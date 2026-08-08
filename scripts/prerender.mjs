@@ -12,7 +12,10 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { trinityHtml } from '../.ssr/trinity.mjs'
 
-const TARGETS = [{ file: 'network/index.html', island: 'trinity', render: trinityHtml }]
+const TARGETS = [
+  { file: 'network/index.html', island: 'trinity', render: trinityHtml },
+  { file: 'index.html', island: 'trinity', render: trinityHtml }
+]
 
 let changed = 0
 for (const { file, island, render } of TARGETS) {
