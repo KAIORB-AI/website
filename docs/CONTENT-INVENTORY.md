@@ -10,7 +10,11 @@ Anything neither verified nor conceptual is absent from the site.
 |---|---|---|
 | Brahmexa LLC — US AI lab making AI "accessible, affordable and practical for small businesses and underserved communities, primarily through agentic automation" | VERIFIED | brahmexa.com |
 | Brahmexa platforms: Nexus (AI business brain), ORBIT (intelligent web hosting), REACH (digital marketing studio), ANYO Academy (learning platform), SMB Engine, Brahmando (platform/marketplace) | VERIFIED | brahmexa.com |
-| Brahmexa CSR: zero-cost AI guidance and learning support for students and citizens, incl. FAFSA financial-aid AI agent | VERIFIED | brahmexa.com |
+| Brahmexa CSR: zero-cost AI guidance and learning support for students and citizens | VERIFIED | brahmexa.com |
+| **CSR agents LIVE (5)** — FAFSA Helper "Federal student aid (FAFSA)"; USCIS Companion "N-400 naturalization & work authorization"; SNAP Helper "Food stamps & Medicaid worksheet"; Housing Rights Helper "Eviction defense & tenant rights"; Veterans Benefits Navigator "Find VA benefits & local NGOs". Each at `brahmexa.com/csr-agent.php?slug=<fafsa\|uscis\|snap\|housing-helper\|veterans-navigator>`, all HTTP 200, all embeddable | VERIFIED | brahmexa.com/csr.php |
+| **CSR agents marked "Soon" (9)** — Scholarship Scout, Learning Agents, Scam Shield Simulator, Care Connect, Micro-Grant Scout, Invoice & KPI Helper, SMB Ops Companion, Startup Agent Pack, Idea Box (with their stated one-liners) | VERIFIED as *planned* — must stay labelled "Soon" | brahmexa.com/csr.php |
+| CSR themes: Education & financial aid · Basic needs & legal · Civic integration · Economic empowerment · Community co-creation | VERIFIED | brahmexa.com/csr.php |
+| "Guidance only — verify on official sites before filing" disclaimer; zero cost, no paid tiers or upsells | VERIFIED — **must be carried wherever the agents appear** | brahmexa.com/csr.php |
 | Brahmexa: free ORBIT hosting starter analysis, no credentials required | VERIFIED | brahmexa.com |
 | Inducer Solutions LLC — Agentic AI, autonomous multi-agent systems, MCP-powered context intelligence, AIOps; Burnaby, BC, Canada | VERIFIED | inducersolutions.com |
 | JSI Software Solutions — smart interactive boards, computer labs, AI datacenter services for schools/enterprises; India (Moradabad, Rampur, Manesar) + USA partner office (Renton, WA) | VERIFIED | jsisoftwaresolutions.com |

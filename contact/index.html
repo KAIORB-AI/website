@@ -18,6 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/site.css">
 <script defer src="/assets/js/cosmos.js"></script>
+<script defer src="/assets/js/viewer.js"></script>
 </head>
 <body>
 <div class="stars" aria-hidden="true"></div>
@@ -49,22 +50,28 @@
 
   <section class="band">
     <div class="container">
-      <div class="worlds" style="max-width:44rem;margin-inline:auto">
-        <div class="world founding">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name">Brahmexa <span class="country">USA</span></span>
-          <a class="w-link" href="https://brahmexa.com/" rel="noopener">brahmexa.com</a>
-        </div>
-        <div class="world founding">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name">Inducer Solutions <span class="country">Burnaby, BC, Canada</span></span>
-          <a class="w-link" href="https://www.inducersolutions.com/" rel="noopener">inducersolutions.com</a>
-        </div>
-        <div class="world founding">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name">JSI Software Solutions <span class="country">India</span></span>
-          <a class="w-link" href="https://jsisoftwaresolutions.com/" rel="noopener">jsisoftwaresolutions.com</a>
-        </div>
+      <div class="orb-field" style="max-width:46rem;margin-inline:auto">
+        <button class="orb-world" type="button" data-slug="brahmexa" data-name="Brahmexa" data-url="https://brahmexa.com/">
+          <span class="orb orb-founding"><span class="orb-ring"></span><span class="orb-sat"></span><span class="orb-code">USA</span></span>
+          <span class="orb-body">
+            <span class="orb-name">Brahmexa</span>
+            <span class="orb-desc">brahmexa.com ↗</span>
+          </span>
+        </button>
+        <button class="orb-world" type="button" data-slug="inducer" data-name="Inducer Solutions" data-url="https://www.inducersolutions.com/">
+          <span class="orb orb-founding"><span class="orb-ring"></span><span class="orb-sat"></span><span class="orb-code">CAN</span></span>
+          <span class="orb-body">
+            <span class="orb-name">Inducer Solutions</span>
+            <span class="orb-desc">Burnaby, BC · inducersolutions.com ↗</span>
+          </span>
+        </button>
+        <button class="orb-world" type="button" data-slug="jsi" data-name="JSI Software Solutions" data-url="https://jsisoftwaresolutions.com/">
+          <span class="orb orb-founding"><span class="orb-ring"></span><span class="orb-sat"></span><span class="orb-code">IND</span></span>
+          <span class="orb-body">
+            <span class="orb-name">JSI Software Solutions</span>
+            <span class="orb-desc">jsisoftwaresolutions.com ↗</span>
+          </span>
+        </button>
       </div>
       <p class="lede" style="text-align:center;margin-top:2rem;font-size:.92rem">A single KAI247 channel is being brought into orbit.</p>
     </div>

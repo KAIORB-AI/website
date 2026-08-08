@@ -18,6 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/site.css">
 <script defer src="/assets/js/cosmos.js"></script>
+<script defer src="/assets/js/viewer.js"></script>
 </head>
 <body>
 <div class="stars" aria-hidden="true"></div>
@@ -52,17 +53,25 @@
       <header>
         <h2>Instruments in orbit.</h2>
       </header>
-      <div class="duo">
-        <div class="panel">
-          <h3>Free School ERP Software</h3>
-          <p>School management software offered free by the network's education arm.</p>
-          <p style="font-size:.85rem">Contributed by JSI Software Solutions · <a href="https://jsisoftwaresolutions.com/" rel="noopener">jsisoftwaresolutions.com</a></p>
-        </div>
-        <div class="panel">
+      <div class="offerings">
+        <button class="offering" type="button" data-slug="school-erp" data-name="Free School ERP" data-url="https://jsisoftwaresolutions.com/">
+          <span class="theme">Education</span>
+          <h3>Free School ERP</h3>
+          <p>School management software, free.</p>
+          <span class="pill live">Free</span>
+        </button>
+        <button class="offering" type="button" data-slug="orbit-analysis" data-name="ORBIT starter analysis" data-url="https://brahmexa.com/services/orbit">
+          <span class="theme">Hosting</span>
           <h3>ORBIT starter analysis</h3>
-          <p>A free web-hosting starter analysis — no credentials required.</p>
-          <p style="font-size:.85rem">Contributed by Brahmexa · <a href="https://brahmexa.com/" rel="noopener">brahmexa.com</a></p>
-        </div>
+          <p>A free hosting analysis — no credentials required.</p>
+          <span class="pill live">Free</span>
+        </button>
+        <button class="offering" type="button" data-slug="brahmando-marketplace" data-name="Brahmando Marketplace" data-url="https://brahmando.com/marketplace/">
+          <span class="theme">AI</span>
+          <h3>Brahmando Marketplace</h3>
+          <p>AI agents, MCP servers and agentic workflows.</p>
+          <span class="pill live">Open</span>
+        </button>
       </div>
     </div>
   </section>

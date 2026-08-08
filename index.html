@@ -18,6 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/site.css">
 <script defer src="/assets/js/cosmos.js"></script>
+<script defer src="/assets/js/viewer.js"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -271,52 +272,52 @@
         <h2>Already in orbit.</h2>
         <p class="lede">Three founding companies. Four network brands. Five countries.</p>
       </header>
-      <div class="worlds">
-        <div class="world founding">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name">Brahmexa LLC <span class="country">USA</span></span>
-          <a class="w-link" href="https://brahmexa.com/" rel="noopener">brahmexa.com</a>
-          <span class="w-desc">AI lab making agentic automation accessible to small businesses.</span>
-        </div>
-        <div class="world founding">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name">Inducer Solutions LLC <span class="country">Canada</span></span>
-          <a class="w-link" href="https://www.inducersolutions.com/" rel="noopener">inducersolutions.com</a>
-          <span class="w-desc">Agentic AI, multi-agent systems and MCP-powered context intelligence.</span>
-        </div>
-        <div class="world founding">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name">JSI Software Solutions <span class="country">India</span></span>
-          <a class="w-link" href="https://jsisoftwaresolutions.com/" rel="noopener">jsisoftwaresolutions.com</a>
-          <span class="w-desc">Education technology — SWAN™ interactive boards, computer labs, AI datacenters.</span>
-        </div>
-        <div class="world">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name">PrimoVive <span class="country">USA</span></span>
-          <a class="w-link" href="https://primovive.com/" rel="noopener">primovive.com</a>
-          <span class="w-desc">Single-use breathalyzers for safer, responsible nights.</span>
-        </div>
-        <div class="world">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name">Isha Skin Care <span class="country">India</span></span>
-          <a class="w-link" href="https://skincareisha.com/" rel="noopener">skincareisha.com</a>
-          <span class="w-desc">Dermatology clinic — personalized skincare and hair restoration.</span>
-        </div>
-        <div class="world">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name">Global &amp; Funsize Productions <span class="country">USA</span></span>
-          <a class="w-link" href="https://funsizegp.com/" rel="noopener">funsizegp.com</a>
-          <span class="w-desc">Live entertainment production and event booking, nationwide.</span>
-        </div>
-        <div class="world">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name">Easy Q2C <span class="country">Australia</span></span>
-          <a class="w-link" href="https://easyq2c.com/" rel="noopener">easyq2c.com</a>
-        </div>
-        <a class="world open-seat" href="/join/">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name" style="color:var(--gold)">Your place is next.</span>
-          <span class="w-link">Join the Orbit →</span>
+      <div class="trinity">
+        <svg class="trinity-arc" viewBox="0 0 1000 240" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M 0 210 Q 500 -90 1000 210"/>
+        </svg>
+        <button class="orb-world" type="button" data-slug="brahmexa" data-name="Brahmexa LLC" data-url="https://brahmexa.com/">
+          <span class="orb orb-founding"><span class="orb-ring"></span><span class="orb-sat"></span><span class="orb-code">USA</span></span>
+          <span class="orb-body">
+            <span class="orb-name">Brahmexa LLC</span>
+            <span class="orb-desc">AI lab making agentic automation accessible to small businesses.</span>
+          </span>
+        </button>
+        <button class="orb-world" type="button" data-slug="inducer" data-name="Inducer Solutions LLC" data-url="https://www.inducersolutions.com/">
+          <span class="orb orb-founding"><span class="orb-ring"></span><span class="orb-sat"></span><span class="orb-code">CAN</span></span>
+          <span class="orb-body">
+            <span class="orb-name">Inducer Solutions LLC</span>
+            <span class="orb-desc">Agentic AI, multi-agent systems and MCP-powered context intelligence.</span>
+          </span>
+        </button>
+        <button class="orb-world" type="button" data-slug="jsi" data-name="JSI Software Solutions" data-url="https://jsisoftwaresolutions.com/">
+          <span class="orb orb-founding"><span class="orb-ring"></span><span class="orb-sat"></span><span class="orb-code">IND</span></span>
+          <span class="orb-body">
+            <span class="orb-name">JSI Software Solutions</span>
+            <span class="orb-desc">Interactive boards, computer labs and AI datacenter services.</span>
+          </span>
+        </button>
+      </div>
+      <div class="orb-field" style="margin-top:3.4rem">
+        <button class="orb-world" type="button" data-slug="primovive" data-name="PrimoVive" data-url="https://primovive.com/">
+          <span class="orb orb-brand"><span class="orb-ring"></span><span class="orb-sat"></span><span class="orb-code">USA</span></span>
+          <span class="orb-body"><span class="orb-name">PrimoVive</span></span>
+        </button>
+        <button class="orb-world" type="button" data-slug="isha" data-name="Isha Skin Care" data-url="https://skincareisha.com/">
+          <span class="orb orb-brand"><span class="orb-ring"></span><span class="orb-sat"></span><span class="orb-code">IND</span></span>
+          <span class="orb-body"><span class="orb-name">Isha Skin Care</span></span>
+        </button>
+        <button class="orb-world" type="button" data-slug="funsize" data-name="Global &amp; Funsize Productions" data-url="https://funsizegp.com/">
+          <span class="orb orb-brand"><span class="orb-ring"></span><span class="orb-sat"></span><span class="orb-code">USA</span></span>
+          <span class="orb-body"><span class="orb-name">Funsize Productions</span></span>
+        </button>
+        <button class="orb-world" type="button" data-slug="easyq2c" data-name="Easy Q2C" data-url="https://easyq2c.com/">
+          <span class="orb orb-brand"><span class="orb-ring"></span><span class="orb-sat"></span><span class="orb-code">AUS</span></span>
+          <span class="orb-body"><span class="orb-name">Easy Q2C</span></span>
+        </button>
+        <a class="orb-world" href="/join/">
+          <span class="orb orb-seat" aria-hidden="true">+</span>
+          <span class="orb-body"><span class="orb-name" style="color:var(--gold)">Your place is next.</span></span>
         </a>
       </div>
     </div>
@@ -333,7 +334,7 @@
       <div class="duo">
         <div class="panel">
           <h3>The Impact Constellation</h3>
-          <p>Zero-cost AI guidance and learning support already run inside the founding network.</p>
+          <p>Five free AI agents — student aid, food, housing, veterans benefits, citizenship.</p>
           <a href="/impact/">Explore Impact →</a>
         </div>
         <div class="panel">

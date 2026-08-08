@@ -18,6 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/site.css">
 <script defer src="/assets/js/cosmos.js"></script>
+<script defer src="/assets/js/viewer.js"></script>
 </head>
 <body>
 <div class="stars" aria-hidden="true"></div>
@@ -112,55 +113,64 @@
     </div>
   </section>
 
-  <section class="band">
+  <section class="band" id="offerings">
     <div class="container">
       <header>
-        <p class="kicker">Named systems</p>
-        <h2>Platforms in the network.</h2>
+        <p class="kicker">KAI247 offerings</p>
+        <h2>Open one. Stay in orbit.</h2>
+        <p class="lede">Named systems you can use through the network — each opens right here.</p>
       </header>
-      <div class="worlds">
-        <div class="world founding">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name">Brahmando</span>
-          <a class="w-link" href="https://brahmando.com/" rel="noopener">brahmando.com</a>
-          <span class="w-desc">The Brahmexa platform for AI agents, MCP servers and agentic workflows.</span>
-        </div>
-        <div class="world">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name">Nexus</span>
-          <a class="w-link" href="https://brahmexa.com/" rel="noopener">brahmexa.com</a>
-          <span class="w-desc">AI business brain.</span>
-        </div>
-        <div class="world">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name">ORBIT</span>
-          <a class="w-link" href="https://brahmexa.com/" rel="noopener">brahmexa.com</a>
-          <span class="w-desc">Intelligent web hosting.</span>
-        </div>
-        <div class="world">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name">REACH</span>
-          <a class="w-link" href="https://brahmexa.com/" rel="noopener">brahmexa.com</a>
-          <span class="w-desc">Digital marketing studio.</span>
-        </div>
-        <div class="world">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name">ANYO Academy</span>
-          <a class="w-link" href="https://brahmexa.com/" rel="noopener">brahmexa.com</a>
-          <span class="w-desc">Learning platform.</span>
-        </div>
-        <div class="world">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name">SWAN™</span>
-          <a class="w-link" href="https://jsisoftwaresolutions.com/" rel="noopener">jsisoftwaresolutions.com</a>
-          <span class="w-desc">Interactive digital boards for smart classrooms.</span>
-        </div>
-        <div class="world">
-          <span class="w-dot" aria-hidden="true"></span>
-          <span class="w-name">Abhyas A.I</span>
-          <a class="w-link" href="https://jsisoftwaresolutions.com/" rel="noopener">jsisoftwaresolutions.com</a>
-          <span class="w-desc">Exam portal.</span>
-        </div>
+      <div class="offerings">
+        <button class="offering" type="button" data-slug="brahmando" data-name="Brahmando" data-url="https://brahmando.com/">
+          <h3>Brahmando</h3>
+          <p>AI agents, MCP servers and agentic workflows.</p>
+          <span class="open">Open ↗</span>
+        </button>
+        <button class="offering" type="button" data-slug="nexus" data-name="Nexus" data-url="https://brahmexa.com/">
+          <h3>Nexus</h3>
+          <p>The AI business brain.</p>
+          <span class="open">Open ↗</span>
+        </button>
+        <button class="offering" type="button" data-slug="orbit" data-name="ORBIT" data-url="https://brahmexa.com/">
+          <h3>ORBIT</h3>
+          <p>Intelligent web hosting.</p>
+          <span class="open">Open ↗</span>
+        </button>
+        <button class="offering" type="button" data-slug="reach" data-name="REACH" data-url="https://brahmexa.com/">
+          <h3>REACH</h3>
+          <p>Digital marketing studio.</p>
+          <span class="open">Open ↗</span>
+        </button>
+        <button class="offering" type="button" data-slug="anyo" data-name="ANYO Academy" data-url="https://brahmexa.com/">
+          <h3>ANYO Academy</h3>
+          <p>Learning platform.</p>
+          <span class="open">Open ↗</span>
+        </button>
+        <button class="offering" type="button" data-slug="smb-engine" data-name="SMB Engine" data-url="https://brahmexa.com/">
+          <h3>SMB Engine</h3>
+          <p>Automation and tools for small business.</p>
+          <span class="open">Open ↗</span>
+        </button>
+        <button class="offering" type="button" data-slug="swan" data-name="SWAN™" data-url="https://jsisoftwaresolutions.com/">
+          <h3>SWAN™</h3>
+          <p>Interactive digital boards for smart classrooms.</p>
+          <span class="open">Open ↗</span>
+        </button>
+        <button class="offering" type="button" data-slug="abhyas" data-name="Abhyas A.I" data-url="https://jsisoftwaresolutions.com/">
+          <h3>Abhyas A.I</h3>
+          <p>Exam portal.</p>
+          <span class="open">Open ↗</span>
+        </button>
+        <button class="offering" type="button" data-slug="school-erp" data-name="School ERP" data-url="https://jsisoftwaresolutions.com/">
+          <h3>School ERP</h3>
+          <p>School management software, free.</p>
+          <span class="open">Open ↗</span>
+        </button>
+        <button class="offering" type="button" data-slug="chat-x" data-name="Chat X" data-url="https://jsisoftwaresolutions.com/">
+          <h3>Chat X</h3>
+          <p>LLM chatbot.</p>
+          <span class="open">Open ↗</span>
+        </button>
       </div>
     </div>
   </section>

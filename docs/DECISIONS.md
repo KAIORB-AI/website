@@ -56,6 +56,33 @@ confirm or replace it (it appears in the two `data-apply` attributes and the two
 "prefer plain email" links). Upgrade path when volume justifies it: a Cloudflare Worker
 form endpoint or a form service, which would also enable real file upload.
 
+## 12. Offerings are presented as KAI247's, and open in-page via iframe
+Per owner direction (and master prompt §3.4, "one unified KAI247 capability ecosystem"), the
+platform catalog no longer reads as a directory of other companies' sites. Tiles carry the
+offering name and descriptor only; the delivering domain appears in the viewer chrome, not on
+the tile face. Clicking opens `assets/js/viewer.js` — a full-screen in-page frame with KAI247
+chrome (Esc / Close / "Open in new tab" / `#open=<slug>` deep link). Links clicked inside the
+frame stay inside the frame, so the visitor never leaves the orbit.
+
+**Embeddability was verified on 2026-08-08**: none of brahmexa.com, brahmando.com,
+jsisoftwaresolutions.com, inducersolutions.com, primovive.com, skincareisha.com or
+funsizegp.com send `X-Frame-Options` or a CSP `frame-ancestors` directive. **Re-check before
+adding any new domain** — if a site starts refusing frames the viewer shows a blank stage, so
+the "Open in new tab" fallback in the chrome is mandatory, not optional.
+
+Interim only: each tile frames the delivering site. When per-offering widgets arrive from the
+individual orgs, **only the tile's `data-url` changes** — no other code moves.
+
+## 13. Founding trinity rendered as an orbital composition, not cards
+The company list was a rectangular card stack, which the brief explicitly rules out ("minimal
+rectangular-card overload", "minimal corporate-grid feeling"). Replaced with `.trinity`: three
+planets seated on a shared SVG arc, each with an elliptical ring echoing the KAI247 mark and
+the country code on the disc — so the "built across three continents" story is told by the
+composition itself. Arc geometry: viewBox `0 0 1000 240`, path `M 0 210 Q 500 -90 1000 210`,
+rendered at 216px with `preserveAspectRatio="none"`, so orb centres land on the curve at any
+width (verified: within 2px). Below 900px it becomes a vertical orbital path. The old `.world`
+component is fully removed.
+
 ## 11. Free-plan wording is founding-period framing, no fixed terms
 The owner directed a free plan now with charging later. To avoid overpromising legal terms
 (§3.3), the site says: free during the founding period; hosting/infrastructure/capability
