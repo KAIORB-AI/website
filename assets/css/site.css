@@ -114,27 +114,29 @@ main { padding-top: 62px; }
 .btn-ghost:hover { border-color: var(--gold); }
 
 /* ---------- Hero ---------- */
-.hero { min-height: calc(100vh - 62px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 1.5rem 0 3.5rem; }
+.hero { min-height: calc(100vh - 62px); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 1.25rem 0 3.5rem; }
 .k-hero-stage {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.05fr;
   gap: 2.5rem;
   align-items: start;
   width: 100%;
   max-width: 1240px;
-  margin: 1rem auto;
+  margin: 0.5rem auto;
 }
-.k-hero-left-col { display: flex; flex-direction: column; gap: 1.5rem; width: 100%; max-width: 540px; margin: 0 auto; }
-.k-hero-right-col { width: 100%; max-width: 580px; margin: 0 auto; }
+.k-hero-left-col { display: flex; flex-direction: column; gap: 1.25rem; width: 100%; max-width: 540px; margin: 0 auto; text-align: left; }
+.k-hero-right-col { width: 100%; max-width: 580px; margin: 0 auto; text-align: center; }
 .cosmos-wrap { width: 100%; max-width: 480px; margin: 0 auto; }
 @media (max-width: 990px) {
   .k-hero-stage { grid-template-columns: 1fr; gap: 2.5rem; }
+  .k-hero-left-col, .hero-copy, .hero-copy h1, .hero-copy .tag, .hero-copy .whisper { text-align: center; margin-inline: auto; }
 }
 .cosmos { width: 100%; height: auto; display: block; }
-.hero-copy h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); letter-spacing: .12em; }
-.hero-copy .tag { font-size: clamp(1.05rem, 2.4vw, 1.3rem); color: var(--ink); margin-top: .35rem; font-weight: 500; }
-.hero-copy .whisper { color: var(--mut); font-size: .88rem; letter-spacing: .25em; text-transform: uppercase; margin-top: .6rem; }
-.hero-copy .cta-row { margin-top: 1.4rem; }
+.hero-copy { text-align: left; }
+.hero-copy h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); letter-spacing: .12em; margin: 0; text-align: left; }
+.hero-copy .tag { font-size: clamp(1rem, 2.2vw, 1.22rem); color: var(--ink); margin-top: .3rem; font-weight: 500; text-align: left; }
+.hero-copy .whisper { color: var(--mut); font-size: .85rem; letter-spacing: .22em; text-transform: uppercase; margin-top: .5rem; text-align: left; }
+.hero-copy .cta-row { margin-top: 1.4rem; justify-content: flex-start; }
 
 .sr-only {
   position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
