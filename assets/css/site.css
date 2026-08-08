@@ -560,6 +560,66 @@ body.viewer-open { overflow: hidden; }
   margin-top: 0.4rem;
 }
 
+.k-biz-offer-card {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1.2rem 1.5rem;
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25), 0 0 20px var(--gold-soft);
+  margin: 1.2rem auto;
+  max-width: 40rem;
+  text-align: left;
+}
+
+.k-biz-offer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.k-biz-offer-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+.k-offer-bullet {
+  color: #ef4444;
+  font-weight: 900;
+  font-size: 1.25rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.k-nexus-line {
+  border-top: 1px dashed var(--line);
+  padding-top: 0.65rem;
+  margin-top: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 500;
+}
+
+.k-nexus-tag {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f6d38b, var(--gold-deep));
+  color: #14100a;
+  box-shadow: 0 0 12px var(--gold-soft);
+  flex-shrink: 0;
+}
+
 .k-biz-pills {
   display: flex;
   flex-wrap: wrap;

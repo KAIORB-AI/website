@@ -97,6 +97,36 @@ export function BusinessEvolution() {
         )}
       </div>
 
+      {/* Free Network Benefits Bullet Points */}
+      <div className="k-biz-offer-card">
+        <ul className="k-biz-offer-list">
+          <li>
+            <span className="k-offer-bullet">•</span>
+            <span><strong>Free Website &amp; Smart Hosting</strong> — Zero server overhead</span>
+          </li>
+          <li>
+            <span className="k-offer-bullet">•</span>
+            <span><strong>Free Digital Marketing &amp; Social Media Promotion</strong> — Reach local customers</span>
+          </li>
+          <li>
+            <span className="k-offer-bullet">•</span>
+            <span><strong>Free SEO</strong> — Help customers find you online 24×7</span>
+          </li>
+          <li>
+            <span className="k-offer-bullet">•</span>
+            <span><strong>Free Business Tools</strong> — REACH, ORBIT, COMET &amp; Utilities</span>
+          </li>
+          <li>
+            <span className="k-offer-bullet">•</span>
+            <span><strong>Free AI Tools</strong> — Helping your business grow 24×7</span>
+          </li>
+          <li className="k-nexus-line">
+            <span className="k-nexus-tag">NEXUS</span>
+            <span>is your conversational AI assistant</span>
+          </li>
+        </ul>
+      </div>
+
       {/* Category Pills Selector */}
       <div className="k-biz-pills">
         {BUSINESS_CATEGORIES.map((cat, i) => {
