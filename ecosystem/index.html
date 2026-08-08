@@ -43,58 +43,77 @@
 
 <main id="main">
   <section class="page-hero container">
-    <p class="kicker">The ecosystem</p>
-    <h1>How the universe works</h1>
-    <p class="lede">One intelligence core, a founding trinity, and open orbits for brands.</p>
+    <p class="kicker">Small changes. Always.</p>
+    <h1>The Ecosystem Architecture</h1>
+    <p class="lede">One intelligence core. A founding trinity. Open orbits for network brands.</p>
   </section>
 
-  <div class="chart" role="img" aria-label="Diagram of the KAI247 layers: the Brahmando core at the center, the founding trinity in close orbit, capability constellations beyond, network brands in the outer orbit, and one open dashed seat.">
-    <svg viewBox="0 0 700 700" aria-hidden="true">
-      <defs>
-        <radialGradient id="coreGrad2">
-          <stop offset="0%" stop-color="#ffeec2"/>
-          <stop offset="55%" stop-color="#eebc61"/>
-          <stop offset="100%" stop-color="#b07d24"/>
-        </radialGradient>
-      </defs>
-      <circle cx="350" cy="350" r="110" fill="none" stroke="var(--line)" stroke-width="1.4"/>
-      <circle cx="350" cy="350" r="190" fill="none" stroke="var(--line)" stroke-width="1.4"/>
-      <circle cx="350" cy="350" r="275" fill="none" stroke="var(--line)" stroke-width="1.4"/>
-      <circle cx="350" cy="350" r="34" fill="url(#coreGrad2)"/>
-      <text class="clabel" x="350" y="420" style="letter-spacing:.16em">BRAHMANDO</text>
-      <circle class="node node-founding" cx="350" cy="240" r="9"/>
-      <circle class="node node-founding" cx="445" cy="405" r="9"/>
-      <circle class="node node-founding" cx="255" cy="405" r="9"/>
-      <text class="clabel" x="350" y="212">FOUNDING TRINITY</text>
-      <circle class="cdot" cx="484" cy="216" r="3"/><circle class="cdot" cx="500" cy="232" r="2.2"/>
-      <circle class="cdot" cx="216" cy="216" r="3"/><circle class="cdot" cx="200" cy="232" r="2.2"/>
-      <text class="clabel" x="350" y="140">CONSTELLATIONS</text>
-      <circle class="node" cx="612" cy="290" r="8"/>
-      <circle class="node" cx="350" cy="625" r="8"/>
-      <circle class="node" cx="88" cy="290" r="8"/>
-      <text class="clabel" x="350" y="52">NETWORK BRANDS</text>
-      <circle class="seat-ring" cx="545" cy="545" r="13"/>
-      <text class="seat-label" x="545" y="590">Open orbit</text>
-    </svg>
-  </div>
+  <!-- Interactive Evolving Spatial Universe Model -->
+  <section class="band" style="padding-top:1rem">
+    <div class="container">
+      <div class="chart" role="img" aria-label="Diagram of the KAI247 layers: Brahmando core at center, founding trinity in first orbit, network brands in outer orbit, and an open position.">
+        <svg viewBox="0 0 700 700" aria-hidden="true">
+          <defs>
+            <radialGradient id="coreGradEco">
+              <stop offset="0%" stop-color="#ffeec2"/>
+              <stop offset="55%" stop-color="#eebc61"/>
+              <stop offset="100%" stop-color="#b07d24"/>
+            </radialGradient>
+          </defs>
+          {/* Concentric Orbital Rings */}
+          <circle cx="350" cy="350" r="110" fill="none" stroke="var(--line)" stroke-width="1.4" class="aw d1"/>
+          <circle cx="350" cy="350" r="190" fill="none" stroke="var(--line)" stroke-width="1.4" class="aw d2"/>
+          <circle cx="350" cy="350" r="275" fill="none" stroke="var(--line)" stroke-dasharray="4 8" stroke-width="1.4" class="aw d3"/>
+          
+          {/* CENTER: Brahmando Core */}
+          <g class="corepulse">
+            <circle cx="350" cy="350" r="38" fill="url(#coreGradEco)"/>
+            <text class="clabel" x="350" y="355" fill="#14100a" font-size="14" font-weight="700">BRAHMANDO</text>
+          </g>
+          <text class="clabel" x="350" y="415" style="letter-spacing:.16em">INTELLIGENCE CORE</text>
 
-  <section class="band" style="padding-top:0">
-    <div class="container prose">
-      <h3>The core</h3>
-      <p>At the center sits Brahmando — the Brahmexa platform for AI agents, MCP servers and agentic workflows. Everything in the network draws light from it.</p>
+          {/* FIRST ORBIT: Founding Trinity */}
+          <g class="aw d2">
+            <circle class="node node-founding" cx="350" cy="240" r="10"/>
+            <text class="nlabel" x="350" y="215" font-size="18">Brahmexa (USA)</text>
 
-      <h3>The founding trinity</h3>
-      <p>Three companies on three continents built the network: Brahmexa (USA), Inducer Solutions (Canada) and JSI Software Solutions (India). They deliver as one ecosystem, not three vendors.</p>
+            <circle class="node node-founding" cx="445" cy="405" r="10"/>
+            <text class="nlabel" x="485" y="425" font-size="18">Inducer (CAN)</text>
 
-      <h3>The orbits</h3>
-      <p>Real businesses orbit the core as network brands — keeping their own name, identity and ownership while drawing on shared capability: web, growth, AI, engineering, infrastructure.</p>
+            <circle class="node node-founding" cx="255" cy="405" r="10"/>
+            <text class="nlabel" x="215" y="425" font-size="18">JSI (IND)</text>
 
-      <h3>The open orbit</h3>
-      <p>The universe always keeps one seat empty. It is not decoration — it is the invitation. Brands join the orbit; providers power the constellations.</p>
+            <text class="clabel" x="350" y="145" style="letter-spacing:.14em">FOUNDING ORBIT</text>
+          </g>
 
-      <div class="cta-row" style="margin-top:2.4rem;justify-content:flex-start">
-        <a class="btn btn-core" href="/join/">Join the Orbit</a>
-        <a class="btn btn-ghost" href="/capabilities/">See the Constellations</a>
+          {/* NEXT ORBITS: Network Brands */}
+          <g class="aw d3">
+            <circle class="node" cx="540" cy="240" r="8"/>
+            <text class="nlabel" x="540" y="220" font-size="16">PrimoVive</text>
+
+            <circle class="node" cx="625" cy="350" r="8"/>
+            <text class="nlabel" x="625" y="380" font-size="16">Isha Skin Care</text>
+
+            <circle class="node" cx="350" cy="625" r="8"/>
+            <text class="nlabel" x="350" y="655" font-size="16">Global & Funsize</text>
+
+            <circle class="node" cx="75" cy="350" r="8"/>
+            <text class="nlabel" x="75" y="380" font-size="16">Easy Q2C</text>
+
+            <text class="clabel" x="350" y="60" style="letter-spacing:.14em">NETWORK ORBITS</text>
+          </g>
+
+          {/* OUTER OPEN ORBIT: Next Participant */}
+          <g class="aw d4">
+            <circle class="seat-ring" cx="545" cy="545" r="14"/>
+            <text class="seat-label" x="545" y="585" font-size="16">Your Brand</text>
+          </g>
+        </svg>
+      </div>
+
+      <div style="display:flex;justify-content:center;gap:1rem;margin-top:2rem;flex-wrap:wrap">
+        <a class="btn btn-core" href="/join/">Enter the Orbit</a>
+        <a class="btn btn-ghost" href="/capabilities/">Explore Constellations</a>
       </div>
     </div>
   </section>
@@ -103,7 +122,7 @@
 <footer>
   <div class="container">
     <div class="cols">
-      <span class="always">KAI247 — Always with you.</span>
+      <span class="always">KAI247 — Small changes. Always. 24×7.</span>
       <nav class="fnav" aria-label="Footer">
         <a href="/about/">About</a>
         <a href="/knowledge/">Ask KAI247</a>

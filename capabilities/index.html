@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Capabilities — KAI247</title>
-<meta name="description" content="The KAI247 capability catalog and its thirteen embeddable widgets — NEXUS, REACH, COMET, ORBIT, LENS and SPACE, plus restaurant, HVAC and landscaping. One line of HTML each.">
+<meta name="description" content="Eight constellations of capabilities surrounding the central intelligence core: AI, software, commerce, growth, cloud, education, events, and data.">
 <link rel="canonical" href="https://kai247.com/capabilities/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kai247.com/capabilities/">
 <meta property="og:title" content="Capabilities — KAI247">
-<meta property="og:description" content="Eight constellations, and thirteen widgets you can put on your own page.">
+<meta property="og:description" content="Eight constellations surrounding one intelligence core.">
 <meta name="theme-color" content="#05060c" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f5f6fb" media="(prefers-color-scheme: light)">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -20,6 +20,66 @@
 <script defer src="/assets/js/cosmos.js"></script>
 <script defer src="/assets/js/nexus.js"></script>
 <script defer src="/assets/js/viewer.js"></script>
+<style>
+.constellation-stage {
+  position: relative;
+  max-width: 900px;
+  margin: 1rem auto 3rem auto;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.constellation-center {
+  position: absolute;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffeec2 0%, #eebc61 60%, #b07d24 100%);
+  box-shadow: 0 0 35px var(--gold-soft);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 0.78rem;
+  color: #14100a; z-index: 10;
+  text-align: center;
+}
+.constellation-ring {
+  position: absolute;
+  width: 440px; height: 440px;
+  border-radius: 50%;
+  border: 1px dashed var(--line);
+  pointer-events: none;
+}
+.constellation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+.constellation-card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.25rem;
+  background: var(--surface);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+.constellation-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  box-shadow: 0 0 20px var(--gold-soft);
+}
+.constellation-card h3 {
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.constellation-card h3::before {
+  content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--blue);
+}
+.constellation-card:hover h3::before {
+  background: var(--gold); box-shadow: 0 0 8px var(--gold-soft);
+}
+</style>
 </head>
 <body>
 <div class="stars" aria-hidden="true"></div>
@@ -44,176 +104,48 @@
 
 <main id="main">
   <section class="page-hero container">
-    <p class="kicker">Capabilities</p>
-    <h1>Eight constellations</h1>
-    <p class="lede">One consolidated catalog — capability, wherever in the network it lives.</p>
+    <p class="kicker">Eight Constellations</p>
+    <h1>Capability surrounds intelligence</h1>
+    <p class="lede">Eight capability families connected through one central core.</p>
   </section>
 
   <section class="band">
     <div class="container">
-      <div class="grid3" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
-        <div class="step" id="ai">
-          <h3>AI &amp; Intelligence</h3>
-          <ul class="tags">
-            <li>AI strategy</li><li>AI agents</li><li>Multi-agent systems</li><li>Agentic workflows</li>
-            <li>MCP servers</li><li>RAG &amp; knowledge systems</li><li>AI copilots</li><li>LLM integration</li>
-            <li>Private AI deployments</li><li>Model hosting</li><li>Document intelligence</li><li>Conversational AI</li>
-          </ul>
+      {/* Eight Constellations Spatial Grid */}
+      <div class="constellation-grid">
+        <div class="constellation-card" id="ai">
+          <h3>AI & Intelligence</h3>
+          <p style="color:var(--mut);font-size:0.875rem">AI agents, MCP servers, multi-agent workflows, RAG, and private deployments.</p>
         </div>
-        <div class="step" id="software">
+        <div class="constellation-card" id="software">
           <h3>Software Engineering</h3>
-          <ul class="tags">
-            <li>Custom software</li><li>SaaS</li><li>Web applications</li><li>Portals</li>
-            <li>ERP &amp; CRM systems</li><li>APIs &amp; middleware</li><li>Mobile apps</li><li>Automation</li>
-          </ul>
+          <p style="color:var(--mut);font-size:0.875rem">Custom SaaS, APIs, portals, ERP/CRM integrations, and desktop automation.</p>
         </div>
-        <div class="step" id="commerce">
-          <h3>Web &amp; Commerce</h3>
-          <ul class="tags">
-            <li>Websites</li><li>E-commerce</li><li>Shopify &amp; WooCommerce</li><li>CMS</li>
-            <li>Hosting</li><li>SSL &amp; backups</li><li>Deployment</li><li>Monitoring</li>
-          </ul>
+        <div class="constellation-card" id="commerce">
+          <h3>Web & Commerce</h3>
+          <p style="color:var(--mut);font-size:0.875rem">Fast web applications, e-commerce platforms, CMS, and managed hosting.</p>
         </div>
-        <div class="step" id="growth">
-          <h3>Growth &amp; Marketing</h3>
-          <ul class="tags">
-            <li>Technical SEO</li><li>Local SEO</li><li>Structured data</li><li>AEO &amp; GEO</li>
-            <li>Content</li><li>Social media</li><li>PPC</li><li>Email</li><li>Lead generation</li><li>Conversion</li>
-          </ul>
+        <div class="constellation-card" id="growth">
+          <h3>Growth & Marketing</h3>
+          <p style="color:var(--mut);font-size:0.875rem">Technical SEO, GEO/AEO optimization, campaign tracking, and lead generation.</p>
         </div>
-        <div class="step" id="cloud">
-          <h3>Cloud &amp; Infrastructure</h3>
-          <ul class="tags">
-            <li>Managed hosting</li><li>Cloud infrastructure</li><li>Private deployments</li><li>GPU &amp; AI compute</li>
-            <li>DevOps</li><li>CI/CD</li><li>Observability</li><li>Security hardening</li>
-          </ul>
+        <div class="constellation-card" id="cloud">
+          <h3>Cloud & Infrastructure</h3>
+          <p style="color:var(--mut);font-size:0.875rem">GPU AI compute, DevOps pipelines, zero-latency deployments, and security.</p>
         </div>
-        <div class="step" id="education">
+        <div class="constellation-card" id="education">
           <h3>Education Technology</h3>
-          <ul class="tags">
-            <li>SWAN™ interactive boards</li><li>Smart classrooms</li><li>AI learning platforms</li>
-            <li>Computer labs</li><li>Assessments</li><li>School ERP</li>
-          </ul>
+          <p style="color:var(--mut);font-size:0.875rem">SWAN™ interactive smart boards, AI computer labs, and school ERP systems.</p>
         </div>
-        <div class="step" id="events">
-          <h3>Events &amp; Engagement</h3>
-          <ul class="tags">
-            <li>Event platforms</li><li>Ticketing</li><li>Event operations</li><li>QR &amp; check-in</li>
-            <li>Audience growth</li><li>Live production</li>
-          </ul>
+        <div class="constellation-card" id="events">
+          <h3>Events & Engagement</h3>
+          <p style="color:var(--mut);font-size:0.875rem">Live event production, streaming infrastructure, ticketing, and artist booking.</p>
         </div>
-        <div class="step" id="data">
-          <h3>Data &amp; Transformation</h3>
-          <ul class="tags">
-            <li>Dashboards</li><li>Business intelligence</li><li>Reporting automation</li><li>Operational intelligence</li>
-            <li>Process modernization</li><li>Workflow automation</li><li>Technical advisory</li>
-          </ul>
+        <div class="constellation-card" id="data">
+          <h3>Data & Transformation</h3>
+          <p style="color:var(--mut);font-size:0.875rem">Data pipelines, financial analytics, reporting automation, and ETL systems.</p>
         </div>
       </div>
-      <p class="lede" style="margin-top:2rem;font-size:.92rem">Delivered across the founding network. Physical services vary by region.</p>
-    </div>
-  </section>
-
-  <section class="band" id="widgets">
-    <div class="container">
-      <header>
-        <p class="kicker">Widgets</p>
-        <h2>Put the network on your page.</h2>
-        <p class="lede">Thirteen widgets, one line of HTML each — switched on per partner, per domain.</p>
-      </header>
-
-      <p class="qa-group">Services — what the network runs</p>
-      <div class="offerings">
-        <button class="offering" type="button" data-slug="nexus-chat" data-name="Nexus Business Brain" data-url="https://brahmexa.com/widgets/preview.php?widget=nexus-chat">
-          <span class="theme">NEXUS</span>
-          <h3>Business Brain chat</h3>
-          <p>Answers from the business's own verified content, with sources — and labels what it cannot verify.</p>
-          <span class="pill live">Verified</span>
-        </button>
-        <button class="offering" type="button" data-slug="reach-audit" data-name="REACH Website Health" data-url="https://brahmexa.com/widgets/preview.php?widget=reach-audit">
-          <span class="theme">REACH</span>
-          <h3>Website Health</h3>
-          <p>A live scorecard of site health — performance, SEO, accessibility.</p>
-          <span class="pill off">Partial</span>
-        </button>
-        <button class="offering" type="button" data-slug="reach-presence" data-name="REACH Channel Presence" data-url="https://brahmexa.com/widgets/preview.php?widget=reach-presence">
-          <span class="theme">REACH</span>
-          <h3>Channel Presence</h3>
-          <p>Reach across every connected channel in one view — impressions, engagement, trend.</p>
-          <span class="pill off">Partial</span>
-        </button>
-        <button class="offering" type="button" data-slug="comet-catalog" data-name="COMET Product Catalog" data-url="https://brahmexa.com/widgets/preview.php?widget=comet-catalog">
-          <span class="theme">COMET</span>
-          <h3>Product Catalog</h3>
-          <p>A shoppable product strip. Read-only — checkout hands off to the partner's storefront.</p>
-          <span class="pill off">Partial</span>
-        </button>
-        <button class="offering" type="button" data-slug="orbit-events" data-name="ORBIT Event List" data-url="https://brahmexa.com/widgets/preview.php?widget=orbit-events">
-          <span class="theme">ORBIT</span>
-          <h3>Event List</h3>
-          <p>Upcoming events for an organizer, always current, each linking to its ticket page.</p>
-          <span class="pill off">Partial</span>
-        </button>
-        <button class="offering" type="button" data-slug="orbit-ticket" data-name="ORBIT Ticket Spotlight" data-url="https://brahmexa.com/widgets/preview.php?widget=orbit-ticket">
-          <span class="theme">ORBIT</span>
-          <h3>Ticket Spotlight</h3>
-          <p>One event with live tier pricing. Never collects a card — tickets open ORBIT's own checkout.</p>
-          <span class="pill off">Partial</span>
-        </button>
-        <button class="offering" type="button" data-slug="lens-metrics" data-name="LENS Findings Board" data-url="https://brahmexa.com/widgets/preview.php?widget=lens-metrics">
-          <span class="theme">LENS</span>
-          <h3>Findings Board</h3>
-          <p>Findings LENS has published, and only those — it computes nothing of its own.</p>
-          <span class="pill off">Partial</span>
-        </button>
-        <button class="offering" type="button" data-slug="space-proposal" data-name="SPACE Project Enquiry" data-url="https://brahmexa.com/widgets/preview.php?widget=space-proposal">
-          <span class="theme">SPACE</span>
-          <h3>Project Enquiry</h3>
-          <p>A qualified project brief — scope, budget band, timeline — ready to become a proposal.</p>
-          <span class="pill work">Working</span>
-        </button>
-      </div>
-
-      <p class="qa-group">Businesses — what a business puts on its own site</p>
-      <div class="offerings">
-        <button class="offering" type="button" data-slug="restaurant-menu" data-name="Restaurant Menu" data-url="https://brahmexa.com/widgets/preview.php?widget=restaurant-menu">
-          <span class="theme">Restaurant</span>
-          <h3>Menu</h3>
-          <p>The live menu — categories, prices, and what is 86'd right now.</p>
-          <span class="pill off">Partial</span>
-        </button>
-        <button class="offering" type="button" data-slug="restaurant-reserve" data-name="Restaurant Reservation Request" data-url="https://brahmexa.com/widgets/preview.php?widget=restaurant-reserve">
-          <span class="theme">Restaurant</span>
-          <h3>Reservation Request</h3>
-          <p>A booking request — party, date, time, contact. A request, not a held table, and it says so.</p>
-          <span class="pill work">Working</span>
-        </button>
-        <button class="offering" type="button" data-slug="hvac-assistant" data-name="HVAC Troubleshooting Assistant" data-url="https://brahmexa.com/widgets/preview.php?widget=hvac-assistant">
-          <span class="theme">HVAC Support</span>
-          <h3>Troubleshooting Assistant</h3>
-          <p>Answers from the contractor's own equipment documents — or not at all, on anything safety-critical.</p>
-          <span class="pill off">Partial</span>
-        </button>
-        <button class="offering" type="button" data-slug="hvac-service-request" data-name="HVAC Service Request" data-url="https://brahmexa.com/widgets/preview.php?widget=hvac-service-request">
-          <span class="theme">HVAC Support</span>
-          <h3>Service Request</h3>
-          <p>Dispatch-ready intake — equipment, symptom, urgency, address.</p>
-          <span class="pill off">Partial</span>
-        </button>
-        <button class="offering" type="button" data-slug="landscaping-quote" data-name="Landscaping Quote Request" data-url="https://brahmexa.com/widgets/preview.php?widget=landscaping-quote">
-          <span class="theme">Landscaping</span>
-          <h3>Quote Request</h3>
-          <p>The five things a crew needs before it can quote, captured on the partner's own page.</p>
-          <span class="pill work">Working</span>
-        </button>
-      </div>
-
-      <p class="notice" style="margin-top:2rem">
-        Statuses are the platform's own, not a sales label. <strong>Verified</strong> means a connected live
-        data source. <strong>Working</strong> means it runs and stores what it captures. <strong>Partial</strong>
-        means the widget runs but its data source is not connected here. Embedding on any site needs a partner
-        key with that site's domain on its allowlist — a key without your domain does nothing.
-      </p>
     </div>
   </section>
 </main>
@@ -221,7 +153,7 @@
 <footer>
   <div class="container">
     <div class="cols">
-      <span class="always">KAI247 — Always with you.</span>
+      <span class="always">KAI247 — Small changes. Always. 24×7.</span>
       <nav class="fnav" aria-label="Footer">
         <a href="/about/">About</a>
         <a href="/knowledge/">Ask KAI247</a>

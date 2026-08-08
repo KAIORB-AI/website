@@ -90,9 +90,13 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .brand svg { display: block; }
 .nav { display: flex; gap: 1.15rem; margin-left: auto; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
 .nav::-webkit-scrollbar { display: none; }
-.nav a { color: var(--mut); font-size: .92rem; font-weight: 500; padding: .3rem 0; }
+.nav a { color: var(--mut); font-size: .92rem; font-weight: 500; padding: .3rem .5rem; position: relative; transition: color .18s ease; }
 .nav a:hover, .nav a[aria-current="page"] { color: var(--ink); text-decoration: none; }
-.nav a[aria-current="page"] { border-bottom: 2px solid var(--gold); }
+.nav a[aria-current="page"]::after {
+  content: ''; position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%);
+  width: 5px; height: 5px; border-radius: 50%; background: var(--gold);
+  box-shadow: 0 0 8px var(--gold-soft);
+}
 .nav .join { color: var(--gold); font-weight: 600; }
 
 main { padding-top: 62px; }
@@ -501,3 +505,94 @@ body.viewer-open { overflow: hidden; }
   .k-trinity-edges { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .k-orb-ring { animation: none; } }
+
+/* ---------- KAI247 Spatial Geometry Primitives ---------- */
+.k-spatial-stage {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.k-spatial-orbit {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed var(--line);
+  pointer-events: none;
+  transition: border-color 0.3s ease;
+}
+
+.k-spatial-orbit.active {
+  border-style: solid;
+  border-color: var(--gold);
+  box-shadow: 0 0 20px var(--gold-soft);
+}
+
+.k-core-node {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffeec2 0%, #eebc61 60%, #b07d24 100%);
+  box-shadow: 0 0 32px var(--gold-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #14100a;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  z-index: 10;
+}
+
+.k-node-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.k-node-badge:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.k-signal-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 10px var(--gold-soft);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* Partial footer orbit arc */
+footer {
+  position: relative;
+  overflow: hidden;
+}
+footer::after {
+  content: '';
+  position: absolute;
+  bottom: -140px;
+  right: -140px;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  border: 1px dashed var(--line);
+  pointer-events: none;
+}
+

@@ -3,218 +3,132 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Free Utilities — KAI247</title>
-<meta name="description" content="Free browser-based utilities from KAI247: photo size targeter, subnet CIDR calculator, UTM builder, slug generator, robots.txt and sitemap validators. No login, no upload — everything runs in your browser.">
+<title>Instrument Ring — KAI247 Utilities</title>
+<meta name="description" content="KAI247 Instrument Ring: free in-browser tools for photo size targeting, CIDR subnetting, UTM tracking, and web essentials. Privacy-first, zero uploads.">
 <link rel="canonical" href="https://kai247.com/utility/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kai247.com/utility/">
-<meta property="og:title" content="Free Utilities — KAI247">
-<meta property="og:description" content="Practical tools that run entirely in your browser. Free, no login, nothing uploaded.">
-<meta name="theme-color" content="#f8fafc">
+<meta property="og:title" content="Instrument Ring — KAI247">
+<meta property="og:description" content="Deterministic in-browser instruments for everyday work. Zero data leaves your device.">
+<meta name="theme-color" content="#05060c" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f5f6fb" media="(prefers-color-scheme: light)">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/utility.css">
-<script defer src="/assets/js/utility-router.js"></script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": "KAI247 Utilities",
-  "url": "https://kai247.com/utility/",
-  "description": "Free browser-based utilities. All processing happens locally in the browser; no file is uploaded or stored.",
-  "isPartOf": { "@type": "WebSite", "name": "KAI247", "url": "https://kai247.com/" },
-  "hasPart": [
-    { "@type": "SoftwareApplication", "name": "Photo Size Targeter", "url": "https://kai247.com/utility/photo-size-targeter/", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any (web browser)", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" } },
-    { "@type": "SoftwareApplication", "name": "IT & Subnet CIDR Calculator", "url": "https://kai247.com/utility/cidr-calculator/", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any (web browser)", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" } },
-    { "@type": "SoftwareApplication", "name": "Web Essentials", "url": "https://kai247.com/utility/web-essentials/", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any (web browser)", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" } }
-  ]
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script defer src="/assets/js/cosmos.js"></script>
+<script defer src="/assets/js/nexus.js"></script>
+<style>
+.instrument-dial {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
 }
-</script>
+.instrument-card {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1.5rem;
+  background: var(--surface);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.instrument-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  box-shadow: 0 0 24px var(--gold-soft);
+}
+</style>
 </head>
 <body>
-<a class="u-skip" href="#main">Skip to content</a>
+<div class="stars" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
 
-<header class="u-head">
-  <div class="u-wrap">
-    <a class="u-brand" href="/" aria-label="KAI247 home">
-      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
-        <ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--u-blue)" stroke-width="4" transform="rotate(-24 32 32)"/>
-        <circle cx="32" cy="32" r="10" fill="var(--u-cyan)"/>
-        <circle cx="51" cy="19" r="4" fill="var(--u-ink)"/>
-      </svg>
+<header class="head">
+  <div class="container">
+    <a class="brand" href="/" aria-label="KAI247 home">
+      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--blue)" stroke-width="4" transform="rotate(-24 32 32)"/><circle cx="32" cy="32" r="10" fill="var(--gold)"/><circle cx="51" cy="19" r="4" fill="var(--ink)"/></svg>
       KAI247
     </a>
-    <nav class="u-nav" aria-label="Primary">
-      <a href="/utility/" aria-current="page">Utilities</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/ecosystem/">Ecosystem</a>
       <a href="/capabilities/">Capabilities</a>
       <a href="/network/">Network</a>
       <a href="/impact/">Impact</a>
-      <a href="/join/">Join the Orbit</a>
+      <a href="/utility/" aria-current="page">Utilities</a>
+      <a class="join" href="/join/">Join the Orbit</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
-  <section class="u-hero u-wrap">
-    <p class="u-kicker">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
-      Free utilities
-    </p>
-    <h1>Tools that never see your data</h1>
-    <p class="u-lede">Practical utilities for everyday work — free, no login, and nothing ever leaves your browser.</p>
-
-    <div class="u-privacy">
-      <span class="lock" aria-hidden="true">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg>
-      </span>
-      <p><strong>100% in-browser privacy guarantee.</strong> We never store, upload, or retain your files, financial statements, or documents. All processing and calculations happen locally in your web browser — the tools below make no network request with your data, so there is nothing for us to keep.</p>
-    </div>
-
-    <!-- Nexus assistant bar -->
-    <div class="u-ask">
-      <form id="askForm" role="search">
-        <label class="sr-only" for="askInput">Describe what you need</label>
-        <div class="u-ask-shell">
-          <svg class="u-orbit-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-            <g class="spin"><ellipse cx="20" cy="20" rx="17" ry="8" stroke="var(--u-blue)" stroke-width="1.6" opacity=".5" transform="rotate(-24 20 20)"/></g>
-            <circle cx="20" cy="20" r="6" fill="var(--u-cyan)"/>
-          </svg>
-          <input id="askInput" type="search" autocomplete="off"
-                 placeholder="Make this photo under 200 KB · What CIDR for 250 devices?">
-          <button class="u-btn" type="submit">Find the tool</button>
-        </div>
-      </form>
-      <div class="u-examples">
-        <button class="u-chip" type="button" data-ask="Make this photo less than 200 KB">Photo under 200 KB</button>
-        <button class="u-chip" type="button" data-ask="What CIDR should I use for 250 devices?">CIDR for 250 devices</button>
-        <button class="u-chip" type="button" data-ask="Build a UTM link for https://kai247.com">UTM for a campaign</button>
-        <button class="u-chip" type="button" data-ask="Validate my sitemap.xml">Validate a sitemap</button>
-      </div>
-      <div class="u-answer" id="askAnswer" hidden role="status" aria-live="polite"></div>
-    </div>
+  <section class="page-hero container">
+    <p class="kicker">Small changes. Always.</p>
+    <h1>The Instrument Ring</h1>
+    <p class="lede">Everyday browser instruments. Deterministic, private, zero server uploads.</p>
   </section>
 
-  <section class="u-section u-wrap" id="suites">
-    <div class="u-section-head">
-      <svg class="u-orbit-dot" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <circle cx="20" cy="20" r="16" stroke="var(--u-line)" stroke-width="1.5"/>
-        <circle cx="20" cy="4" r="3" fill="var(--u-blue)"/>
-        <circle cx="20" cy="20" r="4" fill="var(--u-cyan)"/>
-      </svg>
-      <h2>Eight suites</h2>
-    </div>
-
-    <div class="u-grid">
-      <!-- LIVE -->
-      <a class="u-card" href="/utility/photo-size-targeter/">
-        <span class="u-badge live">Live</span>
-        <span class="u-node" aria-hidden="true">
-          <span class="ring ring-3"></span><span class="ring ring-1"></span><span class="ring ring-2"></span>
-          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="10" r="1.8" fill="currentColor"/><path d="m4 17 5-4.5 4 3.5 3-2.5 4 3.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+  <!-- Instrument Dial Categories Selector -->
+  <section class="band">
+    <div class="container">
+      <div class="instrument-dial">
+        <span class="k-node-badge" style="border-color:var(--gold);color:var(--gold)">
+          <span class="k-signal-pulse"></span> Browser Instruments
         </span>
-        <span class="u-node-title">Photo Size Targeter</span>
-        <p>Hits a size you name — 200 KB, 50 KB — by searching quality and resolution together, then shows you the result before you download.</p>
-        <ul class="u-tools"><li>JPG</li><li>PNG</li><li>WebP</li><li>Canvas</li></ul>
-      </a>
-
-      <a class="u-card" href="/utility/cidr-calculator/">
-        <span class="u-badge live">Live</span>
-        <span class="u-node" aria-hidden="true">
-          <span class="ring ring-3"></span><span class="ring ring-1"></span><span class="ring ring-2"></span>
-          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="5" r="2.4" stroke="currentColor" stroke-width="2"/><circle cx="5" cy="19" r="2.4" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="19" r="2.4" stroke="currentColor" stroke-width="2"/><path d="M12 7.4v4.2M12 11.6 6.5 16.8M12 11.6l5.5 5.2" stroke="currentColor" stroke-width="2"/></svg>
-        </span>
-        <span class="u-node-title">IT &amp; Subnet CIDR Calculator</span>
-        <p>IPv4 and IPv6 subnetting, plus a recommender that answers "what do I need for 250 devices" and flags overlapping ranges.</p>
-        <ul class="u-tools"><li>IPv4</li><li>IPv6</li><li>Wildcard</li><li>Overlap</li></ul>
-      </a>
-
-      <a class="u-card" href="/utility/web-essentials/">
-        <span class="u-badge live">Live</span>
-        <span class="u-node" aria-hidden="true">
-          <span class="ring ring-3"></span><span class="ring ring-1"></span><span class="ring ring-2"></span>
-          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18" stroke="currentColor" stroke-width="2"/></svg>
-        </span>
-        <span class="u-node-title">Web Essentials</span>
-        <p>The four checks that catch real mistakes: campaign links that lose their attribution, slugs that break on accents, robots rules that block the wrong path, sitemaps that promise dead URLs.</p>
-        <ul class="u-tools"><li>UTM builder</li><li>Slug</li><li>robots.txt</li><li>Sitemap</li></ul>
-      </a>
-
-      <!-- IN DEVELOPMENT -->
-      <div class="u-card is-soon">
-        <span class="u-badge soon">In development</span>
-        <span class="u-node" aria-hidden="true">
-          <span class="ring ring-1"></span><span class="ring ring-2"></span>
-          <svg viewBox="0 0 24 24" fill="none"><path d="M6 3h8l4 4v14H6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v4h4" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 15h6" stroke="currentColor" stroke-width="2"/></svg>
-        </span>
-        <span class="u-node-title">PDF Size Reducer</span>
-        <p>In-browser stream compression to a target size while keeping text crisp. Needs a WebAssembly PDF pipeline — not shipping a version that quietly rasterises your text.</p>
-        <ul class="u-tools"><li>WASM</li></ul>
+        <span class="k-node-badge">Network Instruments</span>
+        <span class="k-node-badge">AI Instruments</span>
+        <span class="k-node-badge" style="border-style:dashed">Future Instruments</span>
       </div>
 
-      <div class="u-card is-soon">
-        <span class="u-badge soon">In development</span>
-        <span class="u-node" aria-hidden="true">
-          <span class="ring ring-1"></span><span class="ring ring-2"></span>
-          <svg viewBox="0 0 24 24" fill="none"><path d="M4 19V9M9.5 19V5M15 19v-7M20.5 19v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </span>
-        <span class="u-node-title">Business Finance Analyzer</span>
-        <p>Deterministic P&amp;L and balance-sheet parsing — revenue growth, EBITDA, gross margin, burn rate and anomaly alerts, computed locally.</p>
-        <ul class="u-tools"><li>CSV</li><li>XLSX</li></ul>
-      </div>
+      <div class="grid3">
+        <div class="instrument-card">
+          <div>
+            <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;color:var(--gold);text-transform:uppercase;margin-bottom:0.4rem">Images</div>
+            <h3 style="font-size:1.2rem;margin-bottom:0.5rem">Photo Size Targeter</h3>
+            <p style="color:var(--mut);font-size:0.875rem">Target exact KB limits (e.g. under 200 KB) with circular quality progress tracking. EXIF stripped.</p>
+          </div>
+          <a class="btn btn-ghost" href="/utility/photo-size-targeter/" style="margin-top:1.25rem">Open Instrument</a>
+        </div>
 
-      <div class="u-card is-soon">
-        <span class="u-badge soon">In development</span>
-        <span class="u-node" aria-hidden="true">
-          <span class="ring ring-1"></span><span class="ring ring-2"></span>
-          <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 9h8M8 13h8M8 17h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </span>
-        <span class="u-node-title">Quote &amp; Estimate Generator</span>
-        <p>Multi-currency quotations with seller and buyer profiles, tax and discount maths, and a print-clean PDF.</p>
-        <ul class="u-tools"><li>Multi-currency</li><li>PDF</li></ul>
-      </div>
+        <div class="instrument-card">
+          <div>
+            <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;color:var(--blue);text-transform:uppercase;margin-bottom:0.4rem">Networking</div>
+            <h3 style="font-size:1.2rem;margin-bottom:0.5rem">Subnet & CIDR Calculator</h3>
+            <p style="color:var(--mut);font-size:0.875rem">IPv4 CIDR range calculation, usable host boundaries, and device recommendations.</p>
+          </div>
+          <a class="btn btn-ghost" href="/utility/cidr-calculator/" style="margin-top:1.25rem">Open Instrument</a>
+        </div>
 
-      <div class="u-card is-soon">
-        <span class="u-badge soon">In development</span>
-        <span class="u-node" aria-hidden="true">
-          <span class="ring ring-1"></span><span class="ring ring-2"></span>
-          <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h13l-1.5 8H6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="8" cy="19" r="1.6" fill="currentColor"/><circle cx="15" cy="19" r="1.6" fill="currentColor"/><path d="M2 4h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </span>
-        <span class="u-node-title">Purchase Order Generator</span>
-        <p>Commercial POs with SKU line items and vendor management, exported as a clean document.</p>
-        <ul class="u-tools"><li>SKU lines</li><li>PDF</li></ul>
-      </div>
-
-      <div class="u-card is-soon">
-        <span class="u-badge soon">In development</span>
-        <span class="u-node" aria-hidden="true">
-          <span class="ring ring-1"></span><span class="ring ring-2"></span>
-          <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </span>
-        <span class="u-node-title">Web &amp; Marketing Toolkit</span>
-        <p>SERP preview, Open Graph and Twitter cards, JSON-LD schema, canonical helper, redirect generators, favicon and formatters.</p>
-        <ul class="u-tools"><li>SERP</li><li>JSON-LD</li><li>Redirects</li></ul>
+        <div class="instrument-card">
+          <div>
+            <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;color:var(--gold);text-transform:uppercase;margin-bottom:0.4rem">Web & Marketing</div>
+            <h3 style="font-size:1.2rem;margin-bottom:0.5rem">Web Essentials Suite</h3>
+            <p style="color:var(--mut);font-size:0.875rem">UTM tracking URL builder, QR code generator, slug maker, and sitemap validator.</p>
+          </div>
+          <a class="btn btn-ghost" href="/utility/web-essentials/" style="margin-top:1.25rem">Open Instrument</a>
+        </div>
       </div>
     </div>
-
-    <p class="u-note" style="margin-top:1.6rem">
-      Three suites are live and work end to end. The rest are marked in development rather than
-      linked to an empty page — the same rule the rest of this site follows. QR code generation
-      sits inside Web Essentials and is next.
-    </p>
   </section>
 </main>
 
-<footer class="u-foot">
-  <div class="u-wrap">
-    <span>KAI247 — Always with you.</span>
-    <nav aria-label="Footer">
-      <a href="/">Home</a> ·
-      <a href="/utilities/">Instrument Ring</a> ·
-      <a href="/impact/">Impact</a> ·
-      <a href="/knowledge/">Ask KAI247</a>
-    </nav>
+<footer>
+  <div class="container">
+    <div class="cols">
+      <span class="always">KAI247 — Small changes. Always. 24×7.</span>
+      <nav class="fnav" aria-label="Footer">
+        <a href="/about/">About</a>
+        <a href="/knowledge/">Ask KAI247</a>
+        <a href="/contact/">Contact</a>
+        <a href="/brahmando/">Brahmando</a>
+        <a href="/join/">Join</a>
+      </nav>
+    </div>
+    <p class="foundry">Founded across three continents — Brahmexa (USA) · Inducer Solutions (Canada) · JSI Software Solutions (India). © 2026 KAI247.</p>
   </div>
 </footer>
 </body>

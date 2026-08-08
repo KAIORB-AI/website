@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Impact — KAI247</title>
-<meta name="description" content="The KAI247 Impact Constellation: free AI agents for federal student aid, food and healthcare, housing rights, veterans benefits and naturalization — at zero cost, no upsells.">
+<meta name="description" content="The KAI247 Impact Constellation: free AI agents for student aid, food, housing, veterans benefits, and naturalization. Zero cost, no upsells.">
 <link rel="canonical" href="https://kai247.com/impact/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kai247.com/impact/">
 <meta property="og:title" content="Impact — KAI247">
-<meta property="og:description" content="Free AI agents for student aid, food, housing, veterans benefits and citizenship. Zero cost.">
+<meta property="og:description" content="Free AI agents standing beside people who need them. Zero cost.">
 <meta name="theme-color" content="#05060c" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f5f6fb" media="(prefers-color-scheme: light)">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -20,6 +20,49 @@
 <script defer src="/assets/js/cosmos.js"></script>
 <script defer src="/assets/js/nexus.js"></script>
 <script defer src="/assets/js/viewer.js"></script>
+<style>
+.impact-stage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  max-width: 1000px;
+  margin: 1.5rem auto;
+}
+.impact-node {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1.25rem;
+  background: var(--surface);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  text-align: left;
+}
+.impact-node:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  box-shadow: 0 0 24px var(--gold-soft);
+}
+.impact-node--live {
+  border-left: 3px solid var(--gold);
+}
+.impact-node--dev {
+  border-left: 3px dashed var(--blue);
+  opacity: 0.85;
+}
+.impact-node--open {
+  border-left: 3px dashed var(--mut);
+  opacity: 0.7;
+}
+.impact-status-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+}
+.impact-status-dot.live { background: var(--gold); box-shadow: 0 0 8px var(--gold-soft); }
+.impact-status-dot.dev { background: var(--blue); }
+.impact-status-dot.open { border: 1px solid var(--mut); background: transparent; }
+</style>
 </head>
 <body>
 <div class="stars" aria-hidden="true"></div>
@@ -44,81 +87,70 @@
 
 <main id="main">
   <section class="page-hero container">
-    <p class="kicker">Impact</p>
-    <h1>The Impact Constellation</h1>
-    <p class="lede">Free AI agents standing beside people who need them. Zero cost, no upsells.</p>
-  </section>
-
-  <section class="band" style="padding-top:2.4rem">
-    <div class="container">
-      <header>
-        <h2>Live now.</h2>
-        <p class="lede">Five agents you can open right here.</p>
-      </header>
-      <div class="offerings">
-        <button class="offering" type="button" data-slug="fafsa" data-name="FAFSA Helper" data-url="https://brahmexa.com/csr-agent.php?slug=fafsa">
-          <span class="theme">Education &amp; financial aid</span>
-          <h3>FAFSA Helper</h3>
-          <p>Federal student aid (FAFSA).</p>
-          <span class="pill live">Live</span>
-        </button>
-        <button class="offering" type="button" data-slug="uscis" data-name="USCIS Companion" data-url="https://brahmexa.com/csr-agent.php?slug=uscis">
-          <span class="theme">Civic integration</span>
-          <h3>USCIS Companion</h3>
-          <p>N-400 naturalization &amp; work authorization.</p>
-          <span class="pill live">Live</span>
-        </button>
-        <button class="offering" type="button" data-slug="snap" data-name="SNAP Helper" data-url="https://brahmexa.com/csr-agent.php?slug=snap">
-          <span class="theme">Basic needs &amp; legal</span>
-          <h3>SNAP Helper</h3>
-          <p>Food stamps &amp; Medicaid worksheet.</p>
-          <span class="pill live">Live</span>
-        </button>
-        <button class="offering" type="button" data-slug="housing-helper" data-name="Housing Rights Helper" data-url="https://brahmexa.com/csr-agent.php?slug=housing-helper">
-          <span class="theme">Basic needs &amp; legal</span>
-          <h3>Housing Rights Helper</h3>
-          <p>Eviction defense &amp; tenant rights.</p>
-          <span class="pill live">Live</span>
-        </button>
-        <button class="offering" type="button" data-slug="veterans-navigator" data-name="Veterans Benefits Navigator" data-url="https://brahmexa.com/csr-agent.php?slug=veterans-navigator">
-          <span class="theme">Basic needs &amp; legal</span>
-          <h3>Veterans Benefits Navigator</h3>
-          <p>Find VA benefits &amp; local NGOs.</p>
-          <span class="pill live">Live</span>
-        </button>
-      </div>
-      <p class="notice" style="margin-top:1.6rem">These agents offer guidance only. Always verify on the official government site before filing.</p>
-    </div>
+    <p class="kicker">Impact Constellation</p>
+    <h1>Free Public Agents</h1>
+    <p class="lede">AI agents standing beside people who need them. Zero cost. No upsells.</p>
   </section>
 
   <section class="band">
     <div class="container">
-      <header>
-        <h2>In development.</h2>
-        <p class="lede">Nine more agents forming in the constellation.</p>
-      </header>
-      <div class="offerings">
-        <div class="offering soon"><span class="theme">Education &amp; financial aid</span><h3>Scholarship Scout</h3><p>Find aid after FAFSA.</p><span class="pill">Soon</span></div>
-        <div class="offering soon"><span class="theme">Education &amp; financial aid</span><h3>Learning Agents</h3><p>Math &amp; foundational tutoring.</p><span class="pill">Soon</span></div>
-        <div class="offering soon"><span class="theme">Education &amp; financial aid</span><h3>Scam Shield Simulator</h3><p>Fraud prevention practice.</p><span class="pill">Soon</span></div>
-        <div class="offering soon"><span class="theme">Basic needs &amp; legal</span><h3>Care Connect</h3><p>Find clinics &amp; food banks.</p><span class="pill">Soon</span></div>
-        <div class="offering soon"><span class="theme">Economic empowerment</span><h3>Micro-Grant Scout</h3><p>Find funding for underserved SMBs.</p><span class="pill">Soon</span></div>
-        <div class="offering soon"><span class="theme">Economic empowerment</span><h3>Invoice &amp; KPI Helper</h3><p>Cash-flow reminders &amp; summaries.</p><span class="pill">Soon</span></div>
-        <div class="offering soon"><span class="theme">Economic empowerment</span><h3>SMB Ops Companion</h3><p>Support triage &amp; workflow guides.</p><span class="pill">Soon</span></div>
-        <div class="offering soon"><span class="theme">Economic empowerment</span><h3>Startup Agent Pack</h3><p>Lead follow-up &amp; MVP enablement.</p><span class="pill">Soon</span></div>
-        <div class="offering soon"><span class="theme">Community co-creation</span><h3>Idea Box</h3><p>Propose a CSR agent.</p><span class="pill">Soon</span></div>
-      </div>
-    </div>
-  </section>
+      {/* Live & Forming Impact Agents Micro-Constellations */}
+      <h2 style="font-size:1.2rem;margin-bottom:1rem;color:var(--gold)">
+        <span class="impact-status-dot live"></span> Live Agents
+      </h2>
+      <div class="impact-stage">
+        <button class="impact-node impact-node--live" type="button" data-slug="fafsa" data-name="FAFSA Helper" data-url="https://brahmexa.com/csr-agent.php?slug=fafsa">
+          <span style="font-size:0.75rem;color:var(--mut);text-transform:uppercase">Education</span>
+          <h3 style="font-size:1.1rem;margin:0.25rem 0">FAFSA Helper</h3>
+          <p style="color:var(--mut);font-size:0.875rem">Federal student aid application guidance.</p>
+        </button>
 
-  <section class="band">
-    <div class="container prose">
-      <h3>How this constellation grows</h3>
-      <p>Every participant in the KAI247 ecosystem can contribute a star — an agent, a scholarship, a free service, a community program. Each appears here with its theme and status, open to anyone who needs it.</p>
-      <p>Impact is not a page in the footer. It is a ring of the universe.</p>
-      <div class="cta-row" style="margin-top:2.4rem;justify-content:flex-start">
-        <a class="btn btn-ghost" href="/utilities/">See the Instrument Ring</a>
-        <a class="btn btn-core" href="/join/provider/">Contribute a star</a>
+        <button class="impact-node impact-node--live" type="button" data-slug="uscis" data-name="USCIS Companion" data-url="https://brahmexa.com/csr-agent.php?slug=uscis">
+          <span style="font-size:0.75rem;color:var(--mut);text-transform:uppercase">Civic</span>
+          <h3 style="font-size:1.1rem;margin:0.25rem 0">USCIS Companion</h3>
+          <p style="color:var(--mut);font-size:0.875rem">N-400 naturalization & work authorization.</p>
+        </button>
+
+        <button class="impact-node impact-node--live" type="button" data-slug="snap" data-name="SNAP Helper" data-url="https://brahmexa.com/csr-agent.php?slug=snap">
+          <span style="font-size:0.75rem;color:var(--mut);text-transform:uppercase">Basic Needs</span>
+          <h3 style="font-size:1.1rem;margin:0.25rem 0">SNAP Helper</h3>
+          <p style="color:var(--mut);font-size:0.875rem">Food stamps & Medicaid assistance.</p>
+        </button>
+
+        <button class="impact-node impact-node--live" type="button" data-slug="housing-helper" data-name="Housing Rights Helper" data-url="https://brahmexa.com/csr-agent.php?slug=housing-helper">
+          <span style="font-size:0.75rem;color:var(--mut);text-transform:uppercase">Rights</span>
+          <h3 style="font-size:1.1rem;margin:0.25rem 0">Housing Rights Helper</h3>
+          <p style="color:var(--mut);font-size:0.875rem">Eviction defense & tenant rights guidance.</p>
+        </button>
+
+        <button class="impact-node impact-node--live" type="button" data-slug="veterans-navigator" data-name="Veterans Benefits Navigator" data-url="https://brahmexa.com/csr-agent.php?slug=veterans-navigator">
+          <span style="font-size:0.75rem;color:var(--mut);text-transform:uppercase">Veterans</span>
+          <h3 style="font-size:1.1rem;margin:0.25rem 0">Veterans Navigator</h3>
+          <p style="color:var(--mut);font-size:0.875rem">Find VA benefits & local NGO support.</p>
+        </button>
+      </div>
+
+      <h2 style="font-size:1.2rem;margin:2.5rem 0 1rem 0;color:var(--blue)">
+        <span class="impact-status-dot dev"></span> Forming in Constellation
+      </h2>
+      <div class="impact-stage">
+        <div class="impact-node impact-node--dev">
+          <span style="font-size:0.75rem;color:var(--mut);text-transform:uppercase">Health</span>
+          <h3 style="font-size:1.05rem;margin:0.25rem 0">Medicaid Renewal</h3>
+          <p style="color:var(--mut);font-size:0.85rem">Annual state Medicaid eligibility verification.</p>
+        </div>
+
+        <div class="impact-node impact-node--dev">
+          <span style="font-size:0.75rem;color:var(--mut);text-transform:uppercase">Employment</span>
+          <h3 style="font-size:1.05rem;margin:0.25rem 0">Workforce Rights</h3>
+          <p style="color:var(--mut);font-size:0.85rem">Wage theft & overtime protection worksheets.</p>
+        </div>
+
+        <div class="impact-node impact-node--open">
+          <span style="font-size:0.75rem;color:var(--mut);text-transform:uppercase">Community</span>
+          <h3 style="font-size:1.05rem;margin:0.25rem 0">Open Agent Seat</h3>
+          <p style="color:var(--mut);font-size:0.85rem">Propose a public impact agent.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -127,7 +159,7 @@
 <footer>
   <div class="container">
     <div class="cols">
-      <span class="always">KAI247 — Always with you.</span>
+      <span class="always">KAI247 — Small changes. Always. 24×7.</span>
       <nav class="fnav" aria-label="Footer">
         <a href="/about/">About</a>
         <a href="/knowledge/">Ask KAI247</a>

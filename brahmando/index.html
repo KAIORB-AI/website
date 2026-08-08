@@ -43,44 +43,56 @@
 
 <main id="main">
   <section class="page-hero container">
-    <p class="kicker">The core</p>
-    <h1>The intelligence core</h1>
-    <p class="lede">Brahmando is the Brahmexa platform for AI agents, MCP servers and agentic workflows.</p>
+    <p class="kicker">Intelligence Core</p>
+    <h1>Brahmando</h1>
+    <p class="lede">Infrastructure for AI agents, MCP servers, and agentic workflows.</p>
   </section>
 
+  <!-- Central Intelligence Node & 3 Relationships -->
   <div class="chart">
-    <svg viewBox="0 0 500 400" aria-hidden="true" style="max-width:380px">
+    <svg viewBox="0 0 500 450" aria-hidden="true" style="max-width:440px">
       <defs>
-        <radialGradient id="coreGrad3">
+        <radialGradient id="coreGradBrahmando">
           <stop offset="0%" stop-color="#ffeec2"/>
           <stop offset="55%" stop-color="#eebc61"/>
           <stop offset="100%" stop-color="#b07d24"/>
         </radialGradient>
-        <radialGradient id="glowGrad3">
+        <radialGradient id="glowGradBrahmando">
           <stop offset="0%" stop-color="rgba(242,197,109,.5)"/>
           <stop offset="70%" stop-color="rgba(242,197,109,0)"/>
         </radialGradient>
       </defs>
+
+      {/* Orbit Ring Connecting 3 Relationships */}
+      <circle cx="250" cy="200" r="140" fill="none" stroke="var(--line)" stroke-dasharray="4 8" stroke-width="1.5"/>
+
+      {/* Central Core Pulse */}
       <g class="corepulse">
-        <circle cx="250" cy="185" r="130" fill="url(#glowGrad3)"/>
-        <circle cx="250" cy="185" r="64" fill="url(#coreGrad3)"/>
-        <circle cx="250" cy="185" r="86" fill="none" stroke="var(--gold)" stroke-width="1" opacity=".25"/>
+        <circle cx="250" cy="200" r="110" fill="url(#glowGradBrahmando)"/>
+        <circle cx="250" cy="200" r="54" fill="url(#coreGradBrahmando)"/>
       </g>
-      <text class="clabel" x="250" y="330" style="letter-spacing:.2em">BRAHMANDO</text>
+      <text class="clabel" x="250" y="205" fill="#14100a" font-size="16" font-weight="700">CORE</text>
+
+      {/* 3 Relationships */}
+      <circle class="node node-founding" cx="250" cy="60" r="10"/>
+      <text class="nlabel" x="250" y="38" font-size="16">01 AI Agents</text>
+
+      <circle class="node node-founding" cx="370" cy="280" r="10"/>
+      <text class="nlabel" x="400" y="305" font-size="16">02 MCP Servers</text>
+
+      <circle class="node node-founding" cx="130" cy="280" r="10"/>
+      <text class="nlabel" x="100" y="305" font-size="16">03 Agentic Workflows</text>
     </svg>
   </div>
 
   <section class="band" style="padding-top:0">
     <div class="container prose">
-      <h3>What it is</h3>
-      <p>Every constellation in the KAI247 universe draws on the core: agents that work, MCP servers that connect, workflows that run around the clock.</p>
+      <h3>Intelligence Infrastructure</h3>
+      <p>Signals move into the core, through the core, and out toward network capabilities. Brahmando powers the companion ecosystem.</p>
 
-      <h3>Who can use it</h3>
-      <p>Brahmando is available to Brahmexa customers and community partners — and it stands at the center of what network brands plug into.</p>
-
-      <div class="cta-row" style="margin-top:2.4rem;justify-content:flex-start">
-        <a class="btn btn-core" href="https://brahmando.com/" rel="noopener">Visit brahmando.com</a>
-        <a class="btn btn-ghost" href="/capabilities/#ai">AI capabilities</a>
+      <div class="cta-row" style="margin-top:2rem;justify-content:flex-start">
+        <a class="btn btn-core" href="https://brahmando.com/" rel="noopener">Visit brahmando.com ↗</a>
+        <a class="btn btn-ghost" href="/capabilities/">Explore Constellations</a>
       </div>
     </div>
   </section>
@@ -89,7 +101,7 @@
 <footer>
   <div class="container">
     <div class="cols">
-      <span class="always">KAI247 — Always with you.</span>
+      <span class="always">KAI247 — Small changes. Always. 24×7.</span>
       <nav class="fnav" aria-label="Footer">
         <a href="/about/">About</a>
         <a href="/knowledge/">Ask KAI247</a>
