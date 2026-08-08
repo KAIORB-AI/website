@@ -83,6 +83,41 @@ rendered at 216px with `preserveAspectRatio="none"`, so orb centres land on the 
 width (verified: within 2px). Below 900px it becomes a vertical orbital path. The old `.world`
 component is fully removed.
 
+## 14. Nexus chat assistant — curriculum built, widget ships inert pending a key
+Nexus (brahmexa.com/nexus.php) is an AI assistant that answers questions about **one specific
+business using only that business's own website and documents**. Installed here, that business
+is KAI247. Its official install is a single script tag:
+
+    <script src="https://brahmexa.com/nexus/widget.js" data-nexus-key="pk_…" defer></script>
+
+It renders its own circular launcher in a shadow DOM and supports `data-nexus-key` (required),
+`data-nexus-accent` and `data-nexus-position`.
+
+**Blocker: KAI247 has no publishable key.** A `pk_` key is issued from the Nexus Console and
+cannot be invented — a wrong or absent key yields a dead circle or someone else's business
+brain. So `assets/js/nexus.js` ships with `NEXUS_KEY = ''` and **does nothing at all** until a
+key is set: no launcher, no request, no broken UI. Setting that one string turns Nexus on
+site-wide (it is already loaded on all 14 pages, with KAI247 gold as the accent).
+
+**No stand-in chat was built.** A hand-rolled Q&A panel dressed as an AI assistant would be a
+false claim, and the Nexus demo belongs to a fictional business. Absence over pretence.
+
+**What WAS delivered is the education**, which is the part that actually determines answer
+quality — Nexus learns by crawling:
+- `/llms.txt` — canonical KAI247 facts *and* an explicit "never claim this" section (no invented
+  metrics, no "subsidiary", no prices, no KAI247 email, CSR agents are guidance-only, say "I
+  don't know" rather than guess). This is the guardrail document; keep it current.
+- `/knowledge/` — the same knowledge as human Q&A with `FAQPage` structured data, which also
+  serves answer engines and AI assistants generally (master prompt §15).
+
+To activate: set the key, point the Nexus crawler at https://kai247.com/, and upload
+`/llms.txt` as a document so it outranks anything inferred.
+
+## 15. /knowledge/ exceeds the 350-word page budget
+Master prompt §5 caps rendered prose per page. An FAQ page is inherently textual and exists to
+be read by both humans and crawlers, so the budget is waived here only. Every other page still
+holds to it.
+
 ## 11. Free-plan wording is founding-period framing, no fixed terms
 The owner directed a free plan now with charging later. To avoid overpromising legal terms
 (§3.3), the site says: free during the founding period; hosting/infrastructure/capability

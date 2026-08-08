@@ -388,6 +388,33 @@ body.viewer-open { overflow: hidden; }
   .viewer-loading .pip { animation: none; }
 }
 
+/* ---------- Q&A ---------- */
+.qa { max-width: 46rem; margin-inline: auto; display: grid; gap: .7rem; }
+.qa details {
+  border: 1px solid var(--line); border-radius: 16px; background: var(--surface);
+  padding: 0 1.3rem; transition: border-color .18s ease;
+}
+.qa details[open] { border-color: var(--gold-soft); }
+.qa summary {
+  cursor: pointer; list-style: none; padding: 1.05rem 0;
+  font-family: "Space Grotesk", sans-serif; font-weight: 600; font-size: 1rem;
+  display: flex; align-items: center; gap: .85rem;
+}
+.qa summary::-webkit-details-marker { display: none; }
+.qa summary::before {
+  content: ''; flex: none; width: 12px; height: 12px; border-radius: 50%;
+  border: 2px solid var(--gold); transition: background .18s ease;
+}
+.qa details[open] summary::before { background: var(--gold); box-shadow: 0 0 10px var(--gold-soft); }
+.qa summary:hover { color: var(--gold); }
+.qa .a { color: var(--mut); font-size: .95rem; padding: 0 0 1.15rem 1.9rem; }
+.qa .a a { font-weight: 500; }
+.qa .a p + p { margin-top: .6rem; }
+.qa-group { font: 600 .74rem/1 "Space Grotesk", sans-serif; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin: 2.2rem 0 .9rem; }
+.qa-group:first-child { margin-top: 0; }
+
+@media (prefers-reduced-motion: reduce) { .qa details { transition: none; } }
+
 /* ---------- Application forms ---------- */
 .form { display: grid; gap: 1.1rem; max-width: 44rem; margin-inline: auto; text-align: left; }
 .field label { display: block; font-family: "Space Grotesk", sans-serif; font-weight: 600; font-size: .9rem; margin-bottom: .4rem; }
