@@ -37,28 +37,47 @@
   </div>
 </header>
 
+<!-- Shared gradient for every .u-dial on this page. -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <defs><linearGradient id="uDialGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#06b6d4"/>
+  </linearGradient></defs>
+</svg>
+
 <main id="main" class="u-wrap">
   <section class="u-hero" style="text-align:left;padding-bottom:.6rem">
     <p class="u-kicker"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg> Photo Size Targeter</p>
-    <h1>Hit an exact image size</h1>
-    <p class="u-lede" style="margin-inline:0">Name a size. It searches quality first, then resolution, and stops at the best image that fits.</p>
+    <h1>Name a size. Hit it.</h1>
+    <p class="u-lede" style="margin-inline:0">Quality first, then resolution — it stops at the best image that fits.</p>
+    <div class="u-privacy compact" style="margin-top:1.1rem">
+      <span class="lock" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
+      <p><strong>Nothing is uploaded.</strong> Your browser does the work.</p>
+    </div>
   </section>
 
-  <div class="u-privacy" style="margin:1.2rem 0 1.8rem">
-    <span class="lock" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
-    <p><strong>Your photo never leaves this tab.</strong> It is decoded and re-encoded by your own browser's canvas. There is no upload and no server round trip — you can disconnect from the network and this page still works.</p>
-  </div>
+  <ol class="u-steps" style="margin-top:1.6rem">
+    <li aria-current="step"><span class="dot">1</span>Image</li>
+    <li><span class="dot">2</span>Target</li>
+    <li><span class="dot">3</span>Result</li>
+  </ol>
 
   <div class="u-tool split">
     <div class="u-panel">
-      <h2>1 · Choose an image</h2>
+      <div class="u-panel-head">
+        <span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="10" r="1.8" fill="currentColor"/><path d="M4 17l5-4 4 3 3-2 4 3" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <h2>The image</h2>
+      </div>
       <label class="u-drop" id="drop" for="file">
         <input type="file" id="file" accept="image/jpeg,image/png,image/webp">
-        <strong>Drop an image here</strong>
-        <p class="u-hint" style="margin-top:.35rem">or click to browse — JPG, PNG or WebP</p>
+        <span class="u-glyph" aria-hidden="true" style="margin:0 auto .6rem;width:44px;height:44px"><svg viewBox="0 0 24 24" fill="none" style="width:22px;height:22px"><path d="M12 16V4m0 0L7 9m5-5l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 17v2a1 1 0 001 1h14a1 1 0 001-1v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <strong>Drop an image</strong>
+        <p class="u-hint" style="margin-top:.35rem">JPG · PNG · WebP</p>
       </label>
 
-      <h2 style="margin-top:1.6rem">2 · Set the target</h2>
+      <div class="u-panel-head" style="margin-top:1.7rem">
+        <span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg></span>
+        <h2>The target</h2>
+      </div>
       <div class="u-field">
         <label for="target">Target size (KB)</label>
         <input type="number" id="target" min="5" max="20000" step="5" value="200">
@@ -80,16 +99,29 @@
     </div>
 
     <div class="u-panel">
-      <h2>Result</h2>
-      <div class="u-stat" id="stats" hidden>
-        <div><div class="k">Original</div><div class="v" id="sOrig">—</div></div>
-        <div><div class="k">Compressed</div><div class="v" id="sNew">—</div></div>
-        <div><div class="k">Saved</div><div class="v u-ok" id="sSaved">—</div></div>
-        <div><div class="k">Dimensions</div><div class="v" id="sDim">—</div></div>
-        <div><div class="k">Quality</div><div class="v" id="sQ">—</div></div>
-        <div><div class="k">Attempts</div><div class="v" id="sTries">—</div></div>
+      <div class="u-panel-head">
+        <span class="u-glyph ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M8.5 12.2l2.4 2.4 4.6-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h2>Result</h2>
       </div>
-      <p class="u-hint" id="placeholder">Nothing loaded yet. Choose an image and set a target.</p>
+
+      <div class="u-result">
+        <div class="u-dial is-idle" id="dial" style="--pct:0">
+          <svg viewBox="0 0 120 120">
+            <circle class="ghost" cx="60" cy="60" r="58"/>
+            <circle class="track" cx="60" cy="60" r="52"/>
+            <circle class="fill" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="u-dial-mid"><b id="sSaved">—</b><span>smaller</span></div>
+        </div>
+        <div class="u-stat" id="stats" hidden>
+          <div><div class="k">Before</div><div class="v" id="sOrig">—</div></div>
+          <div><div class="k">After</div><div class="v" id="sNew">—</div></div>
+          <div><div class="k">Pixels</div><div class="v" id="sDim">—</div></div>
+          <div><div class="k">Quality</div><div class="v" id="sQ">—</div></div>
+        </div>
+      </div>
+      <span id="sTries" hidden></span>
+      <p class="u-hint" id="placeholder" style="margin-top:1rem">Choose an image and name a size.</p>
       <div id="verdict" style="margin-top:1rem"></div>
       <img class="u-preview" id="preview" alt="Compressed preview" hidden>
       <div class="u-row" style="margin-top:1rem">
@@ -98,12 +130,20 @@
     </div>
   </div>
 
-  <p class="u-note" style="margin-top:1.6rem">
-    <strong>How it works.</strong> JPEG and WebP are searched by binary-halving the quality between
-    0.05 and 0.95 to find the highest quality that still fits. If even the lowest quality is too
-    large, the image is scaled down in steps and the search runs again. PNG is lossless, so only
-    resolution is reduced. Every attempt happens on a canvas in this tab.
-  </p>
+  <ul class="u-facts" style="margin-top:1.6rem">
+    <li><span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Runs offline</li>
+    <li><span class="u-glyph ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg></span>No upload</li>
+    <li><span class="u-glyph ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M9 7V5h6v2M7 7l1 13h8l1-13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>EXIF stripped</li>
+    <li><span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>JPG · PNG · WebP</li>
+  </ul>
+
+  <details class="u-more">
+    <summary><span class="chev" aria-hidden="true">›</span>How the search works</summary>
+    <div class="body">
+      <p>JPEG and WebP are searched by binary-halving the quality between 0.05 and 0.95 to find the highest quality that still fits. If even the lowest quality is too large, the image is scaled down in steps and the search runs again.</p>
+      <p>PNG is lossless, so only resolution is reduced. Every attempt happens on a canvas in this tab — there is no server round trip, and you can disconnect from the network and this page still works.</p>
+    </div>
+  </details>
 </main>
 
 <footer class="u-foot">
@@ -213,6 +253,10 @@
     document.getElementById('sNew').textContent = human(best.blob.size);
     var saved = source.size ? Math.max(0, Math.round((1 - best.blob.size / source.size) * 100)) : 0;
     document.getElementById('sSaved').textContent = saved + '%';
+    // The ring is the saving, so the headline number is also the picture.
+    var dialEl = document.getElementById('dial');
+    dialEl.classList.remove('is-idle', 'is-working');
+    dialEl.style.setProperty('--pct', saved / 100);
     document.getElementById('sDim').textContent = best.w + '×' + best.h;
     document.getElementById('sQ').textContent = bestQ === null ? 'lossless' : Math.round(bestQ * 100) + '%';
     document.getElementById('sTries').textContent = tries;

@@ -38,28 +38,47 @@
   </div>
 </header>
 
+<!-- Shared gradient for every .u-dial on this page. -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <defs><linearGradient id="uDialGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#06b6d4"/>
+  </linearGradient></defs>
+</svg>
+
 <main id="main" class="u-wrap">
   <section class="u-hero" style="text-align:left;padding-bottom:.6rem">
     <p class="u-kicker"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg> Video to Audio</p>
-    <h1>Take the audio out of a video</h1>
-    <p class="u-lede" style="margin-inline:0">Drop in an MP4 and get a WAV back. Useful for transcription, podcast edits, and anything that wants sound without pictures.</p>
+    <h1>Video in. Audio out.</h1>
+    <p class="u-lede" style="margin-inline:0">MP4 to WAV, in this tab.</p>
+    <div class="u-privacy compact" style="margin-top:1.1rem">
+      <span class="lock" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
+      <p><strong>Nothing is uploaded.</strong> Your browser does the work.</p>
+    </div>
   </section>
 
-  <div class="u-privacy" style="margin:1.2rem 0 1.8rem">
-    <span class="lock" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
-    <p><strong>Your video never leaves this tab.</strong> It is decoded by your own browser's media engine and re-encoded here. There is no upload and no server round trip — you can disconnect from the network and this page still works. That also means nobody at KAI247 can see the file, which matters if it is a client recording.</p>
-  </div>
+  <ol class="u-steps" id="steps" style="margin-top:1.6rem">
+    <li aria-current="step" data-step="1"><span class="dot">1</span>Video</li>
+    <li data-step="2"><span class="dot">2</span>Output</li>
+    <li data-step="3"><span class="dot">3</span>WAV</li>
+  </ol>
 
   <div class="u-tool split">
     <div class="u-panel">
-      <h2>1 · Choose a video</h2>
+      <div class="u-panel-head">
+        <span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h11v12H4z" stroke="currentColor" stroke-width="2"/><path d="M15 10l5-3v10l-5-3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <h2>The video</h2>
+      </div>
       <label class="u-drop" id="drop" for="file">
         <input type="file" id="file" accept="video/*,audio/*">
-        <strong>Drop a video here</strong>
-        <p class="u-hint" style="margin-top:.35rem">or click to browse — MP4, MOV, WebM, M4A</p>
+        <span class="u-glyph" aria-hidden="true" style="margin:0 auto .6rem;width:44px;height:44px"><svg viewBox="0 0 24 24" fill="none" style="width:22px;height:22px"><path d="M12 16V4m0 0L7 9m5-5l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 17v2a1 1 0 001 1h14a1 1 0 001-1v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <strong>Drop a video</strong>
+        <p class="u-hint" style="margin-top:.35rem">MP4 · MOV · WebM · M4A</p>
       </label>
 
-      <h2 style="margin-top:1.6rem">2 · Choose the output</h2>
+      <div class="u-panel-head" style="margin-top:1.7rem">
+        <span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h3l3-7 4 14 3-7h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h2>The output</h2>
+      </div>
       <div class="u-field">
         <label for="rate">Sample rate</label>
         <select id="rate">
@@ -95,40 +114,57 @@
     </div>
 
     <div class="u-panel">
-      <h2>Result</h2>
-      <div class="u-stat" id="stats" hidden>
-        <div><div class="k">Source</div><div class="v" id="sOrig">—</div></div>
-        <div><div class="k">Duration</div><div class="v" id="sDur">—</div></div>
-        <div><div class="k">Sample rate</div><div class="v" id="sRate">—</div></div>
-        <div><div class="k">Channels</div><div class="v" id="sChan">—</div></div>
-        <div><div class="k">WAV size</div><div class="v" id="sNew">—</div></div>
-        <div><div class="k">Bit depth</div><div class="v" id="sDepth">—</div></div>
+      <div class="u-panel-head">
+        <span class="u-glyph ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M8.5 12.2l2.4 2.4 4.6-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h2>The WAV</h2>
       </div>
-      <p class="u-hint" id="placeholder">Nothing loaded yet. Choose a video to begin.</p>
+
+      <div class="u-result">
+        <div class="u-dial is-idle" id="dial" style="--pct:0">
+          <svg viewBox="0 0 120 120">
+            <circle class="ghost" cx="60" cy="60" r="58"/>
+            <circle class="track" cx="60" cy="60" r="52"/>
+            <circle class="fill" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="u-dial-mid"><b id="dialV">—</b><span id="dialK">waiting</span></div>
+        </div>
+        <div class="u-stat" id="stats" hidden>
+          <div><div class="k">Length</div><div class="v" id="sDur">—</div></div>
+          <div><div class="k">Rate</div><div class="v" id="sRate">—</div></div>
+          <div><div class="k">Channels</div><div class="v" id="sChan">—</div></div>
+          <div><div class="k">Depth</div><div class="v" id="sDepth">—</div></div>
+        </div>
+      </div>
+
+      <p class="u-hint" id="placeholder" style="margin-top:1rem">Drop a video to begin.</p>
+      <span id="sOrig" hidden></span>
+      <span id="sNew" hidden></span>
       <div id="verdict" style="margin-top:1rem"></div>
       <audio id="preview" controls style="width:100%;margin-top:1rem" hidden></audio>
-      <div class="u-row" style="margin-top:1rem">
+      <div class="u-row" style="margin-top:1.1rem">
         <a class="u-btn" id="dl" hidden download>Download WAV</a>
       </div>
     </div>
   </div>
 
-  <p class="u-note" style="margin-top:1.6rem">
-    <strong>How it works.</strong> The file is handed to your browser's own audio decoder, which
-    reads the audio track out of the container and ignores the video frames entirely. The result is
-    resampled and mixed to the shape you asked for, then written out as a RIFF/PCM WAV. Nothing is
-    transcoded on a server, so quality is limited only by what was in the original recording.
-  </p>
+  <ul class="u-facts" style="margin-top:1.6rem">
+    <li><span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Runs offline</li>
+    <li><span class="u-glyph ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg></span>No upload</li>
+    <li><span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h3l3-7 4 14 3-7h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Full quality</li>
+    <li><span class="u-glyph warn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4l9 16H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4m0 3v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>WAV only, no MP3</li>
+  </ul>
 
-  <p class="u-note" style="margin-top:.9rem">
-    <strong>What it cannot do.</strong> WAV is uncompressed — expect roughly 10 MB per minute at CD
-    quality in stereo, or about 1.8 MB per minute at 16 kHz mono. The whole track is held in memory
-    while it is converted, so very long recordings can exhaust a tab; if that happens, the page says
-    so rather than hanging. A handful of exotic codecs are not decodable by every browser, and a
-    video with no audio track cannot produce a file — both are reported plainly instead of
-    downloading an empty WAV. There is no MP3 output here: MP3 encoding needs a licensed encoder
-    this page deliberately does not ship.
-  </p>
+  <!-- The wording moved, not the facts. Truth discipline outranks a tidy page,
+       so every limitation the long version stated is still here — one click
+       away instead of three paragraphs deep. -->
+  <details class="u-more">
+    <summary><span class="chev" aria-hidden="true">›</span>How it works, and what it cannot do</summary>
+    <div class="body">
+      <p>Your browser's own decoder reads the audio track out of the container and ignores the video frames. The result is resampled through an offline audio context and written as a RIFF/PCM WAV. Nothing is transcoded on a server, so quality is limited only by the original recording.</p>
+      <p>WAV is uncompressed: roughly 10 MB per minute at CD quality in stereo, or about 1.8 MB per minute at 16 kHz mono. The whole track is held in memory while it converts, so very long recordings can exhaust a tab — the page says so rather than hanging.</p>
+      <p>A file with no audio track, or one using a codec this browser cannot decode, is reported plainly instead of downloading an empty WAV. There is no MP3 output: MP3 encoding needs a licensed encoder this page deliberately does not ship.</p>
+    </div>
+  </details>
 </main>
 
 <footer class="u-foot">
@@ -148,7 +184,28 @@
       placeholder = document.getElementById('placeholder'), verdict = document.getElementById('verdict'),
       preview = document.getElementById('preview'), dl = document.getElementById('dl');
 
+  var dial = document.getElementById('dial'), dialV = document.getElementById('dialV'),
+      dialK = document.getElementById('dialK'), steps = document.getElementById('steps');
+
   var source = null, lastUrl = null;
+
+  /* The dial carries the one number worth reading; the steps say where you
+   * are. Both are presentation only — nothing below depends on them. */
+  function setDial(value, label, state) {
+    dialV.textContent = value;
+    dialK.textContent = label;
+    dial.classList.toggle('is-idle', state === 'idle');
+    dial.classList.toggle('is-working', state === 'working');
+    dial.style.setProperty('--pct', state === 'done' ? 1 : 0);
+  }
+
+  function setStep(n) {
+    [].forEach.call(steps.children, function (li) {
+      var s = +li.getAttribute('data-step');
+      li.classList.toggle('is-done', s < n);
+      if (s === n) { li.setAttribute('aria-current', 'step'); } else { li.removeAttribute('aria-current'); }
+    });
+  }
 
   // Pre-fill from the assistant bar: "extract audio from this mp4 for
   // transcription" arrives here as rate=16000&channels=1. Only values the
@@ -271,7 +328,8 @@
     var c = +chan.value || 2;
     var b = (+depth.value) / 8;
     var bytes = source.duration * r * c * b;
-    say('About ' + human(bytes) + ' as a WAV. Nothing has been converted yet.');
+    setDial(human(bytes), 'estimated', 'idle');
+    say('Nothing has been converted yet.');
   }
 
   function pick(file) {
@@ -281,6 +339,7 @@
     note(''); placeholder.hidden = false;
     source = { file: file, duration: 0 };
     go.disabled = false;
+    setStep(2);
     document.getElementById('sOrig').textContent = human(file.size);
 
     // Read the duration cheaply from a media element so the size estimate can
@@ -317,6 +376,7 @@
     fileInput.value = ''; source = null; go.disabled = true;
     stats.hidden = true; preview.hidden = true; dl.hidden = true;
     placeholder.hidden = false; note(''); say('');
+    setDial('—', 'waiting', 'idle'); setStep(1);
   });
 
   go.addEventListener('click', function () {
@@ -324,6 +384,7 @@
     go.disabled = true;
     say('Decoding the audio track…');
     note('');
+    setDial('…', 'working', 'working');
 
     var AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) {
@@ -365,10 +426,14 @@
       document.getElementById('sNew').textContent = human(blob.size);
       document.getElementById('sDepth').textContent = bits === 32 ? '32-bit float' : bits + '-bit PCM';
 
+      setDial(human(blob.size), 'ready', 'done');
+      setStep(3);
       say('Done.', 'u-ok');
       go.disabled = false;
     }).catch(function (err) {
       go.disabled = false;
+      setDial('—', 'no audio', 'idle');
+      setStep(2);
       var msg = (err && err.message) || '';
       if (msg === 'empty') {
         say('That file decoded to nothing — it probably has no audio track.', 'u-bad');
