@@ -82,3 +82,33 @@ access to that box.
   docroot and never deletes, which is the only reason `./kai247/` and `./funsizegp/` survive it.
 - **`llms.txt` must never return.** The deploy fails if it is in the tree or on the server.
 
+
+## Troubleshooting: kai247.com returns 502 (seen 2026-08-08, during cutover)
+
+Symptom: every route returns `502`, body is the bare text `error code: 502`, `Server: cloudflare`.
+
+Diagnosis that isolates it in three commands:
+
+```bash
+curl -s -o /dev/null -w '%{http_code}
+' https://brahmexa.com/     # 200 -> tunnel + Apache healthy
+curl -s -o /dev/null -w '%{http_code}
+' https://funsizegp.com/    # 200 -> sibling subdirectory healthy
+nslookup kai247.com                                                # 104.21.x / 172.67.x -> proxied by Cloudflare
+```
+
+If the siblings answer 200 and kai247.com does not, the files, the `.htaccess` rewrite and the
+Apache service are all fine — **the fault is the kai247.com Public Hostname entry in Zero
+Trust**. A bare `error code: 502` from the edge means cloudflared could not reach a service for
+that hostname, which is either a wrong service value or a DNS record pointing at the tunnel
+with no matching ingress rule behind it.
+
+Fix: open the **funsizegp.com** public-hostname entry, which is known good, and copy its
+service value verbatim into the kai247.com entry — same tunnel, same scheme, same address.
+Scheme matters: `HTTPS://` against an Apache that only speaks HTTP on :80 returns exactly this
+502. The expected value is `HTTP` → `manjulab-web.brahmando.svc.cluster.local:80`.
+
+Instant rollback while diagnosing: re-add the four GitHub Pages A records for the apex
+(185.199.108.153, .109.153, .110.153, .111.153) as **DNS-only**. The Pages origin is still
+built and serving — `curl --resolve kai247.com:443:185.199.108.153 https://kai247.com/`
+returns 200 — so the site comes back within a DNS TTL.
