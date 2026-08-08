@@ -152,6 +152,26 @@ main { padding-top: 62px; }
 .cosmos .clabel { fill: var(--mut); font: 500 23px "Space Grotesk", sans-serif; text-anchor: middle; letter-spacing: .06em; }
 .cosmos .seat-ring { fill: none; stroke: var(--gold); stroke-width: 2; stroke-dasharray: 5 7; }
 .cosmos .seat-label { fill: var(--gold); font: 500 23px "Space Grotesk", sans-serif; text-anchor: middle; }
+
+/* Keep the moving labels readable where they cross the fixed ones.
+ *
+ * The brand names ride rotating orbits while the sector words (SOFTWARE,
+ * EVENTS, COMMERCE…) and BRAHMANDO stay put, so twice per revolution a brand
+ * name lands exactly on top of one and both become unreadable — "Brahmexa ·
+ * USA" over "SOFTWARE" is the one people notice. Nothing can be moved to fix
+ * this, because the collision depends on the rotation angle.
+ *
+ * So the name that is on top wins cleanly: paint-order draws a background
+ * halo behind the glyphs first, which cuts the label underneath instead of
+ * letting the two interleave. Uses the page background, so it works in both
+ * themes and costs no extra markup. */
+.cosmos .nlabel,
+.cosmos .seat-label {
+  paint-order: stroke fill;
+  stroke: var(--bg0);
+  stroke-width: 7px;
+  stroke-linejoin: round;
+}
 .cosmos a { cursor: pointer; }
 .cosmos a:hover .node, .cosmos a:focus .node { filter: brightness(1.35); }
 .cosmos a:hover .nlabel { fill: var(--gold); }

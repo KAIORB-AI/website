@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video to Audio Converter — MP4 to WAV in your browser — KAI247</title>
+<meta name="description" content="Pull the audio out of an MP4, MOV or WebM and save it as a WAV — entirely in your browser. Nothing is uploaded. Free, no login, no watermark.">
+<link rel="canonical" href="https://kai247.com/utility/video-to-audio/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kai247.com/utility/video-to-audio/">
+<meta property="og:title" content="Video to Audio Converter — KAI247">
+<meta property="og:description" content="MP4 to WAV in your browser. Nothing uploaded.">
+<meta name="theme-color" content="#f8fafc">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/utility.css">
+<script defer src="/assets/js/utility-router.js"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Video to Audio Converter","url":"https://kai247.com/utility/video-to-audio/","applicationCategory":"MultimediaApplication","operatingSystem":"Any (web browser)","description":"Extract the audio track from a video file and export it as a WAV, entirely in the browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<a class="u-skip" href="#main">Skip to content</a>
+<header class="u-head">
+  <div class="u-wrap">
+    <a class="u-brand" href="/" aria-label="KAI247 home">
+      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--u-blue)" stroke-width="4" transform="rotate(-24 32 32)"/><circle cx="32" cy="32" r="10" fill="var(--u-cyan)"/><circle cx="51" cy="19" r="4" fill="var(--u-ink)"/></svg>
+      KAI247
+    </a>
+    <nav class="u-nav" aria-label="Primary">
+      <a href="/utility/">All utilities</a>
+      <a href="/utility/photo-size-targeter/">Photo</a>
+      <a href="/utility/cidr-calculator/">CIDR</a>
+      <a href="/utility/web-essentials/">Web Essentials</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="u-wrap">
+  <section class="u-hero" style="text-align:left;padding-bottom:.6rem">
+    <p class="u-kicker"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg> Video to Audio</p>
+    <h1>Take the audio out of a video</h1>
+    <p class="u-lede" style="margin-inline:0">Drop in an MP4 and get a WAV back. Useful for transcription, podcast edits, and anything that wants sound without pictures.</p>
+  </section>
+
+  <div class="u-privacy" style="margin:1.2rem 0 1.8rem">
+    <span class="lock" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
+    <p><strong>Your video never leaves this tab.</strong> It is decoded by your own browser's media engine and re-encoded here. There is no upload and no server round trip — you can disconnect from the network and this page still works. That also means nobody at KAI247 can see the file, which matters if it is a client recording.</p>
+  </div>
+
+  <div class="u-tool split">
+    <div class="u-panel">
+      <h2>1 · Choose a video</h2>
+      <label class="u-drop" id="drop" for="file">
+        <input type="file" id="file" accept="video/*,audio/*">
+        <strong>Drop a video here</strong>
+        <p class="u-hint" style="margin-top:.35rem">or click to browse — MP4, MOV, WebM, M4A</p>
+      </label>
+
+      <h2 style="margin-top:1.6rem">2 · Choose the output</h2>
+      <div class="u-field">
+        <label for="rate">Sample rate</label>
+        <select id="rate">
+          <option value="0">Keep the original</option>
+          <option value="48000">48,000 Hz — video standard</option>
+          <option value="44100">44,100 Hz — CD quality</option>
+          <option value="22050">22,050 Hz — smaller file</option>
+          <option value="16000">16,000 Hz — speech and transcription</option>
+        </select>
+        <p class="u-hint">16,000 Hz mono is what most speech-to-text engines want, and it is a fraction of the size.</p>
+      </div>
+      <div class="u-field">
+        <label for="chan">Channels</label>
+        <select id="chan">
+          <option value="0">Keep the original</option>
+          <option value="1">Mono — mixed down</option>
+          <option value="2">Stereo</option>
+        </select>
+      </div>
+      <div class="u-field">
+        <label for="depth">Bit depth</label>
+        <select id="depth">
+          <option value="16">16-bit PCM — opens everywhere</option>
+          <option value="24">24-bit PCM — more headroom</option>
+          <option value="32">32-bit float — for further editing</option>
+        </select>
+      </div>
+      <div class="u-row">
+        <button class="u-btn" type="button" id="go" disabled>Extract audio</button>
+        <button class="u-btn u-btn-ghost" type="button" id="reset">Reset</button>
+      </div>
+      <p class="u-hint" id="status" style="margin-top:.8rem"></p>
+    </div>
+
+    <div class="u-panel">
+      <h2>Result</h2>
+      <div class="u-stat" id="stats" hidden>
+        <div><div class="k">Source</div><div class="v" id="sOrig">—</div></div>
+        <div><div class="k">Duration</div><div class="v" id="sDur">—</div></div>
+        <div><div class="k">Sample rate</div><div class="v" id="sRate">—</div></div>
+        <div><div class="k">Channels</div><div class="v" id="sChan">—</div></div>
+        <div><div class="k">WAV size</div><div class="v" id="sNew">—</div></div>
+        <div><div class="k">Bit depth</div><div class="v" id="sDepth">—</div></div>
+      </div>
+      <p class="u-hint" id="placeholder">Nothing loaded yet. Choose a video to begin.</p>
+      <div id="verdict" style="margin-top:1rem"></div>
+      <audio id="preview" controls style="width:100%;margin-top:1rem" hidden></audio>
+      <div class="u-row" style="margin-top:1rem">
+        <a class="u-btn" id="dl" hidden download>Download WAV</a>
+      </div>
+    </div>
+  </div>
+
+  <p class="u-note" style="margin-top:1.6rem">
+    <strong>How it works.</strong> The file is handed to your browser's own audio decoder, which
+    reads the audio track out of the container and ignores the video frames entirely. The result is
+    resampled and mixed to the shape you asked for, then written out as a RIFF/PCM WAV. Nothing is
+    transcoded on a server, so quality is limited only by what was in the original recording.
+  </p>
+
+  <p class="u-note" style="margin-top:.9rem">
+    <strong>What it cannot do.</strong> WAV is uncompressed — expect roughly 10 MB per minute at CD
+    quality in stereo, or about 1.8 MB per minute at 16 kHz mono. The whole track is held in memory
+    while it is converted, so very long recordings can exhaust a tab; if that happens, the page says
+    so rather than hanging. A handful of exotic codecs are not decodable by every browser, and a
+    video with no audio track cannot produce a file — both are reported plainly instead of
+    downloading an empty WAV. There is no MP3 output here: MP3 encoding needs a licensed encoder
+    this page deliberately does not ship.
+  </p>
+</main>
+
+<footer class="u-foot">
+  <div class="u-wrap">
+    <span>KAI247 — Always with you.</span>
+    <nav aria-label="Footer"><a href="/utility/">All utilities</a> · <a href="/">Home</a></nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var fileInput = document.getElementById('file'), drop = document.getElementById('drop'),
+      rate = document.getElementById('rate'), chan = document.getElementById('chan'),
+      depth = document.getElementById('depth'),
+      go = document.getElementById('go'), reset = document.getElementById('reset'),
+      status = document.getElementById('status'), stats = document.getElementById('stats'),
+      placeholder = document.getElementById('placeholder'), verdict = document.getElementById('verdict'),
+      preview = document.getElementById('preview'), dl = document.getElementById('dl');
+
+  var source = null, lastUrl = null;
+
+  // Pre-fill from the assistant bar: "extract audio from this mp4 for
+  // transcription" arrives here as rate=16000&channels=1. Only values the
+  // router could actually prove were asked for are ever present.
+  function preset(select, value) {
+    if (!value) { return; }
+    for (var i = 0; i < select.options.length; i++) {
+      if (+select.options[i].value === +value) { select.selectedIndex = i; return; }
+    }
+  }
+  if (window.kaiParam) {
+    preset(rate, window.kaiParam('rate'));
+    preset(chan, window.kaiParam('channels'));
+  }
+
+  function human(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+    if (bytes < 1073741824) return (bytes / 1048576).toFixed(1) + ' MB';
+    return (bytes / 1073741824).toFixed(2) + ' GB';
+  }
+
+  function clock(seconds) {
+    var s = Math.round(seconds);
+    var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), r = s % 60;
+    var mm = (h ? String(m).padStart(2, '0') : String(m));
+    return (h ? h + ':' : '') + mm + ':' + String(r).padStart(2, '0');
+  }
+
+  function say(msg, cls) {
+    status.textContent = msg || '';
+    status.className = 'u-hint' + (cls ? ' ' + cls : '');
+  }
+
+  function note(html) {
+    verdict.textContent = '';
+    if (!html) { return; }
+    var p = document.createElement('p');
+    p.className = 'u-note';
+    p.textContent = html;
+    verdict.appendChild(p);
+  }
+
+  function revoke() {
+    if (lastUrl) { URL.revokeObjectURL(lastUrl); lastUrl = null; }
+  }
+
+  /* ---- WAV writer ------------------------------------------------------ *
+   * RIFF/PCM. 16- and 24-bit are integer; 32-bit is IEEE float, which needs
+   * format tag 3 and is what editors expect for float files.               */
+  function encodeWav(buffer, bits) {
+    var channels = buffer.numberOfChannels,
+        frames = buffer.length,
+        sampleRate = buffer.sampleRate,
+        bytesPerSample = bits / 8,
+        isFloat = (bits === 32),
+        blockAlign = channels * bytesPerSample,
+        dataBytes = frames * blockAlign,
+        headerBytes = 44,
+        out = new ArrayBuffer(headerBytes + dataBytes),
+        view = new DataView(out),
+        i, ch, offset = 0;
+
+    function str(s) { for (var k = 0; k < s.length; k++) { view.setUint8(offset++, s.charCodeAt(k)); } }
+    function u32(v) { view.setUint32(offset, v, true); offset += 4; }
+    function u16(v) { view.setUint16(offset, v, true); offset += 2; }
+
+    str('RIFF'); u32(36 + dataBytes); str('WAVE');
+    str('fmt '); u32(16); u16(isFloat ? 3 : 1); u16(channels);
+    u32(sampleRate); u32(sampleRate * blockAlign); u16(blockAlign); u16(bits);
+    str('data'); u32(dataBytes);
+
+    // Pull the channel data out once rather than per sample — calling
+    // getChannelData inside the interleave loop is what makes naive versions
+    // of this take minutes on a long file.
+    var data = [];
+    for (ch = 0; ch < channels; ch++) { data.push(buffer.getChannelData(ch)); }
+
+    for (i = 0; i < frames; i++) {
+      for (ch = 0; ch < channels; ch++) {
+        var s = data[ch][i];
+        if (s > 1) { s = 1; } else if (s < -1) { s = -1; }
+        if (isFloat) {
+          view.setFloat32(offset, s, true); offset += 4;
+        } else if (bits === 24) {
+          var v24 = Math.round(s * 8388607);
+          view.setUint8(offset++, v24 & 255);
+          view.setUint8(offset++, (v24 >> 8) & 255);
+          view.setUint8(offset++, (v24 >> 16) & 255);
+        } else {
+          view.setInt16(offset, Math.round(s * 32767), true); offset += 2;
+        }
+      }
+    }
+    return new Blob([out], { type: 'audio/wav' });
+  }
+
+  /* Resample / remix through an OfflineAudioContext. Returns the original
+   * buffer untouched when neither rate nor channel count is changing. */
+  function reshape(buffer, targetRate, targetChannels) {
+    var wantRate = targetRate || buffer.sampleRate;
+    var wantChannels = targetChannels || buffer.numberOfChannels;
+    if (wantRate === buffer.sampleRate && wantChannels === buffer.numberOfChannels) {
+      return Promise.resolve(buffer);
+    }
+    var frames = Math.max(1, Math.ceil(buffer.duration * wantRate));
+    var OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+    if (!OAC) { return Promise.resolve(buffer); }
+    var ctx = new OAC(wantChannels, frames, wantRate);
+    var src = ctx.createBufferSource();
+    src.buffer = buffer;
+    src.connect(ctx.destination);
+    src.start();
+    return ctx.startRendering();
+  }
+
+  function estimate() {
+    if (!source || !source.duration) { return; }
+    var r = +rate.value || source.rateGuess || 48000;
+    var c = +chan.value || 2;
+    var b = (+depth.value) / 8;
+    var bytes = source.duration * r * c * b;
+    say('About ' + human(bytes) + ' as a WAV. Nothing has been converted yet.');
+  }
+
+  function pick(file) {
+    if (!file) { return; }
+    revoke();
+    stats.hidden = true; preview.hidden = true; dl.hidden = true;
+    note(''); placeholder.hidden = false;
+    source = { file: file, duration: 0 };
+    go.disabled = false;
+    document.getElementById('sOrig').textContent = human(file.size);
+
+    // Read the duration cheaply from a media element so the size estimate can
+    // appear before the (expensive) decode is ever run.
+    var probe = document.createElement('video');
+    probe.preload = 'metadata';
+    var purl = URL.createObjectURL(file);
+    probe.onloadedmetadata = function () {
+      source.duration = isFinite(probe.duration) ? probe.duration : 0;
+      document.getElementById('sDur').textContent = source.duration ? clock(source.duration) : '—';
+      URL.revokeObjectURL(purl);
+      estimate();
+    };
+    probe.onerror = function () { URL.revokeObjectURL(purl); say('Loaded. Press Extract audio.'); };
+    probe.src = purl;
+    say('Loaded ' + file.name + '. Reading length…');
+  }
+
+  fileInput.addEventListener('change', function () { pick(fileInput.files[0]); });
+  ['dragenter', 'dragover'].forEach(function (e) {
+    drop.addEventListener(e, function (ev) { ev.preventDefault(); drop.classList.add('is-over'); });
+  });
+  ['dragleave', 'drop'].forEach(function (e) {
+    drop.addEventListener(e, function (ev) { ev.preventDefault(); drop.classList.remove('is-over'); });
+  });
+  drop.addEventListener('drop', function (ev) {
+    var f = ev.dataTransfer && ev.dataTransfer.files && ev.dataTransfer.files[0];
+    if (f) { fileInput.files = ev.dataTransfer.files; pick(f); }
+  });
+  [rate, chan, depth].forEach(function (el) { el.addEventListener('change', estimate); });
+
+  reset.addEventListener('click', function () {
+    revoke();
+    fileInput.value = ''; source = null; go.disabled = true;
+    stats.hidden = true; preview.hidden = true; dl.hidden = true;
+    placeholder.hidden = false; note(''); say('');
+  });
+
+  go.addEventListener('click', function () {
+    if (!source) { return; }
+    go.disabled = true;
+    say('Decoding the audio track…');
+    note('');
+
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) {
+      say('This browser has no Web Audio support, so it cannot decode the track.', 'u-bad');
+      go.disabled = false;
+      return;
+    }
+
+    source.file.arrayBuffer().then(function (bytes) {
+      var ctx = new AC();
+      // Callback form as well as the promise: older Safari only has the former.
+      return new Promise(function (resolve, jec) {
+        var p = ctx.decodeAudioData(bytes, resolve, jec);
+        if (p && p.then) { p.then(resolve, jec); }
+      }).finally(function () { if (ctx.close) { ctx.close(); } });
+    }).then(function (buffer) {
+      if (!buffer || !buffer.length) { throw new Error('empty'); }
+      say('Resampling and writing the WAV…');
+      return reshape(buffer, +rate.value, +chan.value);
+    }).then(function (buffer) {
+      var bits = +depth.value;
+      var blob = encodeWav(buffer, bits);
+      revoke();
+      lastUrl = URL.createObjectURL(blob);
+
+      var base = source.file.name.replace(/\.[^.]+$/, '') || 'audio';
+      dl.href = lastUrl;
+      dl.download = base + '.wav';
+      dl.hidden = false;
+      preview.src = lastUrl;
+      preview.hidden = false;
+
+      placeholder.hidden = true;
+      stats.hidden = false;
+      document.getElementById('sDur').textContent = clock(buffer.duration);
+      document.getElementById('sRate').textContent = buffer.sampleRate.toLocaleString() + ' Hz';
+      document.getElementById('sChan').textContent = buffer.numberOfChannels === 1 ? 'Mono' :
+        (buffer.numberOfChannels === 2 ? 'Stereo' : buffer.numberOfChannels + ' channels');
+      document.getElementById('sNew').textContent = human(blob.size);
+      document.getElementById('sDepth').textContent = bits === 32 ? '32-bit float' : bits + '-bit PCM';
+
+      say('Done.', 'u-ok');
+      go.disabled = false;
+    }).catch(function (err) {
+      go.disabled = false;
+      var msg = (err && err.message) || '';
+      if (msg === 'empty') {
+        say('That file decoded to nothing — it probably has no audio track.', 'u-bad');
+        note('A screen recording made without a microphone or system audio will look like a normal video but carry no sound. Check it plays with audio before converting.');
+      } else if (/allocat|memory|RangeError/i.test(msg) || (err && err.name === 'RangeError')) {
+        say('This recording is too long to hold in memory as uncompressed audio.', 'u-bad');
+        note('Try 16,000 Hz mono, which needs about a sixth of the memory of CD-quality stereo. For very long recordings, split the video first.');
+      } else {
+        // Two different causes land here and the browser does not tell them
+        // apart: a file with no audio track at all, and one whose codec this
+        // browser cannot decode. decodeAudioData throws the same EncodingError
+        // for both, so name both rather than assert the wrong one — a
+        // screen recording captured without a microphone is the commoner case
+        // and would otherwise send someone off re-encoding a fine file.
+        say('No audio could be read from that file.', 'u-bad');
+        note('Either the video has no audio track — screen recordings made without a microphone often do not — or its codec is not one this browser can decode. Check the video plays with sound; if it does, re-saving it as a standard MP4 with AAC audio usually fixes it.');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

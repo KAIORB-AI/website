@@ -89,11 +89,31 @@
       id: 'marketing', built: false, path: '/utility/web-marketing-toolkit/',
       label: 'Web & Marketing Toolkit',
       test: /\b(meta tags?|serp|open graph|og:|twitter card|schema|json-?ld|canonical|redirect|favicon|keyword)\b/i
+    },
+    {
+      id: 'video2audio', built: true, path: '/utility/video-to-audio/',
+      label: 'Video to Audio Converter',
+      // Deliberately matches the container/extension words people actually
+      // type ("mp4 to wav", "rip the audio", "convert mov to mp3") rather than
+      // the bare word "audio", which appears in plenty of unrelated asks.
+      test: /\b(mp4|mov|webm|mkv|m4v|avi)\b|\b(video|screen ?recording|recording)\s*(to|into|→)\s*(audio|wav|mp3|sound)\b|\b(extract|rip|strip|pull|separate|get)\s+(the\s+)?audio\b|\baudio\s+(from|out of)\s+(a\s+)?(video|mp4|recording)\b|\bto\s*\.?wav\b/i,
+      params: function (q) {
+        var p = {};
+        // "16k for transcription" / "44.1 kHz" — only set what was actually said.
+        var hz = q.match(/(\d{2,3}(?:[.,]\d)?)\s*k(?:hz)?\b/i);
+        if (hz) { p.rate = Math.round(parseFloat(hz[1].replace(',', '.')) * 1000); }
+        if (/\bmono\b/i.test(q)) { p.channels = 1; }
+        else if (/\bstereo\b/i.test(q)) { p.channels = 2; }
+        if (/\btranscri|speech|whisper|subtitle|caption/i.test(q)) { p.rate = p.rate || 16000; p.channels = p.channels || 1; }
+        return p;
+      }
     }
   ];
 
   // PDF before photo: "shrink this PDF image" is a PDF request.
-  var ORDER = ['pdf', 'qr', 'utm', 'sitemap', 'robots', 'slug', 'cidr', 'finance', 'quote', 'po', 'marketing', 'photo'];
+  // video2audio before photo too: "extract the audio from this recording" must
+  // not be swallowed by the photo route's broad media words.
+  var ORDER = ['pdf', 'qr', 'utm', 'sitemap', 'robots', 'slug', 'cidr', 'video2audio', 'finance', 'quote', 'po', 'marketing', 'photo'];
 
   function sizeKB(q) {
     var m = q.match(/(\d+(?:\.\d+)?)\s*(kb|mb|gb|k|m|g|b)\b/i);
