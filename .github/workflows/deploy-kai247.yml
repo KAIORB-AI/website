@@ -114,9 +114,12 @@ jobs:
             --exclude='./CNAME' \
             --exclude='./.nojekyll' \
             -C . .
-          echo "Tarball contents:"
-          tar -tzf "$RUNNER_TEMP/kai247-site.tgz" | head -40
-          echo "… $(tar -tzf "$RUNNER_TEMP/kai247-site.tgz" | wc -l) entries total"
+          # Listed to a file first, not piped into head: under `pipefail`, head
+          # closing the pipe at 40 lines gives tar EPIPE and fails the step. That
+          # is exactly what happened the first time the site grew past 40 files.
+          tar -tzf "$RUNNER_TEMP/kai247-site.tgz" > "$RUNNER_TEMP/contents.txt"
+          echo "Tarball contains $(wc -l < "$RUNNER_TEMP/contents.txt") entries; first 40:"
+          head -40 "$RUNNER_TEMP/contents.txt"
 
       - name: Set up SSH agent
         uses: webfactory/ssh-agent@v0.10.0
