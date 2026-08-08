@@ -101,9 +101,11 @@ jobs:
       # exclude list rather than an include list that would silently drop a new
       # page the day someone adds one.
       - name: Build the site tarball
+        # Written to RUNNER_TEMP, not the workspace: tar reading the directory
+        # it is writing into fails with "file changed as we read it".
         run: |
           set -euo pipefail
-          tar -czf kai247-site.tgz \
+          tar -czf "$RUNNER_TEMP/kai247-site.tgz" \
             --exclude='./.git' \
             --exclude='./.github' \
             --exclude='./docs' \
@@ -113,8 +115,8 @@ jobs:
             --exclude='./.nojekyll' \
             -C . .
           echo "Tarball contents:"
-          tar -tzf kai247-site.tgz | head -40
-          echo "… $(tar -tzf kai247-site.tgz | wc -l) entries total"
+          tar -tzf "$RUNNER_TEMP/kai247-site.tgz" | head -40
+          echo "… $(tar -tzf "$RUNNER_TEMP/kai247-site.tgz" | wc -l) entries total"
 
       - name: Set up SSH agent
         uses: webfactory/ssh-agent@v0.10.0
@@ -131,7 +133,7 @@ jobs:
       - name: Upload
         run: |
           set -euo pipefail
-          scp -o BatchMode=yes -P "${{ secrets.SSH_PORT }}" kai247-site.tgz \
+          scp -o BatchMode=yes -P "${{ secrets.SSH_PORT }}" "$RUNNER_TEMP/kai247-site.tgz" \
             "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/tmp/kai247-site.tgz"
 
       - name: Extract and prune on the GPU server
