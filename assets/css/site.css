@@ -449,9 +449,8 @@ body.viewer-open { overflow: hidden; }
   body { background: #fff; color: #000; }
 }
 
-/* ---------- Founding trinity (React island) ----------
-   Point-down triangle: two countries level on the top row, one below, and the
-   centre left to KAI247. An apex would read as.k-trinity {
+/* ---------- Founding trinity (React island) ---------- */
+.k-trinity {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -511,7 +510,6 @@ body.viewer-open { overflow: hidden; }
 @media (max-width: 720px) {
   .k-trinity { grid-template-columns: 1fr; gap: 2rem; }
   .k-world-2 { grid-column: auto; }
-}mn: auto; }
   .k-trinity-edges { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .k-orb-ring { animation: none; } }
