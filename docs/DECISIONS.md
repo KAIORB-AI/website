@@ -187,3 +187,37 @@ what should be handed to it.
 starter analysis, Brahmando Marketplace). `/utility/` is KAI247's own browser-side suite. Main
 navigation now points at `/utility/`, and the two cross-link. **This is a confusing pair of
 URLs** and worth merging under one name when the owner picks one.
+
+## 24. The founding trinity is a point-DOWN triangle
+Owner direction: triangle, and no country in the middle or at the top. An upward triangle puts
+one country at the apex, and an apex reads as rank — wrong for three companies that deliver as
+one network. Pointing down leaves the top edge flat: two countries sit at exactly the same
+height (verified: both orb centres at y=54), the third sits below, and the centroid is the
+KAI247 mark rather than any country. The middle of the network is the network.
+
+Countries render as their own map silhouette **filled with their flag colours**, inside the
+flattened elliptical ring from the KAI247 logo. Filling the map with the flag — rather than
+drawing a white map over flag bands — is what keeps it legible: there is no band the silhouette
+can disappear against, in either theme. The paths are deliberately simplified; at 76px a
+survey-accurate coastline is noise. Canada's path is centred on y=45 rather than y=50 because
+it is far wider than tall and otherwise floats above the middle of its orb.
+
+## 25. React arrives as islands, not a rewrite
+Owner direction, superseding decision #20 for components that will grow. The marketing pages
+stay static HTML — they must render with no JavaScript, and the deploy is a tarball of files,
+not a server. React mounts only where a component grows.
+
+The first island is the trinity, and it earns React twice over: adding a company is one entry
+in `src/data/network.ts` (a new country is one entry in `src/data/countries.ts`), and the
+triangle's edges are **measured from the rendered orbs** via `useLayoutEffect` + `ResizeObserver`
+rather than hard-coded percentages, so they stay attached at any width, font size or zoom.
+
+`npm run build` does three things: bundles the client island, builds an SSR copy of the same
+component, and runs `scripts/prerender.mjs` to bake that markup between `<!-- island:trinity -->`
+markers in the HTML. That is what stops the island and its no-JS fallback from drifting: both
+come from one component, so the crawlable HTML updates in the same commit. CI re-runs the build
+before deploying and fails if the prerender did not land.
+
+Cost, stated plainly: react + react-dom is 198 kB raw / **62.7 kB gzipped** for one component.
+That is real, and only worth it because more islands are coming. If the island count stays at
+one, this should be reverted rather than defended.

@@ -100,9 +100,31 @@ jobs:
       # wrong publishes repo internals to the web root, so it is an explicit
       # exclude list rather than an include list that would silently drop a new
       # page the day someone adds one.
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      # Builds the React islands and re-bakes their server-rendered markup into
+      # the static pages. Running it here rather than trusting the committed
+      # output means the HTML can never lag the component it came from.
+      - name: Build islands
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run build
+          test -f assets/build/trinity.js
+          grep -q 'k-trinity' network/index.html \
+            || { echo "::error::prerender did not write the trinity markup into network/index.html"; exit 1; }
+          echo "VERIFY PASS: island built and prerendered"
+
       - name: Build the site tarball
         # Written to RUNNER_TEMP, not the workspace: tar reading the directory
         # it is writing into fails with "file changed as we read it".
+        #
+        # Everything that is source rather than site is excluded. assets/build
+        # is NOT excluded — it is the compiled island the pages load.
         run: |
           set -euo pipefail
           tar -czf "$RUNNER_TEMP/kai247-site.tgz" \
@@ -113,6 +135,15 @@ jobs:
             --exclude='./.gitignore' \
             --exclude='./CNAME' \
             --exclude='./.nojekyll' \
+            --exclude='./node_modules' \
+            --exclude='./src' \
+            --exclude='./scripts' \
+            --exclude='./.ssr' \
+            --exclude='./package.json' \
+            --exclude='./package-lock.json' \
+            --exclude='./tsconfig.json' \
+            --exclude='./vite.config.ts' \
+            --exclude='./vite.ssr.config.ts' \
             -C . .
           # Listed to a file first, not piped into head: under `pipefail`, head
           # closing the pipe at 40 lines gives tar EPIPE and fails the step. That

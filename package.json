@@ -1,0 +1,23 @@
+{
+  "name": "kai247-web",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "kai247.com \u2014 static pages with React islands for the parts that grow",
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "tsc --noEmit && vite build && vite build -c vite.ssr.config.ts && node scripts/prerender.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7"
+  }
+}
