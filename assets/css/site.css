@@ -246,6 +246,25 @@ footer .always { font-family: "Space Grotesk", sans-serif; color: var(--ink); fo
   .world .w-link { grid-column: 2; }
 }
 
+/* ---------- Application forms ---------- */
+.form { display: grid; gap: 1.1rem; max-width: 44rem; margin-inline: auto; text-align: left; }
+.field label { display: block; font-family: "Space Grotesk", sans-serif; font-weight: 600; font-size: .9rem; margin-bottom: .4rem; }
+.field input, .field select, .field textarea {
+  width: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: .72rem .95rem; color: var(--ink); font: inherit;
+}
+.field textarea { min-height: 7.5rem; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--gold); outline: none; }
+.checks { display: flex; flex-wrap: wrap; gap: .5rem; }
+.chip { position: relative; border: 1px solid var(--line); border-radius: 999px; padding: .38rem .95rem; font-size: .88rem; color: var(--mut); cursor: pointer; user-select: none; }
+.chip input { position: absolute; opacity: 0; pointer-events: none; }
+.chip:has(input:checked) { border-color: var(--gold); color: var(--ink); box-shadow: 0 0 12px var(--gold-soft); }
+.after-note { border: 1px dashed var(--gold); border-radius: 12px; padding: 1rem 1.2rem; color: var(--mut); font-size: .92rem; }
+.hint { color: var(--mut); font-size: .85rem; margin-top: .35rem; }
+.fork { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; }
+.fork .panel h3 { font-size: 1.3rem; }
+.fork .panel .btn { margin-top: .6rem; }
+
 @media print {
   .stars, .head, .cta-row { display: none; }
   body { background: #fff; color: #000; }

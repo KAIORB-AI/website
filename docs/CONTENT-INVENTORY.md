@@ -41,6 +41,14 @@ Anything neither verified nor conceptual is absent from the site.
 - "More stars arriving" (/impact) — roadmap framing
 - KAI name associations — presented as feeling, never as dictionary translations (§1 of master prompt)
 
+## Owner-provided commitments (added 2026-08-08)
+
+| Fact | Register | Source |
+|---|---|---|
+| Brands can join free during the founding period; the network provides hosting and infrastructure; paid plans come later | Owner-provided | Repo owner directive, 2026-08-08 |
+| Companies can join as providers, contributing offerings (e.g. AI datacenter, AI offerings for SMBs) in any form (URL, Excel, other); the network follows up | Owner-provided | Repo owner directive, 2026-08-08 |
+| Interim application intake address: tech@inducersolutions.com | Owner-adjacent (owner's business address; awaiting explicit confirmation) | See docs/DECISIONS.md #10 |
+
 ## Explicitly absent (do not add without verification)
 
 Client counts · revenue · employee numbers · office lists beyond the verified ones ·
