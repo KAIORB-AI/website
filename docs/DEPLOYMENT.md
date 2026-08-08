@@ -27,3 +27,18 @@ for the `kai247-ai` org (Settings → Pages → verified domains) to prevent dom
    to the homepage cosmos SVG if desired; add it to the JSON-LD `member` array in `index.html`.
 3. Record the verification in `docs/CONTENT-INVENTORY.md`.
 4. Never remove the Open Orbit seat — the universe always keeps one seat empty.
+
+---
+
+## SUPERSEDED 2026-08-08 — this repo is no longer the intended origin
+
+kai247.com is moving to the GPU server. The gpuserver origin is the private repo
+**`Brahmando-ai/kai247-web`**, which deploys `site/` into the shared Apache docroot at
+`./kai247/`. It could not be this repo: the self-hosted runner must never be attached to a
+public repo, because a fork's pull request would execute arbitrary code on that server.
+
+This repo is still the LIVE origin via GitHub Pages until the Cloudflare Tunnel public
+hostname for kai247.com is added — so until then, **a change made only here is what the public
+sees, and a change made only there is not live.** Keep them in step, or finish the cutover.
+
+Cutover steps, current state and gotchas: `docs/DEPLOYMENT.md` in the private repo.
