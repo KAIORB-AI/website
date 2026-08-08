@@ -1,0 +1,210 @@
+name: Deploy kai247.com to the GPU server
+
+# Runs on a GITHUB-HOSTED runner and reaches the GPU server over SSH, the same
+# way deploy-brahmexa-com.yml does. This repo is public, so a self-hosted runner
+# is not an option here — a fork's pull request would execute arbitrary code on
+# that box. GitHub-hosted runners are free for public repos and have no such
+# problem, so this is the right shape for a public origin.
+#
+# WHY THERE IS NO pull_request TRIGGER
+# -----------------------------------
+# `push` to main and manual dispatch only. GitHub already withholds secrets from
+# fork pull requests, but a workflow that never runs on untrusted refs cannot
+# leak a key at all. Do not add one.
+#
+# WHERE THIS SITE ACTUALLY LIVES
+# ------------------------------
+# The Apache pod on the GPU server mounts exactly ONE directory —
+# the docroot in secrets.WEB_ROOT — and serves every domain out of it. There is
+# no second vhost and no way to add one from CI. So kai247.com is served from
+# the ./kai247/ subdirectory of that docroot, and the host is matched by an
+# internal rewrite in the PARENT .htaccess, which lives in the Brahmando repo at
+# brahmexa-web/.htaccess.
+#
+# Two consequences worth knowing before debugging a blank page:
+#   1. If the kai247 block is dropped from brahmexa-web/.htaccess, kai247.com
+#      serves the Brahmexa site. The files here are fine — the routing broke,
+#      and it broke in another repository.
+#   2. The brahmexa deploy untars over the docroot and never deletes, so this
+#      subdirectory survives it. Do not add a clean step to that workflow.
+#
+# HOST DETAILS ARE SECRETS, NOT LITERALS
+# --------------------------------------
+# The server address, port, user and docroot are held as repo secrets rather
+# than written here. In a private repo they are plaintext env; in a PUBLIC one
+# that is free reconnaissance for anyone reading the file.
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "docs/**"
+      - "README.md"
+      - ".gitignore"
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-kai247
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Sync site to kai247.com
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      # Fail with something actionable rather than a bare ssh error. Every one
+      # of these must be added under Settings -> Secrets and variables -> Actions.
+      - name: Check deployment secrets are configured
+        env:
+          SSH_KEY: ${{ secrets.DEPLOYER_SSH_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          WEB_ROOT: ${{ secrets.WEB_ROOT }}
+        run: |
+          set -euo pipefail
+          missing=()
+          [ -n "${SSH_KEY:-}"  ] || missing+=(DEPLOYER_SSH_KEY)
+          [ -n "${SSH_HOST:-}" ] || missing+=(SSH_HOST)
+          [ -n "${SSH_PORT:-}" ] || missing+=(SSH_PORT)
+          [ -n "${SSH_USER:-}" ] || missing+=(SSH_USER)
+          [ -n "${WEB_ROOT:-}" ] || missing+=(WEB_ROOT)
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "::error::Missing repository secrets: ${missing[*]}"
+            echo "::error::Add them under Settings -> Secrets and variables -> Actions."
+            exit 1
+          fi
+          echo "All deployment secrets present."
+
+      # The knowledge document that teaches Nexus about KAI247 carries the
+      # internal "never claim this" guardrails. It was public at /llms.txt until
+      # 2026-08-08 and must not come back through this path — it is uploaded to
+      # the Nexus Console directly instead.
+      - name: The private knowledge document must not ship
+        run: |
+          set -euo pipefail
+          if find . -path ./.git -prune -o \( -iname 'llms.txt' -o -iname '*nexus-knowledge*' \) -print | grep -q .; then
+            echo "::error::A private Nexus knowledge document is in the repo and would be served publicly."
+            exit 1
+          fi
+          echo "VERIFY PASS: no private knowledge document in the tree"
+
+      # Everything that is NOT the website is excluded here. Getting this list
+      # wrong publishes repo internals to the web root, so it is an explicit
+      # exclude list rather than an include list that would silently drop a new
+      # page the day someone adds one.
+      - name: Build the site tarball
+        run: |
+          set -euo pipefail
+          tar -czf kai247-site.tgz \
+            --exclude='./.git' \
+            --exclude='./.github' \
+            --exclude='./docs' \
+            --exclude='./README.md' \
+            --exclude='./.gitignore' \
+            --exclude='./CNAME' \
+            --exclude='./.nojekyll' \
+            -C . .
+          echo "Tarball contents:"
+          tar -tzf kai247-site.tgz | head -40
+          echo "… $(tar -tzf kai247-site.tgz | wc -l) entries total"
+
+      - name: Set up SSH agent
+        uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOYER_SSH_KEY }}
+
+      - name: Add server to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keyscan -p "${{ secrets.SSH_PORT }}" -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Upload
+        run: |
+          set -euo pipefail
+          scp -o BatchMode=yes -P "${{ secrets.SSH_PORT }}" kai247-site.tgz \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/tmp/kai247-site.tgz"
+
+      - name: Extract and prune on the GPU server
+        run: |
+          set -euo pipefail
+          ssh -o BatchMode=yes -p "${{ secrets.SSH_PORT }}" \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
+            "WEB_ROOT='${{ secrets.WEB_ROOT }}'" 'bash -s' << 'EOS'
+          set -euo pipefail
+          TARGET="$WEB_ROOT/kai247"
+          if [ ! -d "$WEB_ROOT" ]; then
+            echo "::error::Docroot $WEB_ROOT does not exist on the server"; exit 1
+          fi
+          # Unpack into a staging directory, then swap. Untarring straight over
+          # a live directory serves a half-written site for the duration.
+          STAGE="$(mktemp -d "$WEB_ROOT/.kai247-stage.XXXXXX")"
+          trap 'rm -rf "$STAGE"' EXIT
+          tar -xzf /tmp/kai247-site.tgz -C "$STAGE"
+          rm -f /tmp/kai247-site.tgz
+          test -f "$STAGE/index.html"
+          grep -q 'Always with you' "$STAGE/index.html"
+          # The docroot is served by a pod running as a different uid
+          # (www-data), so world-readable is required, not optional.
+          find "$STAGE" -type d -exec chmod 755 {} +
+          find "$STAGE" -type f -exec chmod 644 {} +
+          mkdir -p "$TARGET"
+          # rsync --delete rather than cp: a page deleted from the repo must
+          # stop being served. Nothing here is written at runtime — the join
+          # forms compose mailto: links and the server stores nothing — so
+          # unlike funsizegp there is no data/ directory to exempt from the
+          # delete, and none must ever be added without exempting it here.
+          if command -v rsync >/dev/null; then
+            rsync -a --delete "$STAGE"/ "$TARGET"/
+          else
+            find "$TARGET" -mindepth 1 -delete
+            cp -a "$STAGE"/. "$TARGET"/
+          fi
+          echo "Deployed $(find "$TARGET" -type f | wc -l) files to $TARGET"
+          test -f "$TARGET/index.html"
+          test -f "$TARGET/knowledge/index.html"
+          test -f "$TARGET/join/provider/index.html"
+          test -f "$TARGET/assets/css/site.css"
+          # The private knowledge document must not exist on the server either,
+          # including a copy left behind by an earlier deploy.
+          if [ -f "$TARGET/llms.txt" ]; then
+            echo "::error::llms.txt is present in the web root"; exit 1
+          fi
+          echo "EXTRACT OK"
+          EOS
+
+      - name: Verify what the server actually serves
+        run: |
+          set -euo pipefail
+          # Host header against the origin, so this is meaningful BEFORE the
+          # Cloudflare Tunnel hostname exists and before any DNS is cut over.
+          # The origin only answers on the NAT-forwarded ports, so this goes
+          # through the public hostname once it is live; until then the
+          # authoritative check is the on-server one above.
+          served="$(curl -sSL --max-time 25 "https://kai247.com/" || true)"
+          if ! grep -q 'Always with you' <<<"$served"; then
+            echo "::warning::kai247.com did not serve the expected page."
+            exit 0
+          fi
+          server="$(curl -sSI --max-time 20 "https://kai247.com/" | tr -d '\r' | awk -F': ' 'tolower($1)=="server"{print $2}')"
+          echo "kai247.com is served by: ${server:-unknown}"
+          if grep -qi 'github' <<<"${server:-}"; then
+            echo "::notice::Still answered by GitHub Pages. Add the Cloudflare Tunnel public hostname and remove the Pages A records to complete the cutover."
+          else
+            echo "VERIFY PASS: kai247.com is served from the GPU server"
+          fi
+
+          code="$(curl -s -o /dev/null -w '%{http_code}' "https://kai247.com/llms.txt")"
+          case "$code" in
+            403|404) echo "SECURITY PASS: /llms.txt is not web-readable (HTTP $code)" ;;
+            *) echo "::error::/llms.txt is reachable over HTTP (HTTP $code)"; exit 1 ;;
+          esac

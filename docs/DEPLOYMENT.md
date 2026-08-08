@@ -30,15 +30,55 @@ for the `kai247-ai` org (Settings → Pages → verified domains) to prevent dom
 
 ---
 
-## SUPERSEDED 2026-08-08 — this repo is no longer the intended origin
+---
 
-kai247.com is moving to the GPU server. The gpuserver origin is the private repo
-**`Brahmando-ai/kai247-web`**, which deploys `site/` into the shared Apache docroot at
-`./kai247/`. It could not be this repo: the self-hosted runner must never be attached to a
-public repo, because a fork's pull request would execute arbitrary code on that server.
+## 2026-08-08 — kai247.com moves to the GPU server, from THIS repo
 
-This repo is still the LIVE origin via GitHub Pages until the Cloudflare Tunnel public
-hostname for kai247.com is added — so until then, **a change made only here is what the public
-sees, and a change made only there is not live.** Keep them in step, or finish the cutover.
+The site is deployed by `.github/workflows/deploy-kai247.yml` on a **GitHub-hosted** runner
+(free for public repos) which reaches the server over SSH — the same route
+`deploy-brahmexa-com.yml` uses. A self-hosted runner is deliberately NOT used here: this repo
+is public, and a fork's pull request would execute arbitrary code on the GPU server.
 
-Cutover steps, current state and gotchas: `docs/DEPLOYMENT.md` in the private repo.
+One repo, one source of truth. During cutover it feeds two origins at once — GitHub Pages
+(still answering the public) and the GPU server — so they cannot drift.
+
+| Piece | Where |
+|---|---|
+| Content | this repo, root |
+| Web server | Apache pod, docroot in `WEB_ROOT`; this site is its `./kai247/` subdirectory |
+| Host routing | internal rewrite in `Brahmando-ai/Brahmando` → `brahmexa-web/.htaccess` |
+| Public routing (pending) | Cloudflare Tunnel → `manjulab-web.brahmando.svc.cluster.local:80` |
+
+### Required secrets
+
+`SSH_HOST`, `SSH_PORT`, `SSH_USER`, `WEB_ROOT` are set. **`DEPLOYER_SSH_KEY` is not** — the
+deploy fails with a clear message until it is added. Host details are secrets rather than
+literals in the workflow because this repo is public.
+
+That key can write the shared docroot serving brahmexa.com, funsizegp.com and manjulab.com, so
+a leak is not scoped to this site. The workflow never runs on untrusted refs (`push` to main
+and manual dispatch only — do not add a `pull_request` trigger), and GitHub withholds secrets
+from fork PRs. Worth scoping the key server-side to `./kai247/` the next time anyone has
+access to that box.
+
+### Finishing the cutover
+
+1. Add the `DEPLOYER_SSH_KEY` secret, then run the workflow.
+2. Zero Trust → Networks → Tunnels → Public Hostnames → add `kai247.com` →
+   `HTTP → manjulab-web.brahmando.svc.cluster.local:80`.
+3. Cloudflare DNS → delete the four Pages A records (185.199.108–111.153) and the `www` CNAME
+   to `whizyoga-ai.github.io`; they conflict with the record the tunnel creates.
+4. Re-run the workflow — `Verify what the server actually serves` stops saying
+   `served by: GitHub.com`.
+5. Disable Pages: `gh api -X DELETE repos/kai247-ai/kai247-web/pages`. Keep the repo public;
+   nothing here needs to be private now that the deploy holds no secrets in plaintext.
+
+### Things that will bite
+
+- **If kai247.com serves the Brahmexa site**, the files are fine — the host rewrite was dropped
+  from `brahmexa-web/.htaccess` in the Brahmando repo, which is re-extracted over the docroot
+  on every brahmexa.com deploy and can regress from another repository.
+- **Never add a clean/delete step to `deploy-brahmexa-com.yml`** — it untars over the shared
+  docroot and never deletes, which is the only reason `./kai247/` and `./funsizegp/` survive it.
+- **`llms.txt` must never return.** The deploy fails if it is in the tree or on the server.
+
