@@ -123,3 +123,27 @@ The owner directed a free plan now with charging later. To avoid overpromising l
 (§3.3), the site says: free during the founding period; hosting/infrastructure/capability
 included; paid plans later with founding brands hearing first; terms shaped brand by brand.
 No prices, dates, or contractual commitments are stated.
+
+## 18. Brahmexa's offering list replaced by the widget catalog, grouped business vs service
+Owner direction. The previous "KAI247 offerings" tiles (Brahmando, Nexus, ORBIT, REACH, ANYO
+Academy, SMB Engine, SWAN, Abhyas, School ERP, Chat X) were a product list; they are replaced
+by the fourteen embeddable widgets, which are the thing a visitor can actually put on a page.
+
+Grouped by the owner's rule — "restaurant is business but REACH is service":
+- **Services** (what the network runs): NEXUS, REACH, COMET, ORBIT, LENS, SPACE — 8 widgets.
+- **Businesses** (what a business puts on its own site): Restaurant, HVAC Support,
+  Landscaping, Education — 6 widgets.
+
+**Education sits under Businesses**, alongside restaurant and landscaping, because the Abhyas
+widget serves school, tutor and publisher sites — the customer's own vertical. It could equally
+be read as a service line (brahmexa.com lists `/services/education`); if it should move, it is
+one `qa-group` boundary in `capabilities/index.html`.
+
+Statuses are rendered verbatim from the platform (`verified` / `working` / `partial`) rather
+than smoothed into marketing language, and a note explains what each means. Ten of the fourteen
+are `partial`; presenting them as live is the specific failure the widget platform's own tests
+exist to prevent.
+
+Tiles open each widget's `preview.php` in the in-page viewer rather than embedding it, because
+embedding needs a partner key with kai247.com on its allowlist and KAI247 has none. When a key
+is issued, an embedded widget replaces the preview tile — the loader snippet is one line.

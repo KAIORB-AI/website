@@ -58,3 +58,38 @@ Anything neither verified nor conceptual is absent from the site.
 Client counts · revenue · employee numbers · office lists beyond the verified ones ·
 certifications · awards · testimonials · case studies · "subsidiary" language ·
 any KAI247 contact email or phone number.
+
+## Widget catalog (verified 2026-08-08 against the live platform)
+
+Source: `GET https://brahmexa.com/api/widgets/catalog` (`{"ok":true,"widgets":14}`) and the
+catalog page at https://brahmexa.com/widgets/. Names, taglines and **statuses are the
+platform's own** — the sales list and the running server read the same `catalog.php`, so what
+is shown here cannot drift from what the server will serve.
+
+| Widget | Product | Status |
+|---|---|---|
+| nexus-chat | NEXUS | **verified** |
+| space-proposal | SPACE | working |
+| restaurant-reserve | Restaurant | working |
+| landscaping-quote | Landscaping | working |
+| reach-audit, reach-presence | REACH | partial |
+| comet-catalog | COMET | partial |
+| orbit-events, orbit-ticket | ORBIT | partial |
+| lens-metrics | LENS | partial |
+| restaurant-menu | Restaurant | partial |
+| hvac-assistant, hvac-service-request | HVAC Support | partial |
+| abhyas-practice | Education | partial |
+
+**Never describe a `partial` widget as live.** Only `nexus-chat` is verified; no backing
+service has a recorded live check from a third-party origin. Re-check the status badges at
+https://brahmexa.com/widgets/ before changing any label on this site.
+
+Constraints carried onto the page because they are product promises, not decoration:
+COMET is read-only and hands off to the partner's storefront; the ORBIT ticket widget never
+collects a card; a restaurant reservation is a request, not a held table; HVAC declines
+safety-critical guidance it cannot source; LENS shows only published findings and computes
+nothing; Abhyas keeps answer keys server-side.
+
+Embedding anywhere requires a partner key with that domain on its allowlist — an empty domain
+list makes a key inert. **KAI247 has no partner key**, so the page previews widgets rather
+than running them.

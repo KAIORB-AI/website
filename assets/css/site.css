@@ -340,6 +340,12 @@ a.orb-world:hover { text-decoration: none; }
 .offering.soon::after { border-color: var(--line); }
 .pill { display: inline-flex; align-items: center; gap: .42rem; font: 600 .7rem/1 "Space Grotesk", sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--mut); margin-top: .9rem; }
 .pill.live { color: var(--gold); }
+.pill.work { color: var(--blue); }
+.pill.work::before {
+  content: ''; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--blue); box-shadow: 0 0 9px color-mix(in srgb, var(--blue) 45%, transparent);
+}
+.pill.off::before { content: ''; width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--mut); }
 .pill.live::before {
   content: ''; width: 7px; height: 7px; border-radius: 50%;
   background: var(--gold); box-shadow: 0 0 9px var(--gold-soft);
