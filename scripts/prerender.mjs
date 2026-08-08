@@ -11,10 +11,13 @@
  */
 import { readFileSync, writeFileSync } from 'node:fs'
 import { trinityHtml } from '../.ssr/trinity.mjs'
+import { businessEvolutionHtml } from '../.ssr/business-evolution.mjs'
 
 const TARGETS = [
   { file: 'network/index.html', island: 'trinity', render: trinityHtml },
-  { file: 'index.html', island: 'trinity', render: trinityHtml }
+  { file: 'index.html', island: 'trinity', render: trinityHtml },
+  { file: 'index.html', island: 'business-evolution', render: businessEvolutionHtml },
+  { file: 'join/index.html', island: 'business-evolution', render: businessEvolutionHtml }
 ]
 
 let changed = 0

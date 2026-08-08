@@ -16,7 +16,10 @@ export default defineConfig({
     outDir: '.ssr',
     emptyOutDir: true,
     rollupOptions: {
-      input: { trinity: 'src/ssr/trinity-html.tsx' },
+      input: {
+        trinity: 'src/ssr/trinity-html.tsx',
+        'business-evolution': 'src/ssr/business-evolution-html.tsx'
+      },
       output: { entryFileNames: '[name].mjs', format: 'es' },
     },
   },

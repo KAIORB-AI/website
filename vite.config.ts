@@ -21,7 +21,10 @@ export default defineConfig({
     emptyOutDir: true,
     target: 'es2020',
     rollupOptions: {
-      input: { trinity: 'src/islands/trinity.tsx' },
+      input: {
+        trinity: 'src/islands/trinity.tsx',
+        'business-evolution': 'src/islands/business-evolution.tsx'
+      },
       output: {
         entryFileNames: '[name].js',
         chunkFileNames: '[name].js',

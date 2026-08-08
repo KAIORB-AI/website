@@ -519,93 +519,114 @@ body.viewer-open { overflow: hidden; }
 }
 @media (prefers-reduced-motion: reduce) { .k-orb-ring { animation: none; } }
 
-/* ---------- KAI247 Spatial Geometry Primitives ---------- */
-.k-spatial-stage {
-  position: relative;
-  width: 100%;
-  max-width: 800px;
-  margin: 2rem auto;
+/* ---------- Small Business Evolution Stage ---------- */
+.k-business-evolution-stage {
+  max-width: 860px;
+  margin: 1rem auto 2rem auto;
+  text-align: center;
+}
+
+.k-biz-header h2 {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  margin: 0.4rem 0;
+  color: var(--ink);
+}
+
+.k-biz-microcopy {
+  font-size: 1.05rem;
+  color: var(--mut);
+  max-width: 36rem;
+  margin: 0.4rem auto;
+  line-height: 1.5;
+}
+
+.k-biz-disclaimer {
+  font-size: 0.8rem;
+  color: var(--gold);
+  opacity: 0.85;
+  margin-top: 0.4rem;
+}
+
+.k-biz-pills {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0 1rem 0;
 }
 
-.k-spatial-orbit {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px dashed var(--line);
-  pointer-events: none;
-  transition: border-color 0.3s ease;
+.k-biz-pill {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  background: var(--surface);
+  color: var(--mut);
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.k-spatial-orbit.active {
-  border-style: solid;
+.k-biz-pill:hover {
   border-color: var(--gold);
-  box-shadow: 0 0 20px var(--gold-soft);
+  color: var(--ink);
+  transform: translateY(-1px);
 }
 
-.k-core-node {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #ffeec2 0%, #eebc61 60%, #b07d24 100%);
-  box-shadow: 0 0 32px var(--gold-soft);
+.k-biz-pill.active {
+  border-color: var(--gold);
+  color: var(--ink);
+  background: color-mix(in srgb, var(--gold) 15%, var(--surface));
+  box-shadow: 0 0 16px var(--gold-soft);
+  font-weight: 600;
+}
+
+.k-biz-diagram {
+  margin: 1rem 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  color: #14100a;
+}
+
+.k-biz-svg {
+  width: 100%;
+  max-width: 680px;
+  height: auto;
+}
+
+.k-biz-flow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem;
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.k-biz-flow-step {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1.4rem;
+  background: var(--surface);
+}
+
+.k-biz-flow-num {
   font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
-  font-size: 0.85rem;
-  z-index: 10;
-}
-
-.k-node-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 0.9rem;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--ink);
-  font-size: 0.85rem;
-  font-weight: 500;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-  cursor: pointer;
-}
-
-.k-node-badge:hover {
-  transform: translateY(-2px);
-  border-color: var(--gold);
+  font-size: 1.1rem;
   color: var(--gold);
+  display: block;
+  margin-bottom: 0.35rem;
 }
 
-.k-signal-pulse {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--gold);
-  box-shadow: 0 0 10px var(--gold-soft);
-  animation: pulse 3s ease-in-out infinite;
+.k-biz-flow-step h4 {
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+  color: var(--ink);
 }
 
-/* Partial footer orbit arc */
-footer {
-  position: relative;
-  overflow: hidden;
+.k-biz-flow-step p {
+  color: var(--mut);
+  font-size: 0.9rem;
+  line-height: 1.45;
 }
-footer::after {
-  content: '';
-  position: absolute;
-  bottom: -140px;
-  right: -140px;
-  width: 380px;
-  height: 380px;
-  border-radius: 50%;
-  border: 1px dashed var(--line);
-  pointer-events: none;
-}
+
 
