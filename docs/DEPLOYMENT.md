@@ -51,9 +51,9 @@ One repo, one source of truth. During cutover it feeds two origins at once — G
 
 ### Required secrets
 
-`SSH_HOST`, `SSH_PORT`, `SSH_USER`, `WEB_ROOT` are set. **`DEPLOYER_SSH_KEY` is not** — the
-deploy fails with a clear message until it is added. Host details are secrets rather than
-literals in the workflow because this repo is public.
+`SSH_HOST`, `SSH_PORT`, `SSH_USER` and `WEB_ROOT` are set as repo secrets. `DEPLOYER_SSH_KEY`
+already exists as a **kai247-ai org secret**, so nothing further is needed. Host details are
+secrets rather than literals because this repo is public.
 
 That key can write the shared docroot serving brahmexa.com, funsizegp.com and manjulab.com, so
 a leak is not scoped to this site. The workflow never runs on untrusted refs (`push` to main
@@ -63,7 +63,7 @@ access to that box.
 
 ### Finishing the cutover
 
-1. Add the `DEPLOYER_SSH_KEY` secret, then run the workflow.
+1. ✅ Done — the workflow deploys green on every push to `main`.
 2. Zero Trust → Networks → Tunnels → Public Hostnames → add `kai247.com` →
    `HTTP → manjulab-web.brahmando.svc.cluster.local:80`.
 3. Cloudflare DNS → delete the four Pages A records (185.199.108–111.153) and the `www` CNAME
