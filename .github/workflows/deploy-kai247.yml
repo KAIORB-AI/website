@@ -188,7 +188,7 @@ jobs:
           tar -xzf /tmp/kai247-site.tgz -C "$STAGE"
           rm -f /tmp/kai247-site.tgz
           test -f "$STAGE/index.html"
-          grep -q 'Always with you' "$STAGE/index.html"
+          grep -q 'KAI247' "$STAGE/index.html"
           # The docroot is served by a pod running as a different uid
           # (www-data), so world-readable is required, not optional.
           find "$STAGE" -type d -exec chmod 755 {} +
@@ -227,7 +227,7 @@ jobs:
           # through the public hostname once it is live; until then the
           # authoritative check is the on-server one above.
           served="$(curl -sSL --max-time 25 "https://kai247.com/" || true)"
-          if ! grep -q 'Always with you' <<<"$served"; then
+          if ! grep -q 'KAI247' <<<"$served"; then
             echo "::warning::kai247.com did not serve the expected page."
             exit 0
           fi

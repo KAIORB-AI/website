@@ -52,7 +52,7 @@ belongs **here**.
 Pushing to `main` **is** the deploy. There is no staging step.
 
 ```bash
-cd C:\whizyoga\repos\kai247-web
+cd C:\whizyoga\antigravity\kai247-web
 git checkout main
 git pull --ff-only
 # ... make your changes ...
