@@ -118,14 +118,15 @@ main { padding-top: 62px; }
 .k-hero-stage {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: center;
+  gap: 2.5rem;
+  align-items: start;
   width: 100%;
   max-width: 1240px;
   margin: 1rem auto;
 }
-.cosmos-wrap { width: 100%; max-width: 520px; margin: 0 auto; }
-.k-hero-biz-wrap { width: 100%; max-width: 560px; margin: 0 auto; }
+.k-hero-left-col { display: flex; flex-direction: column; gap: 1.5rem; width: 100%; max-width: 540px; margin: 0 auto; }
+.k-hero-right-col { width: 100%; max-width: 580px; margin: 0 auto; }
+.cosmos-wrap { width: 100%; max-width: 480px; margin: 0 auto; }
 @media (max-width: 990px) {
   .k-hero-stage { grid-template-columns: 1fr; gap: 2.5rem; }
 }
