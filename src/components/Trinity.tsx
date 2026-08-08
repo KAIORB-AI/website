@@ -4,18 +4,6 @@ import { FOUNDING } from '../data/network'
 
 interface Point { x: number; y: number }
 
-/**
- * The founding trinity as a triangle.
- *
- * Deliberately point-DOWN. An upward triangle puts one country at the apex, and
- * an apex reads as rank — which is wrong for three companies that deliver as
- * one network. Pointing down leaves the top edge flat: two countries sit level
- * with each other, the third sits below, and no country occupies the centre.
- * The centre belongs to KAI247 itself.
- *
- * The connecting edges are measured from the rendered orbs rather than
- * hard-coded percentages, so they stay attached at any width or font size.
- */
 export function Trinity() {
   const wrap = useRef<HTMLDivElement>(null)
   const orbs = useRef<Array<HTMLDivElement | null>>([])
@@ -43,7 +31,6 @@ export function Trinity() {
     const ro = new ResizeObserver(measure)
     if (wrap.current) ro.observe(wrap.current)
     window.addEventListener('resize', measure)
-    // Web fonts land after first paint and move the labels, which moves the orbs.
     if (document.fonts?.ready) document.fonts.ready.then(measure).catch(() => {})
     return () => { ro.disconnect(); window.removeEventListener('resize', measure) }
   }, [])
@@ -55,15 +42,23 @@ export function Trinity() {
           <polygon
             points={pts.map((p) => `${p.x},${p.y}`).join(' ')}
             fill="none"
-            stroke="currentColor"
-            strokeWidth="1.4"
-            strokeDasharray="3 9"
+            stroke="#f2c56d"
+            strokeWidth="1.5"
+            strokeDasharray="4 8"
+            opacity="0.6"
           />
           <g className="k-trinity-core" transform={`translate(${centre.x} ${centre.y})`}>
-            <ellipse rx="19" ry="9.5" fill="none" stroke="currentColor" strokeWidth="1.6"
-                     transform="rotate(-24)" />
-            <circle r="6.5" className="k-trinity-core-dot" />
+            <circle r="22" fill="url(#coreGradTri)" />
+            <circle r="28" fill="none" stroke="#f2c56d" strokeWidth="1" strokeDasharray="3 5" opacity="0.5" />
+            <text textAnchor="middle" dy="4" fill="#14100a" fontSize="10" fontWeight="800" fontFamily="Space Grotesk">KAI</text>
           </g>
+          <defs>
+            <radialGradient id="coreGradTri" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#ffeec2" />
+              <stop offset="60%" stopColor="#eebc61" />
+              <stop offset="100%" stopColor="#b07d24" />
+            </radialGradient>
+          </defs>
         </svg>
       )}
 
@@ -78,11 +73,13 @@ export function Trinity() {
           data-url={e.url}
         >
           <div className="k-world-orb" ref={(el) => { orbs.current[i] = el }}>
-            <CountryOrb country={e.country} idSuffix={`-t${i}`} />
+            <CountryOrb country={e.country} idSuffix={`-t${i}`} size={88} />
           </div>
-          <span className="k-world-name">{e.name}</span>
-          {e.descriptor && <span className="k-world-desc">{e.descriptor}</span>}
-          <span className="k-world-link">{new URL(e.url).hostname.replace(/^www\./, '')} ↗</span>
+          <div className="k-world-info">
+            <span className="k-world-name">{e.name}</span>
+            {e.descriptor && <span className="k-world-desc">{e.descriptor}</span>}
+            <span className="k-world-link">{new URL(e.url).hostname.replace(/^www\./, '')} ↗</span>
+          </div>
         </a>
       ))}
     </div>
