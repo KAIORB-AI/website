@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Web Essentials — UTM builder, slug, robots.txt, sitemap validator — KAI247</title>
+<meta name="description" content="Free web tools: campaign UTM link builder, Unicode-safe slug generator, robots.txt generator and validator, and a sitemap XML validator that finds duplicates and dead promises. All in your browser.">
+<link rel="canonical" href="https://kai247.com/utility/web-essentials/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kai247.com/utility/web-essentials/">
+<meta property="og:title" content="Web Essentials — KAI247">
+<meta property="og:description" content="UTM builder, slug generator, robots.txt and sitemap validators.">
+<meta name="theme-color" content="#f8fafc">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/utility.css">
+<script defer src="/assets/js/utility-router.js"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Web Essentials","url":"https://kai247.com/utility/web-essentials/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","description":"UTM builder, slug generator, robots.txt generator and validator, sitemap XML validator.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<a class="u-skip" href="#main">Skip to content</a>
+<header class="u-head">
+  <div class="u-wrap">
+    <a class="u-brand" href="/" aria-label="KAI247 home">
+      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--u-blue)" stroke-width="4" transform="rotate(-24 32 32)"/><circle cx="32" cy="32" r="10" fill="var(--u-cyan)"/><circle cx="51" cy="19" r="4" fill="var(--u-ink)"/></svg>
+      KAI247
+    </a>
+    <nav class="u-nav" aria-label="Primary">
+      <a href="/utility/">All utilities</a>
+      <a href="/utility/photo-size-targeter/">Photo</a>
+      <a href="/utility/cidr-calculator/">CIDR</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="u-wrap">
+  <section class="u-hero" style="text-align:left;padding-bottom:.6rem">
+    <p class="u-kicker"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg> Web Essentials</p>
+    <h1>Four checks that catch real mistakes</h1>
+    <p class="u-lede" style="margin-inline:0">Campaign links that lose attribution, slugs that break on accents, robots rules that block the wrong path, sitemaps that promise dead URLs.</p>
+  </section>
+
+  <div class="u-tabs" role="tablist">
+    <button class="u-tab" role="tab" aria-selected="true" data-p="utm">UTM Builder</button>
+    <button class="u-tab" role="tab" aria-selected="false" data-p="slug">Slug Generator</button>
+    <button class="u-tab" role="tab" aria-selected="false" data-p="robots">robots.txt</button>
+    <button class="u-tab" role="tab" aria-selected="false" data-p="sitemap">Sitemap Validator</button>
+  </div>
+
+  <!-- UTM -->
+  <section data-panel="utm">
+    <div class="u-tool split">
+      <div class="u-panel">
+        <h2>Campaign link</h2>
+        <div class="u-field"><label for="uUrl">Destination URL</label><input id="uUrl" placeholder="https://kai247.com/join/" spellcheck="false"></div>
+        <div class="u-field"><label for="uSrc">Source <span style="color:var(--u-rose)">*</span></label><input id="uSrc" placeholder="newsletter" spellcheck="false"></div>
+        <div class="u-field"><label for="uMed">Medium <span style="color:var(--u-rose)">*</span></label><input id="uMed" placeholder="email" spellcheck="false"></div>
+        <div class="u-field"><label for="uCam">Campaign <span style="color:var(--u-rose)">*</span></label><input id="uCam" placeholder="founding-orbit" spellcheck="false"></div>
+        <div class="u-field"><label for="uTerm">Term</label><input id="uTerm" spellcheck="false"></div>
+        <div class="u-field"><label for="uCon">Content</label><input id="uCon" spellcheck="false"></div>
+        <div class="u-row">
+          <button class="u-btn" type="button" data-preset="newsletter|email|">Newsletter preset</button>
+          <button class="u-btn u-btn-ghost" type="button" data-preset="linkedin|social|">Social preset</button>
+          <button class="u-btn u-btn-ghost" type="button" data-preset="google|cpc|">Paid preset</button>
+        </div>
+      </div>
+      <div class="u-panel">
+        <h2>Result</h2>
+        <div class="u-out" id="uOut">Fill the destination and the three required fields.</div>
+        <div class="u-row" style="margin-top:.9rem">
+          <button class="u-btn" type="button" id="uCopy">Copy link</button>
+        </div>
+        <ul class="u-list" id="uChecks" style="margin-top:1rem"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLUG -->
+  <section data-panel="slug" hidden>
+    <div class="u-tool split">
+      <div class="u-panel">
+        <h2>Text</h2>
+        <div class="u-field"><label for="sIn">Any title, in any language</label><textarea id="sIn" placeholder="Crème Brûlée & Café — Naïve Björk">Crème Brûlée &amp; Café — Naïve Björk</textarea></div>
+        <div class="u-field"><label for="sSep">Separator</label><select id="sSep"><option value="-">Hyphen (-)</option><option value="_">Underscore (_)</option></select></div>
+        <div class="u-field"><label for="sCase">Case</label><select id="sCase"><option value="lower">lowercase</option><option value="keep">keep as typed</option></select></div>
+      </div>
+      <div class="u-panel">
+        <h2>Slug</h2>
+        <div class="u-out" id="sOut">—</div>
+        <div class="u-row" style="margin-top:.9rem"><button class="u-btn" type="button" id="sCopy">Copy slug</button></div>
+        <ul class="u-list" id="sNotes" style="margin-top:1rem"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROBOTS -->
+  <section data-panel="robots" hidden>
+    <div class="u-tool split">
+      <div class="u-panel">
+        <h2>Build or paste</h2>
+        <div class="u-field"><label for="rUa">User-agent</label><input id="rUa" value="*" spellcheck="false"></div>
+        <div class="u-field"><label for="rDis">Disallow (one path per line)</label><textarea id="rDis" spellcheck="false">/admin/
+/tmp/</textarea></div>
+        <div class="u-field"><label for="rAll">Allow (one path per line)</label><textarea id="rAll" spellcheck="false" style="min-height:4rem"></textarea></div>
+        <div class="u-field"><label for="rMap">Sitemap URL</label><input id="rMap" value="https://kai247.com/sitemap.xml" spellcheck="false"></div>
+        <button class="u-btn" type="button" id="rBuild">Generate</button>
+      </div>
+      <div class="u-panel">
+        <h2>robots.txt</h2>
+        <div class="u-field"><label for="rOut">Generated — edit to validate your own</label><textarea id="rOut" spellcheck="false" style="min-height:11rem"></textarea></div>
+        <div class="u-row"><button class="u-btn" type="button" id="rCheck">Validate</button><button class="u-btn u-btn-ghost" type="button" id="rCopy">Copy</button></div>
+        <ul class="u-list" id="rNotes" style="margin-top:1rem"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SITEMAP -->
+  <section data-panel="sitemap" hidden>
+    <div class="u-tool split">
+      <div class="u-panel">
+        <h2>Paste sitemap XML</h2>
+        <div class="u-field">
+          <label for="mIn">sitemap.xml contents</label>
+          <textarea id="mIn" spellcheck="false" style="min-height:14rem" placeholder="&lt;urlset xmlns=&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;&gt;…"></textarea>
+          <p class="u-hint">Paste the file. Nothing is fetched or uploaded — it is parsed here by your browser.</p>
+        </div>
+        <button class="u-btn" type="button" id="mCheck">Validate</button>
+      </div>
+      <div class="u-panel">
+        <h2>Findings</h2>
+        <div class="u-stat" id="mStats" hidden></div>
+        <ul class="u-list" id="mNotes" style="margin-top:1rem"><li>Paste a sitemap to check it.</li></ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="u-foot">
+  <div class="u-wrap">
+    <span>KAI247 — Always with you.</span>
+    <nav aria-label="Footer"><a href="/utility/">All utilities</a> · <a href="/">Home</a></nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  function li(cls, txt) { return '<li class="' + cls + '">' + txt.replace(/[&<]/g, function (c) { return c === '&' ? '&amp;' : '&lt;'; }) + '</li>'; }
+  function copy(text, btn) {
+    navigator.clipboard.writeText(text).then(function () {
+      var o = btn.textContent; btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = o; }, 1400);
+    });
+  }
+
+  /* ---------- Tabs ---------- */
+  function activate(p) {
+    document.querySelectorAll('.u-tab').forEach(function (x) { x.setAttribute('aria-selected', String(x.dataset.p === p)); });
+    document.querySelectorAll('[data-panel]').forEach(function (s) { s.hidden = s.dataset.panel !== p; });
+  }
+  document.querySelectorAll('.u-tab').forEach(function (t) {
+    t.addEventListener('click', function () { activate(t.dataset.p); history.replaceState(null, '', '#' + t.dataset.p); });
+  });
+
+  /* ---------- UTM ---------- */
+  var uIds = ['uUrl', 'uSrc', 'uMed', 'uCam', 'uTerm', 'uCon'];
+  function buildUtm() {
+    var base = $('uUrl').value.trim(), out = $('uOut'), checks = $('uChecks'), notes = [];
+    if (!base) { out.textContent = 'Fill the destination and the three required fields.'; checks.innerHTML = ''; return ''; }
+    var url;
+    try { url = new URL(/^https?:\/\//i.test(base) ? base : 'https://' + base); }
+    catch (e) { out.textContent = 'That destination is not a valid URL.'; checks.innerHTML = li('err', 'URL could not be parsed'); return ''; }
+    if (url.protocol !== 'https:') notes.push(['warn', 'Destination is not https — some platforms strip parameters on redirect.']);
+    var map = { utm_source: $('uSrc').value.trim(), utm_medium: $('uMed').value.trim(), utm_campaign: $('uCam').value.trim(), utm_term: $('uTerm').value.trim(), utm_content: $('uCon').value.trim() };
+    ['utm_source', 'utm_medium', 'utm_campaign'].forEach(function (k) {
+      if (!map[k]) notes.push(['err', k + ' is required — analytics will group this as direct traffic without it.']);
+    });
+    Object.keys(map).forEach(function (k) {
+      var v = map[k];
+      if (!v) { url.searchParams.delete(k); return; }
+      if (v !== v.toLowerCase()) notes.push(['warn', k + ' has capitals — most analytics treat "Email" and "email" as two sources.']);
+      if (/\s/.test(v)) notes.push(['warn', k + ' contains a space — it will be encoded as %20 and read oddly in reports.']);
+      url.searchParams.set(k, v);
+    });
+    var href = url.toString();
+    out.textContent = href;
+    if (!notes.length) notes.push(['ok', 'Well formed — source, medium and campaign all present and lowercase.']);
+    checks.innerHTML = notes.map(function (n) { return li(n[0], n[1]); }).join('');
+    return href;
+  }
+  uIds.forEach(function (id) { $(id).addEventListener('input', buildUtm); });
+  $('uCopy').addEventListener('click', function () { var v = buildUtm(); if (v) copy(v, this); });
+  document.querySelectorAll('[data-preset]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var p = b.dataset.preset.split('|');
+      $('uSrc').value = p[0]; $('uMed').value = p[1];
+      if (!$('uCam').value) $('uCam').value = 'launch';
+      buildUtm();
+    });
+  });
+
+  /* ---------- Slug ---------- */
+  function slugify() {
+    var raw = $('sIn').value, sep = $('sSep').value, keep = $('sCase').value === 'keep';
+    var notes = [];
+    // NFD splits a letter from its accent so the accent can be dropped,
+    // turning "Creme" into "creme" rather than deleting the letter.
+    // Every range below is an escape on purpose: literal combining marks are
+    // invisible in an editor and one of them silently broke this regex once.
+    var s = raw.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    s = s.replace(/\u00df/g, 'ss')
+         .replace(/\u00e6/gi, 'ae').replace(/\u0153/gi, 'oe')
+         .replace(/\u00f8/gi, 'o')
+         .replace(/[\u0110\u0111]/g, 'd').replace(/[\u0141\u0142]/g, 'l');
+    if (!keep) s = s.toLowerCase();
+    // Outside Basic Latin + Latin-1 + Latin Extended-A/B is another script.
+    var hadNonLatin = /[^\u0000-\u024f\s]/.test(s);
+    s = s.replace(/[\u2018\u2019\u201c\u201d']/g, '').replace(/&/g, ' and ');
+    s = s.replace(/[^\p{L}\p{N}]+/gu, sep)
+         .replace(new RegExp('^\\' + sep + '+|\\' + sep + '+$', 'g'), '');
+    $('sOut').textContent = s || '—';
+    if (hadNonLatin) notes.push(['warn', 'Non-Latin characters were kept as-is. They are valid in a URL but will be percent-encoded when shared.']);
+    if (s.length > 75) notes.push(['warn', 'Longer than 75 characters — most CMSs and search snippets truncate around here.']);
+    if (/^\d/.test(s)) notes.push(['warn', 'Starts with a digit, which some routers treat as an ID rather than a slug.']);
+    if (s) notes.push(['ok', s.length + ' characters, URL-safe.']);
+    else notes.push(['err', 'Nothing left after cleaning — the input had no letters or numbers.']);
+    $('sNotes').innerHTML = notes.map(function (n) { return li(n[0], n[1]); }).join('');
+  }
+  ['sIn', 'sSep', 'sCase'].forEach(function (id) { $(id).addEventListener('input', slugify); });
+  $('sCopy').addEventListener('click', function () { copy($('sOut').textContent, this); });
+
+  /* ---------- robots.txt ---------- */
+  function buildRobots() {
+    var lines = ['User-agent: ' + ($('rUa').value.trim() || '*')];
+    $('rAll').value.split('\n').map(function (x) { return x.trim(); }).filter(Boolean).forEach(function (p) { lines.push('Allow: ' + p); });
+    $('rDis').value.split('\n').map(function (x) { return x.trim(); }).filter(Boolean).forEach(function (p) { lines.push('Disallow: ' + p); });
+    var map = $('rMap').value.trim();
+    if (map) { lines.push(''); lines.push('Sitemap: ' + map); }
+    $('rOut').value = lines.join('\n');
+    checkRobots();
+  }
+  function checkRobots() {
+    var text = $('rOut').value, notes = [], groups = 0, hasUa = false, sitemaps = 0, blocksAll = false;
+    text.split('\n').forEach(function (raw, i) {
+      var line = raw.replace(/#.*$/, '').trim();
+      if (!line) return;
+      var m = line.match(/^([A-Za-z-]+)\s*:\s*(.*)$/);
+      if (!m) { notes.push(['err', 'Line ' + (i + 1) + ': not a directive — "' + line.slice(0, 40) + '"']); return; }
+      var key = m[1].toLowerCase(), val = m[2].trim();
+      if (key === 'user-agent') { hasUa = true; groups++; }
+      else if (key === 'disallow') {
+        if (!hasUa) notes.push(['err', 'Line ' + (i + 1) + ': Disallow before any User-agent — crawlers ignore it.']);
+        if (val === '/') blocksAll = true;
+        if (val && val[0] !== '/' && val[0] !== '*') notes.push(['warn', 'Line ' + (i + 1) + ': path "' + val + '" does not start with / — it is matched literally, not as a path.']);
+      } else if (key === 'allow') {
+        if (!hasUa) notes.push(['err', 'Line ' + (i + 1) + ': Allow before any User-agent.']);
+      } else if (key === 'sitemap') {
+        sitemaps++;
+        if (!/^https?:\/\//i.test(val)) notes.push(['err', 'Line ' + (i + 1) + ': Sitemap must be an absolute URL.']);
+      } else if (key === 'crawl-delay') {
+        if (isNaN(parseFloat(val))) notes.push(['err', 'Line ' + (i + 1) + ': Crawl-delay must be a number.']);
+        notes.push(['warn', 'Crawl-delay is ignored by Google. Use Search Console instead.']);
+      } else notes.push(['warn', 'Line ' + (i + 1) + ': "' + m[1] + '" is not a standard directive.']);
+    });
+    if (!hasUa) notes.push(['err', 'No User-agent line — the whole file is ignored.']);
+    if (blocksAll) notes.push(['warn', 'Disallow: / blocks the entire site. Intentional only for staging.']);
+    if (!sitemaps) notes.push(['warn', 'No Sitemap line. Not required, but it is the cheapest discovery win available.']);
+    if (!notes.length) notes.push(['ok', groups + ' group(s), syntax valid.']);
+    $('rNotes').innerHTML = notes.map(function (n) { return li(n[0], n[1]); }).join('');
+  }
+  $('rBuild').addEventListener('click', buildRobots);
+  $('rCheck').addEventListener('click', checkRobots);
+  $('rCopy').addEventListener('click', function () { copy($('rOut').value, this); });
+
+  /* ---------- Sitemap ---------- */
+  $('mCheck').addEventListener('click', function () {
+    var text = $('mIn').value.trim(), notes = [], stats = $('mStats');
+    if (!text) { $('mNotes').innerHTML = li('err', 'Paste a sitemap first.'); stats.hidden = true; return; }
+    var doc = new DOMParser().parseFromString(text, 'application/xml');
+    if (doc.querySelector('parsererror')) {
+      stats.hidden = true;
+      $('mNotes').innerHTML = li('err', 'XML will not parse. ' + doc.querySelector('parsererror').textContent.split('\n')[0]);
+      return;
+    }
+    var root = doc.documentElement, isIndex = root.localName === 'sitemapindex';
+    if (root.localName !== 'urlset' && !isIndex) notes.push(['err', 'Root element is <' + root.localName + '> — expected <urlset> or <sitemapindex>.']);
+    if (root.namespaceURI !== 'http://www.sitemaps.org/schemas/sitemap/0.9') notes.push(['err', 'Missing or wrong namespace. Expected http://www.sitemaps.org/schemas/sitemap/0.9']);
+
+    var locs = [].slice.call(doc.getElementsByTagName('loc')).map(function (n) { return n.textContent.trim(); });
+    var seen = {}, dupes = [], insecure = 0, relative = 0, tooLong = 0;
+    locs.forEach(function (u) {
+      if (seen[u]) { if (dupes.indexOf(u) < 0) dupes.push(u); } else seen[u] = 1;
+      if (/^http:\/\//i.test(u)) insecure++;
+      else if (!/^https:\/\//i.test(u)) relative++;
+      if (u.length > 2048) tooLong++;
+    });
+    var badDates = [].slice.call(doc.getElementsByTagName('lastmod')).filter(function (n) {
+      return !/^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2})?(\.\d+)?(Z|[+-]\d{2}:\d{2}))?$/.test(n.textContent.trim());
+    }).length;
+
+    stats.hidden = false;
+    stats.innerHTML =
+      '<div><div class="k">Type</div><div class="v">' + (isIndex ? 'Index' : 'URL set') + '</div></div>' +
+      '<div><div class="k">URLs</div><div class="v">' + locs.length + '</div></div>' +
+      '<div><div class="k">Duplicates</div><div class="v ' + (dupes.length ? 'u-err' : 'u-ok') + '">' + dupes.length + '</div></div>' +
+      '<div><div class="k">Non-https</div><div class="v ' + (insecure ? 'u-warn' : 'u-ok') + '">' + insecure + '</div></div>';
+
+    if (!locs.length) notes.push(['err', 'No <loc> elements — this sitemap advertises nothing.']);
+    if (locs.length > 50000) notes.push(['err', locs.length + ' URLs exceeds the 50,000 limit. Split it and use a sitemap index.']);
+    dupes.slice(0, 5).forEach(function (u) { notes.push(['err', 'Duplicate URL: ' + u]); });
+    if (dupes.length > 5) notes.push(['err', 'and ' + (dupes.length - 5) + ' more duplicates.']);
+    if (insecure) notes.push(['warn', insecure + ' URL(s) use http:// — they will usually redirect, wasting crawl budget.']);
+    if (relative) notes.push(['err', relative + ' URL(s) are not absolute. Every <loc> must be a full URL.']);
+    if (badDates) notes.push(['err', badDates + ' <lastmod> value(s) are not valid W3C dates.']);
+    if (tooLong) notes.push(['warn', tooLong + ' URL(s) exceed 2,048 characters.']);
+    var bytes = new Blob([text]).size;
+    if (bytes > 52428800) notes.push(['err', 'Uncompressed size exceeds the 50 MB limit.']);
+    if (!notes.length) notes.push(['ok', locs.length + ' URLs, no duplicates, all https, dates valid.']);
+    $('mNotes').innerHTML = notes.map(function (n) { return li(n[0], n[1]); }).join('');
+  });
+
+  /* ---------- Init ---------- */
+  var hash = (location.hash || '').replace('#', '');
+  if (['utm', 'slug', 'robots', 'sitemap'].indexOf(hash) >= 0) activate(hash);
+  var pu = window.kaiParam && window.kaiParam('url');
+  if (pu) { $('uUrl').value = pu; activate('utm'); }
+  buildUtm(); slugify(); buildRobots();
+})();
+</script>
+</body>
+</html>

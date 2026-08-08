@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photo Size Targeter — compress an image to an exact size — KAI247</title>
+<meta name="description" content="Compress a JPG, PNG or WebP to a size you name — under 200 KB, under 50 KB — entirely in your browser. Nothing is uploaded. Free, no login.">
+<link rel="canonical" href="https://kai247.com/utility/photo-size-targeter/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kai247.com/utility/photo-size-targeter/">
+<meta property="og:title" content="Photo Size Targeter — KAI247">
+<meta property="og:description" content="Hit an exact image size in your browser. Nothing uploaded.">
+<meta name="theme-color" content="#f8fafc">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/utility.css">
+<script defer src="/assets/js/utility-router.js"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Photo Size Targeter","url":"https://kai247.com/utility/photo-size-targeter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","description":"Compress an image to a target file size entirely in the browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<a class="u-skip" href="#main">Skip to content</a>
+<header class="u-head">
+  <div class="u-wrap">
+    <a class="u-brand" href="/" aria-label="KAI247 home">
+      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--u-blue)" stroke-width="4" transform="rotate(-24 32 32)"/><circle cx="32" cy="32" r="10" fill="var(--u-cyan)"/><circle cx="51" cy="19" r="4" fill="var(--u-ink)"/></svg>
+      KAI247
+    </a>
+    <nav class="u-nav" aria-label="Primary">
+      <a href="/utility/">All utilities</a>
+      <a href="/utility/cidr-calculator/">CIDR</a>
+      <a href="/utility/web-essentials/">Web Essentials</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="u-wrap">
+  <section class="u-hero" style="text-align:left;padding-bottom:.6rem">
+    <p class="u-kicker"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg> Photo Size Targeter</p>
+    <h1>Hit an exact image size</h1>
+    <p class="u-lede" style="margin-inline:0">Name a size. It searches quality first, then resolution, and stops at the best image that fits.</p>
+  </section>
+
+  <div class="u-privacy" style="margin:1.2rem 0 1.8rem">
+    <span class="lock" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
+    <p><strong>Your photo never leaves this tab.</strong> It is decoded and re-encoded by your own browser's canvas. There is no upload and no server round trip — you can disconnect from the network and this page still works.</p>
+  </div>
+
+  <div class="u-tool split">
+    <div class="u-panel">
+      <h2>1 · Choose an image</h2>
+      <label class="u-drop" id="drop" for="file">
+        <input type="file" id="file" accept="image/jpeg,image/png,image/webp">
+        <strong>Drop an image here</strong>
+        <p class="u-hint" style="margin-top:.35rem">or click to browse — JPG, PNG or WebP</p>
+      </label>
+
+      <h2 style="margin-top:1.6rem">2 · Set the target</h2>
+      <div class="u-field">
+        <label for="target">Target size (KB)</label>
+        <input type="number" id="target" min="5" max="20000" step="5" value="200">
+        <p class="u-hint">Common asks: 200 KB for uploads, 100 KB for email, 50 KB for avatars.</p>
+      </div>
+      <div class="u-field">
+        <label for="fmt">Output format</label>
+        <select id="fmt">
+          <option value="image/jpeg">JPEG — smallest for photographs</option>
+          <option value="image/webp">WebP — smaller still, modern browsers</option>
+          <option value="image/png">PNG — lossless, only resolution is reduced</option>
+        </select>
+      </div>
+      <div class="u-row">
+        <button class="u-btn" type="button" id="go" disabled>Compress</button>
+        <button class="u-btn u-btn-ghost" type="button" id="reset">Reset</button>
+      </div>
+      <p class="u-hint" id="status" style="margin-top:.8rem"></p>
+    </div>
+
+    <div class="u-panel">
+      <h2>Result</h2>
+      <div class="u-stat" id="stats" hidden>
+        <div><div class="k">Original</div><div class="v" id="sOrig">—</div></div>
+        <div><div class="k">Compressed</div><div class="v" id="sNew">—</div></div>
+        <div><div class="k">Saved</div><div class="v u-ok" id="sSaved">—</div></div>
+        <div><div class="k">Dimensions</div><div class="v" id="sDim">—</div></div>
+        <div><div class="k">Quality</div><div class="v" id="sQ">—</div></div>
+        <div><div class="k">Attempts</div><div class="v" id="sTries">—</div></div>
+      </div>
+      <p class="u-hint" id="placeholder">Nothing loaded yet. Choose an image and set a target.</p>
+      <div id="verdict" style="margin-top:1rem"></div>
+      <img class="u-preview" id="preview" alt="Compressed preview" hidden>
+      <div class="u-row" style="margin-top:1rem">
+        <a class="u-btn" id="dl" hidden download>Download</a>
+      </div>
+    </div>
+  </div>
+
+  <p class="u-note" style="margin-top:1.6rem">
+    <strong>How it works.</strong> JPEG and WebP are searched by binary-halving the quality between
+    0.05 and 0.95 to find the highest quality that still fits. If even the lowest quality is too
+    large, the image is scaled down in steps and the search runs again. PNG is lossless, so only
+    resolution is reduced. Every attempt happens on a canvas in this tab.
+  </p>
+</main>
+
+<footer class="u-foot">
+  <div class="u-wrap">
+    <span>KAI247 — Always with you.</span>
+    <nav aria-label="Footer"><a href="/utility/">All utilities</a> · <a href="/">Home</a></nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var fileInput = document.getElementById('file'), drop = document.getElementById('drop'),
+      target = document.getElementById('target'), fmt = document.getElementById('fmt'),
+      go = document.getElementById('go'), reset = document.getElementById('reset'),
+      status = document.getElementById('status'), stats = document.getElementById('stats'),
+      placeholder = document.getElementById('placeholder'), verdict = document.getElementById('verdict'),
+      preview = document.getElementById('preview'), dl = document.getElementById('dl');
+  var source = null, lastUrl = null;
+
+  var pre = window.kaiParam && window.kaiParam('target');
+  if (pre && +pre > 0) target.value = Math.max(5, Math.round(+pre));
+
+  function human(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / 1048576).toFixed(2) + ' MB';
+  }
+
+  function pick(file) {
+    if (!file || !/^image\/(jpeg|png|webp)$/.test(file.type)) {
+      status.innerHTML = '<span class="u-err">Choose a JPG, PNG or WebP image.</span>';
+      return;
+    }
+    source = file;
+    go.disabled = false;
+    status.textContent = file.name + ' — ' + human(file.size) + ', ready.';
+  }
+
+  fileInput.addEventListener('change', function () { pick(this.files[0]); });
+  ['dragenter', 'dragover'].forEach(function (e) {
+    drop.addEventListener(e, function (ev) { ev.preventDefault(); drop.classList.add('over'); });
+  });
+  ['dragleave', 'drop'].forEach(function (e) {
+    drop.addEventListener(e, function (ev) { ev.preventDefault(); drop.classList.remove('over'); });
+  });
+  drop.addEventListener('drop', function (ev) { pick(ev.dataTransfer.files[0]); });
+
+  function encode(bitmap, w, h, type, q) {
+    var c = document.createElement('canvas');
+    c.width = Math.max(1, Math.round(w));
+    c.height = Math.max(1, Math.round(h));
+    var ctx = c.getContext('2d');
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(bitmap, 0, 0, c.width, c.height);
+    return new Promise(function (res) {
+      c.toBlob(function (b) { res({ blob: b, w: c.width, h: c.height }); }, type, q);
+    });
+  }
+
+  go.addEventListener('click', async function () {
+    if (!source) return;
+    var limit = Math.max(5, +target.value) * 1024;
+    var type = fmt.value;
+    go.disabled = true;
+    status.textContent = 'Working…';
+    verdict.innerHTML = '';
+
+    var bitmap = await createImageBitmap(source);
+    var scale = 1, tries = 0, best = null, bestQ = null;
+    var lossless = type === 'image/png';
+
+    // Up to 8 resolution steps; within each, binary-search quality.
+    for (var step = 0; step < 8; step++) {
+      var w = bitmap.width * scale, h = bitmap.height * scale;
+
+      if (lossless) {
+        tries++;
+        var r = await encode(bitmap, w, h, type, undefined);
+        if (r.blob.size <= limit) { best = r; bestQ = null; break; }
+        best = best || r;
+      } else {
+        var lo = 0.05, hi = 0.95, found = null, foundQ = null;
+        for (var i = 0; i < 7; i++) {
+          var q = (lo + hi) / 2;
+          tries++;
+          var out = await encode(bitmap, w, h, type, q);
+          if (out.blob.size <= limit) { found = out; foundQ = q; lo = q; } else { hi = q; }
+          if (hi - lo < 0.02) break;
+        }
+        if (found) { best = found; bestQ = foundQ; break; }
+        // Nothing fit even at the floor — keep the smallest seen and scale down.
+        var floor = await encode(bitmap, w, h, type, 0.05);
+        tries++;
+        if (!best || floor.blob.size < best.blob.size) { best = floor; bestQ = 0.05; }
+      }
+      scale *= 0.8;
+    }
+
+    if (lastUrl) URL.revokeObjectURL(lastUrl);
+    lastUrl = URL.createObjectURL(best.blob);
+    var fits = best.blob.size <= limit;
+
+    placeholder.hidden = true;
+    stats.hidden = false;
+    document.getElementById('sOrig').textContent = human(source.size);
+    document.getElementById('sNew').textContent = human(best.blob.size);
+    var saved = source.size ? Math.max(0, Math.round((1 - best.blob.size / source.size) * 100)) : 0;
+    document.getElementById('sSaved').textContent = saved + '%';
+    document.getElementById('sDim').textContent = best.w + '×' + best.h;
+    document.getElementById('sQ').textContent = bestQ === null ? 'lossless' : Math.round(bestQ * 100) + '%';
+    document.getElementById('sTries').textContent = tries;
+
+    verdict.innerHTML = fits
+      ? '<p class="u-ok"><strong>Fits.</strong> ' + human(best.blob.size) + ' is under your ' + (+target.value) + ' KB target.</p>'
+      : '<p class="u-warn"><strong>Could not reach ' + (+target.value) + ' KB.</strong> The smallest this image compresses to is ' +
+        human(best.blob.size) + ' at ' + best.w + '×' + best.h + '. Try WebP, or a smaller target is not achievable without cropping.</p>';
+
+    preview.src = lastUrl;
+    preview.hidden = false;
+    var ext = type === 'image/jpeg' ? 'jpg' : type === 'image/webp' ? 'webp' : 'png';
+    dl.href = lastUrl;
+    dl.download = (source.name.replace(/\.[^.]+$/, '') || 'image') + '-' + Math.round(best.blob.size / 1024) + 'kb.' + ext;
+    dl.textContent = 'Download ' + human(best.blob.size);
+    dl.hidden = false;
+    status.textContent = 'Done — ' + tries + ' attempts, all in this tab.';
+    go.disabled = false;
+  });
+
+  reset.addEventListener('click', function () {
+    source = null; fileInput.value = ''; go.disabled = true;
+    stats.hidden = true; preview.hidden = true; dl.hidden = true;
+    placeholder.hidden = false; verdict.innerHTML = ''; status.textContent = '';
+  });
+})();
+</script>
+</body>
+</html>

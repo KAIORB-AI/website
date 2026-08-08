@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Subnet &amp; CIDR Calculator — IPv4 and IPv6 — KAI247</title>
+<meta name="description" content="Free IPv4 and IPv6 subnet calculator: network and broadcast addresses, host ranges, wildcard masks, a prefix recommender for a device count, and an overlap detector. Runs entirely in your browser.">
+<link rel="canonical" href="https://kai247.com/utility/cidr-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kai247.com/utility/cidr-calculator/">
+<meta property="og:title" content="Subnet &amp; CIDR Calculator — KAI247">
+<meta property="og:description" content="IPv4/IPv6 subnetting, host recommender and overlap detection, in your browser.">
+<meta name="theme-color" content="#f8fafc">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/utility.css">
+<script defer src="/assets/js/utility-router.js"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Subnet & CIDR Calculator","url":"https://kai247.com/utility/cidr-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","description":"IPv4 and IPv6 subnet calculator with host recommender and overlap detection.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<a class="u-skip" href="#main">Skip to content</a>
+<header class="u-head">
+  <div class="u-wrap">
+    <a class="u-brand" href="/" aria-label="KAI247 home">
+      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--u-blue)" stroke-width="4" transform="rotate(-24 32 32)"/><circle cx="32" cy="32" r="10" fill="var(--u-cyan)"/><circle cx="51" cy="19" r="4" fill="var(--u-ink)"/></svg>
+      KAI247
+    </a>
+    <nav class="u-nav" aria-label="Primary">
+      <a href="/utility/">All utilities</a>
+      <a href="/utility/photo-size-targeter/">Photo</a>
+      <a href="/utility/web-essentials/">Web Essentials</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="u-wrap">
+  <section class="u-hero" style="text-align:left;padding-bottom:.6rem">
+    <p class="u-kicker"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg> Subnet &amp; CIDR</p>
+    <h1>Subnet without the guesswork</h1>
+    <p class="u-lede" style="margin-inline:0">IPv4 and IPv6 ranges, a prefix recommender for a device count, and an overlap check before you commit a plan.</p>
+  </section>
+
+  <div class="u-tabs" role="tablist">
+    <button class="u-tab" role="tab" aria-selected="true" data-p="calc">Calculator</button>
+    <button class="u-tab" role="tab" aria-selected="false" data-p="rec">Recommender</button>
+    <button class="u-tab" role="tab" aria-selected="false" data-p="ovl">Overlap check</button>
+  </div>
+
+  <section data-panel="calc">
+    <div class="u-tool split">
+      <div class="u-panel">
+        <h2>Network</h2>
+        <div class="u-field">
+          <label for="cidr">CIDR block</label>
+          <input id="cidr" value="192.168.1.0/24" spellcheck="false" placeholder="192.168.1.0/24 or 2001:db8::/48">
+          <p class="u-hint">IPv4 or IPv6. Any address inside the block works — it is normalised to the network address.</p>
+        </div>
+        <div class="u-row">
+          <button class="u-btn" type="button" id="calcGo">Calculate</button>
+          <button class="u-btn u-btn-ghost" type="button" data-fill="10.0.0.0/8">10.0.0.0/8</button>
+          <button class="u-btn u-btn-ghost" type="button" data-fill="172.16.0.0/12">172.16.0.0/12</button>
+          <button class="u-btn u-btn-ghost" type="button" data-fill="2001:db8::/48">2001:db8::/48</button>
+        </div>
+        <div id="calcErr" style="margin-top:.8rem"></div>
+      </div>
+      <div class="u-panel">
+        <h2>Result</h2>
+        <div class="u-stat" id="calcOut"><div><div class="k">Waiting</div><div class="v">—</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-panel="rec" hidden>
+    <div class="u-tool split">
+      <div class="u-panel">
+        <h2>How many devices?</h2>
+        <div class="u-field">
+          <label for="hosts">Usable devices needed</label>
+          <input type="number" id="hosts" min="1" value="250">
+          <p class="u-hint">Count everything that takes an address: laptops, phones, printers, APs, cameras, and headroom.</p>
+        </div>
+        <div class="u-field">
+          <label for="base">Base network (optional)</label>
+          <input id="base" value="10.0.0.0" spellcheck="false" placeholder="10.0.0.0">
+        </div>
+        <button class="u-btn" type="button" id="recGo">Recommend</button>
+      </div>
+      <div class="u-panel">
+        <h2>Recommendation</h2>
+        <div id="recOut"><p class="u-hint">Enter a device count.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-panel="ovl" hidden>
+    <div class="u-tool split">
+      <div class="u-panel">
+        <h2>Do these overlap?</h2>
+        <div class="u-field"><label for="a">Block A</label><input id="a" value="10.0.0.0/16" spellcheck="false"></div>
+        <div class="u-field"><label for="b">Block B</label><input id="b" value="10.0.5.0/24" spellcheck="false"></div>
+        <button class="u-btn" type="button" id="ovlGo">Check</button>
+        <p class="u-hint" style="margin-top:.7rem">Both blocks must be the same IP version.</p>
+      </div>
+      <div class="u-panel">
+        <h2>Verdict</h2>
+        <div id="ovlOut"><p class="u-hint">Enter two blocks.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <p class="u-note" style="margin-top:1.6rem">
+    Usable-host counts follow the standards rather than a simple formula: a <code>/31</code> carries
+    2 usable addresses for point-to-point links (RFC 3021) and a <code>/32</code> carries 1, instead
+    of the "minus two" that applies to ordinary subnets. IPv6 does not reserve a broadcast address,
+    so every address in the prefix is usable.
+  </p>
+</main>
+
+<footer class="u-foot">
+  <div class="u-wrap">
+    <span>KAI247 — Always with you.</span>
+    <nav aria-label="Footer"><a href="/utility/">All utilities</a> · <a href="/">Home</a></nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var V4 = 32n, V6 = 128n;
+
+  function parseV4(s) {
+    var p = s.trim().split('.');
+    if (p.length !== 4) return null;
+    var n = 0n;
+    for (var i = 0; i < 4; i++) {
+      if (!/^\d{1,3}$/.test(p[i])) return null;
+      var o = Number(p[i]);
+      if (o > 255) return null;
+      n = (n << 8n) | BigInt(o);
+    }
+    return n;
+  }
+  function fmtV4(n) {
+    return [24n, 16n, 8n, 0n].map(function (s) { return ((n >> s) & 255n).toString(); }).join('.');
+  }
+  function parseV6(s) {
+    s = s.trim();
+    if (!/^[0-9a-f:]+$/i.test(s) || (s.match(/::/g) || []).length > 1) return null;
+    var head = s, tail = '';
+    if (s.indexOf('::') >= 0) { var parts = s.split('::'); head = parts[0]; tail = parts[1]; }
+    var h = head ? head.split(':') : [], t = tail ? tail.split(':') : [];
+    if (h.length + t.length > 8) return null;
+    var groups = h.concat(new Array(8 - h.length - t.length).fill('0'), t);
+    if (s.indexOf('::') < 0 && groups.length !== 8) return null;
+    var n = 0n;
+    for (var i = 0; i < 8; i++) {
+      var g = groups[i] === '' ? '0' : groups[i];
+      if (!/^[0-9a-f]{1,4}$/i.test(g)) return null;
+      n = (n << 16n) | BigInt(parseInt(g, 16));
+    }
+    return n;
+  }
+  function fmtV6(n) {
+    var g = [];
+    for (var i = 7; i >= 0; i--) g.push((((n >> BigInt(i * 16)) & 0xffffn).toString(16)));
+    // Collapse the longest run of zero groups.
+    var best = -1, bestLen = 0, run = -1, len = 0;
+    for (var j = 0; j < 8; j++) {
+      if (g[j] === '0') { if (run < 0) { run = j; len = 1; } else len++; if (len > bestLen) { bestLen = len; best = run; } }
+      else { run = -1; len = 0; }
+    }
+    if (bestLen > 1) return (g.slice(0, best).join(':') + '::' + g.slice(best + bestLen).join(':')).replace(/^:+|:+$/g, function (m) { return m.length > 2 ? '::' : m; }) || '::';
+    return g.join(':');
+  }
+
+  function parse(input) {
+    var s = String(input || '').trim();
+    var m = s.match(/^([^\/]+)\/(\d{1,3})$/);
+    if (!m) return { err: 'Use address/prefix, for example 192.168.1.0/24.' };
+    var addr = m[1].trim(), prefix = BigInt(m[2]);
+    var v6 = addr.indexOf(':') >= 0;
+    var bits = v6 ? V6 : V4;
+    if (prefix > bits) return { err: 'A prefix cannot exceed /' + bits + ' for IPv' + (v6 ? '6' : '4') + '.' };
+    var n = v6 ? parseV6(addr) : parseV4(addr);
+    if (n === null) return { err: 'That is not a valid IPv' + (v6 ? '6' : '4') + ' address.' };
+    var host = bits - prefix;
+    var mask = host === 0n ? (1n << bits) - 1n : (((1n << bits) - 1n) >> host) << host;
+    var net = n & mask;
+    var last = net | ((1n << host) - 1n);
+    return { v6: v6, bits: bits, prefix: prefix, net: net, last: last, mask: mask, host: host, fmt: v6 ? fmtV6 : fmtV4 };
+  }
+
+  function usable(r) {
+    var total = 1n << r.host;
+    if (r.v6) return total;
+    if (r.prefix >= 31n) return total;      // RFC 3021 /31, and /32 host route
+    return total - 2n;
+  }
+  function group(n) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+
+  function show(r) {
+    var out = document.getElementById('calcOut');
+    var total = 1n << r.host, use = usable(r);
+    var rows = [
+      ['Network', r.fmt(r.net) + '/' + r.prefix],
+      ['First usable', r.fmt(r.v6 || r.prefix >= 31n ? r.net : r.net + 1n)],
+      ['Last usable', r.fmt(r.v6 || r.prefix >= 31n ? r.last : (r.last > r.net ? r.last - 1n : r.last))],
+      [r.v6 ? 'Last address' : 'Broadcast', r.fmt(r.last)],
+      ['Total addresses', group(total)],
+      ['Usable', group(use)]
+    ];
+    if (!r.v6) {
+      rows.push(['Netmask', fmtV4(r.mask)]);
+      rows.push(['Wildcard', fmtV4(((1n << 32n) - 1n) ^ r.mask)]);
+    }
+    out.innerHTML = rows.map(function (x) {
+      return '<div><div class="k">' + x[0] + '</div><div class="v">' + x[1] + '</div></div>';
+    }).join('');
+  }
+
+  function run() {
+    var r = parse(document.getElementById('cidr').value);
+    var err = document.getElementById('calcErr');
+    if (r.err) { err.innerHTML = '<p class="u-err">' + r.err + '</p>'; return; }
+    err.innerHTML = '';
+    show(r);
+  }
+  document.getElementById('calcGo').addEventListener('click', run);
+  document.getElementById('cidr').addEventListener('keydown', function (e) { if (e.key === 'Enter') run(); });
+  document.querySelectorAll('[data-fill]').forEach(function (b) {
+    b.addEventListener('click', function () { document.getElementById('cidr').value = b.dataset.fill; run(); });
+  });
+
+  function recommend() {
+    var need = Math.max(1, parseInt(document.getElementById('hosts').value, 10) || 1);
+    var base = document.getElementById('base').value.trim() || '10.0.0.0';
+    var out = document.getElementById('recOut');
+    var p = 32;
+    while (p >= 0) {
+      var hostBits = BigInt(32 - p);
+      var total = 1n << hostBits;
+      var use = p >= 31 ? total : total - 2n;
+      if (use >= BigInt(need)) break;
+      p--;
+    }
+    var r = parse(base + '/' + p);
+    if (r.err) { out.innerHTML = '<p class="u-err">' + r.err + '</p>'; return; }
+    var use = usable(r), total = 1n << r.host, spare = use - BigInt(need);
+    out.innerHTML =
+      '<div class="u-stat">' +
+      '<div><div class="k">Prefix</div><div class="v">/' + p + '</div></div>' +
+      '<div><div class="k">Netmask</div><div class="v">' + fmtV4(r.mask) + '</div></div>' +
+      '<div><div class="k">Usable</div><div class="v">' + group(use) + '</div></div>' +
+      '<div><div class="k">Headroom</div><div class="v u-ok">' + group(spare) + '</div></div>' +
+      '</div>' +
+      '<p style="margin-top:1rem"><strong>' + r.fmt(r.net) + '/' + p + '</strong> holds ' + group(use) +
+      ' usable addresses for the ' + group(BigInt(need)) + ' you asked for — ' + group(spare) + ' spare.</p>' +
+      '<p class="u-hint" style="margin-top:.6rem">Range ' + r.fmt(r.net + 1n) + ' – ' + r.fmt(r.last - 1n) +
+      ', broadcast ' + r.fmt(r.last) + '. ' + group(total) + ' total addresses, two of which are the network and broadcast.</p>';
+  }
+  document.getElementById('recGo').addEventListener('click', recommend);
+
+  document.getElementById('ovlGo').addEventListener('click', function () {
+    var A = parse(document.getElementById('a').value), B = parse(document.getElementById('b').value);
+    var out = document.getElementById('ovlOut');
+    if (A.err || B.err) { out.innerHTML = '<p class="u-err">' + (A.err || B.err) + '</p>'; return; }
+    if (A.v6 !== B.v6) { out.innerHTML = '<p class="u-err">Compare two blocks of the same IP version.</p>'; return; }
+    var hit = A.net <= B.last && B.net <= A.last;
+    if (!hit) {
+      out.innerHTML = '<p class="u-ok"><strong>No overlap.</strong> ' + A.fmt(A.net) + '/' + A.prefix +
+        ' and ' + B.fmt(B.net) + '/' + B.prefix + ' are disjoint — safe to route together.</p>';
+      return;
+    }
+    var contains = A.net <= B.net && A.last >= B.last ? 'A fully contains B'
+      : (B.net <= A.net && B.last >= A.last ? 'B fully contains A' : 'They partially overlap');
+    var from = A.net > B.net ? A.net : B.net, to = A.last < B.last ? A.last : B.last;
+    out.innerHTML = '<p class="u-err"><strong>Overlap.</strong> ' + contains + '.</p>' +
+      '<p class="u-hint" style="margin-top:.6rem">Shared range: ' + A.fmt(from) + ' – ' + A.fmt(to) +
+      ' (' + group(to - from + 1n) + ' addresses). Assigning both will produce routing ambiguity.</p>';
+  });
+
+  document.querySelectorAll('.u-tab').forEach(function (t) {
+    t.addEventListener('click', function () {
+      document.querySelectorAll('.u-tab').forEach(function (x) { x.setAttribute('aria-selected', String(x === t)); });
+      document.querySelectorAll('[data-panel]').forEach(function (p) { p.hidden = p.dataset.panel !== t.dataset.p; });
+    });
+  });
+
+  // Pre-fill from the assistant bar.
+  var pc = window.kaiParam && window.kaiParam('cidr'), ph = window.kaiParam && window.kaiParam('hosts');
+  if (pc) document.getElementById('cidr').value = pc;
+  if (ph) {
+    document.getElementById('hosts').value = ph;
+    document.querySelector('.u-tab[data-p="rec"]').click();
+    recommend();
+  }
+  run();
+})();
+</script>
+</body>
+</html>
