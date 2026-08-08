@@ -147,3 +147,43 @@ exist to prevent.
 Tiles open each widget's `preview.php` in the in-page viewer rather than embedding it, because
 embedding needs a partner key with kai247.com on its allowlist and KAI247 has none. When a key
 is issued, an embedded widget replaces the preview tile — the loader snippet is one line.
+
+## 19. Education removed from the widget catalog
+Owner direction. The `abhyas-practice` tile is gone; the catalog is now 13 widgets, and
+Businesses is restaurant, HVAC and landscaping. Education remains a capability constellation
+(SWAN boards, smart classrooms) — only the widget was removed.
+
+## 20. /utility built in vanilla JS, not React
+The brief asked for React/TypeScript components. This site is deliberately build-free static
+HTML deployed as a tarball over SSH; introducing React means a build pipeline, a node_modules
+tree in CI, and a framework payload against a ≤200 KB JS budget — for tools whose whole shape
+is form → compute → render. Each tool is instead a self-contained page with an inline ES5
+module, which is also why they work with no network at all. Reversible: if a suite arrives that
+genuinely needs component state (the finance analyzer is the likely one), a build step can be
+added then without touching the pages that do not need it.
+
+## 21. /utility ships three suites, five marked in development
+The brief listed eight suites. Three are built and verified end to end in a browser:
+Photo Size Targeter (3.53 MB → 198.5 KB at full resolution), CIDR Calculator (IPv4/IPv6 via
+BigInt, RFC 3021 /31 handling, overlap detection) and Web Essentials (UTM, slug, robots.txt,
+sitemap). The other five are rendered as **in development** rather than linked to empty pages
+— the site's "no dead worlds" rule.
+
+PDF size reduction and the XLSX half of the finance analyzer both need a WebAssembly or parser
+dependency; shipping a PDF tool that silently rasterises text would be worse than not shipping
+one. QR generation is deliberately deferred rather than guessed at: a QR encoder cannot be
+verified correct without a decoder to check it against, and an unscannable QR code is a failure
+that looks like success.
+
+## 22. The assistant bar is a deterministic router, not an LLM
+`assets/js/utility-router.js` matches declared patterns, extracts only parameters it can prove
+are present (size targets, device counts, URLs, CIDR blocks) and opens the tool pre-filled. It
+never routes to an unbuilt tool — it names the tool and says it is in development. This is the
+local half of the Nexus bar; when a Nexus key exists for kai247.com, unmatched requests are
+what should be handed to it.
+
+## 23. /utility and /utilities are two different things
+`/utilities/` is the Instrument Ring — tools contributed by the network (School ERP, ORBIT
+starter analysis, Brahmando Marketplace). `/utility/` is KAI247's own browser-side suite. Main
+navigation now points at `/utility/`, and the two cross-link. **This is a confusing pair of
+URLs** and worth merging under one name when the owner picks one.
