@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Colour Contrast Checker — WCAG AA and AAA</title>
+<meta name="description" content="Check text contrast against WCAG AA and AAA, and get the nearest passing shade when it fails. Runs in your browser, nothing uploaded, free.">
+<link rel="canonical" href="https://kai247.com/utility/color-contrast-checker/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kai247.com/utility/color-contrast-checker/">
+<meta property="og:title" content="Colour Contrast Checker — KAI247">
+<meta property="og:description" content="WCAG AA and AAA, with the nearest passing shade when it fails.">
+<meta name="theme-color" content="#f5f6fb">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/utility.css?v=3">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Colour Contrast Checker","url":"https://kai247.com/utility/color-contrast-checker/","applicationCategory":"DesignApplication","operatingSystem":"Any (web browser)","description":"Check a text and background colour pair against WCAG 2.1 AA and AAA, and find the nearest passing shade when it fails. Nothing is uploaded.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<style>
+.cc-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 560px) { .cc-pair { grid-template-columns: 1fr; } }
+
+.cc-swatch {
+  display: flex; align-items: center; gap: .8rem;
+  padding: .7rem .8rem; border: 1px solid var(--u-line); border-radius: 999px;
+  background: var(--u-surface);
+}
+.cc-dot {
+  width: 42px; height: 42px; border-radius: 50%; flex: none; position: relative;
+  border: 1px solid var(--u-line); cursor: pointer; overflow: hidden;
+}
+.cc-dot input { position: absolute; inset: -8px; width: 200%; height: 200%; border: 0; padding: 0; cursor: pointer; opacity: 0; }
+.cc-swatch input[type=text] {
+  flex: 1; min-width: 0; border: 0; background: transparent; font: inherit;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .95rem;
+  color: var(--u-ink); padding: .2rem 0;
+}
+.cc-swatch input[type=text]:focus { outline: none; }
+.cc-swatch:focus-within { border-color: var(--u-blue); }
+.cc-label { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--u-mut); }
+
+/* The ratio, as a dial rather than a number in a box. */
+.cc-dial {
+  width: 168px; height: 168px; border-radius: 50%; margin: 0 auto;
+  display: grid; place-items: center; position: relative;
+  background: var(--u-surface); border: 1px solid var(--u-line);
+}
+.cc-dial::after {
+  content: ''; position: absolute; inset: -9px; border-radius: 50%;
+  border: 1px dashed var(--u-line);
+}
+.cc-ratio { font-size: 2.3rem; font-weight: 700; line-height: 1; font-family: 'Space Grotesk', system-ui, sans-serif; }
+.cc-ratio-sub { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--u-mut); margin-top: .3rem; }
+
+.cc-verdicts { display: grid; gap: .5rem; margin-top: 1.4rem; }
+.cc-verdict {
+  display: flex; align-items: center; gap: .7rem;
+  padding: .6rem .9rem; border: 1px solid var(--u-line); border-radius: 999px;
+  font-size: .88rem; background: var(--u-surface);
+}
+.cc-mark {
+  width: 22px; height: 22px; border-radius: 50%; flex: none; display: grid; place-items: center;
+  font-size: .72rem; font-weight: 700; color: #fff;
+}
+.cc-mark.pass { background: #15803d; }
+.cc-mark.fail { background: #b91c1c; }
+.cc-verdict-name { flex: 1; }
+.cc-verdict-need { color: var(--u-mut); font-size: .78rem; font-variant-numeric: tabular-nums; }
+
+.cc-sample { margin-top: 1.4rem; border: 1px solid var(--u-line); border-radius: 22px; padding: 1.6rem 1.4rem; }
+.cc-sample p { margin: 0 0 .7rem; }
+.cc-sample .big { font-size: 1.5rem; font-weight: 700; line-height: 1.25; }
+.cc-sample .small { font-size: .9rem; line-height: 1.6; margin: 0; }
+
+.cc-fix { margin-top: 1.2rem; }
+.cc-fix-row { display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; }
+.cc-fix-dot { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--u-line); flex: none; }
+.cc-fix code { font-size: .9rem; }
+</style>
+<!-- seo:ld -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "What contrast ratio do I need?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "4.5:1 for normal body text to meet WCAG AA, and 7:1 for AAA. Large text — 24px, or 18.66px when bold — needs 3:1 for AA and 4.5:1 for AAA. Interface components and meaningful graphics need 3:1."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How is the ratio calculated?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Each channel is converted from sRGB to linear light, relative luminance is 0.2126R + 0.7152G + 0.0722B, and the ratio is (lighter + 0.05) ÷ (darker + 0.05). That is WCAG 2.1 exactly, not an approximation from perceived brightness."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "My grey text fails. What is the closest colour that passes?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The tool walks your colour toward black or white — whichever direction the background allows — until it meets 4.5:1, and shows you that shade. Stepping in sRGB keeps the hue recognisably the one you chose, so it reads as a nudge rather than a redesign."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is passing the contrast check enough to be accessible?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. Contrast is necessary, not sufficient. It says nothing about whether colour is the only thing carrying meaning, whether text sits on a photograph where the background varies per pixel, or whether a translucent layer changes what is really behind the text."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does it send my brand colours anywhere?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. It is arithmetic on six hex digits, done in your browser. Nothing is fetched and nothing is logged."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "KAI247",
+   "item": "https://kai247.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Utilities",
+   "item": "https://kai247.com/utility/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Colour Contrast",
+   "item": "https://kai247.com/utility/color-contrast-checker/"
+  }
+ ]
+}
+</script>
+<!-- /seo:ld -->
+<link rel="stylesheet" href="/assets/css/seo.css?v=2">
+</head>
+<body>
+<a class="u-skip" href="#main">Skip to content</a>
+<header class="u-head">
+  <div class="u-wrap">
+    <a class="u-brand" href="/" aria-label="KAI247 home">
+      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--u-blue)" stroke-width="4" transform="rotate(-24 32 32)"/><circle cx="32" cy="32" r="10" fill="var(--u-cyan)"/><circle cx="51" cy="19" r="4" fill="var(--u-ink)"/></svg>
+      KAI247
+    </a>
+    <nav class="u-nav" aria-label="Primary">
+      <a href="/utility/">All utilities</a>
+      <a href="/blog/">Blog</a>
+      <a href="/utility/web-marketing-toolkit/">Marketing</a>
+      <a href="/utility/web-essentials/">Web Essentials</a>
+      <a href="/utility/photo-size-targeter/">Images</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="u-wrap">
+  <section class="u-hero" style="text-align:left;padding-bottom:.6rem">
+    <p class="u-kicker"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg> Colour Contrast</p>
+    <h1>Readable, or just pretty?</h1>
+    <p class="u-lede" style="margin-inline:0">WCAG AA and AAA for both text sizes — and when it fails, the nearest shade that passes.</p>
+    <div class="u-privacy compact" style="margin-top:1.1rem">
+      <span class="lock" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
+      <p><strong>Pure arithmetic, in this tab.</strong> No colour you type is sent anywhere.</p>
+    </div>
+  </section>
+
+  <div class="u-tool" style="margin-top:1.6rem">
+    <div class="u-panel">
+      <div class="u-panel-head"><span class="u-badge">1</span><h2>The pair</h2></div>
+
+      <div class="cc-pair">
+        <div>
+          <p class="cc-label" style="margin:0 0 .4rem">Text</p>
+          <div class="cc-swatch">
+            <span class="cc-dot" id="fgDot"><input type="color" id="fgPick" value="#6b7280" aria-label="Pick text colour"></span>
+            <input type="text" id="fgHex" value="#6b7280" spellcheck="false" aria-label="Text colour hex">
+          </div>
+        </div>
+        <div>
+          <p class="cc-label" style="margin:0 0 .4rem">Background</p>
+          <div class="cc-swatch">
+            <span class="cc-dot" id="bgDot"><input type="color" id="bgPick" value="#ffffff" aria-label="Pick background colour"></span>
+            <input type="text" id="bgHex" value="#ffffff" spellcheck="false" aria-label="Background colour hex">
+          </div>
+        </div>
+      </div>
+
+      <div class="u-row" style="margin-top:1rem;gap:.6rem;flex-wrap:wrap">
+        <button class="u-btn u-btn-ghost" type="button" id="swap">Swap</button>
+        <button class="u-btn u-btn-ghost" type="button" id="ex1">Grey on white</button>
+        <button class="u-btn u-btn-ghost" type="button" id="ex2">Gold on dark</button>
+      </div>
+      <p class="u-err" id="err" hidden></p>
+    </div>
+
+    <div class="u-panel">
+      <div class="u-panel-head"><span class="u-badge">2</span><h2>The verdict</h2></div>
+
+      <div class="cc-dial">
+        <div style="text-align:center">
+          <div class="cc-ratio" id="ratio">—</div>
+          <div class="cc-ratio-sub">contrast ratio</div>
+        </div>
+      </div>
+
+      <div class="cc-verdicts" id="verdicts"></div>
+
+      <div class="cc-sample" id="sample">
+        <p class="big" id="sampleBig">Large text, 24px and up</p>
+        <p class="small" id="sampleSmall">Body text at a normal size — this is the case that fails most often, and the one most of your page is made of.</p>
+      </div>
+
+      <div class="cc-fix" id="fix" hidden>
+        <p class="cc-label" style="margin:0 0 .5rem">Nearest passing text colour (AA, normal text)</p>
+        <div class="cc-fix-row">
+          <span class="cc-fix-dot" id="fixDot"></span>
+          <code id="fixHex">—</code>
+          <button class="u-btn u-btn-ghost" type="button" id="useFix">Use it</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="u-facts">
+    <span class="u-chip">WCAG 2.1</span>
+    <span class="u-chip">AA &amp; AAA</span>
+    <span class="u-chip">Runs offline</span>
+    <span class="u-chip">Nothing uploaded</span>
+  </div>
+
+  <details class="u-more">
+    <summary>How the ratio is calculated, and what it does not cover</summary>
+    <p>Each channel is converted from sRGB to linear light — divide by 255, then
+    values at or below 0.03928 are divided by 12.92 and the rest are raised
+    through <code>((c + 0.055) / 1.055) ^ 2.4</code>. Relative luminance is
+    <code>0.2126R + 0.7152G + 0.0722B</code>, and the ratio is
+    <code>(lighter + 0.05) / (darker + 0.05)</code>. That is WCAG 2.1 exactly,
+    not an approximation using perceived brightness.</p>
+    <p>The thresholds: normal text needs 4.5 for AA and 7 for AAA. Large text —
+    24px, or 18.66px when bold — needs 3 for AA and 4.5 for AAA. User interface
+    components and graphical objects need 3.</p>
+    <p>What this cannot tell you: whether the colour carries meaning on its own
+    (a red field with no label fails for a colour-blind visitor at any ratio),
+    whether text sits on a photograph where the effective background varies per
+    pixel, or whether a semi-transparent layer changes what is actually behind
+    the text. Contrast is necessary, not sufficient.</p>
+  </details>
+<!-- seo:faq -->
+  <section class="seo-faq" id="faq" aria-labelledby="faq-h">
+    <div class="seo-faq-head">
+      <span class="seo-faq-ring" aria-hidden="true"></span>
+      <div>
+        <h2 id="faq-h">Questions people actually ask</h2>
+        <p>Accessibility questions that come up the first time someone runs an audit on your site.</p>
+      </div>
+    </div>
+    <div class="seo-faq-list">
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">What contrast ratio do I need?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>4.5:1 for normal body text to meet WCAG AA, and 7:1 for AAA. Large text — 24px, or 18.66px when bold — needs 3:1 for AA and 4.5:1 for AAA. Interface components and meaningful graphics need 3:1.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">How is the ratio calculated?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>Each channel is converted from sRGB to linear light, relative luminance is 0.2126R + 0.7152G + 0.0722B, and the ratio is (lighter + 0.05) ÷ (darker + 0.05). That is WCAG 2.1 exactly, not an approximation from perceived brightness.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">My grey text fails. What is the closest colour that passes?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>The tool walks your colour toward black or white — whichever direction the background allows — until it meets 4.5:1, and shows you that shade. Stepping in sRGB keeps the hue recognisably the one you chose, so it reads as a nudge rather than a redesign.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Is passing the contrast check enough to be accessible?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>No. Contrast is necessary, not sufficient. It says nothing about whether colour is the only thing carrying meaning, whether text sits on a photograph where the background varies per pixel, or whether a translucent layer changes what is really behind the text.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Does it send my brand colours anywhere?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>No. It is arithmetic on six hex digits, done in your browser. Nothing is fetched and nothing is logged.</p>
+      </details>
+    </div>
+    <a class="seo-faq-guide" href="/blog/colour-contrast-that-actually-passes/">
+      <span class="seo-faq-guide-ring" aria-hidden="true"></span>
+      <span><span class="seo-faq-guide-kicker">Read the guide</span>Colour contrast that actually passes</span>
+    </a>
+    <p class="seo-faq-foot">Part of <a href="/utility/">nine free KAI247 instruments</a> — all in-browser, none of them upload your files.</p>
+  </section>
+<!-- /seo:faq -->
+</main>
+
+<footer class="u-foot">
+  <div class="u-wrap">
+    <p>KAI247 — Small changes. Always. 24&times;7.</p>
+    <nav aria-label="Footer">
+      <a href="/utility/">All utilities</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about/">About</a>
+      <a href="/join/">Join</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  function $(id) { return document.getElementById(id); }
+
+  /* ---- colour parsing -------------------------------------------------- */
+  /* Accepts #rgb, #rrggbb, with or without the hash. Anything else is a
+     parse failure that the caller reports, rather than silently becoming
+     black — a wrong colour that looks deliberate is worse than an error. */
+  function parseHex(s) {
+    var t = String(s).trim().replace(/^#/, '');
+    if (/^[0-9a-fA-F]{3}$/.test(t)) {
+      t = t[0] + t[0] + t[1] + t[1] + t[2] + t[2];
+    }
+    if (!/^[0-9a-fA-F]{6}$/.test(t)) return null;
+    return [parseInt(t.slice(0, 2), 16), parseInt(t.slice(2, 4), 16), parseInt(t.slice(4, 6), 16)];
+  }
+  function toHex(rgb) {
+    return '#' + rgb.map(function (v) {
+      return Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, '0');
+    }).join('');
+  }
+
+  /* ---- WCAG 2.1 relative luminance and contrast ------------------------ */
+  function channel(v) {
+    var c = v / 255;
+    return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  }
+  function luminance(rgb) {
+    return 0.2126 * channel(rgb[0]) + 0.7152 * channel(rgb[1]) + 0.0722 * channel(rgb[2]);
+  }
+  function contrast(a, b) {
+    var la = luminance(a), lb = luminance(b);
+    var hi = Math.max(la, lb), lo = Math.min(la, lb);
+    return (hi + 0.05) / (lo + 0.05);
+  }
+
+  var LEVELS = [
+    { name: 'AA — normal text', need: 4.5 },
+    { name: 'AA — large text (24px+)', need: 3 },
+    { name: 'AAA — normal text', need: 7 },
+    { name: 'AAA — large text', need: 4.5 },
+    { name: 'UI components & graphics', need: 3 }
+  ];
+
+  /* Walk the text colour toward black or white — whichever direction the
+     background allows — until AA for normal text is met. Stepping in sRGB
+     rather than a perceptual space keeps the hue recognisably the same one
+     the designer chose, which is the point: this is a nudge, not a redesign. */
+  function nearestPassing(fg, bg, target) {
+    var bgLum = luminance(bg);
+    var toward = bgLum > 0.5 ? [0, 0, 0] : [255, 255, 255];
+    var lo = 0, hi = 1, best = null;
+    for (var i = 0; i < 24; i++) {
+      var t = (lo + hi) / 2;
+      var cand = [
+        fg[0] + (toward[0] - fg[0]) * t,
+        fg[1] + (toward[1] - fg[1]) * t,
+        fg[2] + (toward[2] - fg[2]) * t
+      ].map(Math.round);
+      if (contrast(cand, bg) >= target) { best = cand; hi = t; } else { lo = t; }
+    }
+    // Even full black or full white may not reach the target on a mid-tone
+    // background. Say so rather than returning something that still fails.
+    if (!best && contrast(toward, bg) >= target) best = toward;
+    return best;
+  }
+
+  /* ---- wiring ---------------------------------------------------------- */
+  var fgHex = $('fgHex'), bgHex = $('bgHex'), fgPick = $('fgPick'), bgPick = $('bgPick');
+  var err = $('err'), fixBox = $('fix');
+  var lastFix = null;
+
+  function render() {
+    var fg = parseHex(fgHex.value), bg = parseHex(bgHex.value);
+    if (!fg || !bg) {
+      err.hidden = false;
+      err.textContent = 'That is not a hex colour. Use #rgb or #rrggbb — for example #1a1a1a.';
+      $('ratio').textContent = '—';
+      $('verdicts').textContent = '';
+      fixBox.hidden = true;
+      return;
+    }
+    err.hidden = true;
+
+    $('fgDot').style.background = toHex(fg);
+    $('bgDot').style.background = toHex(bg);
+    fgPick.value = toHex(fg);
+    bgPick.value = toHex(bg);
+
+    var r = contrast(fg, bg);
+    // Two decimals, and never rounded UP to a passing value: 4.4951 is a fail
+    // that would print as "4.50" and read as a pass.
+    var shown = Math.floor(r * 100) / 100;
+    $('ratio').textContent = shown.toFixed(2);
+
+    var v = $('verdicts');
+    v.textContent = '';
+    LEVELS.forEach(function (lv) {
+      var ok = r >= lv.need;
+      var row = document.createElement('div');
+      row.className = 'cc-verdict';
+      var mark = document.createElement('span');
+      mark.className = 'cc-mark ' + (ok ? 'pass' : 'fail');
+      mark.textContent = ok ? '✓' : '✕';
+      var name = document.createElement('span');
+      name.className = 'cc-verdict-name';
+      name.textContent = lv.name;
+      var need = document.createElement('span');
+      need.className = 'cc-verdict-need';
+      need.textContent = 'needs ' + lv.need.toFixed(1);
+      row.appendChild(mark); row.appendChild(name); row.appendChild(need);
+      row.setAttribute('role', 'status');
+      v.appendChild(row);
+    });
+
+    var s = $('sample');
+    s.style.background = toHex(bg);
+    s.style.color = toHex(fg);
+
+    if (r >= 4.5) {
+      fixBox.hidden = true;
+      lastFix = null;
+    } else {
+      var fix = nearestPassing(fg, bg, 4.5);
+      if (fix) {
+        lastFix = fix;
+        fixBox.hidden = false;
+        $('fixDot').style.background = toHex(fix);
+        $('fixHex').textContent = toHex(fix) + '  (' + (Math.floor(contrast(fix, bg) * 100) / 100).toFixed(2) + ':1)';
+      } else {
+        lastFix = null;
+        fixBox.hidden = false;
+        $('fixDot').style.background = 'transparent';
+        $('fixHex').textContent = 'No shade of this hue reaches 4.5 on this background — change the background.';
+      }
+    }
+  }
+
+  [fgHex, bgHex].forEach(function (i) { i.addEventListener('input', render); });
+  fgPick.addEventListener('input', function () { fgHex.value = fgPick.value; render(); });
+  bgPick.addEventListener('input', function () { bgHex.value = bgPick.value; render(); });
+
+  $('swap').addEventListener('click', function () {
+    var t = fgHex.value; fgHex.value = bgHex.value; bgHex.value = t; render();
+  });
+  $('ex1').addEventListener('click', function () { fgHex.value = '#6b7280'; bgHex.value = '#ffffff'; render(); });
+  $('ex2').addEventListener('click', function () { fgHex.value = '#f2c56d'; bgHex.value = '#05060c'; render(); });
+  $('useFix').addEventListener('click', function () {
+    if (lastFix) { fgHex.value = toHex(lastFix); render(); }
+  });
+
+  render();
+
+  // Exposed for the page's own tests.
+  window.KAI_CC = { parseHex: parseHex, contrast: contrast, luminance: luminance, nearestPassing: nearestPassing };
+})();
+</script>
+</body>
+</html>

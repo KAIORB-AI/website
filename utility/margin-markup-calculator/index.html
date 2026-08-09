@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Margin &amp; Markup Calculator — with VAT and sales tax</title>
+<meta name="description" content="Selling price from cost and margin, or margin from cost and price. Markup and margin are different numbers and this shows both. Free, in your browser.">
+<link rel="canonical" href="https://kai247.com/utility/margin-markup-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kai247.com/utility/margin-markup-calculator/">
+<meta property="og:title" content="Margin &amp; Markup Calculator — KAI247">
+<meta property="og:description" content="Margin and markup are different numbers. This shows both, plus tax.">
+<meta name="theme-color" content="#f5f6fb">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/utility.css?v=3">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Margin & Markup Calculator","url":"https://kai247.com/utility/margin-markup-calculator/","applicationCategory":"BusinessApplication","operatingSystem":"Any (web browser)","description":"Calculate selling price from cost and margin, margin from cost and price, and the markup equivalent of either, with VAT or sales tax handled separately. Nothing is uploaded.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<style>
+.mm-modes { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+.mm-mode {
+  border: 1px solid var(--u-line); border-radius: 999px; background: var(--u-surface);
+  padding: .5rem 1.1rem; font: inherit; font-size: .88rem; font-weight: 600;
+  color: var(--u-mut); cursor: pointer; transition: border-color .18s ease, color .18s ease;
+}
+.mm-mode[aria-pressed="true"] { border-color: var(--u-blue); color: var(--u-ink); }
+
+.mm-dials { display: flex; gap: 1.6rem; flex-wrap: wrap; justify-content: center; margin: .4rem 0 1.4rem; }
+.mm-dial {
+  width: 148px; height: 148px; border-radius: 50%; position: relative;
+  display: grid; place-items: center; text-align: center;
+  background: var(--u-surface); border: 1px solid var(--u-line);
+}
+.mm-dial::after {
+  content: ''; position: absolute; inset: -8px; border-radius: 50%;
+  border: 1px dashed var(--u-line);
+}
+.mm-dial.is-key { border-color: var(--u-blue); }
+.mm-val { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 1.7rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+.mm-cap { font-size: .68rem; letter-spacing: .11em; text-transform: uppercase; color: var(--u-mut); margin-top: .35rem; }
+
+.mm-break { margin-top: 1rem; display: grid; gap: .45rem; }
+.mm-line { display: flex; justify-content: space-between; gap: 1rem; font-size: .9rem; padding: .5rem .9rem; border: 1px solid var(--u-line); border-radius: 999px; background: var(--u-surface); }
+.mm-line.is-total { border-color: var(--u-blue); font-weight: 700; }
+.mm-line span:last-child { font-variant-numeric: tabular-nums; }
+</style>
+<!-- seo:ld -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "What is the difference between margin and markup?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Margin is profit as a share of the selling price; markup is profit as a share of the cost. Cost 40 sold at 60 is a 33.3% margin and a 50% markup — the same money, two different numbers."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I calculate selling price from a target margin?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Price equals cost divided by (1 minus the margin). For a 40% margin on a cost of 40: 40 ÷ 0.6 = 66.67. Multiplying by 1.4 instead gives 56, which is the markup formula wearing the wrong label and the most common pricing error in a small business spreadsheet."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can a margin be 100%?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. Margin is a share of the price, so reaching 100% would need an infinite price. The tool says so rather than printing a number. Markup has no ceiling — a 300% markup is perfectly ordinary."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Where does VAT or sales tax fit?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "On top of the selling price, after all the margin arithmetic. It changes what the customer pays and not what you make, so it is shown separately rather than folded into the margin."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is my cost data sent anywhere?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. What you pay your suppliers is commercially sensitive and there is no reason for it to leave the tab. Nothing is stored, sent or logged."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "KAI247",
+   "item": "https://kai247.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Utilities",
+   "item": "https://kai247.com/utility/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Margin & Markup",
+   "item": "https://kai247.com/utility/margin-markup-calculator/"
+  }
+ ]
+}
+</script>
+<!-- /seo:ld -->
+<link rel="stylesheet" href="/assets/css/seo.css?v=2">
+</head>
+<body>
+<a class="u-skip" href="#main">Skip to content</a>
+<header class="u-head">
+  <div class="u-wrap">
+    <a class="u-brand" href="/" aria-label="KAI247 home">
+      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--u-blue)" stroke-width="4" transform="rotate(-24 32 32)"/><circle cx="32" cy="32" r="10" fill="var(--u-cyan)"/><circle cx="51" cy="19" r="4" fill="var(--u-ink)"/></svg>
+      KAI247
+    </a>
+    <nav class="u-nav" aria-label="Primary">
+      <a href="/utility/">All utilities</a>
+      <a href="/blog/">Blog</a>
+      <a href="/utility/business-finance-analyzer/">Finance</a>
+      <a href="/utility/quote-generator/">Quotes</a>
+      <a href="/utility/invoice-generator/">Invoices</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="u-wrap">
+  <section class="u-hero" style="text-align:left;padding-bottom:.6rem">
+    <p class="u-kicker"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg> Pricing</p>
+    <h1>Margin is not markup</h1>
+    <p class="u-lede" style="margin-inline:0">A 50% markup is a 33% margin. Price from either one, and see the other.</p>
+    <div class="u-privacy compact" style="margin-top:1.1rem">
+      <span class="lock" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
+      <p><strong>Your costs stay yours.</strong> Nothing is stored, sent or logged.</p>
+    </div>
+  </section>
+
+  <div class="u-tool split" style="margin-top:1.6rem">
+    <div class="u-panel">
+      <div class="u-panel-head"><span class="u-badge">1</span><h2>What you know</h2></div>
+
+      <div class="mm-modes" role="group" aria-label="What you are solving for">
+        <button class="mm-mode" type="button" data-mode="margin" aria-pressed="true">Cost + margin → price</button>
+        <button class="mm-mode" type="button" data-mode="markup" aria-pressed="false">Cost + markup → price</button>
+        <button class="mm-mode" type="button" data-mode="price" aria-pressed="false">Cost + price → margin</button>
+      </div>
+
+      <div class="u-field">
+        <label for="cur">Currency</label>
+        <select id="cur">
+          <option value="USD">USD — $</option>
+          <option value="EUR">EUR — €</option>
+          <option value="GBP">GBP — £</option>
+          <option value="INR">INR — ₹</option>
+          <option value="CAD">CAD — $</option>
+          <option value="AUD">AUD — $</option>
+          <option value="AED">AED</option>
+          <option value="SGD">SGD — $</option>
+        </select>
+      </div>
+
+      <div class="u-field">
+        <label for="cost">Unit cost (what it costs you)</label>
+        <input type="number" id="cost" step="0.01" min="0" value="40">
+      </div>
+
+      <div class="u-field" id="fMargin">
+        <label for="margin">Target margin %</label>
+        <input type="number" id="margin" step="0.01" value="35">
+      </div>
+
+      <div class="u-field" id="fMarkup" hidden>
+        <label for="markup">Markup %</label>
+        <input type="number" id="markup" step="0.01" value="50">
+      </div>
+
+      <div class="u-field" id="fPrice" hidden>
+        <label for="price">Selling price (excluding tax)</label>
+        <input type="number" id="price" step="0.01" min="0" value="60">
+      </div>
+
+      <div class="u-field">
+        <label for="tax">VAT / sales tax % <span class="u-hint">added on top of the selling price</span></label>
+        <input type="number" id="tax" step="0.01" min="0" value="0">
+      </div>
+
+      <div class="u-field">
+        <label for="qty">Units <span class="u-hint">for the totals below</span></label>
+        <input type="number" id="qty" step="1" min="1" value="1">
+      </div>
+
+      <p class="u-err" id="err" hidden></p>
+    </div>
+
+    <div class="u-panel">
+      <div class="u-panel-head"><span class="u-badge">2</span><h2>What it means</h2></div>
+
+      <div class="mm-dials">
+        <div class="mm-dial is-key">
+          <div><div class="mm-val" id="dPrice">—</div><div class="mm-cap">price ex tax</div></div>
+        </div>
+        <div class="mm-dial">
+          <div><div class="mm-val" id="dMargin">—</div><div class="mm-cap">margin</div></div>
+        </div>
+        <div class="mm-dial">
+          <div><div class="mm-val" id="dMarkup">—</div><div class="mm-cap">markup</div></div>
+        </div>
+      </div>
+
+      <div class="mm-break">
+        <div class="mm-line"><span>Unit cost</span><span id="rCost">—</span></div>
+        <div class="mm-line"><span>Profit per unit</span><span id="rProfit">—</span></div>
+        <div class="mm-line"><span>Price excluding tax</span><span id="rNet">—</span></div>
+        <div class="mm-line"><span id="lTax">Tax</span><span id="rTax">—</span></div>
+        <div class="mm-line is-total"><span>Price including tax</span><span id="rGross">—</span></div>
+      </div>
+
+      <div class="mm-break" style="margin-top:1.1rem">
+        <div class="mm-line"><span id="lQty">Total for 1 unit — revenue ex tax</span><span id="rTotRev">—</span></div>
+        <div class="mm-line"><span>Total profit</span><span id="rTotProfit">—</span></div>
+      </div>
+
+      <p class="u-note" id="note" hidden></p>
+    </div>
+  </div>
+
+  <div class="u-facts">
+    <span class="u-chip">Whole-cent arithmetic</span>
+    <span class="u-chip">Margin ≠ markup</span>
+    <span class="u-chip">Runs offline</span>
+    <span class="u-chip">Nothing uploaded</span>
+  </div>
+
+  <details class="u-more">
+    <summary>The two formulas, and the mistake that costs real money</summary>
+    <p><strong>Margin</strong> is profit as a share of the <em>selling price</em>:
+    <code>(price − cost) ÷ price</code>. <strong>Markup</strong> is profit as a
+    share of the <em>cost</em>: <code>(price − cost) ÷ cost</code>. They describe
+    the same money and give different numbers, always.</p>
+    <p>Cost 40, price 60. Profit is 20. That is a 33.3% margin and a 50% markup.
+    A business that means "I need a 40% margin" and applies a 40% markup prices
+    at 56 instead of 66.67 — it has given away most of the margin it thought it
+    had, on every unit, quietly.</p>
+    <p>Price from margin is <code>cost ÷ (1 − margin)</code>, not
+    <code>cost × (1 + margin)</code>. The second is the markup formula wearing
+    the wrong label, and it is the single most common pricing error in a small
+    business spreadsheet.</p>
+    <p>A margin of 100% or more is impossible: it would need an infinite price.
+    Markup has no ceiling. VAT and sales tax are added after all of this and
+    are not yours — they change what the customer pays and not what you make.</p>
+  </details>
+<!-- seo:faq -->
+  <section class="seo-faq" id="faq" aria-labelledby="faq-h">
+    <div class="seo-faq-head">
+      <span class="seo-faq-ring" aria-hidden="true"></span>
+      <div>
+        <h2 id="faq-h">Questions people actually ask</h2>
+        <p>The pricing questions that cost real money when they are answered wrong.</p>
+      </div>
+    </div>
+    <div class="seo-faq-list">
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">What is the difference between margin and markup?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>Margin is profit as a share of the selling price; markup is profit as a share of the cost. Cost 40 sold at 60 is a 33.3% margin and a 50% markup — the same money, two different numbers.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">How do I calculate selling price from a target margin?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>Price equals cost divided by (1 minus the margin). For a 40% margin on a cost of 40: 40 ÷ 0.6 = 66.67. Multiplying by 1.4 instead gives 56, which is the markup formula wearing the wrong label and the most common pricing error in a small business spreadsheet.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Can a margin be 100%?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>No. Margin is a share of the price, so reaching 100% would need an infinite price. The tool says so rather than printing a number. Markup has no ceiling — a 300% markup is perfectly ordinary.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Where does VAT or sales tax fit?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>On top of the selling price, after all the margin arithmetic. It changes what the customer pays and not what you make, so it is shown separately rather than folded into the margin.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Is my cost data sent anywhere?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>No. What you pay your suppliers is commercially sensitive and there is no reason for it to leave the tab. Nothing is stored, sent or logged.</p>
+      </details>
+    </div>
+    <a class="seo-faq-guide" href="/blog/margin-is-not-markup/">
+      <span class="seo-faq-guide-ring" aria-hidden="true"></span>
+      <span><span class="seo-faq-guide-kicker">Read the guide</span>Margin is not markup, and the difference is your profit</span>
+    </a>
+    <p class="seo-faq-foot">Part of <a href="/utility/">nine free KAI247 instruments</a> — all in-browser, none of them upload your files.</p>
+  </section>
+<!-- /seo:faq -->
+</main>
+
+<footer class="u-foot">
+  <div class="u-wrap">
+    <p>KAI247 — Small changes. Always. 24&times;7.</p>
+    <nav aria-label="Footer">
+      <a href="/utility/">All utilities</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about/">About</a>
+      <a href="/join/">Join</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  function $(id) { return document.getElementById(id); }
+
+  var SYM = { USD: '$', EUR: '€', GBP: '£', INR: '₹', CAD: '$', AUD: '$', AED: 'AED ', SGD: '$' };
+
+  /* Money in whole cents, same discipline as the quote and invoice tools:
+     round once, at the point a number becomes money, never at the end of a
+     chain of floats. */
+  function cents(v) { return Math.round((parseFloat(v) || 0) * 100); }
+
+  var mode = 'margin';
+
+  /* Returns cents-based figures, or an explanation of why there is no answer.
+     Exposed on window for the page's own tests. */
+  function solve(costC, opts) {
+    var priceC, marginPct, markupPct;
+
+    if (opts.mode === 'margin') {
+      marginPct = opts.margin;
+      // price = cost / (1 - margin). At margin >= 100% the divisor is zero or
+      // negative: no finite price yields it. Say so instead of printing NaN or
+      // a negative price that looks like a real answer.
+      if (marginPct >= 100) {
+        return { error: 'A margin of 100% or more needs an infinite price. Margin is a share of the price, so it can never reach 100%.' };
+      }
+      if (costC === 0 && marginPct !== 0) {
+        return { error: 'With a cost of zero, any price above zero is a 100% margin. Enter a cost.' };
+      }
+      priceC = Math.round(costC / (1 - marginPct / 100));
+    } else if (opts.mode === 'markup') {
+      markupPct = opts.markup;
+      if (markupPct <= -100) {
+        return { error: 'A markup of −100% or lower prices the item at zero or below.' };
+      }
+      priceC = Math.round(costC * (1 + markupPct / 100));
+    } else {
+      priceC = opts.priceC;
+    }
+
+    if (priceC < 0) return { error: 'That gives a negative selling price.' };
+
+    var profitC = priceC - costC;
+    // Derive whichever percentages were not the input, from the rounded price,
+    // so the displayed margin always matches the displayed price rather than
+    // the unrounded intermediate.
+    marginPct = priceC === 0 ? (profitC === 0 ? 0 : -Infinity) : (profitC / priceC) * 100;
+    markupPct = costC === 0 ? (profitC === 0 ? 0 : Infinity) : (profitC / costC) * 100;
+
+    var taxC = Math.round(priceC * (opts.tax || 0) / 100);
+    return {
+      costC: costC, priceC: priceC, profitC: profitC,
+      marginPct: marginPct, markupPct: markupPct,
+      taxC: taxC, grossC: priceC + taxC
+    };
+  }
+
+  function render() {
+    var sym = SYM[$('cur').value] || '';
+    function money(c) {
+      var neg = c < 0;
+      var v = Math.abs(c / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return (neg ? '−' : '') + sym + v;
+    }
+    function pct(p) {
+      if (!isFinite(p)) return p > 0 ? '∞' : '—';
+      return (Math.round(p * 10) / 10).toFixed(1) + '%';
+    }
+
+    var costC = cents($('cost').value);
+    var r = solve(costC, {
+      mode: mode,
+      margin: parseFloat($('margin').value) || 0,
+      markup: parseFloat($('markup').value) || 0,
+      priceC: cents($('price').value),
+      tax: parseFloat($('tax').value) || 0
+    });
+
+    var err = $('err');
+    if (r.error) {
+      err.hidden = false;
+      err.textContent = r.error;
+      ['dPrice', 'dMargin', 'dMarkup', 'rCost', 'rProfit', 'rNet', 'rTax', 'rGross', 'rTotRev', 'rTotProfit']
+        .forEach(function (id) { $(id).textContent = '—'; });
+      $('note').hidden = true;
+      return;
+    }
+    err.hidden = true;
+
+    $('dPrice').textContent = money(r.priceC);
+    $('dMargin').textContent = pct(r.marginPct);
+    $('dMarkup').textContent = pct(r.markupPct);
+
+    $('rCost').textContent = money(r.costC);
+    $('rProfit').textContent = money(r.profitC);
+    $('rNet').textContent = money(r.priceC);
+    $('lTax').textContent = 'Tax at ' + (parseFloat($('tax').value) || 0) + '%';
+    $('rTax').textContent = money(r.taxC);
+    $('rGross').textContent = money(r.grossC);
+
+    var qty = Math.max(1, Math.floor(parseFloat($('qty').value) || 1));
+    $('lQty').textContent = 'Total for ' + qty + ' unit' + (qty === 1 ? '' : 's') + ' — revenue ex tax';
+    $('rTotRev').textContent = money(r.priceC * qty);
+    $('rTotProfit').textContent = money(r.profitC * qty);
+
+    var note = $('note');
+    if (r.profitC < 0) {
+      note.hidden = false;
+      note.textContent = 'This sells below cost. Every unit increases the loss.';
+    } else if (r.profitC === 0) {
+      note.hidden = false;
+      note.textContent = 'This sells at exactly cost. Nothing here covers your fixed costs.';
+    } else {
+      note.hidden = true;
+    }
+  }
+
+  [].forEach.call(document.querySelectorAll('.mm-mode'), function (b) {
+    b.addEventListener('click', function () {
+      mode = b.getAttribute('data-mode');
+      [].forEach.call(document.querySelectorAll('.mm-mode'), function (o) {
+        o.setAttribute('aria-pressed', String(o === b));
+      });
+      $('fMargin').hidden = mode !== 'margin';
+      $('fMarkup').hidden = mode !== 'markup';
+      $('fPrice').hidden = mode !== 'price';
+      render();
+    });
+  });
+
+  ['cost', 'margin', 'markup', 'price', 'tax', 'qty', 'cur'].forEach(function (id) {
+    $(id).addEventListener('input', render);
+    $(id).addEventListener('change', render);
+  });
+
+  render();
+  window.KAI_MM = { solve: solve, cents: cents };
+})();
+</script>
+</body>
+</html>

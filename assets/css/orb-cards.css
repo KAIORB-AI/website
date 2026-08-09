@@ -1,0 +1,152 @@
+/* KAI247 — the orb card.
+   ---------------------------------------------------------------------------
+   Every listing on the site used a rounded rectangle, which read as a generic
+   dashboard on a site whose whole language is orbital. This is the shared
+   replacement: a disc carrying the glyph, with the label beneath it — the same
+   shape the constellation nodes and the ecosystem diagram already use.
+
+   Why the DISC and not the whole card is the circle: text inside a circle has
+   to be short enough to fit the narrowest chord, which means either three-word
+   descriptions or clipped ones. Putting the circle above the label keeps the
+   silhouette circular and the prose readable, which is how the landing page's
+   own orbit diagram already handles it.
+
+   Works on both palettes: --u-* is the daylight utility theme, the bare names
+   are the deep-space one. Every colour falls back through both. */
+
+.orb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 2.4rem 1.2rem;
+  justify-items: center;
+}
+/* A row of 4 reads as a constellation; 5+ starts to read as a table. */
+.orb-grid.is-wide { grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); }
+
+.orb-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 240px;
+  color: inherit;
+  text-decoration: none;
+}
+.orb-card:hover, .orb-card:focus-visible { text-decoration: none; }
+
+/* ---------- the disc ---------- */
+.orb-disc {
+  position: relative;
+  width: 116px;
+  height: 116px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex: none;
+  background:
+    radial-gradient(circle at 34% 28%,
+      var(--u-gold-soft, var(--gold-soft, rgba(242,197,109,.28))), transparent 68%),
+    var(--u-surface, var(--surface, #fff));
+  border: 1px solid var(--u-line, var(--line, rgba(148,163,199,.24)));
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+/* The outer dashed ring is the orbit. It is what makes a circle read as a
+   body in a system rather than as a bubble. */
+.orb-disc::after {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 1px dashed var(--u-line, var(--line, rgba(148,163,199,.34)));
+  transition: border-color .22s ease, transform .22s ease;
+}
+.orb-card:hover .orb-disc,
+.orb-card:focus-visible .orb-disc {
+  transform: translateY(-3px);
+  border-color: var(--u-gold, var(--gold, #f2c56d));
+  box-shadow: 0 0 26px var(--u-gold-soft, var(--gold-soft, rgba(242,197,109,.3)));
+}
+.orb-card:hover .orb-disc::after,
+.orb-card:focus-visible .orb-disc::after {
+  border-color: var(--u-gold, var(--gold, #f2c56d));
+  transform: rotate(24deg);
+}
+/* Focus has to land on the disc, not on an invisible inline box: the card is
+   a flex column and the default outline would trace the whole column. */
+.orb-card:focus { outline: none; }
+.orb-card:focus-visible .orb-disc {
+  outline: 2px solid var(--u-gold, var(--gold, #f2c56d));
+  outline-offset: 6px;
+}
+
+.orb-disc svg {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  color: var(--u-gold, var(--gold, #f2c56d));
+}
+/* An emoji or short string instead of an svg glyph. */
+.orb-disc-mark {
+  position: relative;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+/* ---------- the label ---------- */
+.orb-kicker {
+  margin: 1rem 0 .3rem;
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--u-gold, var(--gold, #b8862b));
+}
+.orb-title {
+  margin: 0 0 .35rem;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+.orb-desc {
+  margin: 0;
+  font-size: .84rem;
+  line-height: 1.5;
+  color: var(--u-mut, var(--mut, #64748b));
+}
+.orb-meta {
+  margin: .5rem 0 0;
+  font-size: .74rem;
+  color: var(--u-mut, var(--mut, #64748b));
+}
+
+/* A pill for state — "Live", "Open", "New". Circular language, small. */
+.orb-pill {
+  display: inline-block;
+  margin-top: .55rem;
+  padding: .2rem .7rem;
+  border-radius: 999px;
+  border: 1px solid var(--u-line, var(--line, rgba(148,163,199,.3)));
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--u-mut, var(--mut, #64748b));
+}
+.orb-pill.is-live {
+  border-color: var(--u-gold, var(--gold, #f2c56d));
+  color: var(--u-gold, var(--gold, #b8862b));
+}
+
+/* Small screens: two per row rather than one giant orb per screenful. */
+@media (max-width: 520px) {
+  .orb-grid, .orb-grid.is-wide { grid-template-columns: repeat(2, 1fr); gap: 1.8rem .8rem; }
+  .orb-disc { width: 94px; height: 94px; }
+  .orb-disc svg { width: 28px; height: 28px; }
+  .orb-title { font-size: .92rem; }
+  .orb-desc { font-size: .78rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb-disc, .orb-disc::after { transition: none; }
+  .orb-card:hover .orb-disc { transform: none; }
+  .orb-card:hover .orb-disc::after { transform: none; }
+}

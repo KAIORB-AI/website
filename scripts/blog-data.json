@@ -1040,6 +1040,246 @@
           ]
         ]
       ]
+    },
+    {
+      "slug": "margin-is-not-markup",
+      "title": "Margin is not markup, and the difference is your profit",
+      "description": "A 50% markup is a 33% margin. Which formula to use, why the wrong one silently costs you money on every unit, and where tax fits.",
+      "tag": "Guide",
+      "readMins": 5,
+      "date": "2026-08-09",
+      "body": [
+        [
+          "p",
+          "Two words that get used as if they mean the same thing, describing the same money, giving different numbers. Confusing them does not produce an error message. It produces prices that are quietly too low, on every unit, for as long as nobody checks."
+        ],
+        [
+          "h2",
+          "The two definitions"
+        ],
+        [
+          "p",
+          "Margin is profit as a share of the selling price. Markup is profit as a share of the cost. That is the whole difference, and it is enough to change a price by 20%."
+        ],
+        [
+          "p",
+          "Buy at 40, sell at 60. Profit is 20. As a share of the 60 you charged, that is a 33.3% margin. As a share of the 40 you paid, it is a 50% markup. Same transaction, same 20 in profit, two numbers that look nothing alike."
+        ],
+        [
+          "quote",
+          "Margin is what the accountant means. Markup is what the supplier means. They are almost never talking about the same figure."
+        ],
+        [
+          "h2",
+          "The formula that costs money"
+        ],
+        [
+          "p",
+          "To price from a target margin: cost ÷ (1 − margin). For a 40% margin on a cost of 40, that is 40 ÷ 0.6 = 66.67."
+        ],
+        [
+          "p",
+          "The mistake is multiplying instead: 40 × 1.4 = 56. That is the markup formula, and it feels right because the arithmetic is easier. At 56 the actual margin is 28.6%, not the 40% intended. On a thousand units that is over ten thousand in profit that was budgeted for and never arrived."
+        ],
+        [
+          "ul",
+          [
+            "Price from margin: cost ÷ (1 − margin)",
+            "Price from markup: cost × (1 + markup)",
+            "Margin from price: (price − cost) ÷ price",
+            "Markup from price: (price − cost) ÷ cost"
+          ]
+        ],
+        [
+          "h2",
+          "Why margin cannot reach 100%"
+        ],
+        [
+          "p",
+          "Margin is a share of the price, so a 100% margin would mean the cost is zero — or the price is infinite. Any calculator that returns a number when you ask for a 100% margin is dividing by zero and dressing up the result. Markup has no such ceiling: a 400% markup is ordinary in hospitality and normal in software."
+        ],
+        [
+          "h2",
+          "Where tax sits"
+        ],
+        [
+          "p",
+          "After all of it, and outside all of it. VAT and sales tax change what the customer pays and not what you make — you are collecting it, not earning it. Folding tax into a margin calculation makes the margin look better than it is, which is the same mistake in a different coat."
+        ],
+        [
+          "h2",
+          "The one to write on the wall"
+        ],
+        [
+          "p",
+          "Pick margin and stick to it. It is the number that connects to everything else you care about: gross margin drives break-even, break-even drives runway, and runway is how long you have. Markup is a pricing mechanic. Margin is the business."
+        ],
+        [
+          "tools",
+          [
+            "margin-markup-calculator",
+            "business-finance-analyzer",
+            "quote-generator"
+          ]
+        ]
+      ]
+    },
+    {
+      "slug": "colour-contrast-that-actually-passes",
+      "title": "Colour contrast that actually passes",
+      "description": "Which WCAG ratio applies to which text, how the number is really calculated, and why passing the check is not the same as being readable.",
+      "tag": "Guide",
+      "readMins": 5,
+      "date": "2026-08-09",
+      "body": [
+        [
+          "p",
+          "Light grey text on white is the house style of the modern web, and it is the single most common accessibility failure on the modern web. The two facts are the same fact."
+        ],
+        [
+          "h2",
+          "The numbers you need"
+        ],
+        [
+          "ul",
+          [
+            "Normal body text: 4.5:1 for AA, 7:1 for AAA.",
+            "Large text — 24px, or 18.66px when bold: 3:1 for AA, 4.5:1 for AAA.",
+            "Interface components and meaningful graphics: 3:1.",
+            "Purely decorative elements: no requirement, because nobody needs to read them."
+          ]
+        ],
+        [
+          "p",
+          "The useful landmark is #767676 on white, which lands at 4.54:1. That is the lightest grey that passes AA for body text. Anything lighter — and most placeholder greys are lighter — fails."
+        ],
+        [
+          "h2",
+          "How the ratio is really calculated"
+        ],
+        [
+          "p",
+          "Not by comparing brightness the way your eye would. Each channel is converted from sRGB to linear light: divide by 255, then values at or below 0.03928 are divided by 12.92 and the rest go through ((c + 0.055) ÷ 1.055) raised to 2.4. Relative luminance is 0.2126R + 0.7152G + 0.0722B, and the ratio is (lighter + 0.05) ÷ (darker + 0.05)."
+        ],
+        [
+          "p",
+          "The green coefficient being three times the red one is not arbitrary — human vision is most sensitive to green. It is also why a mid-green and a mid-red that look equally bright can have wildly different contrast against the same background."
+        ],
+        [
+          "quote",
+          "Black on white is 21:1. That is the ceiling. Nothing in sRGB goes higher."
+        ],
+        [
+          "h2",
+          "When it fails, nudge rather than redesign"
+        ],
+        [
+          "p",
+          "The usual reaction to a failing brand colour is to abandon it. Usually that is not necessary. Walking the colour toward black or white — whichever way the background allows — until it hits 4.5:1 keeps the hue recognisably the one that was chosen. It is a different shade of your colour, not a different colour."
+        ],
+        [
+          "p",
+          "If no shade of the hue reaches 4.5 against that background, the background is the problem. That is worth knowing precisely, rather than iterating on the text colour forever."
+        ],
+        [
+          "h2",
+          "What passing does not prove"
+        ],
+        [
+          "p",
+          "Contrast is necessary and not sufficient. A form that marks errors only in red passes every contrast check and is still unusable for someone who cannot distinguish red. Text over a photograph has a different effective background in every corner. A translucent overlay means the colour you tested is not the colour that renders."
+        ],
+        [
+          "p",
+          "Run the check, fix what it finds, and then look at the page with the stylesheet's colours turned to greyscale. What survives that is genuinely readable."
+        ],
+        [
+          "tools",
+          [
+            "color-contrast-checker",
+            "web-marketing-toolkit",
+            "web-essentials"
+          ]
+        ]
+      ]
+    },
+    {
+      "slug": "how-to-invoice-and-get-paid",
+      "title": "How to invoice so you actually get paid",
+      "description": "What has to be on an invoice, why the PO number decides whether it gets processed, and the terms that shorten the wait without souring the relationship.",
+      "tag": "Guide",
+      "readMins": 5,
+      "date": "2026-08-09",
+      "body": [
+        [
+          "p",
+          "An invoice is not a request. It is a document that either matches what the other side's accounts system expects, or sits in a queue while somebody works out what to do with it. Most late payments are not disputes. They are mismatches."
+        ],
+        [
+          "h2",
+          "What has to be on it"
+        ],
+        [
+          "ul",
+          [
+            "The word Invoice — an untitled document is not obviously payable.",
+            "A unique invoice number, and the customer's PO number if they gave you one.",
+            "The date issued, and the date payment is due as a date rather than “30 days”.",
+            "Your full business details, and theirs.",
+            "Itemised lines: what, how many, at what unit price.",
+            "Tax shown separately, and the total.",
+            "How to pay — account details, or the payment link."
+          ]
+        ],
+        [
+          "h2",
+          "The PO number is the whole game"
+        ],
+        [
+          "p",
+          "If your customer raised a purchase order, their accounts payable does three-way matching: the order, the delivery note, and the invoice. All three need the same number. An invoice arriving without it cannot be matched, so it does not get approved, and nobody tells you — it simply does not get paid until you chase."
+        ],
+        [
+          "quote",
+          "Most invoices are not late because someone decided not to pay. They are late because nobody could work out which order they belonged to."
+        ],
+        [
+          "h2",
+          "Terms that work"
+        ],
+        [
+          "p",
+          "Put a real date, not a duration. “Due 8 September” is a deadline; “net 30” is a puzzle that starts from a date the reader has to find. If you take card or bank transfer, put the details on the invoice itself rather than in the covering email, which will not be forwarded to whoever pays it."
+        ],
+        [
+          "p",
+          "Invoice the day the work is done. An invoice sent three weeks late signals that the money is not urgent to you, and it will be treated accordingly."
+        ],
+        [
+          "h2",
+          "The penny problem"
+        ],
+        [
+          "p",
+          "If your line items do not sum to your total, the invoice looks careless before anyone reads a word of it. That happens when amounts are held as decimal fractions and rounded at display time — each line rounds independently, and the sum of the rounded lines is not the rounded sum. Holding money in whole cents from the start makes the arithmetic exact."
+        ],
+        [
+          "h2",
+          "Keep the record"
+        ],
+        [
+          "p",
+          "A browser tool that stores nothing cannot keep your register. That is a real limit, honestly stated: keep the PDFs somewhere consistent, or move to an accounting system once you are sending more than a handful a month. The register matters more than the document."
+        ],
+        [
+          "tools",
+          [
+            "invoice-generator",
+            "purchase-order-generator",
+            "quote-generator"
+          ]
+        ]
+      ]
     }
   ]
 }

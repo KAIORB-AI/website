@@ -21,6 +21,9 @@ TOOL_NAMES = {
     'purchase-order-generator': 'Purchase Order Generator',
     'web-marketing-toolkit': 'Web & Marketing Toolkit',
     'web-essentials': 'Web Essentials',
+    'invoice-generator': 'Invoice Generator',
+    'margin-markup-calculator': 'Margin & Markup Calculator',
+    'color-contrast-checker': 'Colour Contrast Checker',
 }
 
 HEAD = '''<!DOCTYPE html>
@@ -42,7 +45,8 @@ HEAD = '''<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/site.css?v=3">
-<link rel="stylesheet" href="/assets/css/blog.css?v=1">
+<link rel="stylesheet" href="/assets/css/blog.css?v=2">
+<link rel="stylesheet" href="/assets/css/orb-cards.css?v=1">
 <script defer src="/assets/js/cosmos.js"></script>
 <script defer src="/assets/js/nexus.js?v=2"></script>
 {ld}
@@ -93,6 +97,18 @@ FOOT = '''
 
 TITLE_MAX = 62
 BRAND = ' — KAI247'
+
+# One glyph per article kind, so the orb grid is scannable by shape rather
+# than only by reading every title.
+TAG_GLYPH = {
+    'Guide': '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>'
+             '<path d="M12 7v5l3.2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+    'Vision': '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3.4" fill="currentColor"/>'
+              '<ellipse cx="12" cy="12" rx="10" ry="4.6" stroke="currentColor" stroke-width="2" transform="rotate(-22 12 12)"/></svg>',
+    'How we build': '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>'
+                    '<circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>'
+                    '<path d="M12 3v3M12 18v3M3 12h3M18 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+}
 
 
 def branded(title):
@@ -233,14 +249,15 @@ def write_index(posts):
     for p in posts:
         nice = datetime.date.fromisoformat(p['date']).strftime('%d %B %Y').lstrip('0')
         cards.append(
-            '      <a class="bl-card" href="/blog/{slug}/">\n'
-            '        <span class="bl-card-tag">{tag}</span>\n'
-            '        <h2>{title}</h2>\n'
-            '        <p>{desc}</p>\n'
-            '        <span class="bl-card-meta"><time datetime="{date}">{nice}</time> · {mins} min read</span>\n'
-            '      </a>'.format(slug=p['slug'], tag=html.escape(p['tag']),
-                                title=html.escape(p['title']), desc=html.escape(p['description']),
-                                date=p['date'], nice=nice, mins=p['readMins']))
+            '        <a class="orb-card" href="/blog/{slug}/">\n'
+            '          <span class="orb-disc" aria-hidden="true">{glyph}</span>\n'
+            '          <span class="orb-kicker">{tag}</span>\n'
+            '          <h2 class="orb-title">{title}</h2>\n'
+            '          <p class="orb-desc">{desc}</p>\n'
+            '          <p class="orb-meta"><time datetime="{date}">{nice}</time> · {mins} min read</p>\n'
+            '        </a>'.format(slug=p['slug'], tag=html.escape(p['tag']), glyph=TAG_GLYPH.get(p['tag'], TAG_GLYPH['Guide']),
+                                  title=html.escape(p['title']), desc=html.escape(p['description']),
+                                  date=p['date'], nice=nice, mins=p['readMins']))
 
     html_out = HEAD.format(
         title='Blog — KAI247',
@@ -257,7 +274,7 @@ def write_index(posts):
   </section>
   <section class="band">
     <div class="container">
-      <div class="bl-grid">
+      <div class="orb-grid">
 %s
       </div>
     </div>

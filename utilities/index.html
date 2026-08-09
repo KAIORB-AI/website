@@ -17,6 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/site.css?v=3">
+<link rel="stylesheet" href="/assets/css/orb-cards.css?v=1">
 <script defer src="/assets/js/cosmos.js"></script>
 <script defer src="/assets/js/nexus.js?v=2"></script>
 <script defer src="/assets/js/viewer.js"></script>
@@ -115,25 +116,28 @@
 
   <section class="band">
     <div class="container">
-      <div class="offerings">
-        <button class="offering" type="button" data-slug="school-erp" data-name="Free School ERP" data-url="https://jsisoftwaresolutions.com/">
-          <span class="theme">Education</span>
-          <h3>Free School ERP</h3>
-          <p>School management software.</p>
-          <span class="pill live">Live</span>
-        </button>
-        <button class="offering" type="button" data-slug="orbit-analysis" data-name="ORBIT starter analysis" data-url="https://brahmexa.com/services/orbit">
-          <span class="theme">Hosting</span>
-          <h3>ORBIT starter analysis</h3>
-          <p>Free hosting infrastructure analysis.</p>
-          <span class="pill live">Live</span>
-        </button>
-        <button class="offering" type="button" data-slug="brahmando-marketplace" data-name="Brahmando Marketplace" data-url="https://brahmando.com/marketplace/">
-          <span class="theme">AI</span>
-          <h3>Brahmando Marketplace</h3>
-          <p>AI agents and agentic workflows.</p>
-          <span class="pill live">Open</span>
-        </button>
+      <div class="orb-grid">
+        <a class="orb-card" href="https://jsisoftwaresolutions.com/" data-slug="school-erp" data-url="https://jsisoftwaresolutions.com/" data-name="Free School ERP">
+          <span class="orb-disc" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3 8.5L12 4l9 4.5-9 4.5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M7 11v5c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5v-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <span class="orb-kicker">Education</span>
+          <h3 class="orb-title">Free School ERP</h3>
+          <p class="orb-desc">School management software.</p>
+          <span class="orb-pill is-live">Live</span>
+        </a>
+        <a class="orb-card" href="https://brahmexa.com/services/orbit" data-slug="orbit-analysis" data-url="https://brahmexa.com/services/orbit" data-name="ORBIT starter analysis">
+          <span class="orb-disc" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3.2" fill="currentColor"/><ellipse cx="12" cy="12" rx="10" ry="4.6" stroke="currentColor" stroke-width="2" transform="rotate(-24 12 12)"/></svg></span>
+          <span class="orb-kicker">Hosting</span>
+          <h3 class="orb-title">ORBIT starter analysis</h3>
+          <p class="orb-desc">Free hosting infrastructure analysis.</p>
+          <span class="orb-pill is-live">Live</span>
+        </a>
+        <a class="orb-card" href="https://brahmando.com/marketplace/" data-slug="brahmando-marketplace" data-url="https://brahmando.com/marketplace/" data-name="Brahmando Marketplace">
+          <span class="orb-disc" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="8.4" r="1.8" fill="currentColor"/><circle cx="8.6" cy="14.4" r="1.8" fill="currentColor"/><circle cx="15.4" cy="14.4" r="1.8" fill="currentColor"/></svg></span>
+          <span class="orb-kicker">AI</span>
+          <h3 class="orb-title">Brahmando Marketplace</h3>
+          <p class="orb-desc">AI agents and agentic workflows.</p>
+          <span class="orb-pill is-live">Open</span>
+        </a>
       </div>
 
       <div style="display:flex;gap:1rem;margin-top:2.5rem;justify-content:center;flex-wrap:wrap">

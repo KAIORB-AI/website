@@ -29,6 +29,17 @@
       partyFrom: 'Buyer', partyTo: 'Supplier',
       termsDefault: 'Reference this PO number on all invoices and delivery notes.',
       cta: 'Confirm receipt'
+    },
+    /* The third document in the chain. A quote is what you offer, a PO is
+       what the buyer commits to, an invoice is what says it has been supplied
+       and is now payable — same arithmetic, different wording and a due date
+       that is a payment deadline rather than a validity window. */
+    invoice: {
+      title: 'Invoice', noun: 'invoice', prefix: 'INV-',
+      dateLabel: 'Payment due',
+      partyFrom: 'From', partyTo: 'Bill to',
+      termsDefault: 'Payment due within 30 days. Please quote the invoice number with payment.',
+      cta: 'Pay this invoice'
     }
   };
 

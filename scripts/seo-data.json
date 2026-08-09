@@ -768,6 +768,118 @@
         "free-business-tools-that-are-actually-free",
         "Free business tools that are actually free"
       ]
+    },
+    {
+      "path": "/utility/invoice-generator/",
+      "file": "utility/invoice-generator/index.html",
+      "section": "utility",
+      "crumb": "Invoice Generator",
+      "name": "Invoice Generator",
+      "title": "Free Invoice Generator — create an invoice and print it",
+      "description": "Create an invoice with line items, discount, tax and a payment due date, then print or save as PDF. No account, no watermark, nothing uploaded.",
+      "intro": "Billing questions people actually ask before they send the first one.",
+      "guide": [
+        "how-to-invoice-and-get-paid",
+        "How to invoice so you actually get paid"
+      ],
+      "faqs": [
+        [
+          "How do I make an invoice for free?",
+          "Fill in your details and the customer's, add the lines, set a payment due date and press Print. No account, no email address, no watermark and no limit on how many you make."
+        ],
+        [
+          "What has to be on an invoice?",
+          "The word Invoice, a unique invoice number, the date issued, your business name and address, the customer's details, itemised goods or services with quantities and unit prices, the amount of any tax, and the total. Payment terms and how to pay belong there too, or you will be chased for them."
+        ],
+        [
+          "How is an invoice different from a quote or a purchase order?",
+          "A quote is the supplier offering a price. A purchase order is the buyer committing to buy. An invoice is the supplier saying it has been supplied and is now payable. Three documents, three directions — sending the wrong one is a common reason a payment sits unprocessed."
+        ],
+        [
+          "Does the tax calculate correctly?",
+          "Discount comes off the subtotal, then tax applies to what is left. Every amount is held in whole cents from the moment you type it, so the total always equals the sum of its own rows rather than being a penny out."
+        ],
+        [
+          "Can I save it as a PDF?",
+          "Yes — press Print and choose Save as PDF. Your browser already has a competent PDF writer, so this page does not load a second one. The editor is hidden when printing, so what comes out is the invoice alone."
+        ],
+        [
+          "Does it keep a record of my invoices?",
+          "No. Nothing is saved, sent or logged, and there is no numbering sequence between visits — the number is pre-filled and you overwrite it. Keep the PDFs, or use an accounting system if you need a register."
+        ]
+      ]
+    },
+    {
+      "path": "/utility/margin-markup-calculator/",
+      "file": "utility/margin-markup-calculator/index.html",
+      "section": "utility",
+      "crumb": "Margin & Markup",
+      "name": "Margin & Markup Calculator",
+      "title": "Free Margin & Markup Calculator — with VAT and sales tax",
+      "description": "Selling price from cost and margin, or margin from cost and price. Markup and margin are different numbers and this shows both. Free, in your browser.",
+      "intro": "The pricing questions that cost real money when they are answered wrong.",
+      "guide": [
+        "margin-is-not-markup",
+        "Margin is not markup, and the difference is your profit"
+      ],
+      "faqs": [
+        [
+          "What is the difference between margin and markup?",
+          "Margin is profit as a share of the selling price; markup is profit as a share of the cost. Cost 40 sold at 60 is a 33.3% margin and a 50% markup — the same money, two different numbers."
+        ],
+        [
+          "How do I calculate selling price from a target margin?",
+          "Price equals cost divided by (1 minus the margin). For a 40% margin on a cost of 40: 40 ÷ 0.6 = 66.67. Multiplying by 1.4 instead gives 56, which is the markup formula wearing the wrong label and the most common pricing error in a small business spreadsheet."
+        ],
+        [
+          "Can a margin be 100%?",
+          "No. Margin is a share of the price, so reaching 100% would need an infinite price. The tool says so rather than printing a number. Markup has no ceiling — a 300% markup is perfectly ordinary."
+        ],
+        [
+          "Where does VAT or sales tax fit?",
+          "On top of the selling price, after all the margin arithmetic. It changes what the customer pays and not what you make, so it is shown separately rather than folded into the margin."
+        ],
+        [
+          "Is my cost data sent anywhere?",
+          "No. What you pay your suppliers is commercially sensitive and there is no reason for it to leave the tab. Nothing is stored, sent or logged."
+        ]
+      ]
+    },
+    {
+      "path": "/utility/color-contrast-checker/",
+      "file": "utility/color-contrast-checker/index.html",
+      "section": "utility",
+      "crumb": "Colour Contrast",
+      "name": "Colour Contrast Checker",
+      "title": "Free Colour Contrast Checker — WCAG AA and AAA",
+      "description": "Check text contrast against WCAG AA and AAA, and get the nearest passing shade when it fails. Runs in your browser, nothing uploaded, free.",
+      "intro": "Accessibility questions that come up the first time someone runs an audit on your site.",
+      "guide": [
+        "colour-contrast-that-actually-passes",
+        "Colour contrast that actually passes"
+      ],
+      "faqs": [
+        [
+          "What contrast ratio do I need?",
+          "4.5:1 for normal body text to meet WCAG AA, and 7:1 for AAA. Large text — 24px, or 18.66px when bold — needs 3:1 for AA and 4.5:1 for AAA. Interface components and meaningful graphics need 3:1."
+        ],
+        [
+          "How is the ratio calculated?",
+          "Each channel is converted from sRGB to linear light, relative luminance is 0.2126R + 0.7152G + 0.0722B, and the ratio is (lighter + 0.05) ÷ (darker + 0.05). That is WCAG 2.1 exactly, not an approximation from perceived brightness."
+        ],
+        [
+          "My grey text fails. What is the closest colour that passes?",
+          "The tool walks your colour toward black or white — whichever direction the background allows — until it meets 4.5:1, and shows you that shade. Stepping in sRGB keeps the hue recognisably the one you chose, so it reads as a nudge rather than a redesign."
+        ],
+        [
+          "Is passing the contrast check enough to be accessible?",
+          "No. Contrast is necessary, not sufficient. It says nothing about whether colour is the only thing carrying meaning, whether text sits on a photograph where the background varies per pixel, or whether a translucent layer changes what is really behind the text."
+        ],
+        [
+          "Does it send my brand colours anywhere?",
+          "No. It is arithmetic on six hex digits, done in your browser. Nothing is fetched and nothing is logged."
+        ]
+      ]
     }
   ]
 }
