@@ -79,7 +79,10 @@ for path, f in pages():
     # canonical for this page.
     markup = re.sub(r'<script[^>]*>.*?</script>', ' ', src, flags=re.S | re.I)
     c = re.findall(r'<link rel="canonical"', markup)
-    h1 = re.findall(r'<h1[ >]', src)
+    # Count h1 in MARKUP only, for the same reason as the canonical above: the
+    # file-tools Markdown converter builds '<h1>$1</h1>' inside a regex
+    # replacement string, which is not a heading on this page.
+    h1 = re.findall(r'<h1[ >]', markup)
     # Length is measured on the UNESCAPED text: '&amp;' is one character to a
     # search engine and five in the markup, and counting the markup flagged a
     # title that was already inside the limit.
