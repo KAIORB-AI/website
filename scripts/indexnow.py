@@ -22,6 +22,7 @@ SITE = 'https://kai247.com'
 HOST = 'kai247.com'
 KEY = '8ff9c57d8bf96d4341988328a4d43394'
 ENDPOINT = 'https://api.indexnow.org/indexnow'
+UA = 'kai247-indexnow/1.0 (+https://kai247.com/)'
 
 # IndexNow caps a batch at 10,000 URLs. Nowhere near that here, but a silent
 # truncation would look like a successful submission of everything.
@@ -42,8 +43,11 @@ def key_is_live(ctx):
     easy to misread as 'IndexNow rejected the site'.
     """
     url = '%s/%s.txt' % (SITE, KEY)
+    # Cloudflare 403s urllib's default User-Agent, so an unset one reports the
+    # key as missing when it is served perfectly well to anything else.
+    req = urllib.request.Request(url, headers={'User-Agent': UA})
     try:
-        body = urllib.request.urlopen(url, timeout=20, context=ctx).read().decode().strip()
+        body = urllib.request.urlopen(req, timeout=20, context=ctx).read().decode().strip()
     except Exception as e:
         return False, '%s is not reachable (%s)' % (url, e)
     if body != KEY:
@@ -78,7 +82,8 @@ def main():
 
     req = urllib.request.Request(
         ENDPOINT, data=json.dumps(payload).encode('utf-8'),
-        headers={'Content-Type': 'application/json; charset=utf-8'}, method='POST')
+        headers={'Content-Type': 'application/json; charset=utf-8', 'User-Agent': UA},
+        method='POST')
     try:
         r = urllib.request.urlopen(req, timeout=30, context=ctx)
         code, body = r.getcode(), r.read().decode('utf-8', 'replace')
