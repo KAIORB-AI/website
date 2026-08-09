@@ -63,6 +63,18 @@ def main():
     if len(urls) > MAX_BATCH:
         sys.exit('%d URLs exceeds the %d-per-batch limit' % (len(urls), MAX_BATCH))
 
+    # Refuse off-domain URLs here rather than letting IndexNow reject the batch
+    # with "not related to your verified domain", which reads like a
+    # verification problem. It usually is not: Git Bash rewrites a leading-slash
+    # argument into a Windows path, so `/utilities/` arrives as
+    # C:/Program Files/Git/utilities/ and the whole batch fails.
+    stray = [u for u in urls if not u.startswith(SITE + '/')]
+    if stray:
+        sys.exit('these are not %s URLs:\n  %s\n'
+                 'If you passed paths from Git Bash, its path translation rewrote them '
+                 '— run this from PowerShell, or pass full https:// URLs.'
+                 % (SITE, '\n  '.join(stray[:5])))
+
     ctx = ssl.create_default_context()
     live, detail = key_is_live(ctx)
     if not live:
