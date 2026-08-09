@@ -201,6 +201,26 @@ window.KAI_CONSTELLATIONS = [
           [['ai', 'Flag anomalies']]
         ],
         post: [['human', 'Controller reviews'], ['output', 'Report issued']]
+      },
+      /* LENS. The derived-column step is not decoration: a column that is an
+         exact arithmetic function of its neighbours cannot be independent
+         evidence, so a reconciliation built on one closes to ~0 on every row
+         and can never detect anything. Barring it is the thing that makes the
+         rest of the investigation mean something, which is why it earns a
+         node of its own here. */
+      {
+        name: 'LENS — investigate unfamiliar data', layout: 'loop',
+        trigger: 'On dataset ingested',
+        steps: [
+          ['trigger', 'Operator drops in an export nobody documented'],
+          ['action', 'Profile every column: type, range, nulls, cardinality'],
+          ['check', 'Column is an exact function of its neighbours?'],
+          ['action', 'Mark it derived — barred as independent evidence'],
+          ['ai', 'Propose reconciliations the data can actually test'],
+          ['check', 'Does the balance close for the right reason?']
+        ],
+        back: 'Re-profile with the derived columns excluded',
+        tail: [['human', 'Operator publishes the finding'], ['output', 'Findings board, every number traceable']]
       }
     ]
   }

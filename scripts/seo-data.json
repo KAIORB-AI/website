@@ -753,7 +753,7 @@
         ],
         [
           "What is available right now?",
-          "A free school ERP for school management from JSI Software Solutions, a free ORBIT starter analysis of your hosting infrastructure from Brahmexa, and the Brahmando marketplace of AI agents and agentic workflows."
+          "The LENS workspace for investigating unfamiliar operational data, a free school ERP from JSI Software Solutions, a free ORBIT starter analysis of your hosting from Brahmexa, and the Brahmando marketplace of AI agents and agentic workflows."
         ],
         [
           "How is this different from the free browser utilities?",
@@ -762,6 +762,10 @@
         [
           "Do I have to join KAI247 to use them?",
           "No. They are open instruments. Joining the network is a separate decision."
+        ],
+        [
+          "What is LENS?",
+          "Brahmexa’s operational data intelligence workspace: you point it at telemetry nobody documented and it profiles every column, marks the ones that are just arithmetic on their neighbours, and proposes reconciliations the data can actually test. The workspace here runs on a synthetic investigation so you can try it without connecting anything."
         ]
       ],
       "guide": [
