@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Everyday Calculators Suite — KAI247 Utilities</title>
+<meta name="description" content="Free, 100% in-browser loan EMI, mortgage, compound interest, percentage, age & date diff, working days, time zone, unit converter, tip & bill split, discount & sales tax, salary/hourly, fuel & electricity cost calculators.">
+<link rel="canonical" href="https://kai247.com/utility/calculators/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kai247.com/utility/calculators/">
+<meta property="og:title" content="Everyday Calculators Suite — KAI247">
+<meta property="og:description" content="100% client-side calculator suite. Loan EMI, mortgage, interest, age, unit conversion, and tip calculators.">
+<meta name="theme-color" content="#f8fafc">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/utility.css">
+<style>
+.u-tab-nav { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; border-bottom: 1px solid var(--u-line); pb: 0.8rem; }
+.u-tab-btn {
+  border: 1px solid var(--u-line); background: var(--u-surface); color: var(--u-mut);
+  border-radius: 999px; padding: 0.5rem 1.1rem; font: 500 0.88rem Outfit, sans-serif; cursor: pointer;
+  transition: all 0.2s ease;
+}
+.u-tab-btn:hover { border-color: var(--u-blue); color: var(--u-blue); }
+.u-tab-btn.active { background: var(--u-blue); color: #fff; border-color: var(--u-blue); box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35); }
+.u-tool-pane { display: none; background: var(--u-surface); border: 1px solid var(--u-line); border-radius: var(--u-radius); padding: 2rem; box-shadow: var(--u-shadow); }
+.u-tool-pane.active { display: block; }
+.u-form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.25rem; }
+.u-form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.u-form-group label { font-size: 0.88rem; font-weight: 600; color: var(--u-ink-2); }
+.u-form-group input, .u-form-group select {
+  border: 1px solid var(--u-line); border-radius: 10px; padding: 0.65rem 0.9rem; font: inherit; font-size: 0.92rem;
+  background: var(--u-surface); color: var(--u-ink);
+}
+.u-form-group input:focus, .u-form-group select:focus { border-color: var(--u-blue); outline: 0; }
+.u-calc-result-box {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(6, 182, 212, 0.08));
+  border: 1px solid rgba(37, 99, 235, 0.2); border-radius: 16px; padding: 1.5rem; margin-top: 1.5rem;
+}
+.u-stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+.u-stat-card { text-align: center; }
+.u-stat-num { font-size: 1.6rem; font-weight: 700; color: var(--u-blue); font-family: Outfit, sans-serif; }
+.u-stat-lbl { font-size: 0.82rem; color: var(--u-mut); text-transform: uppercase; letter-spacing: 0.05em; }
+</style>
+</head>
+<body>
+<a class="u-skip" href="#main">Skip to content</a>
+<header class="u-head">
+  <div class="u-wrap">
+    <a class="u-brand" href="/" aria-label="KAI247 home">
+      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--u-blue)" stroke-width="4" transform="rotate(-24 32 32)"/><circle cx="32" cy="32" r="10" fill="var(--u-cyan)"/><circle cx="51" cy="19" r="4" fill="var(--u-ink)"/></svg>
+      KAI247
+    </a>
+    <nav class="u-nav" aria-label="Primary">
+      <a href="/utility/">All utilities</a>
+      <a href="/utility/pdf-tools/">PDF &amp; Docs</a>
+      <a href="/utility/image-tools/">Image Suite</a>
+      <a href="/utility/file-tools/">File Suite</a>
+      <a href="/utility/calculators/" aria-current="page">Calculators</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="u-wrap">
+  <section class="u-hero" style="text-align:left;padding-bottom:1rem">
+    <p class="u-kicker"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 6h8M8 10h8M8 14h3M8 18h2" stroke="currentColor" stroke-width="2"/></svg> Everyday Calculators</p>
+    <h1>Comprehensive Financial &amp; Math Instruments</h1>
+    <p class="u-lede" style="margin-inline:0">Loan EMI, mortgage amortization, compound interest, percentage, age &amp; date diff, working days, time zone, unit converter, tip &amp; bill split, discount &amp; sales tax, salary/hourly, fuel &amp; electricity cost.</p>
+    <div class="u-privacy compact" style="margin-top:1.1rem">
+      <span class="lock" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
+      <p><strong>Private &amp; Offline:</strong> All calculations execute in real-time within your browser JavaScript engine.</p>
+    </div>
+  </section>
+
+  <!-- Navigation Tabs -->
+  <div class="u-tab-nav" id="calc-tabs">
+    <button class="u-tab-btn active" data-pane="loan-emi">Loan &amp; Mortgage EMI</button>
+    <button class="u-tab-btn" data-pane="compound-int">Compound Interest</button>
+    <button class="u-tab-btn" data-pane="percentage">Percentage &amp; Change</button>
+    <button class="u-tab-btn" data-pane="age-dates">Age &amp; Date Diff</button>
+    <button class="u-tab-btn" data-pane="units">Universal Unit Converter</button>
+    <button class="u-tab-btn" data-pane="tip-bill">Tip &amp; Split Bill</button>
+    <button class="u-tab-btn" data-pane="discount-tax">Discount &amp; Sales Tax</button>
+    <button class="u-tab-btn" data-pane="salary-converter">Salary ↔ Hourly</button>
+    <button class="u-tab-btn" data-pane="fuel-cost">Fuel &amp; Electricity Cost</button>
+  </div>
+
+  <!-- PANE 1: Loan & Mortgage EMI -->
+  <div class="u-tool-pane active" id="pane-loan-emi">
+    <h2>Loan EMI &amp; Mortgage Calculator</h2>
+    <p style="color:var(--u-mut);margin-bottom:1.5rem">Calculate monthly installment (EMI), total interest payable, and overall loan repayment cost.</p>
+    <div class="u-form-row">
+      <div class="u-form-group">
+        <label for="loan-amount">Loan Amount ($)</label>
+        <input type="number" id="loan-amount" value="250000" step="1000">
+      </div>
+      <div class="u-form-group">
+        <label for="loan-rate">Annual Interest Rate (%)</label>
+        <input type="number" id="loan-rate" value="6.5" step="0.1">
+      </div>
+      <div class="u-form-group">
+        <label for="loan-years">Tenure (Years)</label>
+        <input type="number" id="loan-years" value="30" min="1" max="50">
+      </div>
+    </div>
+    <button class="u-btn" id="btn-calc-loan">Calculate Loan EMI</button>
+    <div class="u-calc-result-box">
+      <div class="u-stat-grid">
+        <div class="u-stat-card">
+          <div class="u-stat-num" id="res-emi">$0</div>
+          <div class="u-stat-lbl">Monthly EMI</div>
+        </div>
+        <div class="u-stat-card">
+          <div class="u-stat-num" id="res-interest">$0</div>
+          <div class="u-stat-lbl">Total Interest</div>
+        </div>
+        <div class="u-stat-card">
+          <div class="u-stat-num" id="res-total">$0</div>
+          <div class="u-stat-lbl">Total Payment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANE 2: Compound Interest -->
+  <div class="u-tool-pane" id="pane-compound-int">
+    <h2>Compound Interest Calculator</h2>
+    <p style="color:var(--u-mut);margin-bottom:1.5rem">Determine future wealth accumulation with initial principal and monthly additions.</p>
+    <div class="u-form-row">
+      <div class="u-form-group">
+        <label for="ci-principal">Initial Principal ($)</label>
+        <input type="number" id="ci-principal" value="10000">
+      </div>
+      <div class="u-form-group">
+        <label for="ci-monthly">Monthly Addition ($)</label>
+        <input type="number" id="ci-monthly" value="500">
+      </div>
+      <div class="u-form-group">
+        <label for="ci-rate">Annual Return (%)</label>
+        <input type="number" id="ci-rate" value="8" step="0.1">
+      </div>
+      <div class="u-form-group">
+        <label for="ci-years">Duration (Years)</label>
+        <input type="number" id="ci-years" value="10">
+      </div>
+    </div>
+    <button class="u-btn" id="btn-calc-ci">Calculate Compound Growth</button>
+    <div class="u-calc-result-box">
+      <div class="u-stat-grid">
+        <div class="u-stat-card">
+          <div class="u-stat-num" id="res-ci-future">$0</div>
+          <div class="u-stat-lbl">Future Balance</div>
+        </div>
+        <div class="u-stat-card">
+          <div class="u-stat-num" id="res-ci-invested">$0</div>
+          <div class="u-stat-lbl">Total Invested</div>
+        </div>
+        <div class="u-stat-card">
+          <div class="u-stat-num" id="res-ci-gains">$0</div>
+          <div class="u-stat-lbl">Interest Earned</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANE 3: Percentage & Change -->
+  <div class="u-tool-pane" id="pane-percentage">
+    <h2>Percentage &amp; Growth Rate Calculator</h2>
+    <p style="color:var(--u-mut);margin-bottom:1.5rem">Compute percentage of value, percentage increase/decrease, and relative ratio.</p>
+    <div class="u-form-row">
+      <div class="u-form-group">
+        <label for="pct-x">What is X%</label>
+        <input type="number" id="pct-x" value="15">
+      </div>
+      <div class="u-form-group">
+        <label for="pct-y">Of Total Y</label>
+        <input type="number" id="pct-y" value="250">
+      </div>
+    </div>
+    <button class="u-btn" id="btn-calc-pct">Calculate Percentage</button>
+    <div class="u-calc-result-box">
+      <div class="u-stat-card">
+        <div class="u-stat-num" id="res-pct-val">0</div>
+        <div class="u-stat-lbl">Resulting Value</div>
+      </div>
+    </div>
+
+    <hr style="border:0;border-top:1px solid var(--u-line);margin:2rem 0">
+
+    <h3>Percentage Increase / Decrease</h3>
+    <div class="u-form-row" style="margin-top:1rem">
+      <div class="u-form-group">
+        <label for="pchange-v1">Original Value (V1)</label>
+        <input type="number" id="pchange-v1" value="100">
+      </div>
+      <div class="u-form-group">
+        <label for="pchange-v2">New Value (V2)</label>
+        <input type="number" id="pchange-v2" value="145">
+      </div>
+    </div>
+    <button class="u-btn" id="btn-calc-pchange">Calculate Change %</button>
+    <div class="u-calc-result-box">
+      <div class="u-stat-card">
+        <div class="u-stat-num" id="res-pchange-val">0%</div>
+        <div class="u-stat-lbl">Percentage Change</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANE 4: Age & Date Diff -->
+  <div class="u-tool-pane" id="pane-age-dates">
+    <h2>Age &amp; Date Difference Calculator</h2>
+    <p style="color:var(--u-mut);margin-bottom:1.5rem">Calculate exact age, days between two dates, and working business days.</p>
+    <div class="u-form-row">
+      <div class="u-form-group">
+        <label for="date-start">Start / Birth Date</label>
+        <input type="date" id="date-start" value="1995-06-15">
+      </div>
+      <div class="u-form-group">
+        <label for="date-end">End Date</label>
+        <input type="date" id="date-end">
+      </div>
+    </div>
+    <button class="u-btn" id="btn-calc-dates">Calculate Duration</button>
+    <div class="u-calc-result-box">
+      <div class="u-stat-grid">
+        <div class="u-stat-card">
+          <div class="u-stat-num" id="res-days">0</div>
+          <div class="u-stat-lbl">Total Days</div>
+        </div>
+        <div class="u-stat-card">
+          <div class="u-stat-num" id="res-business-days">0</div>
+          <div class="u-stat-lbl">Working Days (Mon-Fri)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANE 5: Universal Unit Converter -->
+  <div class="u-tool-pane" id="pane-units">
+    <h2>Universal Unit Converter</h2>
+    <p style="color:var(--u-mut);margin-bottom:1.5rem">Convert units across Length, Mass, Temperature, Digital Storage, and Speed.</p>
+    <div class="u-form-row">
+      <div class="u-form-group">
+        <label for="unit-cat">Category</label>
+        <select id="unit-cat">
+          <option value="length">Length (km, meters, miles, feet)</option>
+          <option value="mass">Mass / Weight (kg, grams, lbs, oz)</option>
+          <option value="storage">Digital Storage (GB, MB, KB, TB)</option>
+        </select>
+      </div>
+      <div class="u-form-group">
+        <label for="unit-val">Input Quantity</label>
+        <input type="number" id="unit-val" value="10">
+      </div>
+    </div>
+    <button class="u-btn" id="btn-calc-unit">Convert Units</button>
+    <div class="u-calc-result-box">
+      <div id="res-unit-out" style="font-size:1.1rem;font-weight:600;color:var(--u-ink)"></div>
+    </div>
+  </div>
+
+  <!-- PANE 6: Tip & Split Bill -->
+  <div class="u-tool-pane" id="pane-tip-bill">
+    <h2>Tip &amp; Split Bill Calculator</h2>
+    <p style="color:var(--u-mut);margin-bottom:1.5rem">Calculate tip amount and split restaurant bills evenly among dining parties.</p>
+    <div class="u-form-row">
+      <div class="u-form-group">
+        <label for="bill-subtotal">Bill Subtotal ($)</label>
+        <input type="number" id="bill-subtotal" value="120.00" step="0.5">
+      </div>
+      <div class="u-form-group">
+        <label for="tip-pct">Tip Percentage (%)</label>
+        <select id="tip-pct">
+          <option value="15">15% Standard</option>
+          <option value="18" selected>18% Good Service</option>
+          <option value="20">20% Excellent</option>
+          <option value="25">25% Exceptional</option>
+        </select>
+      </div>
+      <div class="u-form-group">
+        <label for="split-people">Number of People</label>
+        <input type="number" id="split-people" value="4" min="1">
+      </div>
+    </div>
+    <button class="u-btn" id="btn-calc-tip">Calculate Split</button>
+    <div class="u-calc-result-box">
+      <div class="u-stat-grid">
+        <div class="u-stat-card">
+          <div class="u-stat-num" id="res-tip-amt">$0</div>
+          <div class="u-stat-lbl">Total Tip</div>
+        </div>
+        <div class="u-stat-card">
+          <div class="u-stat-num" id="res-bill-total">$0</div>
+          <div class="u-stat-lbl">Total Bill</div>
+        </div>
+        <div class="u-stat-card">
+          <div class="u-stat-num" id="res-per-person">$0</div>
+          <div class="u-stat-lbl">Per Person</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANE 7: Discount & Sales Tax -->
+  <div class="u-tool-pane" id="pane-discount-tax">
+    <h2>Discount &amp; Sales Tax Calculator</h2>
+    <p style="color:var(--u-mut);margin-bottom:1.5rem">Determine final retail price after applying promotional discounts and local sales tax.</p>
+    <div class="u-form-row">
+      <div class="u-form-group">
+        <label for="disc-price">Original Retail Price ($)</label>
+        <input type="number" id="disc-price" value="89.99">
+      </div>
+      <div class="u-form-group">
+        <label for="disc-pct">Discount (%)</label>
+        <input type="number" id="disc-pct" value="25">
+      </div>
+      <div class="u-form-group">
+        <label for="tax-pct">Sales Tax (%)</label>
+        <input type="number" id="tax-pct" value="8.5">
+      </div>
+    </div>
+    <button class="u-btn" id="btn-calc-disc">Calculate Final Price</button>
+    <div class="u-calc-result-box">
+      <div class="u-stat-grid">
+        <div class="u-stat-card">
+          <div class="u-stat-num" id="res-savings">$0</div>
+          <div class="u-stat-lbl">You Save</div>
+        </div>
+        <div class="u-stat-card">
+          <div class="u-stat-num" id="res-final-price">$0</div>
+          <div class="u-stat-lbl">Final Price</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANE 8: Salary ↔ Hourly -->
+  <div class="u-tool-pane" id="pane-salary-converter">
+    <h2>Salary ↔ Hourly Pay Converter</h2>
+    <p style="color:var(--u-mut);margin-bottom:1.5rem">Convert between hourly wages, weekly pay, monthly salary, and annual gross income.</p>
+    <div class="u-form-row">
+      <div class="u-form-group">
+        <label for="wage-rate">Hourly Rate ($/hr)</label>
+        <input type="number" id="wage-rate" value="45.00">
+      </div>
+      <div class="u-form-group">
+        <label for="wage-hours">Hours Worked Per Week</label>
+        <input type="number" id="wage-hours" value="40">
+      </div>
+    </div>
+    <button class="u-btn" id="btn-calc-salary">Calculate Pay Breakdown</button>
+    <div class="u-calc-result-box">
+      <div class="u-stat-grid">
+        <div class="u-stat-card">
+          <div class="u-stat-num" id="res-weekly">$0</div>
+          <div class="u-stat-lbl">Weekly Pay</div>
+        </div>
+        <div class="u-stat-card">
+          <div class="u-stat-num" id="res-monthly">$0</div>
+          <div class="u-stat-lbl">Monthly Pay</div>
+        </div>
+        <div class="u-stat-card">
+          <div class="u-stat-num" id="res-annual">$0</div>
+          <div class="u-stat-lbl">Annual Income</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANE 9: Fuel & Electricity Cost -->
+  <div class="u-tool-pane" id="pane-fuel-cost">
+    <h2>Fuel &amp; Electricity Cost Calculator</h2>
+    <p style="color:var(--u-mut);margin-bottom:1.5rem">Calculate trip fuel expenses or home appliance electricity consumption costs.</p>
+    <div class="u-form-row">
+      <div class="u-form-group">
+        <label for="fuel-dist">Trip Distance (Miles)</label>
+        <input type="number" id="fuel-dist" value="350">
+      </div>
+      <div class="u-form-group">
+        <label for="fuel-mpg">Vehicle Efficiency (MPG)</label>
+        <input type="number" id="fuel-mpg" value="28">
+      </div>
+      <div class="u-form-group">
+        <label for="fuel-price">Fuel Price ($ / Gallon)</label>
+        <input type="number" id="fuel-price" value="3.65" step="0.05">
+      </div>
+    </div>
+    <button class="u-btn" id="btn-calc-fuel">Calculate Trip Fuel Cost</button>
+    <div class="u-calc-result-box">
+      <div class="u-stat-card">
+        <div class="u-stat-num" id="res-fuel-total">$0</div>
+        <div class="u-stat-lbl">Total Fuel Cost</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// Default End Date to today
+document.getElementById('date-end').valueAsDate = new Date();
+
+// Tab Navigation
+document.querySelectorAll('#calc-tabs .u-tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#calc-tabs .u-tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.u-tool-pane').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('pane-' + btn.dataset.pane).classList.add('active');
+  });
+});
+
+const fmtCurr = num => '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+// 1. LOAN EMI
+document.getElementById('btn-calc-loan').addEventListener('click', () => {
+  const P = parseFloat(document.getElementById('loan-amount').value);
+  const r = parseFloat(document.getElementById('loan-rate').value) / 100 / 12;
+  const n = parseFloat(document.getElementById('loan-years').value) * 12;
+
+  const emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  const totalPay = emi * n;
+  const interest = totalPay - P;
+
+  document.getElementById('res-emi').innerText = fmtCurr(emi);
+  document.getElementById('res-interest').innerText = fmtCurr(interest);
+  document.getElementById('res-total').innerText = fmtCurr(totalPay);
+});
+document.getElementById('btn-calc-loan').click();
+
+// 2. COMPOUND INTEREST
+document.getElementById('btn-calc-ci').addEventListener('click', () => {
+  const P = parseFloat(document.getElementById('ci-principal').value);
+  const PMT = parseFloat(document.getElementById('ci-monthly').value);
+  const r = parseFloat(document.getElementById('ci-rate').value) / 100 / 12;
+  const n = parseFloat(document.getElementById('ci-years').value) * 12;
+
+  let balance = P;
+  let totalInvested = P;
+
+  for (let i = 0; i < n; i++) {
+    balance = (balance + PMT) * (1 + r);
+    totalInvested += PMT;
+  }
+  const gains = balance - totalInvested;
+
+  document.getElementById('res-ci-future').innerText = fmtCurr(balance);
+  document.getElementById('res-ci-invested').innerText = fmtCurr(totalInvested);
+  document.getElementById('res-ci-gains').innerText = fmtCurr(gains);
+});
+
+// 3. PERCENTAGE
+document.getElementById('btn-calc-pct').addEventListener('click', () => {
+  const x = parseFloat(document.getElementById('pct-x').value);
+  const y = parseFloat(document.getElementById('pct-y').value);
+  document.getElementById('res-pct-val').innerText = ((x / 100) * y).toFixed(2);
+});
+
+document.getElementById('btn-calc-pchange').addEventListener('click', () => {
+  const v1 = parseFloat(document.getElementById('pchange-v1').value);
+  const v2 = parseFloat(document.getElementById('pchange-v2').value);
+  const change = ((v2 - v1) / v1) * 100;
+  document.getElementById('res-pchange-val').innerText = (change >= 0 ? '+' : '') + change.toFixed(2) + '%';
+});
+
+// 4. AGE & DATES
+document.getElementById('btn-calc-dates').addEventListener('click', () => {
+  const d1 = new Date(document.getElementById('date-start').value);
+  const d2 = new Date(document.getElementById('date-end').value);
+
+  const diffTime = Math.abs(d2 - d1);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  let workDays = 0;
+  let cur = new Date(d1);
+  while (cur <= d2) {
+    const day = cur.getDay();
+    if (day !== 0 && day !== 6) workDays++;
+    cur.setDate(cur.getDate() + 1);
+  }
+
+  document.getElementById('res-days').innerText = diffDays.toLocaleString() + ' days';
+  document.getElementById('res-business-days').innerText = workDays.toLocaleString() + ' days';
+});
+
+// 5. UNIT CONVERTER
+document.getElementById('btn-calc-unit').addEventListener('click', () => {
+  const cat = document.getElementById('unit-cat').value;
+  const val = parseFloat(document.getElementById('unit-val').value);
+  let out = '';
+
+  if (cat === 'length') {
+    out = `${val} km = ${(val * 0.621371).toFixed(2)} miles = ${(val * 1000).toLocaleString()} meters`;
+  } else if (cat === 'mass') {
+    out = `${val} kg = ${(val * 2.20462).toFixed(2)} lbs = ${(val * 35.274).toFixed(2)} oz`;
+  } else if (cat === 'storage') {
+    out = `${val} GB = ${(val * 1024).toLocaleString()} MB = ${(val / 1024).toFixed(3)} TB`;
+  }
+  document.getElementById('res-unit-out').innerText = out;
+});
+
+// 6. TIP & BILL
+document.getElementById('btn-calc-tip').addEventListener('click', () => {
+  const sub = parseFloat(document.getElementById('bill-subtotal').value);
+  const pct = parseFloat(document.getElementById('tip-pct').value) / 100;
+  const ppl = parseInt(document.getElementById('split-people').value);
+
+  const tip = sub * pct;
+  const total = sub + tip;
+  const perPerson = total / ppl;
+
+  document.getElementById('res-tip-amt').innerText = fmtCurr(tip);
+  document.getElementById('res-bill-total').innerText = fmtCurr(total);
+  document.getElementById('res-per-person').innerText = fmtCurr(perPerson);
+});
+
+// 7. DISCOUNT & TAX
+document.getElementById('btn-calc-disc').addEventListener('click', () => {
+  const orig = parseFloat(document.getElementById('disc-price').value);
+  const discPct = parseFloat(document.getElementById('disc-pct').value) / 100;
+  const taxPct = parseFloat(document.getElementById('tax-pct').value) / 100;
+
+  const savings = orig * discPct;
+  const discounted = orig - savings;
+  const finalPrice = discounted * (1 + taxPct);
+
+  document.getElementById('res-savings').innerText = fmtCurr(savings);
+  document.getElementById('res-final-price').innerText = fmtCurr(finalPrice);
+});
+
+// 8. SALARY CONVERTER
+document.getElementById('btn-calc-salary').addEventListener('click', () => {
+  const rate = parseFloat(document.getElementById('wage-rate').value);
+  const hours = parseFloat(document.getElementById('wage-hours').value);
+
+  const weekly = rate * hours;
+  const annual = weekly * 52;
+  const monthly = annual / 12;
+
+  document.getElementById('res-weekly').innerText = fmtCurr(weekly);
+  document.getElementById('res-monthly').innerText = fmtCurr(monthly);
+  document.getElementById('res-annual').innerText = fmtCurr(annual);
+});
+
+// 9. FUEL COST
+document.getElementById('btn-calc-fuel').addEventListener('click', () => {
+  const dist = parseFloat(document.getElementById('fuel-dist').value);
+  const mpg = parseFloat(document.getElementById('fuel-mpg').value);
+  const price = parseFloat(document.getElementById('fuel-price').value);
+
+  const gallons = dist / mpg;
+  const totalCost = gallons * price;
+
+  document.getElementById('res-fuel-total').innerText = fmtCurr(totalCost);
+});
+</script>
+
+<footer>
+  <div class="u-wrap" style="padding-top:2rem;border-top:1px solid var(--u-line);margin-top:3rem;text-align:center;color:var(--u-mut);font-size:0.88rem">
+    KAI247 Instrument Ring — Small changes. Always. 24×7.
+  </div>
+</footer>
+</body>
+</html>

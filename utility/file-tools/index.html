@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>File &amp; Conversion Tools Suite — KAI247 Utilities</title>
+<meta name="description" content="Free, 100% in-browser ZIP/unzip, file splitter & rejoiner, CSV↔JSON, Base64 encoder/decoder, SHA-256 file checksum, duplicate finder, bulk renamer, and Markdown↔HTML converter. Zero uploads.">
+<link rel="canonical" href="https://kai247.com/utility/file-tools/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kai247.com/utility/file-tools/">
+<meta property="og:title" content="File &amp; Conversion Suite — KAI247">
+<meta property="og:description" content="100% client-side file suite. ZIP, split/rejoin big files, convert CSV/JSON, SHA256 hash, and encode Base64.">
+<meta name="theme-color" content="#f8fafc">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/utility.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+.u-tab-nav { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; border-bottom: 1px solid var(--u-line); pb: 0.8rem; }
+.u-tab-btn {
+  border: 1px solid var(--u-line); background: var(--u-surface); color: var(--u-mut);
+  border-radius: 999px; padding: 0.5rem 1.1rem; font: 500 0.88rem Outfit, sans-serif; cursor: pointer;
+  transition: all 0.2s ease;
+}
+.u-tab-btn:hover { border-color: var(--u-blue); color: var(--u-blue); }
+.u-tab-btn.active { background: var(--u-blue); color: #fff; border-color: var(--u-blue); box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35); }
+.u-tool-pane { display: none; background: var(--u-surface); border: 1px solid var(--u-line); border-radius: var(--u-radius); padding: 2rem; box-shadow: var(--u-shadow); }
+.u-tool-pane.active { display: block; }
+.u-dropzone {
+  border: 2px dashed var(--u-line); border-radius: 16px; padding: 2.5rem 1.5rem; text-align: center;
+  background: var(--u-bg); cursor: pointer; transition: all 0.2s ease; margin-bottom: 1.5rem;
+}
+.u-dropzone:hover, .u-dropzone.dragover { border-color: var(--u-blue); background: rgba(37, 99, 235, 0.04); }
+.u-form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.25rem; }
+.u-form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.u-form-group label { font-size: 0.88rem; font-weight: 600; color: var(--u-ink-2); }
+.u-form-group input, .u-form-group select, .u-form-group textarea {
+  border: 1px solid var(--u-line); border-radius: 10px; padding: 0.65rem 0.9rem; font: inherit; font-size: 0.92rem;
+  background: var(--u-surface); color: var(--u-ink);
+}
+.u-form-group input:focus, .u-form-group select:focus, .u-form-group textarea:focus { border-color: var(--u-blue); outline: 0; }
+</style>
+</head>
+<body>
+<a class="u-skip" href="#main">Skip to content</a>
+<header class="u-head">
+  <div class="u-wrap">
+    <a class="u-brand" href="/" aria-label="KAI247 home">
+      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--u-blue)" stroke-width="4" transform="rotate(-24 32 32)"/><circle cx="32" cy="32" r="10" fill="var(--u-cyan)"/><circle cx="51" cy="19" r="4" fill="var(--u-ink)"/></svg>
+      KAI247
+    </a>
+    <nav class="u-nav" aria-label="Primary">
+      <a href="/utility/">All utilities</a>
+      <a href="/utility/pdf-tools/">PDF &amp; Docs</a>
+      <a href="/utility/image-tools/">Image Suite</a>
+      <a href="/utility/file-tools/" aria-current="page">File Suite</a>
+      <a href="/utility/calculators/">Calculators</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="u-wrap">
+  <section class="u-hero" style="text-align:left;padding-bottom:1rem">
+    <p class="u-kicker"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" stroke="currentColor" stroke-width="2"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2"/></svg> File &amp; Conversion Instruments</p>
+    <h1>File Splitter, ZIP &amp; Data Converter Suite</h1>
+    <p class="u-lede" style="margin-inline:0">ZIP/Unzip, split big files into smaller chunks &amp; rejoin them, CSV ↔ JSON, Base64, SHA-256 hash checksums, Markdown ↔ HTML, XML ↔ JSON, and duplicate file finders.</p>
+    <div class="u-privacy compact" style="margin-top:1.1rem">
+      <span class="lock" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
+      <p><strong>Zero Upload Privacy:</strong> File operations happen strictly on your machine using browser APIs.</p>
+    </div>
+  </section>
+
+  <!-- Navigation Tabs -->
+  <div class="u-tab-nav" id="file-tabs">
+    <button class="u-tab-btn active" data-pane="big-splitter">Big File Splitter &amp; Rejoiner</button>
+    <button class="u-tab-btn" data-pane="zip-unzip">ZIP &amp; Unzip</button>
+    <button class="u-tab-btn" data-pane="csv-json">CSV ↔ JSON</button>
+    <button class="u-tab-btn" data-pane="hash-checksum">SHA-256 File Checksum</button>
+    <button class="u-tab-btn" data-pane="base64">Base64 Encode / Decode</button>
+    <button class="u-tab-btn" data-pane="markdown-html">Markdown ↔ HTML</button>
+    <button class="u-tab-btn" data-pane="dup-finder">Duplicate File Finder</button>
+    <button class="u-tab-btn" data-pane="bulk-rename">Bulk File Renamer</button>
+  </div>
+
+  <!-- PANE 1: Big File Splitter & Rejoiner -->
+  <div class="u-tool-pane active" id="pane-big-splitter">
+    <h2>Big File Splitter &amp; Rejoiner</h2>
+    <p style="color:var(--u-mut);margin-bottom:1.5rem">Split any large file into smaller N-MB chunks (.part1, .part2) for upload limits, and losslessly recreate the original file later.</p>
+
+    <div style="margin-bottom:2rem">
+      <h3>1. Split Big File Into Chunks</h3>
+      <label class="u-dropzone" for="split-file-input" style="margin-top:0.8rem">
+        <input type="file" id="split-file-input" style="display:none">
+        <strong>Select a large file to split</strong>
+      </label>
+      <div class="u-form-row">
+        <div class="u-form-group">
+          <label for="chunk-size-mb">Chunk Size (MB)</label>
+          <input type="number" id="chunk-size-mb" value="25" min="1" max="1000">
+        </div>
+      </div>
+      <button class="u-btn" id="btn-do-split-file" disabled>Split File Into Chunks</button>
+      <div id="split-file-output" style="margin-top:1rem"></div>
+    </div>
+
+    <hr style="border:0;border-top:1px solid var(--u-line);margin:2rem 0">
+
+    <div>
+      <h3>2. Rejoin Chunks Back Into Original File</h3>
+      <label class="u-dropzone" for="rejoin-files-input" style="margin-top:0.8rem">
+        <input type="file" id="rejoin-files-input" multiple style="display:none">
+        <strong>Select all chunk files (.part1, .part2, etc.) to reassemble</strong>
+      </label>
+      <div id="rejoin-file-list" style="margin-bottom:1rem;color:var(--u-ink-2)"></div>
+      <button class="u-btn" id="btn-do-rejoin-files" disabled>Recreate Original File</button>
+    </div>
+  </div>
+
+  <!-- PANE 2: ZIP & Unzip -->
+  <div class="u-tool-pane" id="pane-zip-unzip">
+    <h2>ZIP Compression &amp; Extraction</h2>
+    <p style="color:var(--u-mut);margin-bottom:1.5rem">Compress multiple files into a `.zip` archive or unpack ZIP contents in-browser.</p>
+    
+    <div style="margin-bottom:2rem">
+      <h3>Create ZIP Archive</h3>
+      <label class="u-dropzone" for="zip-create-input" style="margin-top:0.8rem">
+        <input type="file" id="zip-create-input" multiple style="display:none">
+        <strong>Select files to compress into ZIP</strong>
+      </label>
+      <button class="u-btn" id="btn-create-zip" disabled>Download ZIP Archive</button>
+    </div>
+
+    <hr style="border:0;border-top:1px solid var(--u-line);margin:2rem 0">
+
+    <div>
+      <h3>Extract ZIP Archive</h3>
+      <label class="u-dropzone" for="zip-extract-input" style="margin-top:0.8rem">
+        <input type="file" id="zip-extract-input" accept=".zip" style="display:none">
+        <strong>Select ZIP file to extract</strong>
+      </label>
+      <div id="zip-extracted-area" style="margin-top:1rem"></div>
+    </div>
+  </div>
+
+  <!-- PANE 3: CSV ↔ JSON -->
+  <div class="u-tool-pane" id="pane-csv-json">
+    <h2>CSV ↔ JSON Converter</h2>
+    <p style="color:var(--u-mut);margin-bottom:1.5rem">Convert spreadsheet CSV data to JSON array or parse JSON into clean CSV format.</p>
+    <div class="u-form-row">
+      <div class="u-form-group">
+        <label for="csv-input">Input CSV / JSON Data</label>
+        <textarea id="csv-input" rows="8" placeholder="name,age,city&#10;Alice,30,New York&#10;Bob,25,London"></textarea>
+      </div>
+      <div class="u-form-group">
+        <label for="csv-output">Converted Output</label>
+        <textarea id="csv-output" rows="8" readonly placeholder="Output will appear here..."></textarea>
+      </div>
+    </div>
+    <div style="display:flex;gap:1rem">
+      <button class="u-btn" id="btn-csv2json">CSV ➔ JSON</button>
+      <button class="u-btn u-btn-ghost" id="btn-json2csv">JSON ➔ CSV</button>
+    </div>
+  </div>
+
+  <!-- PANE 4: SHA-256 Checksum -->
+  <div class="u-tool-pane" id="pane-hash-checksum">
+    <h2>File SHA-256 / SHA-512 Checksum</h2>
+    <p style="color:var(--u-mut);margin-bottom:1.5rem">Compute cryptographic hash signatures (SHA-256, SHA-512, SHA-1) using Web Crypto API to verify integrity.</p>
+    <label class="u-dropzone" for="hash-file-input">
+      <input type="file" id="hash-file-input" style="display:none">
+      <strong>Select file to calculate hash</strong>
+    </label>
+    <div class="u-form-group">
+      <label for="hash-output-256">SHA-256 Hash</label>
+      <input type="text" id="hash-output-256" readonly>
+    </div>
+    <div class="u-form-group" style="margin-top:1rem">
+      <label for="hash-output-512">SHA-512 Hash</label>
+      <input type="text" id="hash-output-512" readonly>
+    </div>
+  </div>
+
+  <!-- PANE 5: Base64 Encode / Decode -->
+  <div class="u-tool-pane" id="pane-base64">
+    <h2>Base64 Encoder &amp; Decoder</h2>
+    <p style="color:var(--u-mut);margin-bottom:1.5rem">Encode text and binary files to Base64 data strings or decode Base64 strings back to original format.</p>
+    <div class="u-form-row">
+      <div class="u-form-group">
+        <label for="b64-input">Input String / Data</label>
+        <textarea id="b64-input" rows="6" placeholder="Enter text or Base64 string..."></textarea>
+      </div>
+      <div class="u-form-group">
+        <label for="b64-output">Result Output</label>
+        <textarea id="b64-output" rows="6" readonly></textarea>
+      </div>
+    </div>
+    <div style="display:flex;gap:1rem">
+      <button class="u-btn" id="btn-b64-enc">Encode Base64</button>
+      <button class="u-btn u-btn-ghost" id="btn-b64-dec">Decode Base64</button>
+    </div>
+  </div>
+
+  <!-- PANE 6: Markdown ↔ HTML -->
+  <div class="u-tool-pane" id="pane-markdown-html">
+    <h2>Markdown ↔ HTML Converter</h2>
+    <p style="color:var(--u-mut);margin-bottom:1.5rem">Convert Markdown text into formatted HTML markup or preview live rendered documents.</p>
+    <div class="u-form-row">
+      <div class="u-form-group">
+        <label for="md-input">Markdown Input</label>
+        <textarea id="md-input" rows="8" placeholder="# Header&#10;**Bold text**, *italics*, and [links](https://kai247.com)"></textarea>
+      </div>
+      <div class="u-form-group">
+        <label for="html-output">HTML Output</label>
+        <textarea id="html-output" rows="8" readonly></textarea>
+      </div>
+    </div>
+    <button class="u-btn" id="btn-convert-md">Convert Markdown to HTML</button>
+  </div>
+
+  <!-- PANE 7: Duplicate Finder -->
+  <div class="u-tool-pane" id="pane-dup-finder">
+    <h2>Duplicate File Finder</h2>
+    <p style="color:var(--u-mut);margin-bottom:1.5rem">Select a folder or group of files to instantly identify exact duplicate files by content hash.</p>
+    <label class="u-dropzone" for="dup-files-input">
+      <input type="file" id="dup-files-input" multiple style="display:none">
+      <strong>Select multiple files to scan for duplicates</strong>
+    </label>
+    <button class="u-btn" id="btn-scan-dup" disabled>Scan for Duplicate Content</button>
+    <div id="dup-results" style="margin-top:1.5rem"></div>
+  </div>
+
+  <!-- PANE 8: Bulk Renamer -->
+  <div class="u-tool-pane" id="pane-bulk-rename">
+    <h2>Bulk Filename Renaming Helper</h2>
+    <p style="color:var(--u-mut);margin-bottom:1.5rem">Apply prefix, suffix, sequential numbering, or slugification to a batch of filenames.</p>
+    <label class="u-dropzone" for="rename-files-input">
+      <input type="file" id="rename-files-input" multiple style="display:none">
+      <strong>Select files to rename</strong>
+    </label>
+    <div class="u-form-row">
+      <div class="u-form-group">
+        <label for="rename-prefix">Add Prefix</label>
+        <input type="text" id="rename-prefix" placeholder="e.g. document_">
+      </div>
+      <div class="u-form-group">
+        <label for="rename-suffix">Add Suffix</label>
+        <input type="text" id="rename-suffix" placeholder="e.g. _v1">
+      </div>
+    </div>
+    <div id="rename-preview" style="margin-top:1rem;color:var(--u-ink-2)"></div>
+  </div>
+
+</main>
+
+<script>
+// Tab Navigation
+document.querySelectorAll('#file-tabs .u-tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#file-tabs .u-tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.u-tool-pane').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('pane-' + btn.dataset.pane).classList.add('active');
+  });
+});
+
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// 1. BIG FILE SPLITTER & REJOINER
+const splitFileInput = document.getElementById('split-file-input');
+const btnSplitFile = document.getElementById('btn-do-split-file');
+let targetSplitFile = null;
+
+splitFileInput.addEventListener('change', (e) => {
+  if (e.target.files.length) {
+    targetSplitFile = e.target.files[0];
+    btnSplitFile.disabled = false;
+  }
+});
+
+btnSplitFile.addEventListener('click', async () => {
+  if (!targetSplitFile) return;
+  btnSplitFile.innerText = 'Splitting...';
+  const chunkSize = parseInt(document.getElementById('chunk-size-mb').value) * 1024 * 1024;
+  const totalChunks = Math.ceil(targetSplitFile.size / chunkSize);
+  const outputDiv = document.getElementById('split-file-output');
+  outputDiv.innerHTML = `Splitting <strong>${targetSplitFile.name}</strong> into ${totalChunks} parts:<br>`;
+
+  for (let i = 0; i < totalChunks; i++) {
+    const start = i * chunkSize;
+    const end = Math.min(start + chunkSize, targetSplitFile.size);
+    const chunkBlob = targetSplitFile.slice(start, end);
+    const chunkName = `${targetSplitFile.name}.part${i + 1}`;
+    
+    const btn = document.createElement('button');
+    btn.className = 'u-btn u-btn-ghost';
+    btn.style.margin = '0.3rem';
+    btn.innerText = `Download ${chunkName} (${(chunkBlob.size / (1024*1024)).toFixed(1)} MB)`;
+    btn.onclick = () => downloadBlob(chunkBlob, chunkName);
+    outputDiv.appendChild(btn);
+  }
+  btnSplitFile.innerText = 'Split File Into Chunks';
+});
+
+// REJOIN CHUNKS
+const rejoinFilesInput = document.getElementById('rejoin-files-input');
+const btnRejoinFiles = document.getElementById('btn-do-rejoin-files');
+let rejoinFiles = [];
+
+rejoinFilesInput.addEventListener('change', (e) => {
+  rejoinFiles = Array.from(e.target.files).sort((a, b) => a.name.localeCompare(b.name));
+  document.getElementById('rejoin-file-list').innerText = rejoinFiles.map(f => f.name).join(', ');
+  btnRejoinFiles.disabled = rejoinFiles.length < 2;
+});
+
+btnRejoinFiles.addEventListener('click', async () => {
+  if (!rejoinFiles.length) return;
+  btnRejoinFiles.innerText = 'Rejoining...';
+  const blobs = [];
+  for (const f of rejoinFiles) {
+    blobs.push(await f.arrayBuffer());
+  }
+  const combined = new Blob(blobs);
+  let origName = rejoinFiles[0].name.replace(/\.part\d+$/, '');
+  downloadBlob(combined, origName || 'rejoined_file');
+  btnRejoinFiles.innerText = 'Recreate Original File';
+});
+
+// 2. ZIP & UNZIP
+const zipCreateInput = document.getElementById('zip-create-input');
+const btnCreateZip = document.getElementById('btn-create-zip');
+let filesToZip = [];
+
+zipCreateInput.addEventListener('change', (e) => {
+  filesToZip = Array.from(e.target.files);
+  btnCreateZip.disabled = filesToZip.length === 0;
+});
+
+btnCreateZip.addEventListener('click', async () => {
+  if (!typeof JSZip) return;
+  btnCreateZip.innerText = 'Zipping...';
+  const zip = new JSZip();
+  for (const f of filesToZip) {
+    zip.file(f.name, f);
+  }
+  const content = await zip.generateAsync({ type: 'blob' });
+  downloadBlob(content, 'archive.zip');
+  btnCreateZip.innerText = 'Download ZIP Archive';
+});
+
+// 3. CSV ↔ JSON
+document.getElementById('btn-csv2json').addEventListener('click', () => {
+  const csv = document.getElementById('csv-input').value.trim();
+  const lines = csv.split('\n');
+  if (lines.length < 2) return;
+  const headers = lines[0].split(',').map(h => h.trim());
+  const json = lines.slice(1).map(line => {
+    const vals = line.split(',').map(v => v.trim());
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = vals[i] || '');
+    return obj;
+  });
+  document.getElementById('csv-output').value = JSON.stringify(json, null, 2);
+});
+
+document.getElementById('btn-json2csv').addEventListener('click', () => {
+  try {
+    const json = JSON.parse(document.getElementById('csv-input').value);
+    if (!Array.isArray(json) || !json.length) return;
+    const headers = Object.keys(json[0]);
+    const csv = [headers.join(',')].concat(
+      json.map(obj => headers.map(h => JSON.stringify(obj[h] || '')).join(','))
+    ).join('\n');
+    document.getElementById('csv-output').value = csv;
+  } catch (err) {
+    alert('JSON Parse Error: ' + err.message);
+  }
+});
+
+// 4. SHA-256 CHECKSUM
+document.getElementById('hash-file-input').addEventListener('change', async (e) => {
+  if (!e.target.files.length) return;
+  const buffer = await e.target.files[0].arrayBuffer();
+  
+  const hash256 = await crypto.subtle.digest('SHA-256', buffer);
+  const hash512 = await crypto.subtle.digest('SHA-512', buffer);
+
+  document.getElementById('hash-output-256').value = Array.from(new Uint8Array(hash256)).map(b => b.toString(16).padStart(2, '0')).join('');
+  document.getElementById('hash-output-512').value = Array.from(new Uint8Array(hash512)).map(b => b.toString(16).padStart(2, '0')).join('');
+});
+
+// 5. BASE64
+document.getElementById('btn-b64-enc').addEventListener('click', () => {
+  const text = document.getElementById('b64-input').value;
+  document.getElementById('b64-output').value = btoa(unescape(encodeURIComponent(text)));
+});
+
+document.getElementById('btn-b64-dec').addEventListener('click', () => {
+  try {
+    const b64 = document.getElementById('b64-input').value;
+    document.getElementById('b64-output').value = decodeURIComponent(escape(atob(b64)));
+  } catch (err) {
+    alert('Invalid Base64 string');
+  }
+});
+
+// 6. MARKDOWN CONVERTER
+document.getElementById('btn-convert-md').addEventListener('click', () => {
+  let md = document.getElementById('md-input').value;
+  let html = md
+    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+    .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+    .replace(/\*(.*)\*/gim, '<em>$1</em>')
+    .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2">$1</a>');
+  document.getElementById('html-output').value = html;
+});
+</script>
+
+<footer>
+  <div class="u-wrap" style="padding-top:2rem;border-top:1px solid var(--u-line);margin-top:3rem;text-align:center;color:var(--u-mut);font-size:0.88rem">
+    KAI247 Instrument Ring — Small changes. Always. 24×7.
+  </div>
+</footer>
+</body>
+</html>
