@@ -27,7 +27,7 @@
       }
     },
     {
-      id: 'pdf', built: false, path: '/utility/pdf-size-reducer/',
+      id: 'pdf', built: true, path: '/utility/pdf-size-reducer/',
       label: 'PDF Size Reducer',
       test: /\bpdf\b/i
     },

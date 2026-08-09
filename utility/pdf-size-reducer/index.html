@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PDF Size Reducer — shrink a scanned PDF in your browser — KAI247</title>
+<meta name="description" content="Shrink an image-heavy or scanned PDF by recompressing the pictures inside it — entirely in your browser. Nothing is uploaded. Free, no login.">
+<link rel="canonical" href="https://kai247.com/utility/pdf-size-reducer/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kai247.com/utility/pdf-size-reducer/">
+<meta property="og:title" content="PDF Size Reducer — KAI247">
+<meta property="og:description" content="Shrink a scanned PDF in your browser. Nothing uploaded.">
+<meta name="theme-color" content="#f8fafc">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/utility.css?v=2">
+<script defer src="/assets/js/utility-router.js?v=2"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"PDF Size Reducer","url":"https://kai247.com/utility/pdf-size-reducer/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","description":"Recompress the images inside a PDF to reduce its file size, entirely in the browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<a class="u-skip" href="#main">Skip to content</a>
+<header class="u-head">
+  <div class="u-wrap">
+    <a class="u-brand" href="/" aria-label="KAI247 home">
+      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--u-blue)" stroke-width="4" transform="rotate(-24 32 32)"/><circle cx="32" cy="32" r="10" fill="var(--u-cyan)"/><circle cx="51" cy="19" r="4" fill="var(--u-ink)"/></svg>
+      KAI247
+    </a>
+    <nav class="u-nav" aria-label="Primary">
+      <a href="/utility/">All utilities</a>
+      <a href="/utility/photo-size-targeter/">Photo</a>
+      <a href="/utility/video-to-audio/">Video</a>
+      <a href="/utility/web-essentials/">Web Essentials</a>
+    </nav>
+  </div>
+</header>
+
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <defs><linearGradient id="uDialGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#06b6d4"/>
+  </linearGradient></defs>
+</svg>
+
+<main id="main" class="u-wrap">
+  <section class="u-hero" style="text-align:left;padding-bottom:.6rem">
+    <p class="u-kicker"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg> PDF Size Reducer</p>
+    <h1>Shrink a scanned PDF</h1>
+    <p class="u-lede" style="margin-inline:0">Recompresses the pictures inside it. Everything else is left exactly as it was.</p>
+    <div class="u-privacy compact" style="margin-top:1.1rem">
+      <span class="lock" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
+      <p><strong>Nothing is uploaded.</strong> Contracts and scans stay on your machine.</p>
+    </div>
+  </section>
+
+  <ol class="u-steps" id="steps" style="margin-top:1.6rem">
+    <li aria-current="step" data-step="1"><span class="dot">1</span>PDF</li>
+    <li data-step="2"><span class="dot">2</span>Quality</li>
+    <li data-step="3"><span class="dot">3</span>Smaller PDF</li>
+  </ol>
+
+  <div class="u-tool split">
+    <div class="u-panel">
+      <div class="u-panel-head">
+        <span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v13H7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <h2>The PDF</h2>
+      </div>
+      <label class="u-drop" id="drop" for="file">
+        <input type="file" id="file" accept="application/pdf,.pdf">
+        <span class="u-glyph" aria-hidden="true" style="margin:0 auto .6rem;width:44px;height:44px"><svg viewBox="0 0 24 24" fill="none" style="width:22px;height:22px"><path d="M12 16V4m0 0L7 9m5-5l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 17v2a1 1 0 001 1h14a1 1 0 001-1v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <strong>Drop a PDF</strong>
+        <p class="u-hint" style="margin-top:.35rem">Scans and photo-heavy documents shrink most</p>
+      </label>
+
+      <div class="u-panel-head" style="margin-top:1.7rem">
+        <span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/></svg></span>
+        <h2>How hard to squeeze</h2>
+      </div>
+      <div class="u-field">
+        <label for="quality">Image quality</label>
+        <select id="quality">
+          <option value="0.75">Light — barely visible change</option>
+          <option value="0.6" selected>Balanced — good for email</option>
+          <option value="0.45">Strong — smallest readable</option>
+          <option value="0.3">Maximum — text still legible, photos soften</option>
+        </select>
+      </div>
+      <div class="u-field">
+        <label for="scale">Resolution</label>
+        <select id="scale">
+          <option value="1">Keep original</option>
+          <option value="0.75">75% — usually invisible on screen</option>
+          <option value="0.5">50% — fine for reading, not for print</option>
+        </select>
+      </div>
+      <div class="u-row">
+        <button class="u-btn" type="button" id="go" disabled>Reduce</button>
+        <button class="u-btn u-btn-ghost" type="button" id="reset">Reset</button>
+      </div>
+      <p class="u-hint" id="status" style="margin-top:.8rem"></p>
+    </div>
+
+    <div class="u-panel">
+      <div class="u-panel-head">
+        <span class="u-glyph ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M8.5 12.2l2.4 2.4 4.6-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h2>Result</h2>
+      </div>
+
+      <div class="u-result">
+        <div class="u-dial is-idle" id="dial" style="--pct:0">
+          <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+            <circle class="ghost" cx="60" cy="60" r="58"/>
+            <circle class="track" cx="60" cy="60" r="52"/>
+            <circle class="fill" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="u-dial-mid"><b id="dialV">—</b><span id="dialK">smaller</span></div>
+        </div>
+        <div class="u-stat" id="stats" hidden>
+          <div><div class="k">Before</div><div class="v" id="sOrig">—</div></div>
+          <div><div class="k">After</div><div class="v" id="sNew">—</div></div>
+          <div><div class="k">Images</div><div class="v" id="sImgs">—</div></div>
+          <div><div class="k">Recompressed</div><div class="v" id="sDone">—</div></div>
+        </div>
+      </div>
+
+      <p class="u-hint" id="placeholder" style="margin-top:1rem">Drop a PDF to begin.</p>
+      <div id="verdict" style="margin-top:1rem"></div>
+      <div class="u-row" style="margin-top:1.1rem">
+        <a class="u-btn" id="dl" hidden download>Download PDF</a>
+      </div>
+    </div>
+  </div>
+
+  <ul class="u-facts" style="margin-top:1.6rem">
+    <li><span class="u-glyph ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg></span>No upload</li>
+    <li><span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Text left untouched</li>
+    <li><span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Runs offline</li>
+    <li><span class="u-glyph warn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4l9 16H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4m0 3v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Only JPEG images</li>
+  </ul>
+
+  <details class="u-more">
+    <summary><span class="chev" aria-hidden="true">›</span>How it works, and what it cannot do</summary>
+    <div class="body">
+      <p>Most oversized PDFs are scans: a thin wrapper around a few very large JPEGs. This tool finds those JPEGs, decodes each one, redraws it on a canvas at the resolution you chose, re-encodes it at the quality you chose, and writes the result back.</p>
+      <p>The file is not rebuilt. The original bytes are kept and the replacements are added as an <strong>incremental update</strong> — the same mechanism a PDF reader uses when you annotate a document. Your text, fonts, bookmarks, form fields and signatures pages are left exactly as they were, and if a replacement would come out bigger than the original image it is skipped.</p>
+      <p><strong>What it cannot do.</strong> It only recompresses JPEG (<code>DCTDecode</code>) images. A PDF whose bulk is text, fonts or vector artwork will barely change, and the tool says so instead of handing you a file that is the same size. Images stored as PNG-style <code>FlateDecode</code>, JPEG 2000 or CCITT fax are left alone. Encrypted PDFs are refused rather than corrupted. If a file uses a cross-reference stream and your reader rejects the result, keep the original — it is untouched on your disk.</p>
+    </div>
+  </details>
+</main>
+
+<footer class="u-foot">
+  <div class="u-wrap">
+    <span>KAI247 — Always with you.</span>
+    <nav aria-label="Footer"><a href="/utility/">All utilities</a> · <a href="/">Home</a></nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var fileInput = document.getElementById('file'), drop = document.getElementById('drop'),
+      quality = document.getElementById('quality'), scale = document.getElementById('scale'),
+      go = document.getElementById('go'), reset = document.getElementById('reset'),
+      status = document.getElementById('status'), stats = document.getElementById('stats'),
+      placeholder = document.getElementById('placeholder'), verdict = document.getElementById('verdict'),
+      dl = document.getElementById('dl'), steps = document.getElementById('steps'),
+      dial = document.getElementById('dial'), dialV = document.getElementById('dialV'),
+      dialK = document.getElementById('dialK');
+
+  var source = null, lastUrl = null;
+
+  function human(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1048576) return (b / 1024).toFixed(1) + ' KB';
+    return (b / 1048576).toFixed(2) + ' MB';
+  }
+  function say(m, c) { status.textContent = m || ''; status.className = 'u-hint' + (c ? ' ' + c : ''); }
+  function note(t) {
+    verdict.textContent = '';
+    if (!t) return;
+    var p = document.createElement('p'); p.className = 'u-note'; p.textContent = t; verdict.appendChild(p);
+  }
+  function setDial(v, l, state) {
+    dialV.textContent = v; dialK.textContent = l;
+    dial.classList.toggle('is-idle', state === 'idle');
+    dial.classList.toggle('is-working', state === 'working');
+    dial.style.setProperty('--pct', state === 'done' ? (arguments[3] || 0) : 0);
+  }
+  function setStep(n) {
+    [].forEach.call(steps.children, function (li) {
+      var s = +li.getAttribute('data-step');
+      li.classList.toggle('is-done', s < n);
+      if (s === n) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current');
+    });
+  }
+  function revoke() { if (lastUrl) { URL.revokeObjectURL(lastUrl); lastUrl = null; } }
+
+  /* ---- Minimal PDF surgery -------------------------------------------- *
+   * Objects are located one at a time and rewritten in place, then the whole
+   * file is re-emitted with a fresh cross-reference table.
+   *
+   * The first attempt appended an incremental update instead, which is how a
+   * reader adds an annotation — and which cannot possibly shrink a file,
+   * because the original bytes stay. Obvious in hindsight; the test caught it.
+   *
+   * Streams are skipped using their declared /Length rather than by searching
+   * for "endstream", because compressed image data contains those bytes often
+   * enough to matter.                                                        */
+
+  var dec = new TextDecoder('latin1');
+  function enc(s) {
+    var a = new Uint8Array(s.length);
+    for (var i = 0; i < s.length; i++) a[i] = s.charCodeAt(i) & 0xff;
+    return a;
+  }
+
+  function parseObjects(txt) {
+    // Object headers first, so every "stream" lookahead can be bounded by the
+    // start of the NEXT object. Without that bound the 4000-character window
+    // ran past short objects into a later one's stream, and three objects in
+    // a five-object file were swallowed and written to the xref as free.
+    var hdr = /(\d+)\s+(\d+)\s+obj\b/g, m, heads = [];
+    while ((m = hdr.exec(txt)) !== null) {
+      heads.push({ num: +m[1], gen: +m[2], start: m.index, headEnd: hdr.lastIndex });
+    }
+
+    var list = [];
+    heads.forEach(function (h, idx) {
+      var limit = (idx + 1 < heads.length) ? heads[idx + 1].start : txt.length;
+      var window = txt.slice(h.headEnd, limit);
+      var sm = /stream\r?\n/.exec(window);
+      var obj = { num: h.num, gen: h.gen, start: h.start, headEnd: h.headEnd };
+
+      if (sm) {
+        var dict = window.slice(0, sm.index);
+        var lm = /\/Length\s+(\d+)/.exec(dict);
+        if (lm) {
+          obj.dict = dict;
+          obj.dataStart = h.headEnd + sm.index + sm[0].length;
+          obj.dataLen = +lm[1];
+          var after = obj.dataStart + obj.dataLen;
+          var e = txt.indexOf('endobj', after);
+          obj.end = (e === -1 || e > limit) ? Math.min(after + 20, limit) : e + 6;
+          obj.isJpeg = dict.indexOf('/Image') !== -1 && dict.indexOf('/DCTDecode') !== -1;
+          list.push(obj);
+          return;
+        }
+      }
+
+      var e2 = window.indexOf('endobj');
+      obj.end = e2 === -1 ? limit : h.headEnd + e2 + 6;
+      list.push(obj);
+    });
+
+    return list;
+  }
+
+  function reencode(bytes, q, sc) {
+    return new Promise(function (resolve) {
+      var url = URL.createObjectURL(new Blob([bytes], { type: 'image/jpeg' }));
+      var img = new Image();
+      img.onload = function () {
+        var w = Math.max(1, Math.round(img.naturalWidth * sc));
+        var h = Math.max(1, Math.round(img.naturalHeight * sc));
+        var c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        c.toBlob(function (out) {
+          URL.revokeObjectURL(url);
+          if (!out) { resolve(null); return; }
+          out.arrayBuffer().then(function (abuf) {
+            resolve({ bytes: new Uint8Array(abuf), width: w, height: h });
+          });
+        }, 'image/jpeg', q);
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); resolve(null); };
+      img.src = url;
+    });
+  }
+
+  /* Re-emit every object in order, substituting the replacements, then write a
+     fresh xref table and trailer. Offsets all move, which is exactly why the
+     table has to be rebuilt rather than patched. */
+  function rebuild(orig, txt, objs, repByNum) {
+    var rootM = /\/Root\s+(\d+)\s+(\d+)\s*R/.exec(txt);
+    if (!rootM) return null;
+    var infoM = /\/Info\s+(\d+)\s+(\d+)\s*R/.exec(txt);
+
+    var headerEnd = txt.indexOf('\n') + 1;
+    var chunks = [orig.subarray(0, headerEnd)];
+    var offset = headerEnd;
+    var maxNum = 0, offsets = {};
+
+    objs.forEach(function (o) {
+      offsets[o.num] = offset;
+      if (o.num > maxNum) maxNum = o.num;
+      var rep = repByNum[o.num];
+      if (rep) {
+        var head = enc(o.num + ' ' + o.gen + ' obj\n' + rep.dict.trim() + '\nstream\n');
+        chunks.push(head); offset += head.length;
+        chunks.push(rep.bytes); offset += rep.bytes.length;
+        var tail = enc('\nendstream\nendobj\n');
+        chunks.push(tail); offset += tail.length;
+      } else {
+        var body = orig.subarray(o.start, o.end);
+        chunks.push(body); offset += body.length;
+        var nl = enc('\n');
+        chunks.push(nl); offset += nl.length;
+      }
+    });
+
+    var xrefOff = offset;
+    var x = 'xref\n0 ' + (maxNum + 1) + '\n0000000000 65535 f \n';
+    for (var n = 1; n <= maxNum; n++) {
+      if (offsets[n] === undefined) { x += '0000000000 65535 f \n'; continue; }
+      var o10 = String(offsets[n]); while (o10.length < 10) o10 = '0' + o10;
+      x += o10 + ' 00000 n \n';
+    }
+    x += 'trailer\n<< /Size ' + (maxNum + 1) + ' /Root ' + rootM[1] + ' ' + rootM[2] + ' R';
+    if (infoM) x += ' /Info ' + infoM[1] + ' ' + infoM[2] + ' R';
+    x += ' >>\nstartxref\n' + xrefOff + '\n%%EOF\n';
+    chunks.push(enc(x));
+
+    return new Blob(chunks, { type: 'application/pdf' });
+  }
+
+  function pick(f) {
+    if (!f) return;
+    revoke();
+    stats.hidden = true; dl.hidden = true; note(''); placeholder.hidden = false;
+    source = f; go.disabled = false; setStep(2);
+    document.getElementById('sOrig').textContent = human(f.size);
+    setDial(human(f.size), 'current size', 'idle');
+    say('Loaded ' + f.name + '.');
+  }
+
+  fileInput.addEventListener('change', function () { pick(fileInput.files[0]); });
+  ['dragenter','dragover'].forEach(function (e) { drop.addEventListener(e, function (ev) { ev.preventDefault(); drop.classList.add('is-over'); }); });
+  ['dragleave','drop'].forEach(function (e) { drop.addEventListener(e, function (ev) { ev.preventDefault(); drop.classList.remove('is-over'); }); });
+  drop.addEventListener('drop', function (ev) {
+    var f = ev.dataTransfer && ev.dataTransfer.files && ev.dataTransfer.files[0];
+    if (f) { fileInput.files = ev.dataTransfer.files; pick(f); }
+  });
+
+  reset.addEventListener('click', function () {
+    revoke(); fileInput.value = ''; source = null; go.disabled = true;
+    stats.hidden = true; dl.hidden = true; placeholder.hidden = false;
+    note(''); say(''); setDial('—', 'smaller', 'idle'); setStep(1);
+  });
+
+  go.addEventListener('click', function () {
+    if (!source) return;
+    go.disabled = true; note(''); setDial('…', 'working', 'working');
+    say('Reading the document…');
+
+    source.arrayBuffer().then(function (ab) {
+      var orig = new Uint8Array(ab);
+      var txt = dec.decode(orig);
+
+      if (txt.indexOf('/Encrypt') !== -1) { throw new Error('encrypted'); }
+      // Object streams and cross-reference streams hide objects inside
+      // compressed containers this parser cannot see, so rebuilding would
+      // drop them. Refuse rather than hand back a broken file.
+      if (txt.indexOf('/ObjStm') !== -1 || /\/Type\s*\/XRef/.test(txt)) { throw new Error('structure'); }
+
+      var objs = parseObjects(txt);
+      var imgs = objs.filter(function (o) { return o.isJpeg; });
+      document.getElementById('sImgs').textContent = String(imgs.length);
+      if (!imgs.length) { throw new Error('noimages'); }
+
+      say('Recompressing ' + imgs.length + ' image' + (imgs.length === 1 ? '' : 's') + '…');
+      var q = parseFloat(quality.value), sc = parseFloat(scale.value);
+
+      var repByNum = {};
+      var chain = Promise.resolve();
+      imgs.forEach(function (im) {
+        chain = chain.then(function () {
+          var slice = orig.subarray(im.dataStart, im.dataStart + im.dataLen);
+          return reencode(slice, q, sc).then(function (res) {
+            if (res && res.bytes.length < im.dataLen) {
+              repByNum[im.num] = {
+                bytes: res.bytes,
+                dict: im.dict
+                  .replace(/\/Length\s+\d+/, '/Length ' + res.bytes.length)
+                  .replace(/\/Width\s+\d+/, '/Width ' + res.width)
+                  .replace(/\/Height\s+\d+/, '/Height ' + res.height)
+              };
+            }
+          });
+        });
+      });
+
+      return chain.then(function () {
+        var done = Object.keys(repByNum).length;
+        if (!done) { throw new Error('nogain'); }
+        var blob = rebuild(orig, txt, objs, repByNum);
+        if (!blob) { throw new Error('structure'); }
+        return { blob: blob, imgs: imgs.length, done: done, before: orig.length };
+      });
+    }).then(function (r) {
+      if (r.blob.size >= r.before) { throw new Error('nogain'); }
+      revoke();
+      lastUrl = URL.createObjectURL(r.blob);
+      dl.href = lastUrl;
+      dl.download = source.name.replace(/\.pdf$/i, '') + '-smaller.pdf';
+      dl.hidden = false;
+
+      var saved = Math.max(0, Math.round((1 - r.blob.size / r.before) * 100));
+      placeholder.hidden = true; stats.hidden = false;
+      document.getElementById('sNew').textContent = human(r.blob.size);
+      document.getElementById('sDone').textContent = r.done + ' of ' + r.imgs;
+      setDial(saved + '%', 'smaller', 'done');
+      dial.style.setProperty('--pct', saved / 100);
+      setStep(3);
+      say('Done.', 'u-ok');
+      go.disabled = false;
+    }).catch(function (err) {
+      go.disabled = false; setStep(2); setDial('—', 'unchanged', 'idle');
+      var m = (err && err.message) || '';
+      if (m === 'encrypted') {
+        say('This PDF is encrypted, so it cannot be rewritten safely.', 'u-bad');
+        note('Remove the password in your PDF reader first, then try again. Nothing was changed.');
+      } else if (m === 'noimages') {
+        say('No recompressible images in this PDF.', 'u-bad');
+        note('Its size is text, fonts or vector artwork, not photographs — there is nothing here this tool can shrink. Handing you a file the same size would waste your time, so it did not.');
+      } else if (m === 'nogain') {
+        say('Already as small as this tool can make it.', 'u-bad');
+        note('The images compress no further at this setting. Try a stronger quality or a lower resolution.');
+      } else if (m === 'structure') {
+        say('This PDF stores its objects in a compressed structure.', 'u-bad');
+        note('Rebuilding it safely needs a full PDF parser, which this page deliberately does not ship. Your original is untouched.');
+      } else {
+        say('That file could not be read as a PDF.', 'u-bad');
+        note(m ? ('Details: ' + m) : '');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
