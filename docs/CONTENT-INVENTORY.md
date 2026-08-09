@@ -16,7 +16,7 @@ Anything neither verified nor conceptual is absent from the site.
 | CSR themes: Education & financial aid · Basic needs & legal · Civic integration · Economic empowerment · Community co-creation | VERIFIED | brahmexa.com/csr.php |
 | "Guidance only — verify on official sites before filing" disclaimer; zero cost, no paid tiers or upsells | VERIFIED — **must be carried wherever the agents appear** | brahmexa.com/csr.php |
 | Brahmexa: free ORBIT hosting starter analysis, no credentials required | VERIFIED | brahmexa.com |
-| Inducer Solutions LLC — Agentic AI, autonomous multi-agent systems, MCP-powered context intelligence, AIOps; Burnaby, BC, Canada | VERIFIED | inducersolutions.com |
+| Inducer Solutions Inc — Agentic AI, autonomous multi-agent systems, MCP-powered context intelligence, AIOps; Burnaby, BC, Canada | VERIFIED — capabilities and location from the live site 2026-08-08; the **legal suffix was corrected from LLC to Inc on 2026-08-08 on the owner's instruction**, which supersedes the site reading | inducersolutions.com + owner |
 | JSI Software Solutions — smart interactive boards, computer labs, AI datacenter services for schools/enterprises; India (Moradabad, Rampur, Manesar) + USA partner office (Renton, WA) | VERIFIED | jsisoftwaresolutions.com |
 | JSI products: SWAN™ Interactive Digital Boards, Abhyas A.I Exam Portal, Free School ERP Software, Chat X LLM Chatbot | VERIFIED | jsisoftwaresolutions.com |
 

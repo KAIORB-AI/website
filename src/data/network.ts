@@ -38,7 +38,7 @@ export const FOUNDING: NetworkEntity[] = [
   },
   {
     id: 'inducer',
-    name: 'Inducer Solutions LLC',
+    name: 'Inducer Solutions Inc',
     country: 'CAN',
     url: 'https://www.inducersolutions.com/',
     descriptor:
