@@ -17,69 +17,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/site.css?v=3">
+<link rel="stylesheet" href="/assets/css/constellations.css?v=1">
 <script defer src="/assets/js/cosmos.js"></script>
 <script defer src="/assets/js/nexus.js?v=2"></script>
 <script defer src="/assets/js/viewer.js"></script>
-<style>
-.constellation-stage {
-  position: relative;
-  max-width: 900px;
-  margin: 1rem auto 3rem auto;
-  min-height: 520px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.constellation-center {
-  position: absolute;
-  width: 100px; height: 100px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #ffeec2 0%, #eebc61 60%, #b07d24 100%);
-  box-shadow: 0 0 35px var(--gold-soft);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 0.78rem;
-  color: #14100a; z-index: 10;
-  text-align: center;
-}
-.constellation-ring {
-  position: absolute;
-  width: 440px; height: 440px;
-  border-radius: 50%;
-  border: 1px dashed var(--line);
-  pointer-events: none;
-}
-.constellation-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  width: 100%;
-}
-.constellation-card {
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 1.25rem;
-  background: var(--surface);
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
-}
-.constellation-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--gold);
-  box-shadow: 0 0 20px var(--gold-soft);
-}
-.constellation-card h3 {
-  font-size: 1.05rem;
-  color: var(--ink);
-  margin-bottom: 0.5rem;
-  display: flex; align-items: center; gap: 0.5rem;
-}
-.constellation-card h3::before {
-  content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--blue);
-}
-.constellation-card:hover h3::before {
-  background: var(--gold); box-shadow: 0 0 8px var(--gold-soft);
-}
-</style>
+<script defer src="/assets/js/constellations.js?v=1"></script>
 </head>
 <body>
 <div class="stars" aria-hidden="true"></div>
@@ -109,12 +51,21 @@
     <p class="lede">Eight capability families connected through one central core.</p>
   </section>
 
-  <section class="band">
+  <section class="band" style="padding-top:0">
     <div class="container">
-      {/* Eight Constellations Spatial Grid */}
-      <div class="constellation-grid">
+      <p style="text-align:center;color:var(--mut);font-size:0.92rem;margin:-0.5rem auto 2rem;max-width:56ch">
+        Pick a constellation to see the agentic workflows that run inside it.
+      </p>
+
+      <!-- Rendered by assets/js/constellations.js. The card list below is the
+           no-JS view and is hidden once the script takes over. -->
+      <div class="cst-stage" id="cst-stage" role="tablist" aria-label="Capability constellations"></div>
+
+      <div class="cst-panel" id="cst-panel" role="tabpanel" tabindex="-1" hidden></div>
+
+      <div class="constellation-grid" id="cst-fallback">
         <div class="constellation-card" id="ai">
-          <h3>AI & Intelligence</h3>
+          <h3>AI &amp; Intelligence</h3>
           <p style="color:var(--mut);font-size:0.875rem">AI agents, MCP servers, multi-agent workflows, RAG, and private deployments.</p>
         </div>
         <div class="constellation-card" id="software">
@@ -122,27 +73,27 @@
           <p style="color:var(--mut);font-size:0.875rem">Custom SaaS, APIs, portals, ERP/CRM integrations, and desktop automation.</p>
         </div>
         <div class="constellation-card" id="commerce">
-          <h3>Web & Commerce</h3>
+          <h3>Web &amp; Commerce</h3>
           <p style="color:var(--mut);font-size:0.875rem">Fast web applications, e-commerce platforms, CMS, and managed hosting.</p>
         </div>
         <div class="constellation-card" id="growth">
-          <h3>Growth & Marketing</h3>
+          <h3>Growth &amp; Marketing</h3>
           <p style="color:var(--mut);font-size:0.875rem">Technical SEO, GEO/AEO optimization, campaign tracking, and lead generation.</p>
         </div>
         <div class="constellation-card" id="cloud">
-          <h3>Cloud & Infrastructure</h3>
+          <h3>Cloud &amp; Infrastructure</h3>
           <p style="color:var(--mut);font-size:0.875rem">GPU AI compute, DevOps pipelines, zero-latency deployments, and security.</p>
         </div>
         <div class="constellation-card" id="education">
           <h3>Education Technology</h3>
-          <p style="color:var(--mut);font-size:0.875rem">SWAN™ interactive smart boards, AI computer labs, and school ERP systems.</p>
+          <p style="color:var(--mut);font-size:0.875rem">SWAN&trade; interactive smart boards, AI computer labs, and school ERP systems.</p>
         </div>
         <div class="constellation-card" id="events">
-          <h3>Events & Engagement</h3>
+          <h3>Events &amp; Engagement</h3>
           <p style="color:var(--mut);font-size:0.875rem">Live event production, streaming infrastructure, ticketing, and artist booking.</p>
         </div>
         <div class="constellation-card" id="data">
-          <h3>Data & Transformation</h3>
+          <h3>Data &amp; Transformation</h3>
           <p style="color:var(--mut);font-size:0.875rem">Data pipelines, financial analytics, reporting automation, and ETL systems.</p>
         </div>
       </div>
