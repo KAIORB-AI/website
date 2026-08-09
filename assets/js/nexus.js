@@ -17,7 +17,7 @@
  * Keep /llms.txt current — it is the single source Nexus should trust over anything inferred.
  */
 (function () {
-  var NEXUS_KEY = '';                 // ← publishable key from the Nexus Console, e.g. 'pk_...'
+  var NEXUS_KEY = 'pk_ced3ba4e3289a80726922cc2';  // KAI247 tenant, allowlisted to kai247.com
   var ACCENT    = '#f2c56d';          // KAI247 gold
   var POSITION  = 'bottom-right';
 
