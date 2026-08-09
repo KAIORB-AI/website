@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Photo Size Targeter — compress an image to an exact size — KAI247</title>
-<meta name="description" content="Compress a JPG, PNG or WebP to a size you name — under 200 KB, under 50 KB — entirely in your browser. Nothing is uploaded. Free, no login.">
+<title>Free Image Compressor — hit an exact KB size, no upload</title>
+<meta name="description" content="Compress a JPG, PNG or WebP to an exact file size — under 200 KB, under 50 KB — in your browser. Nothing uploaded, EXIF stripped, free with no sign-up.">
 <link rel="canonical" href="https://kai247.com/utility/photo-size-targeter/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kai247.com/utility/photo-size-targeter/">
@@ -20,6 +20,83 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Photo Size Targeter","url":"https://kai247.com/utility/photo-size-targeter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","description":"Compress an image to a target file size entirely in the browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
+<!-- seo:ld -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How do I compress an image to a specific KB size?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Type the limit — 200 KB, 100 KB, 50 KB — and the tool binary-searches JPEG quality between 0.05 and 0.95 to find the highest quality that still fits. If even the lowest quality is too big, it scales the image down in steps and searches again."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is the image uploaded anywhere?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. It is decoded and re-encoded on a canvas inside your own browser. Passport photos and ID scans never leave the machine."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does it remove EXIF data?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes, as a side effect of re-encoding through a canvas. GPS coordinates and camera details in the original are not carried into the output, which matters if you are about to post the picture publicly."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Which formats can it write?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "JPEG, WebP and PNG. JPEG is smallest for photographs, WebP is smaller still in modern browsers, and PNG is lossless so only its resolution can be reduced."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What if it cannot reach my target?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It says so, and shows the smallest it managed and at what dimensions, rather than silently handing back something over the limit."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "KAI247",
+   "item": "https://kai247.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Utilities",
+   "item": "https://kai247.com/utility/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Photo Size Targeter",
+   "item": "https://kai247.com/utility/photo-size-targeter/"
+  }
+ ]
+}
+</script>
+<!-- /seo:ld -->
+<link rel="stylesheet" href="/assets/css/seo.css?v=2">
 </head>
 <body>
 <a class="u-skip" href="#main">Skip to content</a>
@@ -31,6 +108,7 @@
     </a>
     <nav class="u-nav" aria-label="Primary">
       <a href="/utility/">All utilities</a>
+      <a href="/blog/">Blog</a>
       <a href="/utility/cidr-calculator/">CIDR</a>
       <a href="/utility/web-essentials/">Web Essentials</a>
     </nav>
@@ -144,6 +222,44 @@
       <p>PNG is lossless, so only resolution is reduced. Every attempt happens on a canvas in this tab — there is no server round trip, and you can disconnect from the network and this page still works.</p>
     </div>
   </details>
+<!-- seo:faq -->
+  <section class="seo-faq" id="faq" aria-labelledby="faq-h">
+    <div class="seo-faq-head">
+      <span class="seo-faq-ring" aria-hidden="true"></span>
+      <div>
+        <h2 id="faq-h">Questions people actually ask</h2>
+        <p>Upload forms are unforgiving: under 200 KB, under 1 MB, exactly this or nothing. This searches quality first, then resolution, and stops at the best-looking image that still fits the number you named.</p>
+      </div>
+    </div>
+    <div class="seo-faq-list">
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">How do I compress an image to a specific KB size?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>Type the limit — 200 KB, 100 KB, 50 KB — and the tool binary-searches JPEG quality between 0.05 and 0.95 to find the highest quality that still fits. If even the lowest quality is too big, it scales the image down in steps and searches again.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Is the image uploaded anywhere?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>No. It is decoded and re-encoded on a canvas inside your own browser. Passport photos and ID scans never leave the machine.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Does it remove EXIF data?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>Yes, as a side effect of re-encoding through a canvas. GPS coordinates and camera details in the original are not carried into the output, which matters if you are about to post the picture publicly.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Which formats can it write?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>JPEG, WebP and PNG. JPEG is smallest for photographs, WebP is smaller still in modern browsers, and PNG is lossless so only its resolution can be reduced.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">What if it cannot reach my target?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>It says so, and shows the smallest it managed and at what dimensions, rather than silently handing back something over the limit.</p>
+      </details>
+    </div>
+    <a class="seo-faq-guide" href="/blog/resize-an-image-to-an-exact-file-size/">
+      <span class="seo-faq-guide-ring" aria-hidden="true"></span>
+      <span><span class="seo-faq-guide-kicker">Read the guide</span>How to resize an image to an exact file size</span>
+    </a>
+    <p class="seo-faq-foot">Part of <a href="/utility/">nine free KAI247 instruments</a> — all in-browser, none of them upload your files.</p>
+  </section>
+<!-- /seo:faq -->
 </main>
 
 <footer class="u-foot">

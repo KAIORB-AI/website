@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meta tags and structured data, without a developer — KAI247</title>
+<meta name="description" content="Title and description lengths that matter, what JSON-LD is for, why a half-filled address is worse than none, and four checks that catch real mistakes.">
+<link rel="canonical" href="https://kai247.com/blog/meta-tags-and-structured-data-without-a-developer/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kai247.com/blog/meta-tags-and-structured-data-without-a-developer/">
+<meta property="og:title" content="Meta tags and structured data, without a developer">
+<meta property="og:description" content="Title and description lengths that matter, what JSON-LD is for, why a half-filled address is worse than none, and four checks that catch real mistakes.">
+<meta name="theme-color" content="#05060c" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f5f6fb" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css?v=3">
+<link rel="stylesheet" href="/assets/css/blog.css?v=1">
+<script defer src="/assets/js/cosmos.js"></script>
+<script defer src="/assets/js/nexus.js?v=2"></script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BlogPosting",
+ "headline": "Meta tags and structured data, without a developer",
+ "description": "Title and description lengths that matter, what JSON-LD is for, why a half-filled address is worse than none, and four checks that catch real mistakes.",
+ "datePublished": "2026-08-09",
+ "dateModified": "2026-08-09",
+ "url": "https://kai247.com/blog/meta-tags-and-structured-data-without-a-developer/",
+ "mainEntityOfPage": {
+  "@type": "WebPage",
+  "@id": "https://kai247.com/blog/meta-tags-and-structured-data-without-a-developer/"
+ },
+ "author": {
+  "@type": "Organization",
+  "name": "KAI247",
+  "url": "https://kai247.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "KAI247",
+  "url": "https://kai247.com/"
+ },
+ "wordCount": 486,
+ "articleSection": "Guide"
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "KAI247",
+   "item": "https://kai247.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Blog",
+   "item": "https://kai247.com/blog/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Meta tags and structured data, without a developer",
+   "item": "https://kai247.com/blog/meta-tags-and-structured-data-without-a-developer/"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<div class="stars" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="head">
+  <div class="container">
+    <a class="brand" href="/" aria-label="KAI247 home">
+      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--blue)" stroke-width="4" transform="rotate(-24 32 32)"/><circle cx="32" cy="32" r="10" fill="var(--gold)"/><circle cx="51" cy="19" r="4" fill="var(--ink)"/></svg>
+      KAI247
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/ecosystem/">Ecosystem</a>
+      <a href="/capabilities/">Capabilities</a>
+      <a href="/network/">Network</a>
+      <a href="/utility/">Utilities</a>
+      <a href="/blog/">Blog</a>
+      <a class="join" href="/join/">Join the Orbit</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <article class="bl-article container">
+    <nav class="bl-crumb" aria-label="Breadcrumb"><a href="/">KAI247</a> › <a href="/blog/">Blog</a></nav>
+    <p class="kicker">Guide · 6 min read</p>
+    <h1>Meta tags and structured data, without a developer</h1>
+    <p class="lede">Title and description lengths that matter, what JSON-LD is for, why a half-filled address is worse than none, and four checks that catch real mistakes.</p>
+    <p class="bl-date"><time datetime="2026-08-09">9 August 2026</time></p>
+    <div class="bl-body">
+  <p>Most of what a small business needs from technical SEO is a handful of tags in the head of a page and a block of structured data telling a search engine what the business is. Neither requires a developer. Both are routinely wrong.</p>
+  <h2>Title and description lengths</h2>
+  <p>Roughly 60 characters for a title, 155 for a description. Treat those as a working range, not a rule — search engines truncate on rendered pixel width, so a title in capitals runs out of room well before the same character count in lower case.</p>
+  <p>The description does not affect ranking directly. It affects whether anyone clicks, which affects everything downstream. Write it as the sentence that makes someone choose your result over the one above it.</p>
+  <h2>What JSON-LD is actually for</h2>
+  <p>Structured data tells a search engine what a page is about in a form it does not have to infer: this is a business, with this name, this phone number, this address, these opening hours. Organization, LocalBusiness, Restaurant and ProfessionalService cover most small businesses.</p>
+  <p>There is one hard rule. Structured data must match what a visitor can read on the page. Claiming a review score, a price or an FAQ answer that is not visible is what search engines classify as spam, and the penalty is not worth the rich result.</p>
+  <blockquote class="bl-quote">If the JSON-LD and the page disagree, the JSON-LD is the lie — and it is the one with your name on it.</blockquote>
+  <h2>Half an address is worse than no address</h2>
+  <p>A country on its own is not an address. A PostalAddress node with a country and nothing else tells a search engine you have structured data and no information, which is worse than being quiet. A generator worth using refuses to emit it until there is at least a street, city, region or postcode.</p>
+  <h2>The four small checks</h2>
+  <ul class="bl-list">
+    <li>UTM parameters — without them, newsletter traffic and paid traffic look identical in analytics and you cannot tell which worked.</li>
+    <li>Slugs — titles with accents, ampersands or non-Latin characters break in ways you only notice after the link is shared.</li>
+    <li>robots.txt — one wrong Disallow line takes a section of the site out of search, silently.</li>
+    <li>Sitemaps — a sitemap promising URLs that no longer exist wastes the crawl and undermines the rest of it.</li>
+  </ul>
+  <h2>Redirects that fail silently</h2>
+  <p>Two redirect mistakes never announce themselves: a rule that redirects a path to itself, which loops, and duplicate sources, where the second rule never runs. Both are trivial to generate by accident and painful to diagnose in production, so the generator refuses to emit either — for Apache, nginx and Netlify alike.</p>
+  <h2>Nothing here fetches your site</h2>
+  <p>These tools generate from what you type. No URL is fetched, no URL is logged. If you want a crawl of your live site, that is a different kind of tool and it should tell you plainly that it is one.</p>
+  <div class="bl-tools">
+    <p class="bl-tools-label">Tools mentioned — all free, none upload your files</p>
+    <a class="bl-tool" href="/utility/web-marketing-toolkit/"><span class="bl-tool-ring" aria-hidden="true"></span><span>Web &amp; Marketing Toolkit</span></a>
+    <a class="bl-tool" href="/utility/web-essentials/"><span class="bl-tool-ring" aria-hidden="true"></span><span>Web Essentials</span></a>
+  </div>
+    </div>
+    <div class="bl-cta">
+      <p>KAI247 is a network of companies building software for other businesses. The tools are free and always will be.</p>
+      <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1rem">
+        <a class="btn btn-core" href="/utility/">Try the free tools</a>
+        <a class="btn btn-ghost" href="/join/">Join the network</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="cols">
+      <span class="always">KAI247 — Small changes. Always. 24&times;7.</span>
+      <nav class="fnav" aria-label="Footer">
+        <a href="/about/">About</a>
+        <a href="/blog/">Blog</a>
+        <a href="/utility/">Free tools</a>
+        <a href="/knowledge/">Ask KAI247</a>
+        <a href="/contact/">Contact</a>
+        <a href="/join/">Join</a>
+      </nav>
+    </div>
+    <p class="foundry">Founded across three continents — Brahmexa (USA) &middot; Inducer Solutions Inc (Canada) &middot; JSI Software Solutions (India). &copy; 2026 KAI247.</p>
+  </div>
+</footer>
+</body>
+</html>

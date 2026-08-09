@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Business Finance Analyzer — margins, burn and runway — KAI247</title>
-<meta name="description" content="Paste your monthly revenue and costs and see gross margin, net margin, burn rate, runway and break-even — worked out in your browser. Nothing is uploaded.">
+<title>Free Burn Rate &amp; Runway Calculator — margin and break-even</title>
+<meta name="description" content="Work out gross margin, net margin, monthly burn, runway and break-even revenue from your own figures. Runs in your browser, nothing uploaded, free.">
 <link rel="canonical" href="https://kai247.com/utility/business-finance-analyzer/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kai247.com/utility/business-finance-analyzer/">
@@ -20,6 +20,83 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Business Finance Analyzer","url":"https://kai247.com/utility/business-finance-analyzer/","applicationCategory":"BusinessApplication","operatingSystem":"Any (web browser)","description":"Calculate gross margin, net margin, burn rate, runway and break-even from monthly figures, entirely in the browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
+<!-- seo:ld -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How do I calculate runway?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Cash divided by monthly burn, where burn is net profit when it is negative. If you set a growth rate this tool steps month by month instead, because growth changes the burn every month and a single division would quietly ignore that."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is break-even revenue?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Fixed costs divided by gross margin — the sales you need before the bills that arrive anyway are covered. If your gross margin is zero or negative, break-even does not exist at any volume, and the tool says 'unreachable' rather than printing a number."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What counts as a direct cost rather than a fixed cost?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Direct costs scale with each sale: materials, payment fees, per-customer hosting, delivery contractors. Fixed costs arrive whether you sell or not: salaries, rent, tools, insurance. Putting a cost in the wrong bucket is the most common reason these numbers mislead."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is my financial data uploaded?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. Nothing is stored, sent or logged. Close the tab and it is gone."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is this financial advice?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. It is arithmetic. It does not know your tax position, receivables, seasonality or debt schedule, and it is not a substitute for an accountant."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "KAI247",
+   "item": "https://kai247.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Utilities",
+   "item": "https://kai247.com/utility/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Finance Analyzer",
+   "item": "https://kai247.com/utility/business-finance-analyzer/"
+  }
+ ]
+}
+</script>
+<!-- /seo:ld -->
+<link rel="stylesheet" href="/assets/css/seo.css?v=2">
 </head>
 <body>
 <a class="u-skip" href="#main">Skip to content</a>
@@ -31,6 +108,7 @@
     </a>
     <nav class="u-nav" aria-label="Primary">
       <a href="/utility/">All utilities</a>
+      <a href="/blog/">Blog</a>
       <a href="/utility/quote-generator/">Quotes</a>
       <a href="/utility/pdf-size-reducer/">PDF</a>
       <a href="/utility/web-essentials/">Web Essentials</a>
@@ -146,6 +224,44 @@
       <p><strong>This is arithmetic, not advice.</strong> It does not know your tax position, your receivables, your seasonality or your debt schedule, and it is not a substitute for an accountant. It is deliberately blunt about one thing: if fixed costs exceed gross profit, no amount of growth at the current margin fixes it, and the tool says so rather than projecting a happy curve.</p>
     </div>
   </details>
+<!-- seo:faq -->
+  <section class="seo-faq" id="faq" aria-labelledby="faq-h">
+    <div class="seo-faq-head">
+      <span class="seo-faq-ring" aria-hidden="true"></span>
+      <div>
+        <h2 id="faq-h">Questions people actually ask</h2>
+        <p>Four numbers decide whether a small business is fine or in trouble: what each sale actually earns, what the month costs regardless, how long the cash lasts, and how much revenue clears the bar. This works all four out and says plainly which problem you have.</p>
+      </div>
+    </div>
+    <div class="seo-faq-list">
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">How do I calculate runway?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>Cash divided by monthly burn, where burn is net profit when it is negative. If you set a growth rate this tool steps month by month instead, because growth changes the burn every month and a single division would quietly ignore that.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">What is break-even revenue?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>Fixed costs divided by gross margin — the sales you need before the bills that arrive anyway are covered. If your gross margin is zero or negative, break-even does not exist at any volume, and the tool says &#x27;unreachable&#x27; rather than printing a number.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">What counts as a direct cost rather than a fixed cost?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>Direct costs scale with each sale: materials, payment fees, per-customer hosting, delivery contractors. Fixed costs arrive whether you sell or not: salaries, rent, tools, insurance. Putting a cost in the wrong bucket is the most common reason these numbers mislead.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Is my financial data uploaded?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>No. Nothing is stored, sent or logged. Close the tab and it is gone.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Is this financial advice?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>No. It is arithmetic. It does not know your tax position, receivables, seasonality or debt schedule, and it is not a substitute for an accountant.</p>
+      </details>
+    </div>
+    <a class="seo-faq-guide" href="/blog/runway-burn-rate-and-break-even/">
+      <span class="seo-faq-guide-ring" aria-hidden="true"></span>
+      <span><span class="seo-faq-guide-kicker">Read the guide</span>How long will your cash last? Runway, burn and break-even</span>
+    </a>
+    <p class="seo-faq-foot">Part of <a href="/utility/">nine free KAI247 instruments</a> — all in-browser, none of them upload your files.</p>
+  </section>
+<!-- /seo:faq -->
 </main>
 
 <footer class="u-foot">

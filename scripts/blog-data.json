@@ -1,0 +1,1045 @@
+{
+  "_comment": "Articles for /blog/. scripts/build-blog.py renders each into a page with BlogPosting JSON-LD and builds the index. Body is an array of blocks: h2, p, ul, quote, tools. Keep the truth discipline from docs/AGENTS.md — every claim here must be something the network can actually stand behind.",
+  "posts": [
+    {
+      "slug": "why-our-tools-never-upload-your-files",
+      "title": "Why our tools never upload your files",
+      "description": "Every KAI247 utility runs entirely in your browser. Not as a privacy slogan — as an architecture that removes the need to trust us at all.",
+      "date": "2026-08-09",
+      "readMins": 5,
+      "tag": "How we build",
+      "body": [
+        [
+          "p",
+          "There is a standard way to build a file tool on the web, and we did not use it. The standard way is: the visitor uploads a file, a server does the work, the visitor downloads the result. It is easier to build, it works on any device, and it lets you count how many files people convert."
+        ],
+        [
+          "p",
+          "It also means that every contract, passport scan, medical form, client recording and internal spreadsheet passes through a machine the visitor has never seen, owned by a company they have never met, subject to a retention policy they have not read."
+        ],
+        [
+          "h2",
+          "The promise nobody can verify"
+        ],
+        [
+          "p",
+          "Most upload-based tools say the right things. Files are deleted after an hour. Transfers are encrypted. We do not look at your documents. These claims are probably true at most of those companies most of the time. The problem is that no visitor can check any of them, so what is really being offered is trust — and trust is a poor substitute for a guarantee when the file is a signed agreement."
+        ],
+        [
+          "quote",
+          "A promise you cannot verify and an architecture that cannot betray you are not the same product."
+        ],
+        [
+          "h2",
+          "What we did instead"
+        ],
+        [
+          "p",
+          "Every instrument in the KAI247 suite does its work inside the browser tab. The PDF reducer parses and rewrites the document in JavaScript. The image compressor re-encodes on a canvas. The video converter hands the file to your browser's own audio decoder. The finance analyzer is arithmetic on numbers you typed and nothing else."
+        ],
+        [
+          "p",
+          "There is a simple way to check this, and we would rather you did than take our word for it: load the page, disconnect from the internet, and use the tool. It works. Nothing is being sent, because there is nowhere for it to go."
+        ],
+        [
+          "h2",
+          "What it costs"
+        ],
+        [
+          "p",
+          "This approach is not free of trade-offs, and pretending otherwise would undermine the point. Very large files are limited by the memory of your device rather than a server farm. Some formats we would like to support need decoders a browser does not have. The PDF reducer only recompresses JPEG images, so a text-heavy PDF barely shrinks — and it tells you that instead of returning a file the same size with a success message."
+        ],
+        [
+          "p",
+          "We think those are the right trade-offs for the documents people actually want to shrink. A scanned contract is mostly pictures, and it is exactly the file you would least like to upload."
+        ],
+        [
+          "h2",
+          "Why give them away"
+        ],
+        [
+          "p",
+          "KAI247 is a network of companies that build software for other businesses. These tools are not a funnel with a hidden paywall; there is no account, no email capture, no watermark and no export limit. They are the plainest demonstration we can offer of how we approach a problem: work out what the person actually needs, refuse to do the dishonest version of it, and be specific about the limits."
+        ],
+        [
+          "p",
+          "If you use them for years and never speak to us, they still work."
+        ],
+        [
+          "tools",
+          [
+            "pdf-size-reducer",
+            "photo-size-targeter",
+            "video-to-audio"
+          ]
+        ]
+      ]
+    },
+    {
+      "slug": "how-to-reduce-pdf-size-without-uploading",
+      "title": "How to reduce PDF size without uploading it",
+      "description": "A practical guide to shrinking a PDF — what actually makes the file big, which settings matter, and why some PDFs will not shrink no matter what you do.",
+      "date": "2026-08-09",
+      "readMins": 6,
+      "tag": "Guide",
+      "body": [
+        [
+          "p",
+          "Someone asks you for a document under 5 MB. Yours is 40 MB. Before reaching for a tool, it helps to know what is taking up the space, because the answer decides whether the file can be shrunk at all."
+        ],
+        [
+          "h2",
+          "What actually makes a PDF big"
+        ],
+        [
+          "p",
+          "PDFs are containers. A 40 MB file is almost always one of three things:"
+        ],
+        [
+          "ul",
+          [
+            "A scan. Every page is a photograph. The text is not text — it is a picture of text. This is the common case and the one that compresses dramatically.",
+            "Embedded images at print resolution in a document meant for screens. A 4000-pixel-wide photo looks identical to a 1200-pixel one on a laptop and takes eleven times the space.",
+            "Fonts and vector artwork. A text-heavy report with embedded font families is large for reasons no compressor can undo without changing the document."
+          ]
+        ],
+        [
+          "p",
+          "The first two shrink. The third does not, and any tool that claims otherwise is either rasterising your text — turning a searchable document into pictures — or lying about the result."
+        ],
+        [
+          "h2",
+          "Doing it in the browser"
+        ],
+        [
+          "p",
+          "Open the PDF Size Reducer, drop the file in, and pick two settings. Image quality controls how hard each picture is squeezed; balanced is right for email. Resolution controls how many pixels survive; 75% is usually invisible on screen and takes a large bite out of the size."
+        ],
+        [
+          "p",
+          "The tool finds the JPEG images inside the document, re-encodes each one, and rewrites the file around them. Your text stays text. Bookmarks, form fields and links are untouched. In testing, a one-page scan went from 84 KB to 39 KB at balanced quality, which is the ratio to expect on scanned material."
+        ],
+        [
+          "h2",
+          "When it refuses"
+        ],
+        [
+          "p",
+          "Three cases stop rather than produce a broken document, and it is worth knowing which one you have hit:"
+        ],
+        [
+          "ul",
+          [
+            "No recompressible images. The size is text, fonts or vector art. Nothing to squeeze, so nothing is offered.",
+            "Encrypted. Password-protected PDFs cannot be rewritten safely. Remove the password in your reader first.",
+            "Compressed object structure. Some PDFs store their internals in a form that needs a full parser to rewrite safely. Rather than hand you a file your reader might reject, it stops."
+          ]
+        ],
+        [
+          "p",
+          "In every case your original is untouched on disk."
+        ],
+        [
+          "h2",
+          "If it still is not small enough"
+        ],
+        [
+          "p",
+          "Try maximum quality with 50% resolution — fine for reading, not for print. If that is not enough, the document genuinely needs fewer pages or fewer photographs. At that point a compressor is the wrong tool, and any service promising to get you there is going to do it by destroying something you wanted to keep."
+        ],
+        [
+          "tools",
+          [
+            "pdf-size-reducer",
+            "photo-size-targeter"
+          ]
+        ]
+      ]
+    },
+    {
+      "slug": "small-changes-always",
+      "title": "Small changes. Always.",
+      "description": "The idea behind KAI247: businesses are not transformed by one big project, they are improved by continuous small changes to everything around them.",
+      "date": "2026-08-09",
+      "readMins": 4,
+      "tag": "Vision",
+      "body": [
+        [
+          "p",
+          "Most business software is sold as an event. A platform, a migration, a transformation programme. Something big happens, everyone is trained, and then the thing sits there ageing while the business around it keeps moving."
+        ],
+        [
+          "p",
+          "That model fails small businesses in particular, because they cannot absorb an event. A restaurant cannot stop serving for a fortnight to adopt a system. A three-person practice has no one to spare for a rollout."
+        ],
+        [
+          "h2",
+          "The alternative"
+        ],
+        [
+          "p",
+          "You do your business. We help everything around it evolve — continuously, in small increments, without a project plan. A menu that stops disagreeing with the kitchen. A quote that goes out in a minute instead of an evening. A booking that reaches someone instead of vanishing into a mail client that was never configured."
+        ],
+        [
+          "quote",
+          "Nothing stays still. Adaptation happens 24 hours a day, seven days a week — that is the 247."
+        ],
+        [
+          "h2",
+          "Why a network rather than a company"
+        ],
+        [
+          "p",
+          "No single company is good at everything a business needs. KAI247 was founded across three continents by three companies with different strengths: Brahmexa in the United States for AI and agentic automation, Inducer Solutions Inc in Canada for multi-agent systems and AIOps, and JSI Software Solutions in India for interactive classroom hardware and school systems."
+        ],
+        [
+          "p",
+          "A business joining the network keeps its own name, look and independence. What it gains is access to capabilities it could not justify building alone — and those capabilities keep improving without it having to do anything."
+        ],
+        [
+          "h2",
+          "What that looks like in practice"
+        ],
+        [
+          "p",
+          "It looks unglamorous, which is the point. Hosting that stays up. Search listings that are accurate. An assistant that answers questions about your business from your own content and says so when it does not know. Tools that do one job properly and are free because giving them away costs us less than explaining why they are not."
+        ],
+        [
+          "p",
+          "Small changes compound. That is the whole thesis."
+        ],
+        [
+          "tools",
+          [
+            "quote-generator",
+            "business-finance-analyzer"
+          ]
+        ]
+      ]
+    },
+    {
+      "slug": "free-business-tools-that-are-actually-free",
+      "title": "Free business tools that are actually free",
+      "description": "Nine browser tools with no account, no watermark and no paid tier — what each one does, and the honest limits of each.",
+      "date": "2026-08-09",
+      "readMins": 5,
+      "tag": "Guide",
+      "body": [
+        [
+          "p",
+          "\"Free\" online usually means free until the moment it matters: free until you want the file without a watermark, free for three exports a month, free once you have handed over an email address. None of the KAI247 instruments work that way. There is no account, no limit and no upgrade prompt, and this article is partly a list of what each one cannot do — because a tool that only tells you its strengths is selling."
+        ],
+        [
+          "h2",
+          "Documents"
+        ],
+        [
+          "ul",
+          [
+            "PDF Size Reducer — recompresses the images inside a PDF. Halves a typical scan. Will not shrink a text-heavy document, and says so.",
+            "Quote & Estimate Generator — line items, discount, tax, printed to PDF by your own browser. Does not store or number your quotes between visits.",
+            "Purchase Order Generator — the same engine with buyer, supplier and a delivery date. Not a procurement system; it makes documents."
+          ]
+        ],
+        [
+          "h2",
+          "Media"
+        ],
+        [
+          "ul",
+          [
+            "Photo Size Targeter — compresses an image to an exact KB limit and strips EXIF as a side effect. Cannot invent quality that is not there.",
+            "Video to Audio — extracts an audio track to WAV, with a 16 kHz mono preset for transcription. No MP3 output, because that needs a licensed encoder we will not bundle."
+          ]
+        ],
+        [
+          "h2",
+          "Technical"
+        ],
+        [
+          "ul",
+          [
+            "Subnet & CIDR Calculator — IPv4 and IPv6 with exact big-integer arithmetic, a prefix recommender and an overlap check. Follows RFC 3021, so a /31 correctly shows two usable addresses.",
+            "Web Essentials — UTM builder, slug generator, robots.txt and sitemap checks. Fetches nothing from your live site.",
+            "Web & Marketing Toolkit — meta and Open Graph tags with live previews, JSON-LD, redirect rules for three servers, keyword cleanup."
+          ]
+        ],
+        [
+          "h2",
+          "Business"
+        ],
+        [
+          "ul",
+          [
+            "Finance Analyzer — gross and net margin, burn, runway and break-even. Arithmetic, not advice; it does not know your tax position."
+          ]
+        ],
+        [
+          "h2",
+          "The one we did not ship"
+        ],
+        [
+          "p",
+          "There is no QR code generator, and there was nearly one. We wrote a complete encoder, then checked it against a reference implementation and found it produced codes that would not scan. A QR code fails after it has been printed on a flyer, which is the worst moment to discover a bug, so it was deleted rather than shipped. It will appear when it is right."
+        ],
+        [
+          "p",
+          "That is the standard the rest of the suite is held to as well."
+        ],
+        [
+          "tools",
+          [
+            "pdf-size-reducer",
+            "quote-generator",
+            "cidr-calculator",
+            "web-marketing-toolkit"
+          ]
+        ]
+      ]
+    },
+    {
+      "slug": "resize-an-image-to-an-exact-file-size",
+      "title": "How to resize an image to an exact file size",
+      "description": "Upload limits are given in kilobytes, not pixels. Here is how to hit 200 KB, 100 KB or 50 KB exactly — and why the usual advice to “just resize it” misses.",
+      "tag": "Guide",
+      "readMins": 5,
+      "date": "2026-08-09",
+      "body": [
+        [
+          "p",
+          "Every government portal, job board and university application asks for the same thing: a photo under some number of kilobytes. Almost no image editor lets you ask for that. They let you pick a quality slider, save, check the file size, and go round again."
+        ],
+        [
+          "p",
+          "That loop is the whole problem, and it is a loop a computer should be running, not you."
+        ],
+        [
+          "h2",
+          "Why picking a quality level does not work"
+        ],
+        [
+          "p",
+          "JPEG quality is not a size dial. The same quality setting produces wildly different file sizes depending on what is in the picture. A portrait against a plain wall compresses to a fraction of what a photograph of a tree compresses to, because detail is what costs bytes. Quality 70 might land at 90 KB for one photo and 400 KB for the next."
+        ],
+        [
+          "p",
+          "So there is no quality number you can memorise. There is only searching for the one that happens to fit this particular image."
+        ],
+        [
+          "h2",
+          "The search that actually finds it"
+        ],
+        [
+          "p",
+          "Give the tool a target instead of a quality. It binary-searches JPEG quality between 0.05 and 0.95, re-encoding each time and measuring the real output, converging on the highest quality that still fits under your limit. Typically that is a dozen encodes, which takes a moment and costs you nothing."
+        ],
+        [
+          "p",
+          "If even the lowest quality is still too large, the picture is simply carrying more pixels than your limit can hold. At that point it scales the image down a step and searches again, so you get the largest image that fits rather than an error."
+        ],
+        [
+          "quote",
+          "A target size is a question with an answer. A quality slider is a guess you have to verify yourself."
+        ],
+        [
+          "h2",
+          "What to actually ask for"
+        ],
+        [
+          "ul",
+          [
+            "Passport and visa photos: usually 100–200 KB, and the portal will say. Keep JPEG.",
+            "Job applications and CV headshots: 200 KB is comfortable and looks fine.",
+            "Website images: think in what the page needs, not what the camera gave you — under 150 KB for anything not full-width.",
+            "Anything that must stay lossless (a logo, a diagram, a screenshot with text): use PNG and reduce the resolution instead, because PNG quality cannot be traded away."
+          ]
+        ],
+        [
+          "h2",
+          "The EXIF side effect worth knowing about"
+        ],
+        [
+          "p",
+          "Re-encoding through a browser canvas rebuilds the image from its pixels. Everything that was wrapped around those pixels — GPS coordinates, camera model, the timestamp, sometimes the owner's name — does not survive the trip."
+        ],
+        [
+          "p",
+          "That is usually what you want. A photo taken on a phone carries the location it was taken in, and people post those to public profiles without ever knowing. If you did want the metadata kept, copy it separately before you compress."
+        ],
+        [
+          "h2",
+          "Do it without handing over the photo"
+        ],
+        [
+          "p",
+          "An ID scan, a passport photo, a picture of a signed document — these are exactly the files that should not be posted to a conversion site in exchange for a smaller version of themselves. Ours decodes and re-encodes on a canvas inside your own browser. There is no upload step, because there is no server involved in the work."
+        ],
+        [
+          "tools",
+          [
+            "photo-size-targeter",
+            "pdf-size-reducer"
+          ]
+        ]
+      ]
+    },
+    {
+      "slug": "extract-audio-from-video-without-uploading-it",
+      "title": "How to extract audio from a video without uploading it",
+      "description": "Pull the sound out of an MP4 in your browser. Which sample rate to pick for transcription, why the output is WAV and not MP3, and when a file is too long.",
+      "tag": "Guide",
+      "readMins": 5,
+      "date": "2026-08-09",
+      "body": [
+        [
+          "p",
+          "You have a recorded interview, a client call, a lecture or a screen capture, and you need the audio out of it. The obvious route is a conversion website. The obvious route also means handing a recording of someone's voice to a stranger's server."
+        ],
+        [
+          "p",
+          "For an NDA call or a client interview, that is not a small detail. It is the reason not to."
+        ],
+        [
+          "h2",
+          "Your browser already has the decoder"
+        ],
+        [
+          "p",
+          "Every modern browser ships with the machinery to decode the audio track of an MP4, MOV, WebM or M4A — it has to, or video would not play. Reading that track out and ignoring the video frames is something the tab can do on its own, with no server in the loop."
+        ],
+        [
+          "p",
+          "The decoded audio is resampled through an offline audio context and written as a RIFF/PCM WAV. Nothing is transcoded remotely, so the quality ceiling is whatever the original recording had."
+        ],
+        [
+          "h2",
+          "Which sample rate to choose"
+        ],
+        [
+          "ul",
+          [
+            "16,000 Hz mono — what nearly every speech-to-text engine wants, and about a sixth the size of CD-quality stereo. Use this for transcription.",
+            "44,100 Hz — CD quality. Use it if a human will listen closely or the audio is going into an edit.",
+            "48,000 Hz — the video standard. Keep it if the audio is going back into a video timeline.",
+            "22,050 Hz — a middle ground when size matters more than fidelity."
+          ]
+        ],
+        [
+          "p",
+          "The single most common mistake is exporting a two-hour meeting at 48 kHz stereo and then feeding it to a transcription service that immediately downsamples it to 16 kHz mono anyway. You paid for the size and got nothing for it."
+        ],
+        [
+          "h2",
+          "Why there is no MP3 button"
+        ],
+        [
+          "p",
+          "MP3 encoding needs a licensed encoder. Shipping one inside a free page is not something we are going to do quietly, so the tool writes WAV, which is uncompressed and readable by everything. If you need MP3 at the end, convert the WAV afterwards with a tool that has the right to encode it."
+        ],
+        [
+          "quote",
+          "WAV is roughly 10 MB per minute at CD quality in stereo, and about 1.8 MB per minute at 16 kHz mono. Choose accordingly."
+        ],
+        [
+          "h2",
+          "When a file is too long"
+        ],
+        [
+          "p",
+          "The whole track is held in memory while it converts. A very long recording can exhaust a tab, and when it does, the page says so rather than hanging and pretending. Dropping to 16 kHz mono cuts the memory need to about a sixth, which is usually enough to get a long recording through."
+        ],
+        [
+          "h2",
+          "“There is no audio track”"
+        ],
+        [
+          "p",
+          "Two things cause this and the tool distinguishes them. Either the file genuinely has no audio — screen recordings made without a microphone very often do not — or the audio uses a codec your browser cannot decode. Naming both possibilities is more useful than downloading a silent WAV and letting you find out later."
+        ],
+        [
+          "tools",
+          [
+            "video-to-audio",
+            "photo-size-targeter"
+          ]
+        ]
+      ]
+    },
+    {
+      "slug": "subnet-masks-and-cidr-explained",
+      "title": "Subnet masks and CIDR, explained by what you actually need",
+      "description": "How to pick a prefix for a device count, why a /31 has two usable addresses and not zero, and how to check two subnets for overlap before you commit.",
+      "tag": "Guide",
+      "readMins": 6,
+      "date": "2026-08-09",
+      "body": [
+        [
+          "p",
+          "Most subnetting explanations start from binary and work forward. That is the right way to learn it and the wrong way to use it. In practice you have a number of devices and a question: what prefix do I need?"
+        ],
+        [
+          "h2",
+          "Working backwards from the device count"
+        ],
+        [
+          "p",
+          "A /24 gives you 254 usable addresses, not 256. Two are taken: the network address at the bottom and the broadcast address at the top. Every ordinary IPv4 subnet loses those two, which is why 500 devices does not fit in two /24s the way the arithmetic suggests — it fits in a /23, with 510 usable."
+        ],
+        [
+          "ul",
+          [
+            "/26 — 62 usable. A small office floor.",
+            "/25 — 126 usable.",
+            "/24 — 254 usable. The default reach-for.",
+            "/23 — 510 usable.",
+            "/22 — 1,022 usable."
+          ]
+        ],
+        [
+          "p",
+          "Leave headroom. A subnet sized exactly to today's device count is a subnet you will be renumbering in eighteen months, and renumbering is the expensive kind of work."
+        ],
+        [
+          "h2",
+          "The /31 that most calculators get wrong"
+        ],
+        [
+          "p",
+          "Subtracting two addresses is the rule for ordinary subnets, and applying it blindly to a /31 gives zero usable addresses — which would make /31 useless. RFC 3021 says otherwise: on a point-to-point link a /31 carries two usable addresses, because there is nothing to broadcast to when there are exactly two ends."
+        ],
+        [
+          "p",
+          "Similarly a /32 carries one. It is a single host route, which is a completely ordinary thing to write. A calculator that reports zero for both is telling you something that contradicts the routers you are configuring."
+        ],
+        [
+          "h2",
+          "IPv6 and the precision problem"
+        ],
+        [
+          "p",
+          "IPv6 prefixes hold numbers far beyond what a floating-point value can represent exactly. A /64 has 18,446,744,073,709,551,616 addresses, and once a tool rounds that through a double you are looking at an approximation dressed up as a count."
+        ],
+        [
+          "p",
+          "Doing the arithmetic in BigInt keeps it exact. IPv6 also reserves no broadcast address, so unlike IPv4, every address in the prefix is usable."
+        ],
+        [
+          "h2",
+          "Check for overlap before you commit"
+        ],
+        [
+          "p",
+          "The failure that costs a weekend is two blocks in an address plan that quietly overlap — a summarised route in one place, a subnet allocated somewhere else, and traffic going to the wrong side of the network under load. Comparing two CIDR blocks by eye is exactly the sort of task humans are bad at and machines are perfect at."
+        ],
+        [
+          "quote",
+          "An overlap check takes two seconds. Finding an overlap in production takes a day and an outage report."
+        ],
+        [
+          "p",
+          "Feed in both blocks and you get a plain answer: whether one contains the other, where the shared range starts and ends, and how many addresses are involved."
+        ],
+        [
+          "h2",
+          "Keep the address plan internal"
+        ],
+        [
+          "p",
+          "Your internal addressing is reconnaissance for anyone who wants it. Subnet arithmetic is pure computation — there is no reason for it to leave your machine, and in our calculator it does not."
+        ],
+        [
+          "tools",
+          [
+            "cidr-calculator",
+            "web-essentials"
+          ]
+        ]
+      ]
+    },
+    {
+      "slug": "runway-burn-rate-and-break-even",
+      "title": "How long will your cash last? Runway, burn and break-even",
+      "description": "Runway is not just cash divided by burn once growth is involved. What break-even really means, and why the direct-versus-fixed split decides everything.",
+      "tag": "Guide",
+      "readMins": 6,
+      "date": "2026-08-09",
+      "body": [
+        [
+          "p",
+          "Three numbers tell you most of what you need to know about a small business: how fast the cash is going, how long it lasts, and how much you have to sell before the bills that arrive anyway are covered. All three are arithmetic. All three are routinely got wrong."
+        ],
+        [
+          "h2",
+          "Runway is not one division"
+        ],
+        [
+          "p",
+          "Cash divided by monthly burn is the version everyone knows, and it is correct only when the burn is flat. The moment you assume any growth — revenue rising, or costs rising with it — the burn changes every month, and a single division quietly ignores that."
+        ],
+        [
+          "p",
+          "The honest way is to step month by month: apply the growth, recompute the month's profit or loss, subtract it from the cash, repeat. Do that and a business that looks like it has eleven months can turn out to have seven, or eighteen. The difference is not a rounding error; it is the decision you are about to make."
+        ],
+        [
+          "h2",
+          "Break-even is fixed costs over gross margin"
+        ],
+        [
+          "p",
+          "Break-even revenue is the sales figure at which you stop losing money: fixed costs divided by gross margin. If your gross margin is 40% and your fixed costs are £8,000 a month, you need £20,000 of sales to break even."
+        ],
+        [
+          "p",
+          "If gross margin is zero or negative, break-even does not exist at any volume. Selling more makes the loss bigger. A tool that prints a number here rather than saying “unreachable” is doing real damage, because the number looks like a target."
+        ],
+        [
+          "quote",
+          "If you lose money on every sale, you cannot make it up in volume. That is not a joke about startups; it is what a negative gross margin means."
+        ],
+        [
+          "h2",
+          "The split that decides everything"
+        ],
+        [
+          "p",
+          "Direct costs scale with each sale. Fixed costs arrive whether you sell or not. Getting a cost into the wrong bucket is the single most common reason these numbers mislead."
+        ],
+        [
+          "ul",
+          [
+            "Direct: materials, payment processing fees, per-customer hosting, delivery contractors, commission.",
+            "Fixed: salaries, rent, software subscriptions, insurance, accountancy.",
+            "The awkward ones: a part-time contractor you use only when work comes in is direct. A retainer is fixed. Same person, different bucket."
+          ]
+        ],
+        [
+          "p",
+          "Move one salary from fixed to direct and your break-even moves thousands. It is worth ten minutes with the list rather than a guess."
+        ],
+        [
+          "h2",
+          "What the arithmetic cannot see"
+        ],
+        [
+          "p",
+          "This is a calculator, not an accountant. It does not know your tax position, when your receivables actually land, whether your trade is seasonal, or what your debt schedule looks like. A business with twelve months of runway and a large VAT bill due next quarter does not have twelve months of runway."
+        ],
+        [
+          "p",
+          "Use the numbers to frame the conversation, then have the conversation with someone who knows your books."
+        ],
+        [
+          "tools",
+          [
+            "business-finance-analyzer",
+            "quote-generator",
+            "purchase-order-generator"
+          ]
+        ]
+      ]
+    },
+    {
+      "slug": "how-to-write-a-quote-that-gets-accepted",
+      "title": "How to write a quote that gets accepted",
+      "description": "What belongs on a quote, why a validity date changes the conversation, how discount and tax interact, and the penny-rounding bug that breaks totals.",
+      "tag": "Guide",
+      "readMins": 5,
+      "date": "2026-08-09",
+      "body": [
+        [
+          "p",
+          "A quote is a sales document that most small businesses treat as paperwork. The ones that get accepted are specific, easy to say yes to, and impossible to argue with later."
+        ],
+        [
+          "h2",
+          "What has to be on it"
+        ],
+        [
+          "ul",
+          [
+            "Who is quoting and who is being quoted — full legal names, not just trading names.",
+            "A quote number and the date it was issued.",
+            "Itemised lines: what, how many, at what unit price. Not one line saying ‘works as discussed’.",
+            "Subtotal, any discount, tax, total.",
+            "A validity date.",
+            "What happens next — how to accept, and what the payment terms are."
+          ]
+        ],
+        [
+          "h2",
+          "The validity date does more work than you think"
+        ],
+        [
+          "p",
+          "A quote with no expiry is an offer you have made forever, at prices that were true in the spring. It also removes the only polite reason to follow up. “This is valid until the 30th” converts a chase into a courtesy."
+        ],
+        [
+          "p",
+          "Thirty days is normal. Shorter if your input costs move; say so in the terms rather than surprising them later."
+        ],
+        [
+          "h2",
+          "Discount then tax, in that order"
+        ],
+        [
+          "p",
+          "The discount comes off the subtotal, and tax applies to what is left. Applying tax first and discounting the gross gives a different — and in most jurisdictions wrong — total. It is a small thing that an accountant will notice immediately."
+        ],
+        [
+          "h2",
+          "Why totals sometimes do not add up"
+        ],
+        [
+          "p",
+          "This is the bug that makes a document look amateur. Hold amounts as decimal fractions, round each line for display, and the displayed lines will sometimes not sum to the displayed total. Off by a penny, every time the fractions land badly."
+        ],
+        [
+          "quote",
+          "Hold money in whole cents from the moment it is typed. Then the total always equals the sum of its own rows, because it literally is."
+        ],
+        [
+          "p",
+          "Rounding at the end rather than at the start is how invoices end up a penny out, and a penny out is what people notice."
+        ],
+        [
+          "h2",
+          "Make the PDF the boring way"
+        ],
+        [
+          "p",
+          "Your browser already contains a competent PDF writer. Press Print, choose Save as PDF, done. A page that loads a second PDF library to do a job the browser already does well is adding weight and a new set of font bugs for nothing. Ours hides the editor when printing, so what comes out is the document alone."
+        ],
+        [
+          "h2",
+          "A quote is not a purchase order"
+        ],
+        [
+          "p",
+          "A quote is what you offer; a purchase order is what your customer raises to commit to buying it. They need different wording, different numbering, and a delivery date rather than a validity date. Use the right one — sending a quote where a PO is expected slows the payment down."
+        ],
+        [
+          "tools",
+          [
+            "quote-generator",
+            "purchase-order-generator",
+            "business-finance-analyzer"
+          ]
+        ]
+      ]
+    },
+    {
+      "slug": "what-a-purchase-order-needs",
+      "title": "What a purchase order actually needs",
+      "description": "A PO is a commitment to buy. What has to be on it, how numbering should work, how it differs from a quote and an invoice, and what a generator cannot do.",
+      "tag": "Guide",
+      "readMins": 4,
+      "date": "2026-08-09",
+      "body": [
+        [
+          "p",
+          "A purchase order is the buyer's document. It is the moment the intention to buy becomes a commitment to buy, and once the supplier accepts it, both sides are working from the same list at the same prices."
+        ],
+        [
+          "h2",
+          "The required parts"
+        ],
+        [
+          "ul",
+          [
+            "A unique PO number — this is what the supplier will quote on the invoice, and what your accounts team will match against.",
+            "The date raised.",
+            "Buyer details and supplier details, in full.",
+            "Itemised goods or services: description, quantity, unit price.",
+            "The total.",
+            "A delivery date, and a delivery address if it differs from the buyer address.",
+            "Terms — payment period, and anything conditional."
+          ]
+        ],
+        [
+          "p",
+          "The PO number is the part people under-rate. Three-way matching — order, delivery note, invoice — only works if the number is on all three. A missing PO number is the most common reason an invoice sits unpaid while everyone waits for someone else."
+        ],
+        [
+          "h2",
+          "Quote, PO, invoice"
+        ],
+        [
+          "p",
+          "A quote is the supplier saying “here is what it would cost”. A purchase order is the buyer saying “yes, supply that”. An invoice is the supplier saying “that has been supplied, now pay”. Three documents, three directions, and mixing them up is how a payment ends up a month late."
+        ],
+        [
+          "h2",
+          "Numbering, honestly"
+        ],
+        [
+          "p",
+          "A document generator that runs entirely in a browser tab cannot keep a sequence between visits, because it stores nothing between visits. Ours pre-fills a number you can overwrite, and that is the truthful limit of what it does."
+        ],
+        [
+          "quote",
+          "It generates documents. It does not keep a register. If you need one, keep the PDFs somewhere consistent — or use an accounting system, which is what one is for."
+        ],
+        [
+          "p",
+          "For a handful of orders a month, a folder and a consistent number format is genuinely enough. For more than that, the register matters more than the document, and this is the wrong tool."
+        ],
+        [
+          "h2",
+          "Supplier pricing stays yours"
+        ],
+        [
+          "p",
+          "What you pay your suppliers is commercially sensitive, and there is no reason for it to travel. Everything here stays in the tab — nothing is saved, sent or logged."
+        ],
+        [
+          "tools",
+          [
+            "purchase-order-generator",
+            "quote-generator"
+          ]
+        ]
+      ]
+    },
+    {
+      "slug": "meta-tags-and-structured-data-without-a-developer",
+      "title": "Meta tags and structured data, without a developer",
+      "description": "Title and description lengths that matter, what JSON-LD is for, why a half-filled address is worse than none, and four checks that catch real mistakes.",
+      "tag": "Guide",
+      "readMins": 6,
+      "date": "2026-08-09",
+      "body": [
+        [
+          "p",
+          "Most of what a small business needs from technical SEO is a handful of tags in the head of a page and a block of structured data telling a search engine what the business is. Neither requires a developer. Both are routinely wrong."
+        ],
+        [
+          "h2",
+          "Title and description lengths"
+        ],
+        [
+          "p",
+          "Roughly 60 characters for a title, 155 for a description. Treat those as a working range, not a rule — search engines truncate on rendered pixel width, so a title in capitals runs out of room well before the same character count in lower case."
+        ],
+        [
+          "p",
+          "The description does not affect ranking directly. It affects whether anyone clicks, which affects everything downstream. Write it as the sentence that makes someone choose your result over the one above it."
+        ],
+        [
+          "h2",
+          "What JSON-LD is actually for"
+        ],
+        [
+          "p",
+          "Structured data tells a search engine what a page is about in a form it does not have to infer: this is a business, with this name, this phone number, this address, these opening hours. Organization, LocalBusiness, Restaurant and ProfessionalService cover most small businesses."
+        ],
+        [
+          "p",
+          "There is one hard rule. Structured data must match what a visitor can read on the page. Claiming a review score, a price or an FAQ answer that is not visible is what search engines classify as spam, and the penalty is not worth the rich result."
+        ],
+        [
+          "quote",
+          "If the JSON-LD and the page disagree, the JSON-LD is the lie — and it is the one with your name on it."
+        ],
+        [
+          "h2",
+          "Half an address is worse than no address"
+        ],
+        [
+          "p",
+          "A country on its own is not an address. A PostalAddress node with a country and nothing else tells a search engine you have structured data and no information, which is worse than being quiet. A generator worth using refuses to emit it until there is at least a street, city, region or postcode."
+        ],
+        [
+          "h2",
+          "The four small checks"
+        ],
+        [
+          "ul",
+          [
+            "UTM parameters — without them, newsletter traffic and paid traffic look identical in analytics and you cannot tell which worked.",
+            "Slugs — titles with accents, ampersands or non-Latin characters break in ways you only notice after the link is shared.",
+            "robots.txt — one wrong Disallow line takes a section of the site out of search, silently.",
+            "Sitemaps — a sitemap promising URLs that no longer exist wastes the crawl and undermines the rest of it."
+          ]
+        ],
+        [
+          "h2",
+          "Redirects that fail silently"
+        ],
+        [
+          "p",
+          "Two redirect mistakes never announce themselves: a rule that redirects a path to itself, which loops, and duplicate sources, where the second rule never runs. Both are trivial to generate by accident and painful to diagnose in production, so the generator refuses to emit either — for Apache, nginx and Netlify alike."
+        ],
+        [
+          "h2",
+          "Nothing here fetches your site"
+        ],
+        [
+          "p",
+          "These tools generate from what you type. No URL is fetched, no URL is logged. If you want a crawl of your live site, that is a different kind of tool and it should tell you plainly that it is one."
+        ],
+        [
+          "tools",
+          [
+            "web-marketing-toolkit",
+            "web-essentials"
+          ]
+        ]
+      ]
+    },
+    {
+      "slug": "what-a-small-business-actually-gets-from-kai247",
+      "title": "What a small business actually gets from KAI247",
+      "description": "Free website and hosting, marketing, local SEO, AI tools and a conversational assistant — and you keep your name and 100% of your business.",
+      "tag": "Vision",
+      "readMins": 5,
+      "date": "2026-08-09",
+      "body": [
+        [
+          "p",
+          "“Free” is a word that has been ruined by people who meant “free until you need it to work”. So it is worth being specific about what KAI247 gives a business, what it asks in return, and where the edges are."
+        ],
+        [
+          "h2",
+          "What arrives"
+        ],
+        [
+          "ul",
+          [
+            "A website, with smart hosting on a high-speed CDN. No server for you to run, patch or pay for.",
+            "Digital marketing and social promotion, through the network's REACH and COMET tooling.",
+            "Local SEO — the work that decides whether someone searching for your trade in your town finds you.",
+            "Business tools, including the utility suite anyone can use.",
+            "NEXUS, a conversational AI assistant that answers from your own content rather than a generic model."
+          ]
+        ],
+        [
+          "h2",
+          "What you keep"
+        ],
+        [
+          "p",
+          "Your name, your look, your customers and 100% of your ownership. No equity changes hands, there are no franchise fees, and your brand is never replaced by someone else's. That is the whole difference between a companion ecosystem and an umbrella company."
+        ],
+        [
+          "quote",
+          "You do your business. We help everything around it evolve."
+        ],
+        [
+          "p",
+          "The premise is that you already know your craft, your service and your local customers. What you should not have to become is a systems administrator, a marketing department and an AI engineer at the same time."
+        ],
+        [
+          "h2",
+          "Why it costs nothing during the founding period"
+        ],
+        [
+          "p",
+          "Because the network is forming. Three founding companies — an AI lab in the USA, an agentic-systems firm in Canada, and an education and datacenter business in India — are contributing infrastructure while the orbits fill. A network of four brands is worth less to each of them than a network of forty."
+        ],
+        [
+          "p",
+          "That is the trade, and it is stated plainly rather than hidden in a footer. There is nothing to cancel and nothing to claw back."
+        ],
+        [
+          "h2",
+          "Who it fits"
+        ],
+        [
+          "p",
+          "Restaurants, landscaping and lawn care, urgent care and dental practices, retail stores and boutiques, construction and trades, event businesses and venues, and professional services like legal, accounting and consulting. Anywhere the work is a craft and the technology around it is a burden."
+        ],
+        [
+          "h2",
+          "What it is not"
+        ],
+        [
+          "p",
+          "It is not a website builder you log into and operate yourself. It is not a franchise. It is not an agency retainer with a different name. And it will not fix a business whose problem is the business — the network strengthens what is around your work, not the work itself."
+        ],
+        [
+          "tools",
+          [
+            "web-marketing-toolkit",
+            "web-essentials",
+            "quote-generator"
+          ]
+        ]
+      ]
+    },
+    {
+      "slug": "free-ai-agents-for-public-benefits",
+      "title": "Why we built free AI agents for FAFSA, SNAP and VA benefits",
+      "description": "Five public agents — student aid, food assistance, housing rights, veterans benefits and naturalization. Zero cost, and a clear line about what they are not.",
+      "tag": "Vision",
+      "readMins": 4,
+      "date": "2026-08-09",
+      "body": [
+        [
+          "p",
+          "The forms that decide whether someone eats, studies, stays housed or becomes a citizen are among the hardest documents ordinary people are ever asked to complete. They are long, conditional, written in the language of the agency rather than the applicant, and getting them wrong is expensive in a way that falls entirely on the person least able to absorb it."
+        ],
+        [
+          "p",
+          "An industry has grown up charging people for help with them. That is the part we object to."
+        ],
+        [
+          "h2",
+          "The five that are live"
+        ],
+        [
+          "ul",
+          [
+            "FAFSA Helper — federal student aid application guidance.",
+            "USCIS Companion — N-400 naturalization and work authorization.",
+            "SNAP Helper — food stamps and Medicaid assistance.",
+            "Housing Rights Helper — eviction defence and tenant rights.",
+            "Veterans Navigator — finding VA benefits and local NGO support."
+          ]
+        ],
+        [
+          "p",
+          "Zero cost, no upsells, nothing to buy at the end. Two more are forming: Medicaid renewal, and workforce rights for wage theft and overtime."
+        ],
+        [
+          "h2",
+          "Why a network pays for this"
+        ],
+        [
+          "p",
+          "KAI247 is a network of companies that make money building software for other businesses. The impact constellation is what a share of that capability does when it is pointed at people instead of customers."
+        ],
+        [
+          "quote",
+          "The network grows by helping others grow. That has to mean something when there is no invoice at the end of it."
+        ],
+        [
+          "h2",
+          "The line we will not cross"
+        ],
+        [
+          "p",
+          "These agents explain eligibility and walk you through the forms. They are not a lawyer and not a caseworker, and they say so. For a decision carrying legal weight — an eviction hearing, an immigration filing, a benefits appeal — take what the agent produced to a qualified adviser and let them check it."
+        ],
+        [
+          "p",
+          "An AI that overstates its own authority in this domain does more harm than one that does not exist. Being useful and being honest about the limit are the same requirement here."
+        ],
+        [
+          "h2",
+          "Propose one"
+        ],
+        [
+          "p",
+          "There is an open seat in the constellation for a programme nobody has covered. If you work with people who are stuck on a form that a patient explainer would unstick, tell us which one."
+        ],
+        [
+          "tools",
+          [
+            "business-finance-analyzer",
+            "web-essentials"
+          ]
+        ]
+      ]
+    }
+  ]
+}

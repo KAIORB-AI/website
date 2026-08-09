@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Subnet &amp; CIDR Calculator — IPv4 and IPv6 — KAI247</title>
-<meta name="description" content="Free IPv4 and IPv6 subnet calculator: network and broadcast addresses, host ranges, wildcard masks, a prefix recommender for a device count, and an overlap detector. Runs entirely in your browser.">
+<title>Free CIDR Subnet Calculator — IPv4 and IPv6, RFC 3021 aware</title>
+<meta name="description" content="Subnet ranges, usable hosts, netmask and broadcast for IPv4 and IPv6. Recommends a prefix for a device count and checks two blocks for overlap. Free.">
 <link rel="canonical" href="https://kai247.com/utility/cidr-calculator/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kai247.com/utility/cidr-calculator/">
@@ -20,6 +20,83 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Subnet & CIDR Calculator","url":"https://kai247.com/utility/cidr-calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","description":"IPv4 and IPv6 subnet calculator with host recommender and overlap detection.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
+<!-- seo:ld -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "What prefix do I need for 500 devices?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Enter the device count and the recommender returns the smallest prefix that fits, with the headroom it leaves. It accounts for the addresses you cannot assign, so the number it gives is usable hosts and not raw address count."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why does a /31 show two usable addresses?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Because RFC 3021 says so. A /31 carries two usable addresses for point-to-point links and a /32 carries one, instead of the 'minus two' that applies to ordinary subnets. Many calculators get this wrong and report zero."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does it support IPv6?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. IPv6 arithmetic uses BigInt so the counts are exact rather than rounded through floating point. IPv6 reserves no broadcast address, so every address in the prefix is usable."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can it tell me if two subnets overlap?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes — the overlap check takes two blocks and reports whether one contains the other, where the shared range starts and ends, and how many addresses are involved. Worth running before committing an address plan."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is anything sent to a server?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. It is pure arithmetic in the browser, so your internal address plan stays internal."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "KAI247",
+   "item": "https://kai247.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Utilities",
+   "item": "https://kai247.com/utility/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "CIDR Calculator",
+   "item": "https://kai247.com/utility/cidr-calculator/"
+  }
+ ]
+}
+</script>
+<!-- /seo:ld -->
+<link rel="stylesheet" href="/assets/css/seo.css?v=2">
 </head>
 <body>
 <a class="u-skip" href="#main">Skip to content</a>
@@ -31,6 +108,7 @@
     </a>
     <nav class="u-nav" aria-label="Primary">
       <a href="/utility/">All utilities</a>
+      <a href="/blog/">Blog</a>
       <a href="/utility/photo-size-targeter/">Photo</a>
       <a href="/utility/web-essentials/">Web Essentials</a>
     </nav>
@@ -130,6 +208,44 @@
       <p>IPv6 does not reserve a broadcast address, so every address in the prefix is usable.</p>
     </div>
   </details>
+<!-- seo:faq -->
+  <section class="seo-faq" id="faq" aria-labelledby="faq-h">
+    <div class="seo-faq-head">
+      <span class="seo-faq-ring" aria-hidden="true"></span>
+      <div>
+        <h2 id="faq-h">Questions people actually ask</h2>
+        <p>Subnet maths is easy to get subtly wrong, and the subtle errors are the ones that reach production. This does the arithmetic exactly, in big integers, and follows the standards rather than the usual shortcut formula.</p>
+      </div>
+    </div>
+    <div class="seo-faq-list">
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">What prefix do I need for 500 devices?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>Enter the device count and the recommender returns the smallest prefix that fits, with the headroom it leaves. It accounts for the addresses you cannot assign, so the number it gives is usable hosts and not raw address count.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Why does a /31 show two usable addresses?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>Because RFC 3021 says so. A /31 carries two usable addresses for point-to-point links and a /32 carries one, instead of the &#x27;minus two&#x27; that applies to ordinary subnets. Many calculators get this wrong and report zero.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Does it support IPv6?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>Yes. IPv6 arithmetic uses BigInt so the counts are exact rather than rounded through floating point. IPv6 reserves no broadcast address, so every address in the prefix is usable.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Can it tell me if two subnets overlap?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>Yes — the overlap check takes two blocks and reports whether one contains the other, where the shared range starts and ends, and how many addresses are involved. Worth running before committing an address plan.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Is anything sent to a server?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>No. It is pure arithmetic in the browser, so your internal address plan stays internal.</p>
+      </details>
+    </div>
+    <a class="seo-faq-guide" href="/blog/subnet-masks-and-cidr-explained/">
+      <span class="seo-faq-guide-ring" aria-hidden="true"></span>
+      <span><span class="seo-faq-guide-kicker">Read the guide</span>Subnet masks and CIDR, explained by what you actually need</span>
+    </a>
+    <p class="seo-faq-foot">Part of <a href="/utility/">nine free KAI247 instruments</a> — all in-browser, none of them upload your files.</p>
+  </section>
+<!-- /seo:faq -->
 </main>
 
 <footer class="u-foot">

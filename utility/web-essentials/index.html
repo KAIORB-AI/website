@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Web Essentials — UTM builder, slug, robots.txt, sitemap validator — KAI247</title>
-<meta name="description" content="Free web tools: campaign UTM link builder, Unicode-safe slug generator, robots.txt generator and validator, and a sitemap XML validator that finds duplicates and dead promises. All in your browser.">
+<title>Free UTM Builder, Slug, robots.txt and Sitemap Checker</title>
+<meta name="description" content="Build campaign tracking URLs, make slugs that survive accents, generate and validate robots.txt, and check a sitemap. Four checks, free.">
 <link rel="canonical" href="https://kai247.com/utility/web-essentials/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kai247.com/utility/web-essentials/">
@@ -20,6 +20,75 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Web Essentials","url":"https://kai247.com/utility/web-essentials/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","description":"UTM builder, slug generator, robots.txt generator and validator, sitemap XML validator.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
+<!-- seo:ld -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "What is a UTM parameter and do I need one?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "UTM parameters are tags on a link that tell your analytics where a visitor came from. Without them, traffic from a newsletter and traffic from a paid ad look identical, and you cannot tell which one worked."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I make a URL slug from a title with accents?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Paste the title. The slug generator folds accented characters to their closest ASCII equivalent, so 'Café Münchén' becomes 'cafe-munchen' rather than losing the words entirely or emitting percent-encoding."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Will this validate my robots.txt?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It generates rules and flags the common mistakes, including disallowing a path you probably meant to keep crawlable. It does not fetch your live file — nothing on this page makes a network request."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is any of this sent to a server?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. All four tools run in the browser."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "KAI247",
+   "item": "https://kai247.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Utilities",
+   "item": "https://kai247.com/utility/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Web Essentials",
+   "item": "https://kai247.com/utility/web-essentials/"
+  }
+ ]
+}
+</script>
+<!-- /seo:ld -->
+<link rel="stylesheet" href="/assets/css/seo.css?v=2">
 </head>
 <body>
 <a class="u-skip" href="#main">Skip to content</a>
@@ -31,6 +100,7 @@
     </a>
     <nav class="u-nav" aria-label="Primary">
       <a href="/utility/">All utilities</a>
+      <a href="/blog/">Blog</a>
       <a href="/utility/photo-size-targeter/">Photo</a>
       <a href="/utility/cidr-calculator/">CIDR</a>
     </nav>
@@ -147,6 +217,40 @@
     <li><span class="u-glyph warn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4l9 16H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4m0 3v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Flags blocked paths</li>
     <li><span class="u-glyph ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg></span>Runs offline</li>
   </ul>
+<!-- seo:faq -->
+  <section class="seo-faq" id="faq" aria-labelledby="faq-h">
+    <div class="seo-faq-head">
+      <span class="seo-faq-ring" aria-hidden="true"></span>
+      <div>
+        <h2 id="faq-h">Questions people actually ask</h2>
+        <p>Four small checks that catch real mistakes: campaign links that lose their attribution, slugs that break on accented characters, robots rules that block the wrong path, and sitemaps that promise URLs which no longer exist.</p>
+      </div>
+    </div>
+    <div class="seo-faq-list">
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">What is a UTM parameter and do I need one?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>UTM parameters are tags on a link that tell your analytics where a visitor came from. Without them, traffic from a newsletter and traffic from a paid ad look identical, and you cannot tell which one worked.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">How do I make a URL slug from a title with accents?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>Paste the title. The slug generator folds accented characters to their closest ASCII equivalent, so &#x27;Café Münchén&#x27; becomes &#x27;cafe-munchen&#x27; rather than losing the words entirely or emitting percent-encoding.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Will this validate my robots.txt?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>It generates rules and flags the common mistakes, including disallowing a path you probably meant to keep crawlable. It does not fetch your live file — nothing on this page makes a network request.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Is any of this sent to a server?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>No. All four tools run in the browser.</p>
+      </details>
+    </div>
+    <a class="seo-faq-guide" href="/blog/meta-tags-and-structured-data-without-a-developer/">
+      <span class="seo-faq-guide-ring" aria-hidden="true"></span>
+      <span><span class="seo-faq-guide-kicker">Read the guide</span>Meta tags and structured data, without a developer</span>
+    </a>
+    <p class="seo-faq-foot">Part of <a href="/utility/">nine free KAI247 instruments</a> — all in-browser, none of them upload your files.</p>
+  </section>
+<!-- /seo:faq -->
 </main>
 
 <footer class="u-foot">

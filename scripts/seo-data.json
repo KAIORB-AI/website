@@ -1,0 +1,773 @@
+{
+  "_comment": "Source of truth for per-page SEO. scripts/build-seo.py renders the visible FAQ and the FAQPage JSON-LD from THIS FILE, so the two can never disagree. Google treats structured data that does not match visible content as spam, and it is also just dishonest. Edit here, then re-run the script.",
+  "pages": [
+    {
+      "path": "/utility/pdf-size-reducer/",
+      "file": "utility/pdf-size-reducer/index.html",
+      "name": "PDF Size Reducer",
+      "title": "Free PDF Size Reducer — shrink a PDF without uploading it",
+      "description": "Reduce PDF file size in your browser. Nothing is uploaded, no email, no watermark, no sign-up. Best on scanned documents, where it typically halves the size.",
+      "crumb": "PDF Size Reducer",
+      "intro": "Most tools that shrink a PDF ask you to upload it to their servers first. If the document is a signed contract, a passport scan or a client's accounts, that is a decision you may not want to make. This one never sends the file anywhere.",
+      "faqs": [
+        [
+          "Is this PDF size reducer really free?",
+          "Yes. There is no account, no email address, no watermark, no page limit and no paid tier hiding the useful settings. It is one of nine free instruments KAI247 publishes."
+        ],
+        [
+          "Does my PDF get uploaded to a server?",
+          "No. The file is read and rewritten by your own browser. You can disconnect from the internet after the page loads and it still works, which is the simplest proof that nothing is being sent."
+        ],
+        [
+          "How much smaller will my PDF get?",
+          "It depends entirely on what is inside. A scanned document is mostly JPEG images and commonly halves — a one-page scan in our testing went from 84 KB to 39 KB. A PDF that is mostly text and fonts will barely change, and the tool tells you that rather than handing back a file the same size."
+        ],
+        [
+          "Will it ruin the quality?",
+          "You choose. Four quality settings run from barely-visible change to maximum compression, and a separate resolution control. Text drawn as text is never touched — only the pictures are recompressed."
+        ],
+        [
+          "Why did it refuse my file?",
+          "Three cases are refused on purpose rather than producing a broken document: encrypted PDFs, PDFs with no recompressible images, and PDFs that store their objects in a compressed structure this tool will not rewrite. Your original is never modified."
+        ],
+        [
+          "Does it work on a phone?",
+          "Yes, in any modern mobile browser. Very large scans may exhaust memory on an older phone, and if that happens the page says so instead of hanging."
+        ]
+      ],
+      "section": "utility",
+      "guide": [
+        "how-to-reduce-pdf-size-without-uploading",
+        "How to reduce PDF size without uploading it"
+      ]
+    },
+    {
+      "path": "/utility/photo-size-targeter/",
+      "file": "utility/photo-size-targeter/index.html",
+      "name": "Photo Size Targeter",
+      "title": "Free Image Compressor — hit an exact KB size, no upload",
+      "description": "Compress a JPG, PNG or WebP to an exact file size — under 200 KB, under 50 KB — in your browser. Nothing uploaded, EXIF stripped, free with no sign-up.",
+      "crumb": "Photo Size Targeter",
+      "intro": "Upload forms are unforgiving: under 200 KB, under 1 MB, exactly this or nothing. This searches quality first, then resolution, and stops at the best-looking image that still fits the number you named.",
+      "faqs": [
+        [
+          "How do I compress an image to a specific KB size?",
+          "Type the limit — 200 KB, 100 KB, 50 KB — and the tool binary-searches JPEG quality between 0.05 and 0.95 to find the highest quality that still fits. If even the lowest quality is too big, it scales the image down in steps and searches again."
+        ],
+        [
+          "Is the image uploaded anywhere?",
+          "No. It is decoded and re-encoded on a canvas inside your own browser. Passport photos and ID scans never leave the machine."
+        ],
+        [
+          "Does it remove EXIF data?",
+          "Yes, as a side effect of re-encoding through a canvas. GPS coordinates and camera details in the original are not carried into the output, which matters if you are about to post the picture publicly."
+        ],
+        [
+          "Which formats can it write?",
+          "JPEG, WebP and PNG. JPEG is smallest for photographs, WebP is smaller still in modern browsers, and PNG is lossless so only its resolution can be reduced."
+        ],
+        [
+          "What if it cannot reach my target?",
+          "It says so, and shows the smallest it managed and at what dimensions, rather than silently handing back something over the limit."
+        ]
+      ],
+      "section": "utility",
+      "guide": [
+        "resize-an-image-to-an-exact-file-size",
+        "How to resize an image to an exact file size"
+      ]
+    },
+    {
+      "path": "/utility/video-to-audio/",
+      "file": "utility/video-to-audio/index.html",
+      "name": "Video to Audio Converter",
+      "title": "Free MP4 to WAV Converter — extract audio in your browser",
+      "description": "Extract the audio from an MP4, MOV or WebM and save it as a WAV. Runs in your browser, nothing uploaded, free. 16 kHz mono preset for transcription.",
+      "crumb": "Video to Audio",
+      "intro": "Pull the sound out of a recording without handing the video to a conversion site. Useful before transcription, for podcast edits, and any time you need the audio and not the pictures.",
+      "faqs": [
+        [
+          "How do I convert MP4 to WAV for free?",
+          "Drop the file in, choose a sample rate and channel count, and press Extract audio. Your browser's own decoder reads the audio track and ignores the video frames; the result is written as a standard RIFF/PCM WAV."
+        ],
+        [
+          "Is my video uploaded?",
+          "No. Everything happens in the tab. That matters for client recordings, interviews and anything under NDA."
+        ],
+        [
+          "What settings should I use for transcription?",
+          "16,000 Hz mono. That is what most speech-to-text engines expect, and it is roughly a sixth the size of CD-quality stereo. There is a preset for exactly that."
+        ],
+        [
+          "Can it output MP3?",
+          "No, and deliberately. MP3 encoding needs a licensed encoder this page does not ship. WAV is uncompressed and universally readable — convert it afterwards if you need MP3."
+        ],
+        [
+          "Why does it say there is no audio?",
+          "Either the file genuinely has no audio track — screen recordings made without a microphone often do not — or its codec is not one your browser can decode. The tool names both possibilities rather than guessing."
+        ],
+        [
+          "How large a file can it handle?",
+          "The whole track is held in memory while converting, so very long recordings can exhaust a tab. 16 kHz mono needs about a sixth of the memory of CD-quality stereo, which is usually the fix."
+        ]
+      ],
+      "section": "utility",
+      "guide": [
+        "extract-audio-from-video-without-uploading-it",
+        "How to extract audio from a video without uploading it"
+      ]
+    },
+    {
+      "path": "/utility/cidr-calculator/",
+      "file": "utility/cidr-calculator/index.html",
+      "name": "Subnet & CIDR Calculator",
+      "title": "Free CIDR Subnet Calculator — IPv4 and IPv6, RFC 3021 aware",
+      "description": "Subnet ranges, usable hosts, netmask and broadcast for IPv4 and IPv6. Recommends a prefix for a device count and checks two blocks for overlap. Free.",
+      "crumb": "CIDR Calculator",
+      "intro": "Subnet maths is easy to get subtly wrong, and the subtle errors are the ones that reach production. This does the arithmetic exactly, in big integers, and follows the standards rather than the usual shortcut formula.",
+      "faqs": [
+        [
+          "What prefix do I need for 500 devices?",
+          "Enter the device count and the recommender returns the smallest prefix that fits, with the headroom it leaves. It accounts for the addresses you cannot assign, so the number it gives is usable hosts and not raw address count."
+        ],
+        [
+          "Why does a /31 show two usable addresses?",
+          "Because RFC 3021 says so. A /31 carries two usable addresses for point-to-point links and a /32 carries one, instead of the 'minus two' that applies to ordinary subnets. Many calculators get this wrong and report zero."
+        ],
+        [
+          "Does it support IPv6?",
+          "Yes. IPv6 arithmetic uses BigInt so the counts are exact rather than rounded through floating point. IPv6 reserves no broadcast address, so every address in the prefix is usable."
+        ],
+        [
+          "Can it tell me if two subnets overlap?",
+          "Yes — the overlap check takes two blocks and reports whether one contains the other, where the shared range starts and ends, and how many addresses are involved. Worth running before committing an address plan."
+        ],
+        [
+          "Is anything sent to a server?",
+          "No. It is pure arithmetic in the browser, so your internal address plan stays internal."
+        ]
+      ],
+      "section": "utility",
+      "guide": [
+        "subnet-masks-and-cidr-explained",
+        "Subnet masks and CIDR, explained by what you actually need"
+      ]
+    },
+    {
+      "path": "/utility/business-finance-analyzer/",
+      "file": "utility/business-finance-analyzer/index.html",
+      "name": "Business Finance Analyzer",
+      "title": "Free Burn Rate & Runway Calculator — margin and break-even",
+      "description": "Work out gross margin, net margin, monthly burn, runway and break-even revenue from your own figures. Runs in your browser, nothing uploaded, free.",
+      "crumb": "Finance Analyzer",
+      "intro": "Four numbers decide whether a small business is fine or in trouble: what each sale actually earns, what the month costs regardless, how long the cash lasts, and how much revenue clears the bar. This works all four out and says plainly which problem you have.",
+      "faqs": [
+        [
+          "How do I calculate runway?",
+          "Cash divided by monthly burn, where burn is net profit when it is negative. If you set a growth rate this tool steps month by month instead, because growth changes the burn every month and a single division would quietly ignore that."
+        ],
+        [
+          "What is break-even revenue?",
+          "Fixed costs divided by gross margin — the sales you need before the bills that arrive anyway are covered. If your gross margin is zero or negative, break-even does not exist at any volume, and the tool says 'unreachable' rather than printing a number."
+        ],
+        [
+          "What counts as a direct cost rather than a fixed cost?",
+          "Direct costs scale with each sale: materials, payment fees, per-customer hosting, delivery contractors. Fixed costs arrive whether you sell or not: salaries, rent, tools, insurance. Putting a cost in the wrong bucket is the most common reason these numbers mislead."
+        ],
+        [
+          "Is my financial data uploaded?",
+          "No. Nothing is stored, sent or logged. Close the tab and it is gone."
+        ],
+        [
+          "Is this financial advice?",
+          "No. It is arithmetic. It does not know your tax position, receivables, seasonality or debt schedule, and it is not a substitute for an accountant."
+        ]
+      ],
+      "section": "utility",
+      "guide": [
+        "runway-burn-rate-and-break-even",
+        "How long will your cash last? Runway, burn and break-even"
+      ]
+    },
+    {
+      "path": "/utility/quote-generator/",
+      "file": "utility/quote-generator/index.html",
+      "name": "Quote & Estimate Generator",
+      "title": "Free Quote & Estimate Generator — print or save as PDF",
+      "description": "Build a priced quote with line items, discount and tax, then print it or save it as a PDF. No account, no watermark, nothing uploaded. Free.",
+      "crumb": "Quote Generator",
+      "intro": "A quote is a small document with one job: be clear about what is included and what it costs. This builds one in a minute, gets the arithmetic exactly right, and prints without a watermark or a subscription prompt.",
+      "faqs": [
+        [
+          "Can I make a quote for free without signing up?",
+          "Yes. No account, no email, no watermark and no export limit. Fill in the lines and print."
+        ],
+        [
+          "How do I turn it into a PDF?",
+          "Press Print and choose 'Save as PDF' in your browser's print dialogue. Your browser already has a competent PDF writer, so this page does not load a second one just to do the same job. The editor is hidden when printing, so the page prints as the document alone."
+        ],
+        [
+          "Does it handle discount and tax correctly?",
+          "The discount comes off the subtotal, then tax applies to what is left. Every amount is held in whole cents from the moment you type it, so the total always equals the sum of its own rows — rounding at the end is how invoices end up a penny out."
+        ],
+        [
+          "Which currencies are supported?",
+          "USD, EUR, GBP, INR, CAD, AUD, AED and SGD."
+        ],
+        [
+          "Is my client data stored?",
+          "No. Nothing is saved or transmitted. Closing the tab discards it, so keep the printed PDF if you need a record."
+        ],
+        [
+          "Can I use it for purchase orders too?",
+          "There is a dedicated Purchase Order Generator with the right wording, numbering and a delivery date instead of a validity date."
+        ]
+      ],
+      "section": "utility",
+      "guide": [
+        "how-to-write-a-quote-that-gets-accepted",
+        "How to write a quote that gets accepted"
+      ]
+    },
+    {
+      "path": "/utility/purchase-order-generator/",
+      "file": "utility/purchase-order-generator/index.html",
+      "name": "Purchase Order Generator",
+      "title": "Free Purchase Order Generator — raise a PO and print it",
+      "description": "Create a purchase order with supplier details, line items, discount, tax and a delivery date, then print or save as PDF. Free, nothing uploaded.",
+      "crumb": "Purchase Order Generator",
+      "intro": "A purchase order exists so everyone agrees what was ordered before an invoice argues about it. This raises a clean one with a reference number your supplier can quote back.",
+      "faqs": [
+        [
+          "How do I create a purchase order for free?",
+          "Fill in buyer and supplier, add the lines, set a delivery date and print. No account and no watermark."
+        ],
+        [
+          "What should a purchase order include?",
+          "A unique PO number, the date raised, buyer and supplier details, itemised goods or services with quantities and unit prices, the total, and any terms. All of those are on the form, and the PO number is pre-filled in a sequence you can overwrite."
+        ],
+        [
+          "Can I save it as a PDF?",
+          "Yes — print, then choose Save as PDF. The editor is hidden in print, so you get the document by itself."
+        ],
+        [
+          "Does it track POs or number them for me?",
+          "No. It generates documents; it does not store them or keep a sequence between visits. If you need a register, keep the PDFs or use an accounting system."
+        ],
+        [
+          "Is supplier pricing sent anywhere?",
+          "No. Everything stays in the browser tab."
+        ]
+      ],
+      "section": "utility",
+      "guide": [
+        "what-a-purchase-order-needs",
+        "What a purchase order actually needs"
+      ]
+    },
+    {
+      "path": "/utility/web-marketing-toolkit/",
+      "file": "utility/web-marketing-toolkit/index.html",
+      "name": "Web & Marketing Toolkit",
+      "title": "Free Meta Tag & Schema Generator — with live SERP preview",
+      "description": "Write meta and Open Graph tags with a live search and social preview, generate LocalBusiness JSON-LD, and build redirect rules. Free, in your browser.",
+      "crumb": "Marketing Toolkit",
+      "intro": "Four jobs that get skipped because each is small and none is interesting: the tags that decide how a page looks in search, the structured data that tells engines what a business is, the redirects that stop a rebuild losing traffic, and a keyword list with the duplicates taken out.",
+      "faqs": [
+        [
+          "How long should a meta title and description be?",
+          "Roughly 60 characters for a title and 155 for a description, and the counters flag those. Treat them as a working range rather than a rule: search engines truncate on rendered pixel width, so a title in capitals runs out of room sooner than the same count in lower case."
+        ],
+        [
+          "What is JSON-LD structured data for?",
+          "It tells a search engine what a page is about in a form it does not have to guess at — that this is a business, with this name, phone and address. This generator emits Organization, LocalBusiness, Restaurant and ProfessionalService."
+        ],
+        [
+          "Why will it not add my address?",
+          "Because a country on its own is not an address. It needs at least a street, city, region or postcode before it emits a PostalAddress — a half-filled structured-data node is worse than none."
+        ],
+        [
+          "Can it generate redirects for nginx and Netlify?",
+          "Yes, and Apache .htaccess. It also refuses to emit a rule that redirects a path to itself, and skips duplicate sources, because both fail silently in production."
+        ],
+        [
+          "Does it check my live site?",
+          "No. It fetches nothing and logs no URL. Everything is generated from what you type."
+        ]
+      ],
+      "section": "utility",
+      "guide": [
+        "meta-tags-and-structured-data-without-a-developer",
+        "Meta tags and structured data, without a developer"
+      ]
+    },
+    {
+      "path": "/utility/web-essentials/",
+      "file": "utility/web-essentials/index.html",
+      "name": "Web Essentials",
+      "title": "Free UTM Builder, Slug, robots.txt and Sitemap Checker",
+      "description": "Build campaign tracking URLs, make slugs that survive accents, generate and validate robots.txt, and check a sitemap. Four checks, free.",
+      "crumb": "Web Essentials",
+      "intro": "Four small checks that catch real mistakes: campaign links that lose their attribution, slugs that break on accented characters, robots rules that block the wrong path, and sitemaps that promise URLs which no longer exist.",
+      "faqs": [
+        [
+          "What is a UTM parameter and do I need one?",
+          "UTM parameters are tags on a link that tell your analytics where a visitor came from. Without them, traffic from a newsletter and traffic from a paid ad look identical, and you cannot tell which one worked."
+        ],
+        [
+          "How do I make a URL slug from a title with accents?",
+          "Paste the title. The slug generator folds accented characters to their closest ASCII equivalent, so 'Café Münchén' becomes 'cafe-munchen' rather than losing the words entirely or emitting percent-encoding."
+        ],
+        [
+          "Will this validate my robots.txt?",
+          "It generates rules and flags the common mistakes, including disallowing a path you probably meant to keep crawlable. It does not fetch your live file — nothing on this page makes a network request."
+        ],
+        [
+          "Is any of this sent to a server?",
+          "No. All four tools run in the browser."
+        ]
+      ],
+      "section": "utility",
+      "guide": [
+        "meta-tags-and-structured-data-without-a-developer",
+        "Meta tags and structured data, without a developer"
+      ]
+    },
+    {
+      "path": "/utility/",
+      "file": "utility/index.html",
+      "name": "Free Online Tools",
+      "title": "Free Online Tools — PDF, image, video, subnet and business",
+      "description": "Nine free browser tools: PDF size reducer, image compressor, MP4 to WAV, CIDR calculator, quote and PO generators, finance analyzer and SEO toolkit.",
+      "crumb": "Utilities",
+      "intro": "Nine instruments, all free, all running entirely in your browser. No account, no upload, no watermark and no paid tier holding back the setting you actually need.",
+      "faqs": [
+        [
+          "Are these tools really free?",
+          "Yes. No account, no email, no trial, no watermark and no export limit. They are published by KAI247 as part of what the network gives away."
+        ],
+        [
+          "Why do they run in the browser instead of on a server?",
+          "Because most of these jobs involve a file you would rather not hand over: a signed contract, a passport scan, a client recording, an internal address plan, your own revenue figures. If the file never leaves the tab, there is nothing to trust us with."
+        ],
+        [
+          "Do they work offline?",
+          "Once a page has loaded, yes. You can disconnect and keep working, which is the simplest demonstration that nothing is being uploaded."
+        ],
+        [
+          "What is the catch?",
+          "There is not one for you. KAI247 is a network of companies that build software, and these tools are a plain demonstration of how we work. If you never contact us, the tools still work."
+        ],
+        [
+          "Can I suggest a tool?",
+          "Yes — through the contact page. The suite grows from what people actually ask for."
+        ]
+      ],
+      "section": "utility",
+      "guide": [
+        "why-our-tools-never-upload-your-files",
+        "Why our tools never upload your files"
+      ]
+    },
+    {
+      "path": "/",
+      "file": "index.html",
+      "section": "network",
+      "crumb": "Home",
+      "name": "KAI247",
+      "title": "KAI247 — free website, hosting and AI tools for your business",
+      "description": "A network that gives your business a free website, hosting, SEO, marketing and AI tools — while you keep your own name and 100% ownership.",
+      "intro": "What KAI247 is, what it costs, and what your business actually gets.",
+      "faqs": [
+        [
+          "What is KAI247?",
+          "A companion ecosystem — a shared intelligence, technology and growth network that businesses join while keeping their own identity. It is not an umbrella company and not a franchise. You run your business; the network runs everything around it."
+        ],
+        [
+          "What does KAI247 cost?",
+          "Joining is free during the founding period. There are no franchise fees and no equity is taken. The nine browser utilities are free to everyone, whether you join the network or not."
+        ],
+        [
+          "What do I actually get if I join?",
+          "A free website with smart hosting on a high-speed CDN, digital marketing and social promotion through REACH and COMET, local SEO so customers find you, free business tools, and NEXUS — a conversational AI assistant that works 24×7."
+        ],
+        [
+          "Do I lose control of my business if I join?",
+          "No. Network brands keep their name, their look and 100% of their ownership. Capability arrives around your business without absorbing it."
+        ],
+        [
+          "What kinds of businesses is this for?",
+          "Restaurants, landscaping and lawn care, urgent care and dental, retail stores and boutiques, construction and trades, event businesses and venues, and professional services such as legal, accounting and consulting."
+        ],
+        [
+          "Where is KAI247 based?",
+          "Three founding companies on three continents: Brahmexa LLC (USA), Inducer Solutions Inc (Canada) and JSI Software Solutions (India). Network brands span five countries."
+        ]
+      ],
+      "guide": [
+        "what-a-small-business-actually-gets-from-kai247",
+        "What a small business actually gets from KAI247"
+      ]
+    },
+    {
+      "path": "/about/",
+      "file": "about/index.html",
+      "section": "network",
+      "crumb": "About",
+      "name": "About KAI247",
+      "title": "About KAI247 — small changes, always",
+      "description": "KAI247 exists to make continuous business adaptation simple and reliable 24×7. A companion ecosystem across three continents, not a franchise.",
+      "intro": "The idea behind the network, and what it is deliberately not.",
+      "faqs": [
+        [
+          "What does “Small changes. Always.” mean?",
+          "A customer changes, a market changes, technology changes. A company adapts — not once a year in a grand overhaul, but continuously. Small useful iterations accumulate into lasting evolution."
+        ],
+        [
+          "What is a companion ecosystem?",
+          "A network that sits alongside your business rather than above it. Intelligence sits at the centre, surrounded by capability, with real businesses in orbit keeping their own identity."
+        ],
+        [
+          "Is KAI247 a franchise?",
+          "No. There are no franchise fees, no equity is taken, and your brand is never replaced. That is the difference between a companion ecosystem and an umbrella company."
+        ],
+        [
+          "Who founded KAI247?",
+          "Three companies across three continents — Brahmexa LLC (USA), Inducer Solutions Inc (Canada) and JSI Software Solutions (India) — delivering as one global technology network."
+        ]
+      ],
+      "guide": [
+        "small-changes-always",
+        "Small changes. Always."
+      ]
+    },
+    {
+      "path": "/ecosystem/",
+      "file": "ecosystem/index.html",
+      "section": "network",
+      "crumb": "Ecosystem",
+      "name": "The Ecosystem",
+      "title": "How the KAI247 ecosystem works — core, orbits, brands",
+      "description": "One intelligence core, a founding trinity across three continents, and open orbits for the brands that join. How the KAI247 universe is actually put together.",
+      "intro": "How the pieces fit: the core, the orbits, and the open seat.",
+      "faqs": [
+        [
+          "How is the KAI247 ecosystem structured?",
+          "Brahmando, the intelligence core, sits at the centre. The first orbit holds the three founding companies. Further out are the network brands, and beyond them an open orbit for the next business to join."
+        ],
+        [
+          "What is an orbit?",
+          "A position in the network. Being in orbit means shared capability reaches your business — hosting, growth, AI, engineering — without your business being absorbed into anyone else's brand."
+        ],
+        [
+          "Who is in the founding orbit?",
+          "Brahmexa LLC (USA), Inducer Solutions Inc (Canada) and JSI Software Solutions (India). Each contributes a different capability to the core."
+        ],
+        [
+          "Can any business enter an orbit?",
+          "Yes. There is an open seat in the outer orbit, and joining is free during the founding period. You keep your name, your look and your ownership."
+        ],
+        [
+          "Does the ecosystem run on shared infrastructure?",
+          "Yes. Hosting, AI agents and growth tooling are provided from the network's own infrastructure across the USA, Canada and India, so a joining business needs no servers of its own."
+        ]
+      ]
+    },
+    {
+      "path": "/capabilities/",
+      "file": "capabilities/index.html",
+      "section": "network",
+      "crumb": "Capabilities",
+      "name": "Capabilities",
+      "title": "Capabilities — eight constellations of AI, cloud and growth",
+      "description": "Eight constellations around the intelligence core: AI, software engineering, web and commerce, growth, cloud, education, events and data.",
+      "intro": "What the network can actually do, and how the work is automated.",
+      "faqs": [
+        [
+          "What capabilities does KAI247 offer?",
+          "Eight constellations: AI and intelligence, software engineering, web and commerce, growth and marketing, cloud and infrastructure, education technology, events and engagement, and data and transformation."
+        ],
+        [
+          "What is a constellation?",
+          "A cluster of related capabilities that work together. Selecting one opens the agentic workflows inside it, so you can see the stages a piece of work actually moves through."
+        ],
+        [
+          "Are these delivered by people or by automation?",
+          "Both. Agentic workflows carry the repeatable stages — intake, enrichment, checks, publishing — and the founding companies stand behind the parts that need judgement."
+        ],
+        [
+          "Do I need technical staff to use any of this?",
+          "No. Hosting, growth, AI and digital capabilities arrive without technical complexity. That is the point of the network: you keep doing your craft."
+        ],
+        [
+          "Can a capability be added to a constellation?",
+          "Yes. Providers can offer AI compute, cloud, software engineering, growth or education capability into a constellation, where it reaches network brands worldwide."
+        ]
+      ],
+      "guide": [
+        "small-changes-always",
+        "Small changes. Always."
+      ]
+    },
+    {
+      "path": "/network/",
+      "file": "network/index.html",
+      "section": "network",
+      "crumb": "Network",
+      "name": "The Network",
+      "title": "The KAI247 network — founding companies and network brands",
+      "description": "Three founding companies, four network brands, five countries and one open seat. Who is already in orbit and what each of them does.",
+      "intro": "Who is already in orbit, and how a brand keeps its identity inside a network.",
+      "faqs": [
+        [
+          "Who is in the KAI247 network?",
+          "Three founding companies and four network brands across five countries, with one open seat in the outer orbit."
+        ],
+        [
+          "What do the founding companies do?",
+          "Brahmexa LLC (USA) is an AI lab making agentic automation accessible to small businesses and underserved communities. Inducer Solutions Inc (Canada) builds agentic AI, autonomous multi-agent systems, MCP-powered context intelligence and AIOps. JSI Software Solutions (India) delivers smart interactive boards, computer labs and AI datacenter services."
+        ],
+        [
+          "What is a network brand?",
+          "A business with its own distinct identity that draws on the network's shared capabilities. PrimoVive, Isha Skin Care, Global & Funsize Productions and Easy Q2C are the current four."
+        ],
+        [
+          "Can I add my company to the network?",
+          "Yes — the open orbit exists for exactly that. Applying is free during the founding period and costs you no equity."
+        ]
+      ]
+    },
+    {
+      "path": "/impact/",
+      "file": "impact/index.html",
+      "section": "network",
+      "crumb": "Impact",
+      "name": "Impact Constellation",
+      "title": "Free AI agents for student aid, food, housing and veterans",
+      "description": "Free AI agents for FAFSA, SNAP and Medicaid, tenant rights, VA benefits and N-400 naturalization. Zero cost, no upsells, no account.",
+      "intro": "Free public agents — what they cover, and what they are not.",
+      "faqs": [
+        [
+          "What is the Impact Constellation?",
+          "A set of free AI agents standing beside people who need them — zero cost, no upsells, no account required."
+        ],
+        [
+          "Which agents are live?",
+          "Five: the FAFSA Helper for federal student aid, the USCIS Companion for N-400 naturalization and work authorization, the SNAP Helper for food stamps and Medicaid, the Housing Rights Helper for eviction defence and tenant rights, and the Veterans Navigator for VA benefits and local NGO support."
+        ],
+        [
+          "Do the impact agents cost anything?",
+          "No. They are free, with no upsell and nothing to buy. They exist because the network grows by helping others grow."
+        ],
+        [
+          "Are they a substitute for a lawyer or a caseworker?",
+          "No. They explain eligibility and walk you through the forms. For a decision that carries legal weight, take the output to a qualified adviser."
+        ],
+        [
+          "Can I propose a new public agent?",
+          "Yes. There is an open agent seat in the constellation for a programme the network has not covered yet."
+        ]
+      ],
+      "guide": [
+        "free-ai-agents-for-public-benefits",
+        "Why we built free AI agents for FAFSA, SNAP and VA benefits"
+      ]
+    },
+    {
+      "path": "/join/",
+      "file": "join/index.html",
+      "section": "network",
+      "crumb": "Join",
+      "name": "Join the Orbit",
+      "title": "Join KAI247 — free hosting, marketing and AI for your business",
+      "description": "Two ways in: bring your business into orbit and keep 100% of your brand, or bring a capability to a constellation. Free while the network forms.",
+      "intro": "How joining works, what it costs, and what happens after you apply.",
+      "faqs": [
+        [
+          "How do I join KAI247?",
+          "There are three routes. Trajectory 01 brings your business into orbit as a network brand. Trajectory 02 offers a capability into a constellation. If you are not ready for either, the third route simply lets you tell us what you are building."
+        ],
+        [
+          "What does it cost to join?",
+          "Nothing during the founding period. No franchise fees, no equity, no subscription."
+        ],
+        [
+          "Do I give up any ownership of my business?",
+          "No. You keep your name, your look and 100% of your brand. Zero equity loss, zero franchise fees."
+        ],
+        [
+          "What happens after I apply?",
+          "The brand and capability applications open your own email client with the application filled in, so nothing is stored on a server. The short proposal form sends straight through and returns a reference number."
+        ],
+        [
+          "What kinds of businesses join?",
+          "Restaurants, salons, urgent care, retail stores, landscaping and professional services — anywhere the work is the craft and the technology around it is the burden."
+        ]
+      ],
+      "guide": [
+        "what-a-small-business-actually-gets-from-kai247",
+        "What a small business actually gets from KAI247"
+      ]
+    },
+    {
+      "path": "/join/brand/",
+      "file": "join/brand/index.html",
+      "section": "network",
+      "crumb": "Join as a Brand",
+      "parent": [
+        "Join",
+        "/join/"
+      ],
+      "name": "Join as a Network Brand",
+      "title": "Join as a network brand — keep 100% of your business",
+      "description": "Free hosting, growth tooling and AI for your business, backed by labs in the USA, Canada and India. No equity, no franchise fees.",
+      "intro": "What a network brand gets, and what it gives up (nothing).",
+      "faqs": [
+        [
+          "What does a network brand get?",
+          "Free hosting, REACH and COMET growth tooling, AI tools and the utility suite — all upgrading automatically — backed by founding AI labs and data centres in the USA, Canada and India."
+        ],
+        [
+          "Do I keep ownership of my brand?",
+          "Completely. 100% brand sovereignty: your name, your look, your ownership. Zero equity loss and zero franchise fees."
+        ],
+        [
+          "What does it cost?",
+          "It is free during the founding period. Shared infrastructure and capability are provided while the orbit forms."
+        ],
+        [
+          "How does the application work?",
+          "The form assembles your application and opens it in your own email client for you to review and send. No data is stored on our server."
+        ],
+        [
+          "How long does it take to get set up?",
+          "It depends on what you already have. A business with no website starts from a fresh build; one with an existing site is migrated onto network hosting first, then the growth and AI capabilities are switched on around it."
+        ]
+      ],
+      "guide": [
+        "what-a-small-business-actually-gets-from-kai247",
+        "What a small business actually gets from KAI247"
+      ]
+    },
+    {
+      "path": "/join/provider/",
+      "file": "join/provider/index.html",
+      "section": "network",
+      "crumb": "Offer a Capability",
+      "parent": [
+        "Join",
+        "/join/"
+      ],
+      "name": "Offer a Capability",
+      "title": "Offer a capability — AI compute, cloud, engineering",
+      "description": "Distribute your AI models, GPU compute, cloud infrastructure or software engineering across the KAI247 network of brands. Power a constellation.",
+      "intro": "Who should offer a capability, and where it ends up.",
+      "faqs": [
+        [
+          "Who should offer a capability?",
+          "Providers of AI datacenter and GPU compute, AI offerings for small businesses, cloud and hosting, software engineering, growth and marketing, or education technology."
+        ],
+        [
+          "What happens to my offering?",
+          "It powers a constellation — the cluster of capabilities that network brands draw on. Instead of selling to one business at a time, your capability reaches the brands already in orbit."
+        ],
+        [
+          "Does it cost anything to offer a capability?",
+          "No. The founding period is free in both directions: brands pay nothing to join and providers pay nothing to be listed into a constellation."
+        ],
+        [
+          "How do I apply?",
+          "Fill in the offering details and the form opens your own email client with the submission ready to review and send. No data is stored on our server."
+        ]
+      ]
+    },
+    {
+      "path": "/brahmando/",
+      "file": "brahmando/index.html",
+      "section": "network",
+      "crumb": "Brahmando",
+      "name": "Brahmando",
+      "title": "Brahmando — the intelligence core for AI agents",
+      "description": "Brahmando is the Brahmexa platform for AI agents, MCP servers and agentic workflows — the intelligence core at the centre of the KAI247 universe.",
+      "intro": "What the core does, and how it reaches the rest of the network.",
+      "faqs": [
+        [
+          "What is Brahmando?",
+          "The intelligence core of the network: infrastructure for AI agents, MCP servers and agentic workflows, built by Brahmexa."
+        ],
+        [
+          "What is an MCP server?",
+          "MCP is the Model Context Protocol — a standard way for an AI model to reach real tools and real data. An MCP server is what exposes a system, so an agent can act on it rather than only describe it."
+        ],
+        [
+          "How does Brahmando relate to KAI247?",
+          "Signals move into the core, through the core, and back out toward network capabilities. Brahmando is what powers the companion ecosystem; KAI247 is the network that ecosystem serves."
+        ],
+        [
+          "Where can I see Brahmando?",
+          "At brahmando.com. The capability constellations on this site are the same intelligence expressed as things a business can use."
+        ]
+      ]
+    },
+    {
+      "path": "/contact/",
+      "file": "contact/index.html",
+      "section": "network",
+      "crumb": "Contact",
+      "name": "Contact",
+      "title": "Contact KAI247 — three doors in the USA, Canada and India",
+      "description": "Reach the KAI247 network through its three founding entry points: Brahmexa in the USA, Inducer Solutions in Canada, and JSI Software Solutions in India.",
+      "intro": "Which door to use, and what to do while the central channel is forming.",
+      "faqs": [
+        [
+          "How do I contact KAI247?",
+          "Through any of the three founding doors: Brahmexa in the USA, Inducer Solutions in Canada, or JSI Software Solutions in India. All three reach the same network."
+        ],
+        [
+          "Which door should I use?",
+          "The one nearest you, or the one closest to what you need. There is no wrong door — the founding companies operate as one network."
+        ],
+        [
+          "Is there a single central contact?",
+          "A central direct channel is forming. Until it opens, use a founding company door, or send a short proposal from the join page and you will get a reference number back."
+        ],
+        [
+          "I want to join rather than ask a question. Where do I go?",
+          "Straight to the join page. Bringing a business into orbit and offering a capability each have their own application."
+        ]
+      ]
+    },
+    {
+      "path": "/utilities/",
+      "file": "utilities/index.html",
+      "section": "network",
+      "crumb": "Instrument Ring",
+      "name": "The Instrument Ring",
+      "title": "The Instrument Ring — free tools from the network",
+      "description": "A free school ERP, a free ORBIT hosting analysis, and the Brahmando marketplace of AI agents. Open to anyone, member or not.",
+      "intro": "Network-contributed tools — and how they differ from the in-browser utilities.",
+      "faqs": [
+        [
+          "What is the Instrument Ring?",
+          "Tools contributed by companies in the network and opened to everyone, member or not. The network grows by helping others grow."
+        ],
+        [
+          "What is available right now?",
+          "A free school ERP for school management from JSI Software Solutions, a free ORBIT starter analysis of your hosting infrastructure from Brahmexa, and the Brahmando marketplace of AI agents and agentic workflows."
+        ],
+        [
+          "How is this different from the free browser utilities?",
+          "The Instrument Ring holds full products hosted by network companies. The utility suite is nine small tools that run entirely inside your browser — nothing you open there is ever uploaded."
+        ],
+        [
+          "Do I have to join KAI247 to use them?",
+          "No. They are open instruments. Joining the network is a separate decision."
+        ]
+      ],
+      "guide": [
+        "free-business-tools-that-are-actually-free",
+        "Free business tools that are actually free"
+      ]
+    }
+  ]
+}

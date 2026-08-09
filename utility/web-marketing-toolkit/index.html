@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Web &amp; Marketing Toolkit — meta tags, schema, redirects — KAI247</title>
-<meta name="description" content="Write meta and Open Graph tags with a live search and social preview, generate Organization or LocalBusiness JSON-LD, build redirect rules, and clean a keyword list. All in your browser.">
+<title>Free Meta Tag &amp; Schema Generator — with live SERP preview</title>
+<meta name="description" content="Write meta and Open Graph tags with a live search and social preview, generate LocalBusiness JSON-LD, and build redirect rules. Free, in your browser.">
 <link rel="canonical" href="https://kai247.com/utility/web-marketing-toolkit/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kai247.com/utility/web-marketing-toolkit/">
@@ -35,6 +35,83 @@
 .mk-count.over { color:var(--u-rose); font-weight:600; }
 .mk-count.ok { color:var(--u-emerald); }
 </style>
+<!-- seo:ld -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How long should a meta title and description be?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Roughly 60 characters for a title and 155 for a description, and the counters flag those. Treat them as a working range rather than a rule: search engines truncate on rendered pixel width, so a title in capitals runs out of room sooner than the same count in lower case."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is JSON-LD structured data for?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It tells a search engine what a page is about in a form it does not have to guess at — that this is a business, with this name, phone and address. This generator emits Organization, LocalBusiness, Restaurant and ProfessionalService."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why will it not add my address?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Because a country on its own is not an address. It needs at least a street, city, region or postcode before it emits a PostalAddress — a half-filled structured-data node is worse than none."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can it generate redirects for nginx and Netlify?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes, and Apache .htaccess. It also refuses to emit a rule that redirects a path to itself, and skips duplicate sources, because both fail silently in production."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does it check my live site?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. It fetches nothing and logs no URL. Everything is generated from what you type."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "KAI247",
+   "item": "https://kai247.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Utilities",
+   "item": "https://kai247.com/utility/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Marketing Toolkit",
+   "item": "https://kai247.com/utility/web-marketing-toolkit/"
+  }
+ ]
+}
+</script>
+<!-- /seo:ld -->
+<link rel="stylesheet" href="/assets/css/seo.css?v=2">
 </head>
 <body>
 <a class="u-skip" href="#main">Skip to content</a>
@@ -46,6 +123,7 @@
     </a>
     <nav class="u-nav" aria-label="Primary">
       <a href="/utility/">All utilities</a>
+      <a href="/blog/">Blog</a>
       <a href="/utility/web-essentials/">Web Essentials</a>
       <a href="/utility/quote-generator/">Quotes</a>
       <a href="/utility/business-finance-analyzer/">Finance</a>
@@ -204,6 +282,44 @@ Project Management Tool!
       <p>Redirect rules are generated for the server you pick and nothing is tested against a live site — this page fetches nothing. It does flag a loop (a path redirecting to itself) and a source appearing twice, because both silently break in production.</p>
     </div>
   </details>
+<!-- seo:faq -->
+  <section class="seo-faq" id="faq" aria-labelledby="faq-h">
+    <div class="seo-faq-head">
+      <span class="seo-faq-ring" aria-hidden="true"></span>
+      <div>
+        <h2 id="faq-h">Questions people actually ask</h2>
+        <p>Four jobs that get skipped because each is small and none is interesting: the tags that decide how a page looks in search, the structured data that tells engines what a business is, the redirects that stop a rebuild losing traffic, and a keyword list with the duplicates taken out.</p>
+      </div>
+    </div>
+    <div class="seo-faq-list">
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">How long should a meta title and description be?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>Roughly 60 characters for a title and 155 for a description, and the counters flag those. Treat them as a working range rather than a rule: search engines truncate on rendered pixel width, so a title in capitals runs out of room sooner than the same count in lower case.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">What is JSON-LD structured data for?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>It tells a search engine what a page is about in a form it does not have to guess at — that this is a business, with this name, phone and address. This generator emits Organization, LocalBusiness, Restaurant and ProfessionalService.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Why will it not add my address?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>Because a country on its own is not an address. It needs at least a street, city, region or postcode before it emits a PostalAddress — a half-filled structured-data node is worse than none.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Can it generate redirects for nginx and Netlify?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>Yes, and Apache .htaccess. It also refuses to emit a rule that redirects a path to itself, and skips duplicate sources, because both fail silently in production.</p>
+      </details>
+      <details class="seo-faq-item">
+        <summary><span class="seo-faq-q">Does it check my live site?</span><span class="seo-faq-mark" aria-hidden="true">+</span></summary>
+        <p>No. It fetches nothing and logs no URL. Everything is generated from what you type.</p>
+      </details>
+    </div>
+    <a class="seo-faq-guide" href="/blog/meta-tags-and-structured-data-without-a-developer/">
+      <span class="seo-faq-guide-ring" aria-hidden="true"></span>
+      <span><span class="seo-faq-guide-kicker">Read the guide</span>Meta tags and structured data, without a developer</span>
+    </a>
+    <p class="seo-faq-foot">Part of <a href="/utility/">nine free KAI247 instruments</a> — all in-browser, none of them upload your files.</p>
+  </section>
+<!-- /seo:faq -->
 </main>
 
 <footer class="u-foot">

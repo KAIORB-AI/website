@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to resize an image to an exact file size — KAI247</title>
+<meta name="description" content="Upload limits are given in kilobytes, not pixels. Here is how to hit 200 KB, 100 KB or 50 KB exactly — and why the usual advice to “just resize it” misses.">
+<link rel="canonical" href="https://kai247.com/blog/resize-an-image-to-an-exact-file-size/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kai247.com/blog/resize-an-image-to-an-exact-file-size/">
+<meta property="og:title" content="How to resize an image to an exact file size">
+<meta property="og:description" content="Upload limits are given in kilobytes, not pixels. Here is how to hit 200 KB, 100 KB or 50 KB exactly — and why the usual advice to “just resize it” misses.">
+<meta name="theme-color" content="#05060c" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f5f6fb" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css?v=3">
+<link rel="stylesheet" href="/assets/css/blog.css?v=1">
+<script defer src="/assets/js/cosmos.js"></script>
+<script defer src="/assets/js/nexus.js?v=2"></script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BlogPosting",
+ "headline": "How to resize an image to an exact file size",
+ "description": "Upload limits are given in kilobytes, not pixels. Here is how to hit 200 KB, 100 KB or 50 KB exactly — and why the usual advice to “just resize it” misses.",
+ "datePublished": "2026-08-09",
+ "dateModified": "2026-08-09",
+ "url": "https://kai247.com/blog/resize-an-image-to-an-exact-file-size/",
+ "mainEntityOfPage": {
+  "@type": "WebPage",
+  "@id": "https://kai247.com/blog/resize-an-image-to-an-exact-file-size/"
+ },
+ "author": {
+  "@type": "Organization",
+  "name": "KAI247",
+  "url": "https://kai247.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "KAI247",
+  "url": "https://kai247.com/"
+ },
+ "wordCount": 511,
+ "articleSection": "Guide"
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "KAI247",
+   "item": "https://kai247.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Blog",
+   "item": "https://kai247.com/blog/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "How to resize an image to an exact file size",
+   "item": "https://kai247.com/blog/resize-an-image-to-an-exact-file-size/"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<div class="stars" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="head">
+  <div class="container">
+    <a class="brand" href="/" aria-label="KAI247 home">
+      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--blue)" stroke-width="4" transform="rotate(-24 32 32)"/><circle cx="32" cy="32" r="10" fill="var(--gold)"/><circle cx="51" cy="19" r="4" fill="var(--ink)"/></svg>
+      KAI247
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/ecosystem/">Ecosystem</a>
+      <a href="/capabilities/">Capabilities</a>
+      <a href="/network/">Network</a>
+      <a href="/utility/">Utilities</a>
+      <a href="/blog/">Blog</a>
+      <a class="join" href="/join/">Join the Orbit</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <article class="bl-article container">
+    <nav class="bl-crumb" aria-label="Breadcrumb"><a href="/">KAI247</a> › <a href="/blog/">Blog</a></nav>
+    <p class="kicker">Guide · 5 min read</p>
+    <h1>How to resize an image to an exact file size</h1>
+    <p class="lede">Upload limits are given in kilobytes, not pixels. Here is how to hit 200 KB, 100 KB or 50 KB exactly — and why the usual advice to “just resize it” misses.</p>
+    <p class="bl-date"><time datetime="2026-08-09">9 August 2026</time></p>
+    <div class="bl-body">
+  <p>Every government portal, job board and university application asks for the same thing: a photo under some number of kilobytes. Almost no image editor lets you ask for that. They let you pick a quality slider, save, check the file size, and go round again.</p>
+  <p>That loop is the whole problem, and it is a loop a computer should be running, not you.</p>
+  <h2>Why picking a quality level does not work</h2>
+  <p>JPEG quality is not a size dial. The same quality setting produces wildly different file sizes depending on what is in the picture. A portrait against a plain wall compresses to a fraction of what a photograph of a tree compresses to, because detail is what costs bytes. Quality 70 might land at 90 KB for one photo and 400 KB for the next.</p>
+  <p>So there is no quality number you can memorise. There is only searching for the one that happens to fit this particular image.</p>
+  <h2>The search that actually finds it</h2>
+  <p>Give the tool a target instead of a quality. It binary-searches JPEG quality between 0.05 and 0.95, re-encoding each time and measuring the real output, converging on the highest quality that still fits under your limit. Typically that is a dozen encodes, which takes a moment and costs you nothing.</p>
+  <p>If even the lowest quality is still too large, the picture is simply carrying more pixels than your limit can hold. At that point it scales the image down a step and searches again, so you get the largest image that fits rather than an error.</p>
+  <blockquote class="bl-quote">A target size is a question with an answer. A quality slider is a guess you have to verify yourself.</blockquote>
+  <h2>What to actually ask for</h2>
+  <ul class="bl-list">
+    <li>Passport and visa photos: usually 100–200 KB, and the portal will say. Keep JPEG.</li>
+    <li>Job applications and CV headshots: 200 KB is comfortable and looks fine.</li>
+    <li>Website images: think in what the page needs, not what the camera gave you — under 150 KB for anything not full-width.</li>
+    <li>Anything that must stay lossless (a logo, a diagram, a screenshot with text): use PNG and reduce the resolution instead, because PNG quality cannot be traded away.</li>
+  </ul>
+  <h2>The EXIF side effect worth knowing about</h2>
+  <p>Re-encoding through a browser canvas rebuilds the image from its pixels. Everything that was wrapped around those pixels — GPS coordinates, camera model, the timestamp, sometimes the owner&#x27;s name — does not survive the trip.</p>
+  <p>That is usually what you want. A photo taken on a phone carries the location it was taken in, and people post those to public profiles without ever knowing. If you did want the metadata kept, copy it separately before you compress.</p>
+  <h2>Do it without handing over the photo</h2>
+  <p>An ID scan, a passport photo, a picture of a signed document — these are exactly the files that should not be posted to a conversion site in exchange for a smaller version of themselves. Ours decodes and re-encodes on a canvas inside your own browser. There is no upload step, because there is no server involved in the work.</p>
+  <div class="bl-tools">
+    <p class="bl-tools-label">Tools mentioned — all free, none upload your files</p>
+    <a class="bl-tool" href="/utility/photo-size-targeter/"><span class="bl-tool-ring" aria-hidden="true"></span><span>Photo Size Targeter</span></a>
+    <a class="bl-tool" href="/utility/pdf-size-reducer/"><span class="bl-tool-ring" aria-hidden="true"></span><span>PDF Size Reducer</span></a>
+  </div>
+    </div>
+    <div class="bl-cta">
+      <p>KAI247 is a network of companies building software for other businesses. The tools are free and always will be.</p>
+      <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1rem">
+        <a class="btn btn-core" href="/utility/">Try the free tools</a>
+        <a class="btn btn-ghost" href="/join/">Join the network</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="cols">
+      <span class="always">KAI247 — Small changes. Always. 24&times;7.</span>
+      <nav class="fnav" aria-label="Footer">
+        <a href="/about/">About</a>
+        <a href="/blog/">Blog</a>
+        <a href="/utility/">Free tools</a>
+        <a href="/knowledge/">Ask KAI247</a>
+        <a href="/contact/">Contact</a>
+        <a href="/join/">Join</a>
+      </nav>
+    </div>
+    <p class="foundry">Founded across three continents — Brahmexa (USA) &middot; Inducer Solutions Inc (Canada) &middot; JSI Software Solutions (India). &copy; 2026 KAI247.</p>
+  </div>
+</footer>
+</body>
+</html>
