@@ -294,6 +294,7 @@
     trig.appendChild(document.createTextNode(wf.trigger));
     tags.appendChild(trig);
     tags.appendChild(el('span', 'cst-wf-shape', LAYOUT_NOTE[wf.layout] || 'Sequential'));
+    tags.appendChild(el('span', 'cst-wf-scroll', 'scroll to follow the flow →'));
     head.appendChild(tags);
     wrap.appendChild(head);
 
@@ -391,6 +392,49 @@
     return close;
   }
 
+  /* On wide screens a flow longer than the panel scrolls inside its own
+   * container. Nothing on screen says so, and a diagram that appears to stop
+   * mid-pipeline reads as broken — the exact failure this layout replaced. So
+   * mark each flow with what it can still reveal:
+   *   can-scroll  there is more than fits
+   *   at-start / at-end  which ends are already visible
+   * CSS fades the edge that has pipeline behind it and shows a header hint.
+   * Below 720px flows are vertical and never overflow, so the classes simply
+   * never apply.
+   *
+   * MUST be called after the panel is visible. A hidden panel is display:none,
+   * so every measurement inside it reads zero and every flow looks like it
+   * fits. Calling this from renderPanel() silently disabled the hint. */
+  var scrollUpdaters = [];
+
+  function wireScrollHints(panel) {
+    // The panel is rebuilt on every selection, so the previous panel's
+    // updaters point at detached nodes. Drop them.
+    scrollUpdaters = [];
+    var flows = panel.querySelectorAll('.cst-flow');
+    Array.prototype.forEach.call(flows, function (flow) {
+      var wf = flow.closest ? flow.closest('.cst-wf') : null;
+      function update() {
+        var max = flow.scrollWidth - flow.clientWidth;
+        var can = max > 2;
+        flow.classList.toggle('can-scroll', can);
+        flow.classList.toggle('at-start', flow.scrollLeft <= 1);
+        flow.classList.toggle('at-end', flow.scrollLeft >= max - 1);
+        if (wf) { wf.classList.toggle('can-scroll', can); }
+      }
+      flow.addEventListener('scroll', update, { passive: true });
+      if (window.ResizeObserver) { new window.ResizeObserver(update).observe(flow); }
+      scrollUpdaters.push(update);
+      update();
+    });
+  }
+
+  // Fallback for browsers without ResizeObserver, and belt-and-braces for the
+  // vertical/horizontal breakpoint crossing.
+  window.addEventListener('resize', function () {
+    scrollUpdaters.forEach(function (fn) { fn(); });
+  });
+
   /* -------------------------------- boot -------------------------------- */
   function init() {
     var mount = document.getElementById('cst-stage');
@@ -417,6 +461,7 @@
 
       var close = renderPanel(panel, family);
       panel.hidden = false;
+      wireScrollHints(panel);   // after unhiding — see the note on that function
       close.addEventListener('click', function () {
         deselect();
         if (stage.nodes[id]) { stage.nodes[id].focus(); }

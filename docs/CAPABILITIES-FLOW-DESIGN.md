@@ -34,10 +34,16 @@ The renderer emits one structure; CSS switches orientation at **720px**.
 - Every node is the same card (icon chip, kind, label, centred), flexible
   between 120–168px so mid-length chains compress to fit the panel.
 - Nodes sit on a horizontal rail; `.cst-flow` is `overflow-x: auto`, so a
-  flow longer than the panel (e.g. Software's 8-node chain, AI's 11-node
-  branch) scrolls **inside its own container** — the page never scrolls
-  sideways. That in-container scroll is deliberate; do not "fix" it by
-  letting the flow wrap.
+  flow longer than the panel scrolls **inside its own container** — the page
+  never scrolls sideways. That in-container scroll is deliberate; do not
+  "fix" it by letting the flow wrap.
+- **The panel breaks out of the 1080px container above 1200px**, widening to
+  `min(1320px, 100vw - 3rem)` via `left: 50%; transform: translateX(-50%)`.
+  At 1440px every flow in all eight constellations fits with no scrolling at
+  all; the two longest (Software's 8-node chain, AI's 11-node branch) only
+  scroll on narrower desktops. `100vw` includes the scrollbar — hence the
+  3rem inset, which is what keeps the page from gaining a horizontal
+  scrollbar of its own.
 - **branch**: lanes stack vertically between a vertical *fork bar* and *join
   bar* (`.cst-lanes::before/::after`, spanning first-lane-centre to
   last-lane-centre via `top/bottom: calc(50% / var(--lanes))`), each lane
@@ -51,6 +57,21 @@ The renderer emits one structure; CSS switches orientation at **720px**.
   centred on the rail next to its exit segment and tail.
 - Geometry carries the semantics here: what stacks between bars is parallel,
   what sits on the rail is sequence.
+
+**Scroll must be visible.** A flow that scrolls with no affordance looks
+truncated — the same "this diagram is broken" impression the original bug
+gave. `wireScrollHints()` in the renderer maintains three classes per flow:
+`can-scroll` (more than fits), `at-start` and `at-end` (which ends are
+already visible). CSS fades whichever edge still has pipeline behind it via
+`mask-image`, and shows a "scroll to follow the flow →" hint in the workflow
+header. State updates on scroll, on `ResizeObserver`, and on window `resize`
+(the last is the fallback for browsers without `ResizeObserver`).
+
+> **Ordering trap:** `wireScrollHints()` **must** be called *after*
+> `panel.hidden = false`. A hidden panel is `display: none`, so every
+> measurement inside it reads zero and every flow looks like it fits —
+> calling it from `renderPanel()` silently disabled the hint everywhere.
+> This was caught in testing; keep the call in `select()`.
 
 ### Below 720px — the vertical spine
 - Flows descend a rail fixed at x=14px (chip centre); sequential steps are
@@ -120,7 +141,21 @@ panel into view (it unfolds below the wheel).
 ## 8. How this was verified
 
 No-JS fallback (the `<noscript>` card grid) is untouched. Checked at
-1280×800 and 375×812: all eight constellations open; on desktop every node
-in a flow sits on one rail (identical y-centres), only the longest flows
-scroll and only inside their own container; on mobile the spine returns with
-zero overflow; the page never scrolls horizontally; the console is clean.
+1440×900, 1280×800, 900×800 and 375×812:
+
+- All eight constellations open at every width; console clean throughout.
+- Desktop: every node in a flow shares one rail y-centre (the wrap bug is
+  measurably absent). At 1440 all 19 flows fit with zero scrolling; at 900
+  the long ones scroll and the hint/fade appear, with the fade correctly
+  tracking start → middle → end.
+- The scroll hint is asserted *both ways*: visible exactly when a flow
+  overflows, hidden exactly when it fits.
+- Mobile: the vertical spine returns, no element escapes the panel, no hint
+  ever shows (vertical flows cannot overflow).
+- The page itself never gains a horizontal scrollbar at any width.
+
+One testing artifact worth knowing: the browser-pane resize tool changes the
+emulated viewport **without dispatching a `resize` event**, so scroll-hint
+state looks stale after a programmatic resize. Dispatching `resize` manually
+(or reloading at the target width) shows the logic is correct — real browser
+resizes fire the event normally.
