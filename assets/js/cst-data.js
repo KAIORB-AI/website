@@ -27,22 +27,27 @@ window.KAI_CONSTELLATIONS = [
     blurb: 'AI agents, MCP servers, multi-agent workflows, RAG, and private deployments.',
     workflows: [
       {
-        name: 'Multi-agent research desk', layout: 'branch',
-        trigger: 'On question received',
-        pre: [['trigger', 'Question arrives'], ['ai', 'Plan the work']],
+        name: 'Multi-agent RAG, verified answers', layout: 'branch',
+        trigger: 'On query received',
+        pre: [['trigger', 'Query hits the gateway'], ['ai', 'Planner decomposes into sub-tasks']],
         lanes: [
-          [['action', 'Search the web'], ['ai', 'Extract claims']],
-          [['action', 'Query internal docs'], ['ai', 'Extract claims']],
-          [['action', 'Read the database'], ['ai', 'Summarise rows']]
+          [['action', 'Hybrid retrieval: BM25 + vectors'], ['ai', 'Cross-encoder rerank, top-k']],
+          [['action', 'Text-to-SQL over the warehouse'], ['ai', 'Summarise the result set']],
+          [['action', 'Web search via MCP tool'], ['ai', 'Extract claims with source spans']]
         ],
-        post: [['ai', 'Reconcile conflicts'], ['check', 'Every claim sourced?'], ['output', 'Answer with citations']]
+        post: [['ai', 'Synthesise, attribute every claim'], ['check', 'Groundedness gate passes?'], ['output', 'Answer with citation graph']]
       },
       {
-        name: 'Nightly knowledge refresh', layout: 'loop',
-        trigger: 'Every night, 02:00',
-        steps: [['trigger', 'Schedule fires'], ['action', 'Crawl changed pages'], ['ai', 'Chunk and embed'], ['check', 'Index healthy?']],
-        back: 'Re-embed what failed',
-        tail: [['output', 'Report drift']]
+        name: 'Nightly embedding refresh', layout: 'loop',
+        trigger: 'Cron, 02:00 UTC',
+        steps: [['trigger', 'Schedule fires'], ['action', 'Diff-crawl changed sources'], ['ai', 'Chunk ~512 tokens, embed'], ['action', 'Upsert vectors, reindex'], ['check', 'Recall@10 holds on eval set?']],
+        back: 'Re-embed failed shards',
+        tail: [['output', 'Drift report, per-source deltas']]
+      },
+      {
+        name: 'Prompt change to production', layout: 'chain',
+        trigger: 'On prompt PR opened',
+        steps: [['trigger', 'Prompt PR opened'], ['action', 'Replay the golden set'], ['ai', 'LLM-as-judge scores outputs'], ['check', 'No regression vs baseline?'], ['human', 'Engineer approves'], ['output', 'Canary rollout, then 100%']]
       }
     ]
   },

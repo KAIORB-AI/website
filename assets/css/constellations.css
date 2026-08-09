@@ -25,23 +25,11 @@
 }
 .constellation-card:hover h3::before { background: var(--gold); box-shadow: 0 0 8px var(--gold-soft); }
 
-/* ---------- Stage and panel, side by side ----------
-   Closed, the wheel sits alone and centred. Open, it moves left and the panel
-   takes the right, so you can read a workflow without losing sight of which
-   constellation you are in — and without the page jumping a screen down. */
-.cst-layout { display: grid; gap: 2rem; align-items: start; justify-items: center; }
-
-@media (min-width: 1040px) {
-  .cst-layout.is-open {
-    grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
-    justify-items: stretch;
-    max-width: 1240px; margin-inline: auto;
-  }
-  .cst-layout.is-open .cst-stage {
-    position: sticky; top: 84px;   /* clears the fixed header */
-  }
-  .cst-layout.is-open .cst-panel { margin: 0; }
-}
+/* ---------- Stage above, panel below ----------
+   The wheel sits centred; opening a constellation unfolds a full-width panel
+   underneath it (owner direction, 2026-08-08: workflows read better wide —
+   flows get the container's whole width instead of a thin side column). */
+.cst-layout { width: 100%; }
 
 /* ---------- The orbital stage ---------- */
 .cst-stage { position: relative; width: 100%; max-width: 760px; margin: 0 auto; }
@@ -90,7 +78,7 @@
 
 /* ---------- The panel underneath ---------- */
 .cst-panel {
-  max-width: 940px; margin: 2rem auto 0;
+  width: 100%; margin: 2.25rem auto 0;
   border: 1px solid var(--line); border-radius: 20px;
   background: var(--surface); overflow: hidden;
 }
@@ -154,14 +142,22 @@
   color: var(--violet); border: 1px solid var(--line); border-radius: 999px; padding: .22rem .65rem;
 }
 
-/* ---------- The vertical spine ----------
-   Flows read top to bottom. The spine rail sits at x=14px (chip centre);
-   every connector, junction and bus bar is drawn against that coordinate,
-   which is what makes fork/join read as plumbing instead of decoration.
+/* ---------- The flow, two orientations ----------
+   One DOM, two renderings:
 
-   Sequence  = rows on the spine (chip left, words right).
-   Parallel  = centred mini-cards in columns under a bus bar.
-   The two must not look alike: that contrast is the whole grammar. */
+   Below 720px  — flows read TOP TO BOTTOM down a spine rail fixed at x=14px
+                  (chip centre). Narrow screens cannot host a horizontal
+                  pipeline, and a vertical flow can never wrap.
+   720px and up — the panel spans the container, so flows read LEFT TO RIGHT,
+                  n8n-style: uniform node cards on a horizontal rail, branches
+                  stacked between fork/join bars, a loop's return path drawn
+                  underneath. A flow longer than the panel scrolls inside its
+                  own container — the page never scrolls sideways.
+
+   In the vertical rendering, sequence (airy rows) and parallelism (bordered
+   cells) look deliberately different. In the horizontal one, every node is
+   the same card and GEOMETRY carries the semantics: what stacks between the
+   bars is parallel, what sits on the rail is sequence. */
 .cst-flow, .cst-stack { display: flex; flex-direction: column; align-items: stretch; }
 
 .cst-step {
@@ -231,33 +227,25 @@
 .cst-cell .cst-kind { font-size: .58rem; }
 .cst-cell .cst-label { font-size: .78rem; }
 
-/* branch/fanin: columns between a fork bus and a join bus. The bus runs from
-   the spine (x=13) to the centre of the last column; each column hangs from
-   it by a stub. --lanes is set by the renderer. */
+/* Parallel sections, vertical rendering: a bracketed list off the spine —
+   one lane per row, each hung on the bracket by a stub, cells folded to row
+   orientation. --lanes (set by the renderer) is used by the horizontal
+   rendering below. */
 .cst-lanes {
-  position: relative; display: grid;
-  grid-template-columns: repeat(var(--lanes, 2), minmax(0, 1fr));
-  gap: .7rem; padding: 14px 0;
+  position: relative; display: flex; flex-direction: column; gap: .55rem;
+  margin-left: 13px; padding-left: 16px;
+  border-left: 2px dashed var(--line);
 }
-.cst-lanes::before, .cst-lanes::after {
-  content: ''; position: absolute; height: 2px;
-  left: 13px; right: calc(50% / var(--lanes, 2));
-  background: repeating-linear-gradient(90deg, var(--line) 0 5px, transparent 5px 10px);
-}
-.cst-lanes::before { top: 0; }
-.cst-lanes::after { bottom: 0; }
 .cst-lane { position: relative; display: flex; flex-direction: column; align-items: stretch; }
-.cst-lane::before, .cst-lane::after {
-  content: ''; position: absolute; left: 50%; margin-left: -1px; width: 2px; height: 14px;
-  background: repeating-linear-gradient(180deg, var(--line) 0 5px, transparent 5px 10px);
+.cst-lane::before {
+  content: ''; position: absolute; left: -16px; top: 50%; width: 14px; height: 2px;
+  background: repeating-linear-gradient(90deg, var(--line) 0 4px, transparent 4px 8px);
 }
-.cst-lane::before { top: -14px; }
-.cst-lane::after { bottom: -14px; }
-
-/* fanin sources: feeds converge, so there is no fork bus above them. */
-.cst-lanes-in { padding-top: 0; }
-.cst-lanes-in::before { display: none; }
-.cst-lanes-in .cst-lane::before { display: none; }
+.cst-lanes .cst-cell {
+  flex-direction: row; text-align: left; align-items: center;
+  gap: .6rem; padding: .5rem .6rem;
+}
+.cst-lanes .cst-cell .cst-kind { display: none; }
 
 /* grid: independent checks, no order implied — a collector bar underneath. */
 .cst-grid {
@@ -270,11 +258,11 @@
   background: repeating-linear-gradient(90deg, var(--line) 0 5px, transparent 5px 10px);
 }
 
-/* loop: the spine, plus a return path bracket on the right with the retry
-   condition pinned to it. Steps keep clear of the bracket via padding. */
-.cst-loop { position: relative; padding-right: 108px; }
+/* loop, vertical rendering: return bracket on the right, retry condition
+   pinned to it. Steps keep clear of the bracket via padding. */
+.cst-loop { position: relative; padding-right: 84px; }
 .cst-back {
-  position: absolute; top: 16px; bottom: 16px; right: 44px; width: 40px;
+  position: absolute; top: 16px; bottom: 16px; right: 32px; width: 28px;
   border: 2px dashed var(--line); border-left: 0;
   border-radius: 0 16px 16px 0;
 }
@@ -284,41 +272,118 @@
   transform: rotate(45deg);
 }
 .cst-back-label {
-  position: absolute; top: 50%; right: -44px; transform: translateY(-50%);
-  width: 88px; text-align: center;
+  position: absolute; top: 50%; right: -36px; transform: translateY(-50%);
+  width: 72px; text-align: center;
   background: var(--bg0); border: 1px dashed var(--line); border-radius: 10px;
-  padding: .3rem .4rem; font-size: .64rem; line-height: 1.35; color: var(--mut);
+  padding: .3rem .4rem; font-size: .6rem; line-height: 1.35; color: var(--mut);
 }
 
-/* ---------- Narrow screens ----------
-   Columns of centred cards get too thin below ~560px, so parallel sections
-   fold into a bracketed list off the spine: still visibly a fork, one lane
-   per row. */
-@media (max-width: 560px) {
-  .cst-lanes {
-    grid-template-columns: 1fr; gap: .55rem;
-    margin-left: 13px; padding: 0 0 0 16px;
-    border-left: 2px dashed var(--line);
+/* ---------- 720px and up: the flow turns horizontal ---------- */
+@media (min-width: 720px) {
+  .cst-flow {
+    flex-direction: row; align-items: center;
+    overflow-x: auto; padding: 6px 2px 10px;
+    scrollbar-width: thin; scrollbar-color: var(--line) transparent;
   }
-  .cst-lanes::before, .cst-lanes::after { display: none; }
-  .cst-lane::after { display: none; }
-  .cst-lane::before {
-    display: block; left: -16px; top: 50%; margin: 0;
-    width: 14px; height: 2px;
-    background: repeating-linear-gradient(90deg, var(--line) 0 4px, transparent 4px 8px);
+  .cst-flow::-webkit-scrollbar { height: 8px; }
+  .cst-flow::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+  .cst-stack { flex-direction: row; align-items: center; flex: 1 1 auto; min-width: 0; }
+
+  /* Uniform node card, flexible between 120 and 168px: mid-length chains
+     compress to fit the panel instead of scrolling; only the longest flows
+     scroll. display:contents flattens the text wrapper so the kind and
+     label centre under the chip. */
+  .cst-step {
+    flex: 1 1 140px; min-width: 120px; max-width: 168px;
+    flex-direction: column; align-items: center;
+    text-align: center; gap: .3rem;
+    border: 1px solid var(--line); border-radius: 12px; background: var(--bg0);
+    padding: .65rem .55rem .7rem;
+    animation-name: cst-cell-lite;
   }
-  .cst-lanes-in .cst-lane::before { display: block; }
+  .cst-step-text { display: contents; }
+  .cst-step .cst-kind { display: inline; margin: 0; font-size: .58rem; }
+  .cst-step .cst-label { font-size: .78rem; }
+  .cst-cell { flex: none; width: 152px; }
   .cst-lanes .cst-cell {
-    flex-direction: row; text-align: left; align-items: center;
-    gap: .6rem; padding: .5rem .6rem;
+    flex-direction: column; text-align: center; align-items: center;
+    gap: .3rem; padding: .65rem .55rem .7rem;
   }
-  .cst-lanes .cst-cell .cst-kind { display: none; }
+  .cst-lanes .cst-cell .cst-kind { display: inline; }
 
-  .cst-loop { padding-right: 84px; }
-  .cst-back { right: 32px; width: 28px; }
-  .cst-back-label { width: 72px; right: -36px; font-size: .6rem; }
+  .cst-seg { width: 26px; height: 2px; margin-left: 0; align-self: center; }
+  .cst-seg::before {
+    background: repeating-linear-gradient(90deg, var(--line) 0 5px, transparent 5px 10px);
+  }
+  .cst-seg::after {
+    top: 50%; left: 0; margin: -3px 0 0 0;
+    animation-name: cst-travel-h;
+  }
+  .cst-seg-junction { width: 26px; height: 2px; }
+  .cst-seg-lane { width: 18px; height: 2px; }
+
+  /* Branches stack between a fork bar and a join bar; each lane runs
+     rightward, hung on the bars by stubs at its vertical centre. */
+  .cst-lanes {
+    flex: none; margin: 0; padding: 0 14px;
+    border-left: 0; gap: .6rem;
+  }
+  .cst-lanes::before, .cst-lanes::after {
+    content: ''; position: absolute; width: 2px;
+    top: calc(50% / var(--lanes, 2)); bottom: calc(50% / var(--lanes, 2));
+    background: repeating-linear-gradient(180deg, var(--line) 0 5px, transparent 5px 10px);
+  }
+  .cst-lanes::before { left: 0; }
+  .cst-lanes::after { right: 0; }
+  .cst-lane { flex-direction: row; align-items: center; }
+  .cst-lane::before, .cst-lane::after {
+    content: ''; position: absolute; top: 50%; margin: -1px 0 0 0; width: 14px; height: 2px;
+    background: repeating-linear-gradient(90deg, var(--line) 0 5px, transparent 5px 10px);
+  }
+  .cst-lane::before { left: -14px; }
+  .cst-lane::after { right: -14px; }
+
+  /* fanin sources converge: no fork bar on the left, join bar only. */
+  .cst-lanes-in::before { display: none; }
+  .cst-lanes-in .cst-lane::before { display: none; }
+
+  /* grid: the collector turns vertical and sits on the right. */
+  .cst-grid { flex: 1 1 auto; min-width: 320px; width: auto; padding: 0 14px 0 0; }
+  .cst-grid::after {
+    left: auto; right: 0; top: 13px; bottom: 13px; width: 2px; height: auto;
+    background: repeating-linear-gradient(180deg, var(--line) 0 5px, transparent 5px 10px);
+  }
+
+  /* loop: the return path runs UNDER the row, back to the start. The top
+     margin mirrors the bracket's space so the row stays centred on the rail. */
+  .cst-loop {
+    display: flex; align-items: center; flex: 1 1 auto; min-width: 0;
+    padding: 0 0 34px; margin-top: 34px;
+  }
+  .cst-back {
+    top: auto; left: 20px; right: 20px; bottom: 4px; width: auto; height: 24px;
+    border: 2px dashed var(--line); border-top: 0;
+    border-radius: 0 0 14px 14px;
+  }
+  .cst-back::before {
+    left: -1px; top: -4px;
+    border-bottom: 0; border-top: 2px solid var(--violet);
+  }
+  .cst-back-label {
+    top: auto; bottom: 0; left: 50%; right: auto;
+    transform: translate(-50%, 55%);
+    width: auto; white-space: nowrap;
+    font-size: .64rem; padding: .25rem .6rem;
+  }
 }
 
+@keyframes cst-travel-h {
+  0%, 4% { left: 0; opacity: 0; }
+  6%     { opacity: 1; }
+  13%    { left: calc(100% - 6px); opacity: 1; }
+  16%    { left: calc(100% - 6px); opacity: 0; }
+  100%   { left: calc(100% - 6px); opacity: 0; }
+}
 @keyframes cst-row-lite {
   0%, 6%    { background: transparent; }
   9%        { background: var(--gold-soft); }
@@ -338,4 +403,7 @@
 @media (prefers-reduced-motion: reduce) {
   .cst-rotor, .cst-step, .cst-dot, .cst-cell { animation: none; }
   .cst-seg::after { animation: none; opacity: .8; top: calc(50% - 3px); }
+}
+@media (min-width: 720px) and (prefers-reduced-motion: reduce) {
+  .cst-seg::after { top: -2px; left: calc(50% - 3px); }
 }

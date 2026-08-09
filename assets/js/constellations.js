@@ -80,9 +80,8 @@
     // that sit BELOW them. They used to be drawn at cy+16, which is inside a
     // 38px disc, so every name overlapped its own circle.
     var W = 780, H = 780, CX = 390, CY = 390, R = 248;
-    // Node radius is deliberately large against the orbit: in the two-column
-    // layout the stage is only ~460px wide, so a disc sized for a full-width
-    // wheel comes out tiny once the SVG scales down.
+    // Large discs read as destinations, not decoration — and they keep the
+    // wheel legible when the SVG scales down on small screens.
     var NODE_R = 68, RING_R = 81, LABEL_GAP = 18;
 
     var svg = svgEl('svg', {
@@ -396,7 +395,6 @@
   function init() {
     var mount = document.getElementById('cst-stage');
     var panel = document.getElementById('cst-panel');
-    var layout = document.getElementById('cst-layout');
     if (!mount || !panel) { return; }
 
     // The plain card list is the no-JS view; replace it now that JS is here.
@@ -419,7 +417,6 @@
 
       var close = renderPanel(panel, family);
       panel.hidden = false;
-      if (layout) { layout.classList.add('is-open'); }
       close.addEventListener('click', function () {
         deselect();
         if (stage.nodes[id]) { stage.nodes[id].focus(); }
@@ -428,19 +425,14 @@
       if (location.hash !== '#' + id) {
         history.replaceState(null, '', '#' + id);
       }
-      // Only chase the panel when it is stacked underneath; side by side it
-      // is already in view and scrolling would be disorienting.
-      if (!layout || !layout.classList.contains('is-open') ||
-          window.matchMedia('(max-width: 1039px)').matches) {
-        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
+      // The panel unfolds below the wheel, so bring it into view.
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     function deselect() {
       selected = null;
       panel.hidden = true;
       panel.textContent = '';
-      if (layout) { layout.classList.remove('is-open'); }
       Object.keys(stage.nodes).forEach(function (k) {
         stage.nodes[k].setAttribute('aria-selected', 'false');
         stage.spokes[k].classList.remove('is-active');

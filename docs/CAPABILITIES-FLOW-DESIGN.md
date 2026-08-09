@@ -2,97 +2,99 @@
 
 **Files:** `capabilities/index.html` · `assets/js/cst-data.js` (the shapes) ·
 `assets/js/constellations.js` (the renderer) · `assets/css/constellations.css`
-**Established:** 2026-08-08, replacing the horizontal card-chain rendering.
+**Established:** 2026-08-08. Two revisions the same day: first replacing the
+original horizontal card-chains (which line-wrapped), then — on the owner's
+direction — moving the panel below the wheel and turning wide-screen flows
+horizontal again, properly this time.
 
 ---
 
-## 1. Why the panel was rebuilt
+## 1. History: why it looks the way it does
 
-The first rendering drew every workflow as a left-to-right chain of cards
-joined by horizontal connectors. On desktop the panel sits **beside** the
-wheel and is only ~460–520px wide — and a horizontal chain that does not fit
-line-wraps like text. Measured on the live page at a 1280px viewport, the
-three-step Education chain broke after its second card: the third card jumped
-to a new line at the far left, with the connector after card two dangling into
-nothing. A flow diagram that wraps mid-arrow reads as broken, which is what
-"looks weird" was.
+**Rev 1 (broken):** workflows drew as left-to-right chains of cards beside
+the wheel, in a ~460px side panel. Chains line-wrapped like text — a
+three-step flow broke mid-arrow with a connector dangling into nothing — and
+single-card "parallel lanes" read as an indented bullet list.
 
-Two smaller problems compounded it: parallel branches rendered as an indented
-dashed list (single-card "lanes" looked like bullets, not simultaneous work),
-and Education was the sparsest constellation on the page — two workflows, one
-of them three nodes.
+**Rev 2:** flows turned vertical (a spine that cannot wrap), still in the
+side-by-side layout.
 
-## 2. The fix: flows read top to bottom
+**Rev 3 (current):** the owner directed that workflows read better wide:
+*the panel now always opens FULL-WIDTH BELOW the wheel* (the side-by-side
+`is-open` mode is gone), and on wide screens flows run horizontally again —
+but engineered so wrapping is impossible. The vertical spine survives as the
+phone rendering. Do not reintroduce a thin side panel; that constraint is
+what broke Rev 1.
 
-A vertical flow cannot wrap. Every layout now descends a **spine** — a rail
-fixed at x=14px (the centre of the 28px icon chips). Every connector,
-junction stub and bus bar is drawn against that same coordinate, which is what
-makes forks and joins look like plumbing rather than decoration.
+## 2. One DOM, two renderings
 
-The grammar has exactly two vocabularies, and they must not look alike:
+The renderer emits one structure; CSS switches orientation at **720px**.
 
-| Meaning | Drawn as | Class |
-|---|---|---|
-| One-after-another work | A row **on** the spine: icon chip on the rail, kind + label beside it. No border. | `.cst-step` |
-| Simultaneous work | A **centred mini-card** in a column: chip on top, label under it. Bordered, on `--bg0`. | `.cst-cell` |
+### 720px and up — horizontal, n8n-style
+- Every node is the same card (icon chip, kind, label, centred), flexible
+  between 120–168px so mid-length chains compress to fit the panel.
+- Nodes sit on a horizontal rail; `.cst-flow` is `overflow-x: auto`, so a
+  flow longer than the panel (e.g. Software's 8-node chain, AI's 11-node
+  branch) scrolls **inside its own container** — the page never scrolls
+  sideways. That in-container scroll is deliberate; do not "fix" it by
+  letting the flow wrap.
+- **branch**: lanes stack vertically between a vertical *fork bar* and *join
+  bar* (`.cst-lanes::before/::after`, spanning first-lane-centre to
+  last-lane-centre via `top/bottom: calc(50% / var(--lanes))`), each lane
+  hung on the bars by 14px stubs. **fanin** is the same minus the fork bar.
+- **grid**: checks in an auto-fit grid with a vertical collector bar on the
+  right.
+- **loop**: the return path is a dashed bracket UNDER the run
+  (left/right/bottom borders, arrowhead pointing back up into the start),
+  retry label centred on the bottom edge. `.cst-loop` carries
+  `margin-top: 34px` mirroring its `padding-bottom: 34px` so the run stays
+  centred on the rail next to its exit segment and tail.
+- Geometry carries the semantics here: what stacks between bars is parallel,
+  what sits on the rail is sequence.
 
-The contrast is the point — sequence is airy, parallelism is contained. If a
-future change styles them alike, the diagrams stop saying anything.
-
-### The five layouts, in this language
-
-- **chain** — rows down the spine, 20px dashed segments between them.
-- **branch** — spine rows, then a *fork bus* (horizontal dashed bar running
-  from the spine at x=13 to the centre of the last lane column), lanes as
-  centred columns hanging from it by stubs, then a *join bus*, then spine
-  rows again. `--lanes` (set by the renderer) drives both the grid columns
-  and the bus end-point: `right: calc(50% / var(--lanes))` lands the bar on
-  the last column's centre.
-- **fanin** — like branch lanes but sources only converge, so there is no
-  fork bus above them (`.cst-lanes-in`), only the join underneath.
-- **grid** — independent checks in an auto-fit grid over a full-width
-  *collector bar*; deliberately no per-cell stubs, because no order is implied.
-- **loop** — spine rows plus a dashed *return bracket* on the right
-  (`.cst-back`), arrowhead where it rejoins the top, with the retry condition
-  as a pill pinned to the bracket's vertical line (`.cst-back-label`). Loop
-  steps get `padding-right` so text never enters the bracket zone.
-
-### Narrow screens (≤560px)
-
-Columns of centred cards get too thin, so parallel sections fold into a
-**bracketed list off the spine**: the lanes container becomes a single column
-with a dashed left border at the spine's x, each lane connected by a
-horizontal stub, and cells switch to row orientation (chip left, label right,
-kind hidden — the chip colour still carries it). Still visibly a fork; one
-lane per row.
+### Below 720px — the vertical spine
+- Flows descend a rail fixed at x=14px (chip centre); sequential steps are
+  airy rows (chip left, label right), parallel sections fold into a
+  bracketed list off the spine (dashed left border + horizontal stubs),
+  cells in row orientation with the kind label hidden (chip colour still
+  carries it).
+- Loops keep a right-side return bracket with the retry pill pinned to it.
+- In this rendering, sequence and parallelism deliberately do NOT look
+  alike — rows vs bordered cells.
 
 ## 3. The animation grammar
 
-Unchanged in spirit from the first version: nodes light **in turn**, so a
-panel reads as a system working steadily, not a loading spinner.
+Nodes light **in turn** — a system working steadily, not a spinner.
 
-- Every node carries `--i` (its position in the light-up order) and `--cycle`
-  (full loop length, `total nodes × 1.05s + 4.5s`, computed per workflow so a
-  three-step flow does not idle waiting for a nine-step one).
-- Spine rows flash a soft gold background (`cst-row-lite`); chips get a gold
-  ring (`cst-dot-lite`); cells flash border + lift (`cst-cell-lite`); segments
-  run a travelling gold dot downward (`cst-travel`), offset +0.35s so the dot
-  leaves a node just after it lights.
-- Parallel lanes **share** indices — parallel means simultaneous. Fan-in
-  sources are the exception: they light one after another (arrivals), then
-  merge.
-- `prefers-reduced-motion` kills all of it; the travelling dot parks at the
-  segment's midpoint.
+- Every node carries `--i` (light-up order) and `--cycle` (loop length,
+  `total nodes × 1.05s + 4.5s`, per workflow).
+- Desktop cards flash border + lift (`cst-cell-lite`); mobile spine rows
+  flash a soft background (`cst-row-lite`) and chips a gold ring
+  (`cst-dot-lite`). Connector segments run a travelling gold dot —
+  `cst-travel` (down) on mobile, `cst-travel-h` (rightward) on desktop —
+  offset +0.35s so the dot leaves a node just after it lights.
+- Parallel lanes share indices (parallel = simultaneous); fan-in sources
+  light one after another (arrivals), then merge.
+- `prefers-reduced-motion` disables everything; the dot parks mid-segment.
 
 ## 4. The kind vocabulary
 
 Six node kinds, one hue per role, applied to the chip via `[data-kind]`:
 `trigger` (blue bolt) · `ai` (gold) · `action` (grey arrow) · `check`
-(violet shield) · `human` (blue figure) · `output` (green check). These are
-the semantic legend of every diagram; do not add a kind without a colour and
-an icon in `KIND_ICON`.
+(violet shield) · `human` (blue figure) · `output` (green check). Do not add
+a kind without a colour and an icon in `KIND_ICON`.
 
-## 5. Adding or editing a workflow
+## 5. Content register
+
+**AI & Intelligence is written technical on purpose** (owner direction,
+2026-08-08): hybrid retrieval BM25 + vectors, cross-encoder rerank,
+text-to-SQL, groundedness gates, chunk-and-embed with Recall@10 eval,
+LLM-as-judge prompt regression gating. Keep that register when editing it —
+this constellation is the flagship and its audience is engineers. Other
+constellations stay in plain operational language (their audiences are
+school heads, event producers, controllers).
+
+## 6. Adding or editing a workflow
 
 Shapes live in `assets/js/cst-data.js` as data — no renderer changes needed.
 Pick the layout that matches the real topology (`chain`, `branch`, `loop`,
@@ -102,27 +104,23 @@ they version together.
 
 Rules that outrank aesthetics, restated from the data file:
 
-1. Workflows are **illustrative** — the shape of automation in an area, not a
-   claim that KAI247 runs that pipeline for a customer today. The badge above
-   the diagrams says so. Never drop it.
+1. Workflows are **illustrative** — the shape of automation in an area, not
+   a claim that KAI247 runs that pipeline for a customer today. The badge
+   above the diagrams says so. Never drop it.
 2. Do not add a workflow describing something the network cannot build.
-   (The Education "Lesson to every SWAN board" loop, added with this
-   redesign, is grounded in the SWAN interactive-board capability the page
-   already claims.)
 
-## 6. Deep links
+## 7. Deep links
 
-`/capabilities/#<family-id>` opens that constellation on load, and — since
-this redesign — also via `hashchange`, so in-page links to `#education` work
-without a reload. `select()`/`deselect()` write the hash with
-`replaceState`, which does not fire `hashchange`, so there is no re-entry
-loop.
+`/capabilities/#<family-id>` opens that constellation on load and via
+`hashchange`, so in-page links work without a reload. `select()`/
+`deselect()` write the hash with `replaceState`, which does not fire
+`hashchange`, so there is no re-entry loop. Opening always scrolls the
+panel into view (it unfolds below the wheel).
 
-## 7. How this was verified
+## 8. How this was verified
 
-No-JS fallback (the `<noscript>` card grid) is untouched. The rendered page
-was checked at 1280×800 and 375×812: all eight constellations open with zero
-horizontal overflow, branch lanes measure as equal-width columns
-(desktop) / stacked bracketed rows (mobile), the loop label never overlaps
-step text, and the console is clean. The old failure — a chain card
-wrapping to a second line — is structurally impossible in a vertical flow.
+No-JS fallback (the `<noscript>` card grid) is untouched. Checked at
+1280×800 and 375×812: all eight constellations open; on desktop every node
+in a flow sits on one rail (identical y-centres), only the longest flows
+scroll and only inside their own container; on mobile the spine returns with
+zero overflow; the page never scrolls horizontally; the console is clean.
