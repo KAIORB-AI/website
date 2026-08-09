@@ -1,0 +1,44 @@
+# kai247.com — caching rules.
+#
+# This file is deployed into the ./kai247/ subdirectory of the shared docroot
+# and applies to this site only. The parent docroot's .htaccess (which lives in
+# Brahmando-ai/Brahmando → brahmexa-web/.htaccess) does the host routing; this
+# one does nothing but set cache headers.
+#
+# WHY IT EXISTS
+# -------------
+# The HTML was served with a Last-Modified but no Cache-Control. With no
+# explicit freshness, browsers fall back to heuristic caching — commonly a
+# tenth of the document's age — so a visitor who had been here before kept
+# getting yesterday's HTML, which referenced the previous, un-versioned
+# assets. Nexus was switched on and simply did not appear for anyone who had
+# visited before, with no error to explain it.
+#
+# HTML is therefore always revalidated, and the fingerprinted assets it points
+# at can be cached hard. That is the normal pairing, and it was the missing
+# half of it that hid a working feature.
+
+<IfModule mod_headers.c>
+  # HTML: never trusted from cache without asking. These documents are small,
+  # and the whole point of them is to name the current asset versions.
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+
+  # Directory index requests (/, /join/, …) resolve to index.html but do not
+  # always match the FilesMatch above depending on how the index is served,
+  # so cover the no-extension case too.
+  <IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [E=IS_DIRECTORY:1]
+    Header set Cache-Control "no-cache, must-revalidate" env=IS_DIRECTORY
+  </IfModule>
+
+  # Versioned assets are referenced as ?v=N and change name-by-query when they
+  # change, so they are safe to cache for a day. Anything referenced without a
+  # version should be added to the HTML rule above instead of here.
+  <FilesMatch "\.(css|js|svg|woff2?|png|jpg|jpeg|webp|ico)$">
+    Header set Cache-Control "public, max-age=86400"
+  </FilesMatch>
+</IfModule>

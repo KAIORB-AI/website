@@ -117,6 +117,27 @@
       </div>
     </div>
   </section>
+
+  <!-- Live from ORBIT, the network's event platform. Real published events,
+       fetched from brahmexa.com at view time — not a copy that goes stale.
+       This is the first network capability rendered on kai247.com as a widget
+       rather than an iframe, which is the path viewer.js was always meant to
+       hand over to. -->
+  <section class="band">
+    <div class="container" style="max-width:820px">
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <p class="kicker">Live from the network</p>
+        <h2 style="font-size:1.4rem">What's on</h2>
+        <p style="color:var(--mut);font-size:0.95rem">Events published by network brands, straight from ORBIT.</p>
+      </div>
+      <div id="brahmexa-orbit-events"></div>
+    </div>
+  </section>
+  <script src="https://brahmexa.com/widgets/loader.js"
+          data-brahmexa-widget="orbit-events"
+          data-brahmexa-key="pk_c44bc472ec6f1664f098f66c"
+          data-brahmexa-mount="#brahmexa-orbit-events"
+          data-brahmexa-accent="#f2c56d" defer></script>
 </main>
 
 <footer>
