@@ -123,12 +123,71 @@
   color: var(--blue); border: 1px solid var(--line); border-radius: 999px; padding: .2rem .6rem;
 }
 
-/* The chain. Horizontal on wide screens, vertical on narrow. */
-.cst-flow {
-  list-style: none; margin: 0; padding: 0;
-  display: flex; align-items: stretch; gap: 0; flex-wrap: wrap;
+.cst-wf-shape {
+  font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--violet); border: 1px solid var(--line); border-radius: 999px; padding: .2rem .6rem;
 }
+
+/* ---------- Layout containers ----------
+   Five shapes, so eight families do not read as one diagram repeated. The
+   flow is a column of sections; a section is either a straight run, a set of
+   parallel lanes, a fan of sources, or a grid of independent checks. */
+.cst-flow { display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
+.cst-run { display: flex; align-items: center; flex-wrap: wrap; gap: 0; }
 .cst-step { display: flex; align-items: center; gap: 0; }
+
+/* branch: lanes stacked, each indented so the split reads vertically. */
+.cst-lanes {
+  display: flex; flex-direction: column; gap: .55rem;
+  border-left: 2px dashed var(--line); padding-left: 1.1rem; margin-left: 1.25rem;
+}
+.cst-lane { position: relative; }
+.cst-lane::before {
+  content: ''; position: absolute; left: -1.1rem; top: 50%; width: .85rem; height: 2px;
+  background: repeating-linear-gradient(90deg, var(--line) 0 4px, transparent 4px 8px);
+}
+
+/* fanin: sources side by side, converging. */
+.cst-sources { display: flex; flex-wrap: wrap; gap: .55rem; }
+
+/* grid: independent checks, no order implied between them. */
+.cst-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .55rem; width: 100%; }
+
+/* loop: the run, plus a return path drawn under it. */
+.cst-loop { position: relative; padding-bottom: 2.1rem; }
+.cst-back {
+  position: absolute; left: 1.5rem; right: 1.5rem; bottom: .55rem; height: 1.4rem;
+  border: 2px dashed var(--line); border-top: 0;
+  border-radius: 0 0 12px 12px;
+}
+.cst-back-label {
+  position: absolute; left: 50%; transform: translate(-50%, 40%);
+  background: var(--surface); padding: 0 .5rem;
+  font-size: .7rem; color: var(--mut); white-space: nowrap;
+}
+.cst-back::after {
+  content: ''; position: absolute; left: 0; top: -1px; width: 7px; height: 7px;
+  border-left: 2px solid var(--violet); border-top: 2px solid var(--violet);
+  transform: translateY(-3px) rotate(45deg);
+}
+
+/* Vertical connectors between sections of a multi-part layout. */
+.cst-link-split, .cst-link-merge, .cst-link-exit {
+  width: 2px; height: 18px; margin-left: 1.25rem; align-self: flex-start;
+}
+.cst-link-split::before, .cst-link-merge::before, .cst-link-exit::before {
+  background: repeating-linear-gradient(180deg, var(--line) 0 5px, transparent 5px 10px);
+}
+.cst-link-split::after, .cst-link-merge::after, .cst-link-exit::after {
+  left: 50%; margin-left: -3px; animation-name: cst-travel-down;
+}
+@keyframes cst-travel-down {
+  0%, 4% { top: 0; opacity: 0; }
+  6%     { opacity: 1; }
+  13%    { top: calc(100% - 6px); opacity: 1; }
+  16%    { top: calc(100% - 6px); opacity: 0; }
+  100%   { top: calc(100% - 6px); opacity: 0; }
+}
 
 .cst-card {
   position: relative; min-width: 132px; max-width: 172px;

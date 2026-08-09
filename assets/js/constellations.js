@@ -41,245 +41,10 @@
     output:  'M20 6L9 17l-5-5'
   };
 
-  /* --------------------------------------------------------------------- *
-   * The eight constellations.                                             *
-   * angle is degrees clockwise from 12 o'clock.                           *
-   * --------------------------------------------------------------------- */
-  var FAMILIES = [
-    {
-      id: 'ai', name: 'AI & Intelligence', angle: 0, icon: 'ai',
-      blurb: 'AI agents, MCP servers, multi-agent workflows, RAG, and private deployments.',
-      workflows: [
-        {
-          name: 'Inbound support triage',
-          trigger: 'On new email',
-          steps: [
-            ['trigger', 'Email arrives'],
-            ['ai', 'Classify intent'],
-            ['action', 'Retrieve from knowledge base'],
-            ['ai', 'Draft grounded reply'],
-            ['check', 'Confident enough?'],
-            ['human', 'Agent approves'],
-            ['output', 'Reply sent']
-          ]
-        },
-        {
-          name: 'Nightly knowledge refresh',
-          trigger: 'Every night, 02:00',
-          steps: [
-            ['trigger', 'Schedule fires'],
-            ['action', 'Crawl changed pages'],
-            ['ai', 'Chunk and embed'],
-            ['action', 'Rebuild index'],
-            ['check', 'Drift vs last build'],
-            ['output', 'Report to owner']
-          ]
-        }
-      ]
-    },
-    {
-      id: 'software', name: 'Software Engineering', angle: 45, icon: 'software',
-      blurb: 'Custom SaaS, APIs, portals, ERP/CRM integrations, and desktop automation.',
-      workflows: [
-        {
-          name: 'Merge to production',
-          trigger: 'On pull request merged',
-          steps: [
-            ['trigger', 'PR merged'],
-            ['action', 'Run test suite'],
-            ['check', 'All green?'],
-            ['action', 'Build image'],
-            ['action', 'Deploy to staging'],
-            ['check', 'Smoke tests pass'],
-            ['output', 'Promote to production']
-          ]
-        },
-        {
-          name: 'Exception to ticket',
-          trigger: 'On unhandled error',
-          steps: [
-            ['trigger', 'Exception captured'],
-            ['action', 'Group by signature'],
-            ['ai', 'Summarise likely cause'],
-            ['check', 'Already known?'],
-            ['action', 'Open ticket, assign owner'],
-            ['output', 'Notify the channel']
-          ]
-        }
-      ]
-    },
-    {
-      id: 'commerce', name: 'Web & Commerce', angle: 90, icon: 'commerce',
-      blurb: 'Fast web applications, e-commerce platforms, CMS, and managed hosting.',
-      workflows: [
-        {
-          name: 'Recover an abandoned cart',
-          trigger: 'On cart idle 30 min',
-          steps: [
-            ['trigger', 'Cart goes quiet'],
-            ['check', 'Still in stock?'],
-            ['ai', 'Pick the right nudge'],
-            ['action', 'Send email'],
-            ['check', 'Opened but not bought'],
-            ['output', 'One reminder, then stop']
-          ]
-        },
-        {
-          name: 'Supplier catalog sync',
-          trigger: 'Every 6 hours',
-          steps: [
-            ['trigger', 'Feed pulled'],
-            ['action', 'Normalise fields'],
-            ['check', 'Price rules hold'],
-            ['action', 'Publish changes'],
-            ['output', 'Reindex search']
-          ]
-        }
-      ]
-    },
-    {
-      id: 'growth', name: 'Growth & Marketing', angle: 135, icon: 'growth',
-      blurb: 'Technical SEO, GEO/AEO optimization, campaign tracking, and lead generation.',
-      workflows: [
-        {
-          name: 'Content from a keyword gap',
-          trigger: 'Weekly, on rank report',
-          steps: [
-            ['trigger', 'Gap detected'],
-            ['ai', 'Draft an outline'],
-            ['ai', 'Write to brand voice'],
-            ['check', 'Claims sourced?'],
-            ['human', 'Editor approves'],
-            ['action', 'Publish'],
-            ['output', 'Track position']
-          ]
-        },
-        {
-          name: 'Lead scoring and routing',
-          trigger: 'On form submitted',
-          steps: [
-            ['trigger', 'Form submitted'],
-            ['action', 'Enrich company data'],
-            ['ai', 'Score fit and intent'],
-            ['check', 'Above threshold?'],
-            ['action', 'Route to an owner'],
-            ['output', 'Start follow-up']
-          ]
-        }
-      ]
-    },
-    {
-      id: 'cloud', name: 'Cloud & Infrastructure', angle: 180, icon: 'cloud',
-      blurb: 'GPU AI compute, DevOps pipelines, zero-latency deployments, and security.',
-      workflows: [
-        {
-          name: 'Scale under load',
-          trigger: 'On metric threshold',
-          steps: [
-            ['trigger', 'Latency climbs'],
-            ['check', 'Policy allows scale'],
-            ['action', 'Add replicas'],
-            ['check', 'Health steady'],
-            ['output', 'Notify, or roll back']
-          ]
-        },
-        {
-          name: 'Backup restore drill',
-          trigger: 'Monthly',
-          steps: [
-            ['trigger', 'Drill scheduled'],
-            ['action', 'Snapshot volumes'],
-            ['action', 'Restore to sandbox'],
-            ['check', 'Checksums match'],
-            ['output', 'Evidence recorded']
-          ]
-        }
-      ]
-    },
-    {
-      id: 'education', name: 'Education Technology', angle: 225, icon: 'education',
-      blurb: 'SWAN™ interactive smart boards, AI computer labs, and school ERP systems.',
-      workflows: [
-        {
-          name: 'Assignment to feedback',
-          trigger: 'On submission',
-          steps: [
-            ['trigger', 'Student submits'],
-            ['action', 'Auto-grade objective parts'],
-            ['ai', 'Draft written feedback'],
-            ['human', 'Teacher reviews'],
-            ['output', 'Released to student']
-          ]
-        },
-        {
-          name: 'Attendance to guardian',
-          trigger: 'On roll call',
-          steps: [
-            ['trigger', 'Roll call closes'],
-            ['check', 'Unexplained absence'],
-            ['action', 'Message the guardian'],
-            ['output', 'Logged for follow-up']
-          ]
-        }
-      ]
-    },
-    {
-      id: 'events', name: 'Events & Engagement', angle: 270, icon: 'events',
-      blurb: 'Live event production, streaming infrastructure, ticketing, and artist booking.',
-      workflows: [
-        {
-          name: 'Order to doors',
-          trigger: 'On payment confirmed',
-          steps: [
-            ['trigger', 'Order paid'],
-            ['action', 'Issue ticket'],
-            ['action', 'Remind 24h before'],
-            ['check', 'Scanned at door'],
-            ['output', 'Live capacity updates']
-          ]
-        },
-        {
-          name: 'After the show',
-          trigger: 'On event ends',
-          steps: [
-            ['trigger', 'Doors close'],
-            ['action', 'Collect feedback'],
-            ['ai', 'Summarise what worked'],
-            ['output', 'Share with the organiser']
-          ]
-        }
-      ]
-    },
-    {
-      id: 'data', name: 'Data & Transformation', angle: 315, icon: 'data',
-      blurb: 'Data pipelines, financial analytics, reporting automation, and ETL systems.',
-      workflows: [
-        {
-          name: 'Nightly pipeline',
-          trigger: 'Every night, 01:00',
-          steps: [
-            ['trigger', 'Extract sources'],
-            ['check', 'Schema still valid'],
-            ['action', 'Transform and join'],
-            ['action', 'Load to warehouse'],
-            ['check', 'Freshness within SLA'],
-            ['output', 'Alert only on drift']
-          ]
-        },
-        {
-          name: 'Month-end close',
-          trigger: 'On period close',
-          steps: [
-            ['trigger', 'Ledgers imported'],
-            ['action', 'Reconcile accounts'],
-            ['ai', 'Flag anomalies'],
-            ['human', 'Controller reviews'],
-            ['output', 'Report issued']
-          ]
-        }
-      ]
-    }
-  ];
+  /* The eight constellations and their workflows live in cst-data.js, loaded
+   * before this file. Kept apart so the shapes can be edited without
+   * scrolling past the renderer. */
+  var FAMILIES = window.KAI_CONSTELLATIONS || [];
 
   /* ------------------------------- helpers ------------------------------ */
   var NS = 'http://www.w3.org/2000/svg';
@@ -408,48 +173,143 @@
   }
 
   /* ------------------------------ the panel ----------------------------- */
+  /* Every stage is one of these cards. `i` drives both the light-up order and
+   * the travelling dot on the connector after it. */
+  function stepCard(kind, label, i, cycle) {
+    var card = el('div', 'cst-card');
+    card.setAttribute('data-kind', kind);
+    card.style.setProperty('--i', i);
+    card.style.setProperty('--cycle', cycle);
+    var top = el('div', 'cst-card-top');
+    var ico = el('span', 'cst-ico');
+    ico.appendChild(iconSvg(KIND_ICON[kind] || KIND_ICON.action, 12));
+    top.appendChild(ico);
+    top.appendChild(el('span', 'cst-kind', kind));
+    card.appendChild(top);
+    card.appendChild(el('div', 'cst-label', label));
+    return card;
+  }
+
+  function connector(i, cycle, cls) {
+    var link = el('span', 'cst-link' + (cls ? ' ' + cls : ''));
+    link.setAttribute('aria-hidden', 'true');
+    link.style.setProperty('--i', i);
+    link.style.setProperty('--cycle', cycle);
+    return link;
+  }
+
+  /* A straight run of steps. Returns the row and the next free index, so a
+   * layout can keep the animation in order across its sections. */
+  function runRow(steps, from, cycle, cls) {
+    var row = el('div', 'cst-run' + (cls ? ' ' + cls : ''));
+    steps.forEach(function (s, k) {
+      row.appendChild(stepCard(s[0], s[1], from + k, cycle));
+      if (k < steps.length - 1) { row.appendChild(connector(from + k, cycle)); }
+    });
+    return { node: row, next: from + steps.length };
+  }
+
+  /* Total node count decides how long one cycle runs, so a three-step flow
+   * does not sit idle waiting for a nine-step one to finish. */
+  function countNodes(wf) {
+    var n = 0;
+    if (wf.steps) { n += wf.steps.length; }
+    if (wf.pre) { n += wf.pre.length; }
+    if (wf.post) { n += wf.post.length; }
+    if (wf.tail) { n += wf.tail.length; }
+    if (wf.sources) { n += wf.sources.length; }
+    if (wf.tasks) { n += wf.tasks.length; }
+    if (wf.lanes) { n += Math.max.apply(null, wf.lanes.map(function (l) { return l.length; })); }
+    return n;
+  }
+
+  var LAYOUT_NOTE = {
+    chain:  'Sequential',
+    branch: 'Parallel branches',
+    loop:   'Retries until it passes',
+    fanin:  'Many sources, one pipeline',
+    grid:   'Independent checks'
+  };
+
   function renderWorkflow(wf) {
     var wrap = el('div', 'cst-wf');
+    wrap.setAttribute('data-layout', wf.layout || 'chain');
+
+    var total = countNodes(wf);
+    var cycle = (total * 1.05 + 4.5).toFixed(2) + 's';
 
     var head = el('div', 'cst-wf-head');
     head.appendChild(el('h3', null, wf.name));
     head.appendChild(el('span', 'cst-wf-trigger', wf.trigger));
-    head.appendChild(el('span', 'cst-wf-meta', wf.steps.length + ' steps'));
+    head.appendChild(el('span', 'cst-wf-shape', LAYOUT_NOTE[wf.layout] || 'Sequential'));
+    head.appendChild(el('span', 'cst-wf-meta', total + ' nodes'));
     wrap.appendChild(head);
 
-    // One cycle should let every stage light in turn, then rest a moment.
-    var cycle = (wf.steps.length * 1.05 + 4).toFixed(2) + 's';
+    var body = el('div', 'cst-flow');
+    var i = 0;
 
-    var flow = el('ol', 'cst-flow');
-    wf.steps.forEach(function (s, i) {
-      var li = el('li', 'cst-step');
+    if (wf.layout === 'branch') {
+      var pre = runRow(wf.pre || [], i, cycle);
+      body.appendChild(pre.node); i = pre.next;
+      body.appendChild(connector(i - 1, cycle, 'cst-link-split'));
 
-      var card = el('div', 'cst-card');
-      card.setAttribute('data-kind', s[0]);
-      card.style.setProperty('--i', i);
-      card.style.setProperty('--cycle', cycle);
+      var lanes = el('div', 'cst-lanes');
+      var laneStart = i;
+      var deepest = 0;
+      wf.lanes.forEach(function (lane) {
+        var r = runRow(lane, laneStart, cycle, 'cst-lane');
+        lanes.appendChild(r.node);
+        deepest = Math.max(deepest, lane.length);
+      });
+      body.appendChild(lanes);
+      i = laneStart + deepest;
 
-      var top = el('div', 'cst-card-top');
-      var ico = el('span', 'cst-ico');
-      ico.appendChild(iconSvg(KIND_ICON[s[0]] || KIND_ICON.action, 12));
-      top.appendChild(ico);
-      top.appendChild(el('span', 'cst-kind', s[0]));
-      card.appendChild(top);
-      card.appendChild(el('div', 'cst-label', s[1]));
-      li.appendChild(card);
+      body.appendChild(connector(i - 1, cycle, 'cst-link-merge'));
+      var post = runRow(wf.post || [], i, cycle);
+      body.appendChild(post.node);
 
-      if (i < wf.steps.length - 1) {
-        var link = el('span', 'cst-link');
-        link.setAttribute('aria-hidden', 'true');
-        link.style.setProperty('--i', i);
-        link.style.setProperty('--cycle', cycle);
-        li.appendChild(link);
-      }
+    } else if (wf.layout === 'fanin') {
+      var sources = el('div', 'cst-sources');
+      (wf.sources || []).forEach(function (s, k) {
+        sources.appendChild(stepCard(s[0], s[1], k, cycle));
+      });
+      body.appendChild(sources);
+      i = (wf.sources || []).length;
+      body.appendChild(connector(i - 1, cycle, 'cst-link-merge'));
+      var main = runRow(wf.steps || [], i, cycle);
+      body.appendChild(main.node);
 
-      flow.appendChild(li);
-    });
+    } else if (wf.layout === 'grid') {
+      var grid = el('div', 'cst-grid');
+      (wf.tasks || []).forEach(function (t, k) {
+        grid.appendChild(stepCard(t[0], t[1], k, cycle));
+      });
+      body.appendChild(grid);
+      i = (wf.tasks || []).length;
+      body.appendChild(connector(i - 1, cycle, 'cst-link-merge'));
+      var gpost = runRow(wf.post || [], i, cycle);
+      body.appendChild(gpost.node);
 
-    wrap.appendChild(flow);
+    } else if (wf.layout === 'loop') {
+      var loopWrap = el('div', 'cst-loop');
+      var main2 = runRow(wf.steps || [], i, cycle);
+      loopWrap.appendChild(main2.node);
+      i = main2.next;
+      var back = el('div', 'cst-back');
+      back.appendChild(el('span', 'cst-back-label', wf.back || 'Retry'));
+      back.setAttribute('aria-label', 'Loops back: ' + (wf.back || 'retry'));
+      loopWrap.appendChild(back);
+      body.appendChild(loopWrap);
+      body.appendChild(connector(i - 1, cycle, 'cst-link-exit'));
+      var tail = runRow(wf.tail || [], i, cycle);
+      body.appendChild(tail.node);
+
+    } else {
+      var chain = runRow(wf.steps || [], 0, cycle);
+      body.appendChild(chain.node);
+    }
+
+    wrap.appendChild(body);
     return wrap;
   }
 

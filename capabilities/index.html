@@ -17,11 +17,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/site.css?v=3">
-<link rel="stylesheet" href="/assets/css/constellations.css?v=1">
+<link rel="stylesheet" href="/assets/css/constellations.css?v=2">
 <script defer src="/assets/js/cosmos.js"></script>
 <script defer src="/assets/js/nexus.js?v=2"></script>
 <script defer src="/assets/js/viewer.js"></script>
-<script defer src="/assets/js/constellations.js?v=1"></script>
+<script defer src="/assets/js/cst-data.js?v=2"></script>
+<script defer src="/assets/js/constellations.js?v=2"></script>
 </head>
 <body>
 <div class="stars" aria-hidden="true"></div>
@@ -63,40 +64,18 @@
 
       <div class="cst-panel" id="cst-panel" role="tabpanel" tabindex="-1" hidden></div>
 
-      <div class="constellation-grid" id="cst-fallback">
-        <div class="constellation-card" id="ai">
-          <h3>AI &amp; Intelligence</h3>
-          <p style="color:var(--mut);font-size:0.875rem">AI agents, MCP servers, multi-agent workflows, RAG, and private deployments.</p>
+      <noscript>
+        <div class="constellation-grid">
+          <div class="constellation-card"><h3>AI &amp; Intelligence</h3><p style="color:var(--mut);font-size:0.875rem">AI agents, MCP servers, multi-agent workflows, RAG, and private deployments.</p></div>
+          <div class="constellation-card"><h3>Software Engineering</h3><p style="color:var(--mut);font-size:0.875rem">Custom SaaS, APIs, portals, ERP/CRM integrations, and desktop automation.</p></div>
+          <div class="constellation-card"><h3>Web &amp; Commerce</h3><p style="color:var(--mut);font-size:0.875rem">Fast web applications, e-commerce platforms, CMS, and managed hosting.</p></div>
+          <div class="constellation-card"><h3>Growth &amp; Marketing</h3><p style="color:var(--mut);font-size:0.875rem">Technical SEO, GEO/AEO optimization, campaign tracking, and lead generation.</p></div>
+          <div class="constellation-card"><h3>Cloud &amp; Infrastructure</h3><p style="color:var(--mut);font-size:0.875rem">GPU AI compute, DevOps pipelines, zero-latency deployments, and security.</p></div>
+          <div class="constellation-card"><h3>Education Technology</h3><p style="color:var(--mut);font-size:0.875rem">SWAN&trade; interactive smart boards, AI computer labs, and school ERP systems.</p></div>
+          <div class="constellation-card"><h3>Events &amp; Engagement</h3><p style="color:var(--mut);font-size:0.875rem">Live event production, streaming infrastructure, ticketing, and artist booking.</p></div>
+          <div class="constellation-card"><h3>Data &amp; Transformation</h3><p style="color:var(--mut);font-size:0.875rem">Data pipelines, financial analytics, reporting automation, and ETL systems.</p></div>
         </div>
-        <div class="constellation-card" id="software">
-          <h3>Software Engineering</h3>
-          <p style="color:var(--mut);font-size:0.875rem">Custom SaaS, APIs, portals, ERP/CRM integrations, and desktop automation.</p>
-        </div>
-        <div class="constellation-card" id="commerce">
-          <h3>Web &amp; Commerce</h3>
-          <p style="color:var(--mut);font-size:0.875rem">Fast web applications, e-commerce platforms, CMS, and managed hosting.</p>
-        </div>
-        <div class="constellation-card" id="growth">
-          <h3>Growth &amp; Marketing</h3>
-          <p style="color:var(--mut);font-size:0.875rem">Technical SEO, GEO/AEO optimization, campaign tracking, and lead generation.</p>
-        </div>
-        <div class="constellation-card" id="cloud">
-          <h3>Cloud &amp; Infrastructure</h3>
-          <p style="color:var(--mut);font-size:0.875rem">GPU AI compute, DevOps pipelines, zero-latency deployments, and security.</p>
-        </div>
-        <div class="constellation-card" id="education">
-          <h3>Education Technology</h3>
-          <p style="color:var(--mut);font-size:0.875rem">SWAN&trade; interactive smart boards, AI computer labs, and school ERP systems.</p>
-        </div>
-        <div class="constellation-card" id="events">
-          <h3>Events &amp; Engagement</h3>
-          <p style="color:var(--mut);font-size:0.875rem">Live event production, streaming infrastructure, ticketing, and artist booking.</p>
-        </div>
-        <div class="constellation-card" id="data">
-          <h3>Data &amp; Transformation</h3>
-          <p style="color:var(--mut);font-size:0.875rem">Data pipelines, financial analytics, reporting automation, and ETL systems.</p>
-        </div>
-      </div>
+      </noscript>
     </div>
   </section>
 </main>
