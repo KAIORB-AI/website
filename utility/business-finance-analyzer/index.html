@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Business Finance Analyzer — margins, burn and runway — KAI247</title>
+<meta name="description" content="Paste your monthly revenue and costs and see gross margin, net margin, burn rate, runway and break-even — worked out in your browser. Nothing is uploaded.">
+<link rel="canonical" href="https://kai247.com/utility/business-finance-analyzer/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kai247.com/utility/business-finance-analyzer/">
+<meta property="og:title" content="Business Finance Analyzer — KAI247">
+<meta property="og:description" content="Margins, burn and runway from your own numbers. Nothing uploaded.">
+<meta name="theme-color" content="#f8fafc">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/utility.css?v=2">
+<script defer src="/assets/js/utility-router.js?v=3"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Business Finance Analyzer","url":"https://kai247.com/utility/business-finance-analyzer/","applicationCategory":"BusinessApplication","operatingSystem":"Any (web browser)","description":"Calculate gross margin, net margin, burn rate, runway and break-even from monthly figures, entirely in the browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<a class="u-skip" href="#main">Skip to content</a>
+<header class="u-head">
+  <div class="u-wrap">
+    <a class="u-brand" href="/" aria-label="KAI247 home">
+      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--u-blue)" stroke-width="4" transform="rotate(-24 32 32)"/><circle cx="32" cy="32" r="10" fill="var(--u-cyan)"/><circle cx="51" cy="19" r="4" fill="var(--u-ink)"/></svg>
+      KAI247
+    </a>
+    <nav class="u-nav" aria-label="Primary">
+      <a href="/utility/">All utilities</a>
+      <a href="/utility/quote-generator/">Quotes</a>
+      <a href="/utility/pdf-size-reducer/">PDF</a>
+      <a href="/utility/web-essentials/">Web Essentials</a>
+    </nav>
+  </div>
+</header>
+
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <defs><linearGradient id="uDialGrad" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#06b6d4"/>
+  </linearGradient></defs>
+</svg>
+
+<main id="main" class="u-wrap">
+  <section class="u-hero" style="text-align:left;padding-bottom:.6rem">
+    <p class="u-kicker"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg> Finance Analyzer</p>
+    <h1>Where the money actually goes</h1>
+    <p class="u-lede" style="margin-inline:0">Monthly figures in. Margin, burn, runway and break-even out.</p>
+    <div class="u-privacy compact" style="margin-top:1.1rem">
+      <span class="lock" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
+      <p><strong>Nothing is uploaded.</strong> Your numbers never leave this tab.</p>
+    </div>
+  </section>
+
+  <div class="u-tool split" style="margin-top:1.6rem">
+    <div class="u-panel">
+      <div class="u-panel-head">
+        <span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19h16M6 16V9m5 7V5m5 11v-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <h2>Your month</h2>
+      </div>
+
+      <div class="u-field">
+        <label for="cur">Currency</label>
+        <select id="cur">
+          <option value="USD">USD $</option><option value="EUR">EUR €</option>
+          <option value="GBP">GBP £</option><option value="INR">INR ₹</option>
+          <option value="CAD">CAD $</option><option value="AUD">AUD $</option>
+        </select>
+      </div>
+      <div class="u-field">
+        <label for="rev">Revenue</label>
+        <input type="number" id="rev" min="0" step="any" value="40000" inputmode="decimal">
+        <p class="u-hint">What you invoiced this month.</p>
+      </div>
+      <div class="u-field">
+        <label for="cogs">Direct costs (COGS)</label>
+        <input type="number" id="cogs" min="0" step="any" value="14000" inputmode="decimal">
+        <p class="u-hint">Only what scales with each sale: materials, hosting per customer, payment fees, contractor delivery.</p>
+      </div>
+      <div class="u-field">
+        <label for="fixed">Fixed costs</label>
+        <input type="number" id="fixed" min="0" step="any" value="21000" inputmode="decimal">
+        <p class="u-hint">Salaries, rent, tools, insurance — the bill that arrives whether you sell or not.</p>
+      </div>
+      <div class="u-field">
+        <label for="cash">Cash in the bank</label>
+        <input type="number" id="cash" min="0" step="any" value="120000" inputmode="decimal">
+      </div>
+      <div class="u-field">
+        <label for="growth">Revenue growth per month</label>
+        <input type="number" id="growth" step="any" value="0" inputmode="decimal">
+        <p class="u-hint">Percent. Leave at 0 to see runway on today's numbers, which is the honest default.</p>
+      </div>
+      <div class="u-row">
+        <button class="u-btn" type="button" id="go">Analyse</button>
+        <button class="u-btn u-btn-ghost" type="button" id="reset">Reset</button>
+      </div>
+      <p class="u-hint" id="status" style="margin-top:.8rem"></p>
+    </div>
+
+    <div class="u-panel">
+      <div class="u-panel-head">
+        <span class="u-glyph ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M8.5 12.2l2.4 2.4 4.6-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h2>The picture</h2>
+      </div>
+
+      <div class="u-result">
+        <div class="u-dial is-idle" id="dial" style="--pct:0">
+          <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+            <circle class="ghost" cx="60" cy="60" r="58"/>
+            <circle class="track" cx="60" cy="60" r="52"/>
+            <circle class="fill" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="u-dial-mid"><b id="dialV">—</b><span id="dialK">gross margin</span></div>
+        </div>
+        <div class="u-stat" id="stats" hidden>
+          <div><div class="k">Gross profit</div><div class="v" id="sGross">—</div></div>
+          <div><div class="k">Net profit</div><div class="v" id="sNet">—</div></div>
+          <div><div class="k">Net margin</div><div class="v" id="sNetM">—</div></div>
+          <div><div class="k">Break-even</div><div class="v" id="sBE">—</div></div>
+          <div><div class="k">Monthly burn</div><div class="v" id="sBurn">—</div></div>
+          <div><div class="k">Runway</div><div class="v" id="sRun">—</div></div>
+        </div>
+      </div>
+
+      <p class="u-hint" id="placeholder" style="margin-top:1rem">Enter your figures and press Analyse.</p>
+      <div id="verdict" style="margin-top:1rem"></div>
+    </div>
+  </div>
+
+  <ul class="u-facts" style="margin-top:1.6rem">
+    <li><span class="u-glyph ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg></span>No upload</li>
+    <li><span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Runs offline</li>
+    <li><span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Shows its arithmetic</li>
+    <li><span class="u-glyph warn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4l9 16H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4m0 3v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Not financial advice</li>
+  </ul>
+
+  <details class="u-more">
+    <summary><span class="chev" aria-hidden="true">›</span>The formulas, and what this is not</summary>
+    <div class="body">
+      <p><strong>Gross profit</strong> = revenue − direct costs. <strong>Gross margin</strong> = gross profit ÷ revenue. <strong>Net profit</strong> = gross profit − fixed costs. <strong>Break-even revenue</strong> = fixed costs ÷ gross margin — the sales you need before the fixed bill is covered. <strong>Burn</strong> is net profit when negative, and <strong>runway</strong> is cash ÷ burn, stepped month by month when a growth rate is set so compounding is not ignored.</p>
+      <p>Runway is capped at 120 months in the display: past ten years the number stops meaning anything.</p>
+      <p><strong>This is arithmetic, not advice.</strong> It does not know your tax position, your receivables, your seasonality or your debt schedule, and it is not a substitute for an accountant. It is deliberately blunt about one thing: if fixed costs exceed gross profit, no amount of growth at the current margin fixes it, and the tool says so rather than projecting a happy curve.</p>
+    </div>
+  </details>
+</main>
+
+<footer class="u-foot">
+  <div class="u-wrap">
+    <span>KAI247 — Always with you.</span>
+    <nav aria-label="Footer"><a href="/utility/">All utilities</a> · <a href="/">Home</a></nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var cur = $('cur'), rev = $('rev'), cogs = $('cogs'), fixed = $('fixed'),
+      cash = $('cash'), growth = $('growth'), go = $('go'), reset = $('reset'),
+      status = $('status'), stats = $('stats'), placeholder = $('placeholder'),
+      verdict = $('verdict'), dial = $('dial'), dialV = $('dialV'), dialK = $('dialK');
+
+  var SYM = { USD:'$', EUR:'€', GBP:'£', INR:'₹', CAD:'$', AUD:'$' };
+
+  function money(n) {
+    var s = SYM[cur.value] || '';
+    var neg = n < 0; n = Math.abs(n);
+    var str = n >= 1000000 ? (n/1000000).toFixed(2) + 'M'
+            : n >= 1000 ? (n/1000).toFixed(1) + 'k'
+            : n.toFixed(0);
+    return (neg ? '−' : '') + s + str;
+  }
+  function pct(n) { return (n * 100).toFixed(1) + '%'; }
+  function note(text, cls) {
+    verdict.textContent = '';
+    if (!text) return;
+    var p = document.createElement('p');
+    p.className = 'u-note' + (cls ? ' ' + cls : '');
+    p.textContent = text;
+    verdict.appendChild(p);
+  }
+
+  /* Runway with compounding growth, stepped month by month. A closed form
+     would need a fixed burn, and the whole point of a growth rate is that the
+     burn changes every month. Capped so a profitable business does not loop. */
+  function runwayMonths(cashNow, revNow, cogsRatio, fixedCost, g) {
+    if (revNow * (1 - cogsRatio) - fixedCost >= 0) return Infinity;
+    var c = cashNow, r = revNow, m = 0;
+    while (c > 0 && m < 600) {
+      var net = r * (1 - cogsRatio) - fixedCost;
+      if (net >= 0) return Infinity;
+      c += net;
+      r = r * (1 + g);
+      m++;
+    }
+    return m;
+  }
+
+  function analyse() {
+    var R = Math.max(0, parseFloat(rev.value) || 0);
+    var C = Math.max(0, parseFloat(cogs.value) || 0);
+    var F = Math.max(0, parseFloat(fixed.value) || 0);
+    var K = Math.max(0, parseFloat(cash.value) || 0);
+    var g = (parseFloat(growth.value) || 0) / 100;
+
+    if (R <= 0) {
+      status.textContent = 'Enter a revenue figure above zero.';
+      status.className = 'u-hint u-bad';
+      stats.hidden = true; placeholder.hidden = false; note('');
+      dial.classList.add('is-idle'); dialV.textContent = '—';
+      return;
+    }
+
+    var gross = R - C;
+    var gm = gross / R;
+    var net = gross - F;
+    var nm = net / R;
+    var breakeven = gm > 0 ? F / gm : Infinity;
+    var burn = net < 0 ? -net : 0;
+    var months = runwayMonths(K, R, C / R, F, g);
+
+    $('sGross').textContent = money(gross);
+    $('sNet').textContent = money(net);
+    $('sNetM').textContent = pct(nm);
+    $('sBE').textContent = isFinite(breakeven) ? money(breakeven) : 'unreachable';
+    $('sBurn').textContent = burn > 0 ? money(burn) + '/mo' : 'none';
+    $('sRun').textContent = !isFinite(months) ? 'profitable'
+                          : months >= 120 ? '10 yrs+'
+                          : months + ' mo';
+
+    var pctShown = Math.max(0, Math.min(1, gm));
+    dial.classList.remove('is-idle', 'is-working');
+    dial.style.setProperty('--pct', pctShown);
+    dialV.textContent = pct(gm);
+    dialK.textContent = 'gross margin';
+
+    placeholder.hidden = true; stats.hidden = false;
+    status.textContent = ''; status.className = 'u-hint';
+
+    if (gm <= 0) {
+      note('Every sale loses money before a single fixed cost is paid: direct costs are at or above revenue. Growth makes this worse, not better — the price or the delivery cost has to change first.', 'u-bad');
+    } else if (net >= 0) {
+      note('Profitable this month. Break-even is ' + money(breakeven) + ' of revenue, so you are ' +
+           pct((R - breakeven) / R) + ' above the line.');
+    } else if (breakeven > R * 3) {
+      note('Fixed costs need ' + money(breakeven) + ' of revenue to cover at this margin — more than triple where you are. That is a cost problem, not a sales problem.', 'u-bad');
+    } else {
+      note('Burning ' + money(burn) + ' a month. You need ' + money(breakeven - R) +
+           ' more revenue at this margin to break even' +
+           (isFinite(months) ? ', and have ' + months + ' months of cash to get there.' : '.'));
+    }
+  }
+
+  go.addEventListener('click', analyse);
+  [rev, cogs, fixed, cash, growth, cur].forEach(function (el) {
+    el.addEventListener('change', function () { if (!stats.hidden) analyse(); });
+  });
+  reset.addEventListener('click', function () {
+    rev.value = 40000; cogs.value = 14000; fixed.value = 21000; cash.value = 120000; growth.value = 0;
+    stats.hidden = true; placeholder.hidden = false; note(''); status.textContent = '';
+    dial.classList.add('is-idle'); dial.style.setProperty('--pct', 0);
+    dialV.textContent = '—'; dialK.textContent = 'gross margin';
+  });
+})();
+</script>
+</body>
+</html>

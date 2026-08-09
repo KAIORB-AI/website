@@ -71,7 +71,7 @@
       test: /\bqr\b|\bqr[- ]?code\b/i
     },
     {
-      id: 'finance', built: false, path: '/utility/business-finance-analyzer/',
+      id: 'finance', built: true, path: '/utility/business-finance-analyzer/',
       label: 'Business Finance Analyzer',
       test: /\b(p&l|p and l|profit|loss|balance sheet|ebitda|margin|burn rate|revenue|financial|accounts?)\b/i
     },
