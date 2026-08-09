@@ -76,7 +76,14 @@
 
   /* ------------------------------ the stage ----------------------------- */
   function buildStage(mount, onSelect) {
-    var W = 700, H = 700, CX = 350, CY = 350, R = 250;
+    // Bigger discs than the first pass, and a viewBox with room for labels
+    // that sit BELOW them. They used to be drawn at cy+16, which is inside a
+    // 38px disc, so every name overlapped its own circle.
+    var W = 780, H = 780, CX = 390, CY = 390, R = 248;
+    // Node radius is deliberately large against the orbit: in the two-column
+    // layout the stage is only ~460px wide, so a disc sized for a full-width
+    // wheel comes out tiny once the SVG scales down.
+    var NODE_R = 68, RING_R = 81, LABEL_GAP = 18;
 
     var svg = svgEl('svg', {
       viewBox: '0 0 ' + W + ' ' + H, class: 'cst-svg',
@@ -129,12 +136,12 @@
         'data-id': f.id
       });
       g.appendChild(svgEl('title', {})).textContent = f.name;
-      g.appendChild(svgEl('circle', { cx: p.x, cy: p.y, r: 46, class: 'ring' }));
-      g.appendChild(svgEl('circle', { cx: p.x, cy: p.y, r: 38, class: 'disc' }));
+      g.appendChild(svgEl('circle', { cx: p.x, cy: p.y, r: RING_R, class: 'ring' }));
+      g.appendChild(svgEl('circle', { cx: p.x, cy: p.y, r: NODE_R, class: 'disc' }));
 
-      var ic = iconSvg(ICON[f.icon], 22);
-      ic.setAttribute('x', p.x - 11);
-      ic.setAttribute('y', p.y - 15);
+      var ic = iconSvg(ICON[f.icon], 30);
+      ic.setAttribute('x', p.x - 15);
+      ic.setAttribute('y', p.y - 19);
       ic.querySelector('path').setAttribute('class', 'glyph');
       ic.querySelector('path').removeAttribute('stroke');
       g.appendChild(ic);
@@ -143,10 +150,10 @@
       var words = f.name.split(' ');
       var l1 = words.slice(0, 1).join(' ');
       var l2 = words.slice(1).join(' ');
-      var yBase = p.y + 16;
+      var yBase = p.y + NODE_R + LABEL_GAP;
       [l1, l2].forEach(function (line, k) {
         if (!line) { return; }
-        var t = svgEl('text', { x: p.x, y: yBase + k * 12, class: 'name' });
+        var t = svgEl('text', { x: p.x, y: yBase + k * 15, class: 'name' });
         t.textContent = line;
         g.appendChild(t);
       });
@@ -349,11 +356,11 @@
   function init() {
     var mount = document.getElementById('cst-stage');
     var panel = document.getElementById('cst-panel');
-    var fallback = document.getElementById('cst-fallback');
+    var layout = document.getElementById('cst-layout');
     if (!mount || !panel) { return; }
 
     // The plain card list is the no-JS view; replace it now that JS is here.
-    if (fallback) { fallback.hidden = true; }
+
 
     var selected = null;
     var stage;
@@ -372,6 +379,7 @@
 
       var close = renderPanel(panel, family);
       panel.hidden = false;
+      if (layout) { layout.classList.add('is-open'); }
       close.addEventListener('click', function () {
         deselect();
         if (stage.nodes[id]) { stage.nodes[id].focus(); }
@@ -380,13 +388,19 @@
       if (location.hash !== '#' + id) {
         history.replaceState(null, '', '#' + id);
       }
-      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      // Only chase the panel when it is stacked underneath; side by side it
+      // is already in view and scrolling would be disorienting.
+      if (!layout || !layout.classList.contains('is-open') ||
+          window.matchMedia('(max-width: 1039px)').matches) {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
     }
 
     function deselect() {
       selected = null;
       panel.hidden = true;
       panel.textContent = '';
+      if (layout) { layout.classList.remove('is-open'); }
       Object.keys(stage.nodes).forEach(function (k) {
         stage.nodes[k].setAttribute('aria-selected', 'false');
         stage.spokes[k].classList.remove('is-active');

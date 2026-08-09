@@ -25,6 +25,24 @@
 }
 .constellation-card:hover h3::before { background: var(--gold); box-shadow: 0 0 8px var(--gold-soft); }
 
+/* ---------- Stage and panel, side by side ----------
+   Closed, the wheel sits alone and centred. Open, it moves left and the panel
+   takes the right, so you can read a workflow without losing sight of which
+   constellation you are in — and without the page jumping a screen down. */
+.cst-layout { display: grid; gap: 2rem; align-items: start; justify-items: center; }
+
+@media (min-width: 1040px) {
+  .cst-layout.is-open {
+    grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
+    justify-items: stretch;
+    max-width: 1240px; margin-inline: auto;
+  }
+  .cst-layout.is-open .cst-stage {
+    position: sticky; top: 84px;   /* clears the fixed header */
+  }
+  .cst-layout.is-open .cst-panel { margin: 0; }
+}
+
 /* ---------- The orbital stage ---------- */
 .cst-stage { position: relative; width: 100%; max-width: 760px; margin: 0 auto; }
 .cst-svg { width: 100%; height: auto; display: block; overflow: visible; }
