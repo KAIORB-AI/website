@@ -1,7 +1,7 @@
 # Working on kai247.com — instructions for coding agents
 
 **Canonical location:** `docs/AGENTS.md` (Antigravity, Claude, Codex, Cursor — all of you)
-**Related:** [DEPLOYMENT.md](DEPLOYMENT.md) · [DECISIONS.md](DECISIONS.md) · [CONTENT-INVENTORY.md](CONTENT-INVENTORY.md)
+**Related:** [DEPLOYMENT.md](DEPLOYMENT.md) · [DECISIONS.md](DECISIONS.md) · [CONTENT-INVENTORY.md](CONTENT-INVENTORY.md) · [CAPABILITIES-FLOW-DESIGN.md](CAPABILITIES-FLOW-DESIGN.md)
 
 This file is excluded from the deploy tarball and from the deploy trigger, so
 editing it publishes nothing and deploys nothing.

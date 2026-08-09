@@ -180,40 +180,82 @@
   }
 
   /* ------------------------------ the panel ----------------------------- */
-  /* Every stage is one of these cards. `i` drives both the light-up order and
-   * the travelling dot on the connector after it. */
-  function stepCard(kind, label, i, cycle) {
-    var card = el('div', 'cst-card');
-    card.setAttribute('data-kind', kind);
-    card.style.setProperty('--i', i);
-    card.style.setProperty('--cycle', cycle);
-    var top = el('div', 'cst-card-top');
-    var ico = el('span', 'cst-ico');
-    ico.appendChild(iconSvg(KIND_ICON[kind] || KIND_ICON.action, 12));
-    top.appendChild(ico);
-    top.appendChild(el('span', 'cst-kind', kind));
-    card.appendChild(top);
-    card.appendChild(el('div', 'cst-label', label));
-    return card;
+  /* Flows read TOP TO BOTTOM. The panel is ~460px wide when it sits beside
+   * the wheel, and the old left-to-right chains line-wrapped mid-arrow at that
+   * width — a flow diagram that wraps looks broken. A vertical spine never
+   * wraps at any width.
+   *
+   * Two vocabularies, on purpose:
+   *   stepRow  — a row ON the spine: icon chip on the rail, label beside it.
+   *              One-after-another work.
+   *   cellCard — a centred mini-card used in parallel sections (lanes, fans,
+   *              grids). Side-by-side work looks different from sequence.
+   * `i` drives the light-up order; `cycle` is the full loop length. */
+  function stepRow(kind, label, i, cycle) {
+    var row = el('div', 'cst-step');
+    row.setAttribute('data-kind', kind);
+    row.style.setProperty('--i', i);
+    row.style.setProperty('--cycle', cycle);
+    var dot = el('span', 'cst-dot');
+    dot.appendChild(iconSvg(KIND_ICON[kind] || KIND_ICON.action, 13));
+    row.appendChild(dot);
+    var text = el('div', 'cst-step-text');
+    text.appendChild(el('span', 'cst-kind', kind));
+    text.appendChild(el('div', 'cst-label', label));
+    row.appendChild(text);
+    return row;
   }
 
-  function connector(i, cycle, cls) {
-    var link = el('span', 'cst-link' + (cls ? ' ' + cls : ''));
-    link.setAttribute('aria-hidden', 'true');
-    link.style.setProperty('--i', i);
-    link.style.setProperty('--cycle', cycle);
-    return link;
+  function cellCard(kind, label, i, cycle) {
+    var cell = el('div', 'cst-cell');
+    cell.setAttribute('data-kind', kind);
+    cell.style.setProperty('--i', i);
+    cell.style.setProperty('--cycle', cycle);
+    var dot = el('span', 'cst-dot');
+    dot.appendChild(iconSvg(KIND_ICON[kind] || KIND_ICON.action, 13));
+    cell.appendChild(dot);
+    cell.appendChild(el('span', 'cst-kind', kind));
+    cell.appendChild(el('div', 'cst-label', label));
+    return cell;
   }
 
-  /* A straight run of steps. Returns the row and the next free index, so a
-   * layout can keep the animation in order across its sections. */
-  function runRow(steps, from, cycle, cls) {
-    var row = el('div', 'cst-run' + (cls ? ' ' + cls : ''));
+  /* A vertical connector segment with a dot that travels down it. */
+  function seg(i, cycle, cls) {
+    var s = el('span', 'cst-seg' + (cls ? ' ' + cls : ''));
+    s.setAttribute('aria-hidden', 'true');
+    s.style.setProperty('--i', i);
+    s.style.setProperty('--cycle', cycle);
+    return s;
+  }
+
+  /* A straight run of steps down the spine. Returns the column and the next
+   * free index, so a layout keeps the animation in order across sections. */
+  function runStack(steps, from, cycle) {
+    var col = el('div', 'cst-stack');
     steps.forEach(function (s, k) {
-      row.appendChild(stepCard(s[0], s[1], from + k, cycle));
-      if (k < steps.length - 1) { row.appendChild(connector(from + k, cycle)); }
+      col.appendChild(stepRow(s[0], s[1], from + k, cycle));
+      if (k < steps.length - 1) { col.appendChild(seg(from + k, cycle)); }
     });
-    return { node: row, next: from + steps.length };
+    return { node: col, next: from + steps.length };
+  }
+
+  /* Parallel lanes: centred columns forked off the spine under a bus bar and
+   * merged back under a second one. Lanes share animation indices, because
+   * parallel means simultaneous. */
+  function laneBlock(lanes, from, cycle) {
+    var block = el('div', 'cst-lanes');
+    block.style.setProperty('--lanes', lanes.length);
+    var deepest = 0;
+    lanes.forEach(function (lane) {
+      var col = el('div', 'cst-lane');
+      lane.forEach(function (s, k) {
+        col.appendChild(cellCard(s[0], s[1], from + k, cycle));
+        if (k < lane.length - 1) { col.appendChild(seg(from + k, cycle, 'cst-seg-lane')); }
+      });
+      block.appendChild(col);
+      deepest = Math.max(deepest, lane.length);
+    });
+    return { node: block, next: from + deepest };
   }
 
   /* Total node count decides how long one cycle runs, so a three-step flow
@@ -247,59 +289,58 @@
 
     var head = el('div', 'cst-wf-head');
     head.appendChild(el('h3', null, wf.name));
-    head.appendChild(el('span', 'cst-wf-trigger', wf.trigger));
-    head.appendChild(el('span', 'cst-wf-shape', LAYOUT_NOTE[wf.layout] || 'Sequential'));
-    head.appendChild(el('span', 'cst-wf-meta', total + ' nodes'));
+    var tags = el('div', 'cst-wf-tags');
+    var trig = el('span', 'cst-wf-trigger');
+    trig.appendChild(iconSvg(KIND_ICON.trigger, 10));
+    trig.appendChild(document.createTextNode(wf.trigger));
+    tags.appendChild(trig);
+    tags.appendChild(el('span', 'cst-wf-shape', LAYOUT_NOTE[wf.layout] || 'Sequential'));
+    head.appendChild(tags);
     wrap.appendChild(head);
 
     var body = el('div', 'cst-flow');
     var i = 0;
 
     if (wf.layout === 'branch') {
-      var pre = runRow(wf.pre || [], i, cycle);
+      var pre = runStack(wf.pre || [], i, cycle);
       body.appendChild(pre.node); i = pre.next;
-      body.appendChild(connector(i - 1, cycle, 'cst-link-split'));
-
-      var lanes = el('div', 'cst-lanes');
-      var laneStart = i;
-      var deepest = 0;
-      wf.lanes.forEach(function (lane) {
-        var r = runRow(lane, laneStart, cycle, 'cst-lane');
-        lanes.appendChild(r.node);
-        deepest = Math.max(deepest, lane.length);
-      });
-      body.appendChild(lanes);
-      i = laneStart + deepest;
-
-      body.appendChild(connector(i - 1, cycle, 'cst-link-merge'));
-      var post = runRow(wf.post || [], i, cycle);
+      body.appendChild(seg(i - 1, cycle, 'cst-seg-junction'));
+      var lanes = laneBlock(wf.lanes || [], i, cycle);
+      body.appendChild(lanes.node); i = lanes.next;
+      body.appendChild(seg(i - 1, cycle, 'cst-seg-junction'));
+      var post = runStack(wf.post || [], i, cycle);
       body.appendChild(post.node);
 
     } else if (wf.layout === 'fanin') {
-      var sources = el('div', 'cst-sources');
+      // Sources are parallel feeds, but they light one after another —
+      // arrivals, then the merge.
+      var srcBlock = el('div', 'cst-lanes cst-lanes-in');
+      srcBlock.style.setProperty('--lanes', (wf.sources || []).length);
       (wf.sources || []).forEach(function (s, k) {
-        sources.appendChild(stepCard(s[0], s[1], k, cycle));
+        var col = el('div', 'cst-lane');
+        col.appendChild(cellCard(s[0], s[1], k, cycle));
+        srcBlock.appendChild(col);
       });
-      body.appendChild(sources);
+      body.appendChild(srcBlock);
       i = (wf.sources || []).length;
-      body.appendChild(connector(i - 1, cycle, 'cst-link-merge'));
-      var main = runRow(wf.steps || [], i, cycle);
+      body.appendChild(seg(i - 1, cycle, 'cst-seg-junction'));
+      var main = runStack(wf.steps || [], i, cycle);
       body.appendChild(main.node);
 
     } else if (wf.layout === 'grid') {
       var grid = el('div', 'cst-grid');
       (wf.tasks || []).forEach(function (t, k) {
-        grid.appendChild(stepCard(t[0], t[1], k, cycle));
+        grid.appendChild(cellCard(t[0], t[1], k, cycle));
       });
       body.appendChild(grid);
       i = (wf.tasks || []).length;
-      body.appendChild(connector(i - 1, cycle, 'cst-link-merge'));
-      var gpost = runRow(wf.post || [], i, cycle);
+      body.appendChild(seg(i - 1, cycle, 'cst-seg-junction'));
+      var gpost = runStack(wf.post || [], i, cycle);
       body.appendChild(gpost.node);
 
     } else if (wf.layout === 'loop') {
       var loopWrap = el('div', 'cst-loop');
-      var main2 = runRow(wf.steps || [], i, cycle);
+      var main2 = runStack(wf.steps || [], i, cycle);
       loopWrap.appendChild(main2.node);
       i = main2.next;
       var back = el('div', 'cst-back');
@@ -307,13 +348,12 @@
       back.setAttribute('aria-label', 'Loops back: ' + (wf.back || 'retry'));
       loopWrap.appendChild(back);
       body.appendChild(loopWrap);
-      body.appendChild(connector(i - 1, cycle, 'cst-link-exit'));
-      var tail = runRow(wf.tail || [], i, cycle);
+      body.appendChild(seg(i - 1, cycle, 'cst-seg-junction'));
+      var tail = runStack(wf.tail || [], i, cycle);
       body.appendChild(tail.node);
 
     } else {
-      var chain = runRow(wf.steps || [], 0, cycle);
-      body.appendChild(chain.node);
+      body.appendChild(runStack(wf.steps || [], 0, cycle).node);
     }
 
     wrap.appendChild(body);
@@ -416,10 +456,21 @@
 
     // Deep link: /capabilities/#growth opens that constellation. The old page
     // used these same ids as anchors, so existing links keep working.
-    var hash = (location.hash || '').replace('#', '');
-    if (hash && FAMILIES.some(function (f) { return f.id === hash; })) {
-      select(hash);
+    function openFromHash() {
+      var hash = (location.hash || '').replace('#', '');
+      if (hash && FAMILIES.some(function (f) { return f.id === hash; })) {
+        if (selected !== hash) { select(hash); }
+      } else if (selected) {
+        deselect();
+      }
     }
+    openFromHash();
+
+    // A hash-only navigation does not reload the document, so a link to
+    // /capabilities/#education clicked while already on the page must be
+    // handled here. replaceState does not fire hashchange, so select() and
+    // deselect() cannot re-enter this.
+    window.addEventListener('hashchange', openFromHash);
   }
 
   if (document.readyState === 'loading') {

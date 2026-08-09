@@ -138,6 +138,13 @@ window.KAI_CONSTELLATIONS = [
         steps: [['trigger', 'Roll call closes'], ['check', 'Unexplained absence'], ['output', 'Guardian messaged']]
       },
       {
+        name: 'Lesson to every SWAN board', layout: 'loop',
+        trigger: 'On lesson published',
+        steps: [['trigger', 'Teacher publishes'], ['action', 'Push to classroom boards'], ['check', 'Every board confirmed?']],
+        back: 'Retry boards still offline',
+        tail: [['output', 'Rollout report']]
+      },
+      {
         name: 'Assignment to feedback', layout: 'branch',
         trigger: 'On submission',
         pre: [['trigger', 'Student submits']],

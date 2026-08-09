@@ -130,156 +130,212 @@
   padding: .35rem .85rem; margin-bottom: 1.4rem;
 }
 
-/* ---------- A workflow ---------- */
-.cst-wf { margin-bottom: 2rem; }
+/* ---------- A workflow ----------
+   Each workflow is a soft container so the panel reads as a set of distinct
+   automations rather than one undifferentiated column. */
+.cst-wf {
+  border: 1px solid var(--line); border-radius: 16px;
+  background: var(--surface);
+  padding: 1.1rem 1.25rem 1.3rem;
+  margin-bottom: 1.25rem;
+}
 .cst-wf:last-child { margin-bottom: 0; }
-.cst-wf-head { display: flex; align-items: baseline; gap: .75rem; margin-bottom: .9rem; flex-wrap: wrap; }
-.cst-wf-head h3 { font-size: 1.02rem; margin: 0; }
-.cst-wf-meta { font-size: .78rem; color: var(--mut); }
+.cst-wf-head { margin-bottom: 1rem; }
+.cst-wf-head h3 { font-size: 1.02rem; margin: 0 0 .5rem; }
+.cst-wf-tags { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
 .cst-wf-trigger {
-  font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-  color: var(--blue); border: 1px solid var(--line); border-radius: 999px; padding: .2rem .6rem;
+  display: inline-flex; align-items: center; gap: .35rem;
+  font-size: .66rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--blue); border: 1px solid var(--line); border-radius: 999px; padding: .22rem .65rem;
 }
-
+.cst-wf-trigger svg { flex: none; }
 .cst-wf-shape {
-  font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-  color: var(--violet); border: 1px solid var(--line); border-radius: 999px; padding: .2rem .6rem;
+  font-size: .66rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--violet); border: 1px solid var(--line); border-radius: 999px; padding: .22rem .65rem;
 }
 
-/* ---------- Layout containers ----------
-   Five shapes, so eight families do not read as one diagram repeated. The
-   flow is a column of sections; a section is either a straight run, a set of
-   parallel lanes, a fan of sources, or a grid of independent checks. */
-.cst-flow { display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
-.cst-run { display: flex; align-items: center; flex-wrap: wrap; gap: 0; }
-.cst-step { display: flex; align-items: center; gap: 0; }
+/* ---------- The vertical spine ----------
+   Flows read top to bottom. The spine rail sits at x=14px (chip centre);
+   every connector, junction and bus bar is drawn against that coordinate,
+   which is what makes fork/join read as plumbing instead of decoration.
 
-/* branch: lanes stacked, each indented so the split reads vertically. */
-.cst-lanes {
-  display: flex; flex-direction: column; gap: .55rem;
-  border-left: 2px dashed var(--line); padding-left: 1.1rem; margin-left: 1.25rem;
-}
-.cst-lane { position: relative; }
-.cst-lane::before {
-  content: ''; position: absolute; left: -1.1rem; top: 50%; width: .85rem; height: 2px;
-  background: repeating-linear-gradient(90deg, var(--line) 0 4px, transparent 4px 8px);
-}
+   Sequence  = rows on the spine (chip left, words right).
+   Parallel  = centred mini-cards in columns under a bus bar.
+   The two must not look alike: that contrast is the whole grammar. */
+.cst-flow, .cst-stack { display: flex; flex-direction: column; align-items: stretch; }
 
-/* fanin: sources side by side, converging. */
-.cst-sources { display: flex; flex-wrap: wrap; gap: .55rem; }
+.cst-step {
+  display: flex; align-items: flex-start; gap: .7rem;
+  padding: .3rem .5rem .3rem 0; border-radius: 10px;
+  /* Nodes light in turn — a system working steadily, not a spinner. */
+  animation: cst-row-lite var(--cycle, 12s) ease-in-out infinite;
+  animation-delay: calc(var(--i) * 1.05s);
+}
+.cst-step-text { min-width: 0; padding-top: 1px; }
+.cst-step .cst-kind { display: block; margin-bottom: 1px; }
 
-/* grid: independent checks, no order implied between them. */
-.cst-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .55rem; width: 100%; }
+.cst-dot {
+  width: 28px; height: 28px; flex: none; display: grid; place-items: center;
+  border-radius: 50%; color: var(--mut); background: rgba(148,163,199,.16);
+  animation: cst-dot-lite var(--cycle, 12s) ease-in-out infinite;
+  animation-delay: calc(var(--i) * 1.05s);
+}
+.cst-dot svg { width: 13px; height: 13px; }
 
-/* loop: the run, plus a return path drawn under it. */
-.cst-loop { position: relative; padding-bottom: 2.1rem; }
-.cst-back {
-  position: absolute; left: 1.5rem; right: 1.5rem; bottom: .55rem; height: 1.4rem;
-  border: 2px dashed var(--line); border-top: 0;
-  border-radius: 0 0 12px 12px;
+.cst-kind {
+  font-size: .6rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--mut);
 }
-.cst-back-label {
-  position: absolute; left: 50%; transform: translate(-50%, 40%);
-  background: var(--surface); padding: 0 .5rem;
-  font-size: .7rem; color: var(--mut); white-space: nowrap;
-}
-.cst-back::after {
-  content: ''; position: absolute; left: 0; top: -1px; width: 7px; height: 7px;
-  border-left: 2px solid var(--violet); border-top: 2px solid var(--violet);
-  transform: translateY(-3px) rotate(45deg);
-}
+.cst-label { font-size: .86rem; font-weight: 600; line-height: 1.35; color: var(--ink); }
 
-/* Vertical connectors between sections of a multi-part layout. */
-.cst-link-split, .cst-link-merge, .cst-link-exit {
-  width: 2px; height: 18px; margin-left: 1.25rem; align-self: flex-start;
-}
-.cst-link-split::before, .cst-link-merge::before, .cst-link-exit::before {
+/* Kind colouring — one hue per role so a flow is readable at a glance. */
+[data-kind="trigger"] .cst-dot { background: rgba(122,174,252,.16); color: var(--blue); }
+[data-kind="ai"]      .cst-dot { background: var(--gold-soft); color: var(--gold); }
+[data-kind="action"]  .cst-dot { background: rgba(148,163,199,.16); color: var(--mut); }
+[data-kind="check"]   .cst-dot { background: rgba(167,139,250,.18); color: var(--violet); }
+[data-kind="human"]   .cst-dot { background: rgba(122,174,252,.16); color: var(--blue); }
+[data-kind="output"]  .cst-dot { background: rgba(127,214,168,.18); color: #2f9e6a; }
+
+/* Connector segments on the spine, with a dot that travels down. */
+.cst-seg { position: relative; width: 2px; height: 20px; margin-left: 13px; flex: none; }
+.cst-seg::before {
+  content: ''; position: absolute; inset: 0;
   background: repeating-linear-gradient(180deg, var(--line) 0 5px, transparent 5px 10px);
 }
-.cst-link-split::after, .cst-link-merge::after, .cst-link-exit::after {
-  left: 50%; margin-left: -3px; animation-name: cst-travel-down;
+.cst-seg::after {
+  content: ''; position: absolute; left: 50%; top: 0; width: 6px; height: 6px;
+  margin-left: -3px; border-radius: 50%; background: var(--gold);
+  box-shadow: 0 0 8px var(--gold-soft); opacity: 0;
+  animation: cst-travel var(--cycle, 12s) ease-in-out infinite;
+  animation-delay: calc(var(--i) * 1.05s + .35s);
 }
-@keyframes cst-travel-down {
+@keyframes cst-travel {
   0%, 4% { top: 0; opacity: 0; }
   6%     { opacity: 1; }
   13%    { top: calc(100% - 6px); opacity: 1; }
   16%    { top: calc(100% - 6px); opacity: 0; }
   100%   { top: calc(100% - 6px); opacity: 0; }
 }
+.cst-seg-junction { height: 22px; }
+.cst-seg-lane { margin-left: 0; align-self: center; height: 14px; }
 
-.cst-card {
-  position: relative; min-width: 132px; max-width: 172px;
-  border: 1px solid var(--line); border-radius: 14px;
-  background: var(--bg0); padding: .7rem .8rem;
-  display: flex; flex-direction: column; gap: .3rem;
-  /* Each node lights in turn: this is the "stage" animation. One full cycle
-     is deliberately long — it should read as a system working steadily, not
-     as a loading spinner. */
-  animation: cst-lite var(--cycle, 12s) ease-in-out infinite;
+/* ---------- Parallel sections ----------
+   A cell is the same step drawn as a centred mini-card. */
+.cst-cell {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: .3rem; flex: 1;
+  border: 1px solid var(--line); border-radius: 12px; background: var(--bg0);
+  padding: .65rem .55rem .7rem;
+  animation: cst-cell-lite var(--cycle, 12s) ease-in-out infinite;
   animation-delay: calc(var(--i) * 1.05s);
 }
-.cst-card-top { display: flex; align-items: center; gap: .45rem; }
-.cst-ico { width: 20px; height: 20px; flex: none; display: grid; place-items: center; border-radius: 50%; }
-.cst-ico svg { width: 12px; height: 12px; }
-.cst-kind {
-  font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--mut);
+.cst-cell .cst-kind { font-size: .58rem; }
+.cst-cell .cst-label { font-size: .78rem; }
+
+/* branch/fanin: columns between a fork bus and a join bus. The bus runs from
+   the spine (x=13) to the centre of the last column; each column hangs from
+   it by a stub. --lanes is set by the renderer. */
+.cst-lanes {
+  position: relative; display: grid;
+  grid-template-columns: repeat(var(--lanes, 2), minmax(0, 1fr));
+  gap: .7rem; padding: 14px 0;
 }
-.cst-label { font-size: .82rem; font-weight: 600; line-height: 1.3; color: var(--ink); }
-
-/* Kind colouring — one hue per role so a chain is readable at a glance. */
-.cst-card[data-kind="trigger"] .cst-ico { background: rgba(122,174,252,.16); color: var(--blue); }
-.cst-card[data-kind="ai"]      .cst-ico { background: var(--gold-soft); color: var(--gold); }
-.cst-card[data-kind="action"]  .cst-ico { background: rgba(148,163,199,.16); color: var(--mut); }
-.cst-card[data-kind="check"]   .cst-ico { background: rgba(167,139,250,.18); color: var(--violet); }
-.cst-card[data-kind="human"]   .cst-ico { background: rgba(122,174,252,.16); color: var(--blue); }
-.cst-card[data-kind="output"]  .cst-ico { background: rgba(127,214,168,.18); color: #2f9e6a; }
-
-@keyframes cst-lite {
-  0%, 6%   { border-color: var(--line); box-shadow: none; transform: translateY(0); }
-  9%       { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-soft); transform: translateY(-2px); }
-  16%      { border-color: var(--line); box-shadow: none; transform: translateY(0); }
-  100%     { border-color: var(--line); box-shadow: none; transform: translateY(0); }
-}
-
-/* The connector, with a dot that travels it. */
-.cst-link { width: 34px; height: 2px; position: relative; flex: none; align-self: center; }
-.cst-link::before {
-  content: ''; position: absolute; inset: 0;
+.cst-lanes::before, .cst-lanes::after {
+  content: ''; position: absolute; height: 2px;
+  left: 13px; right: calc(50% / var(--lanes, 2));
   background: repeating-linear-gradient(90deg, var(--line) 0 5px, transparent 5px 10px);
 }
-.cst-link::after {
-  content: ''; position: absolute; top: 50%; left: 0; width: 6px; height: 6px;
-  margin-top: -3px; border-radius: 50%; background: var(--gold);
-  box-shadow: 0 0 8px var(--gold-soft); opacity: 0;
-  animation: cst-travel var(--cycle, 12s) ease-in-out infinite;
-  animation-delay: calc(var(--i) * 1.05s + .35s);
+.cst-lanes::before { top: 0; }
+.cst-lanes::after { bottom: 0; }
+.cst-lane { position: relative; display: flex; flex-direction: column; align-items: stretch; }
+.cst-lane::before, .cst-lane::after {
+  content: ''; position: absolute; left: 50%; margin-left: -1px; width: 2px; height: 14px;
+  background: repeating-linear-gradient(180deg, var(--line) 0 5px, transparent 5px 10px);
 }
-@keyframes cst-travel {
-  0%, 4%  { left: 0; opacity: 0; }
-  6%      { opacity: 1; }
-  13%     { left: calc(100% - 6px); opacity: 1; }
-  16%     { left: calc(100% - 6px); opacity: 0; }
-  100%    { left: calc(100% - 6px); opacity: 0; }
+.cst-lane::before { top: -14px; }
+.cst-lane::after { bottom: -14px; }
+
+/* fanin sources: feeds converge, so there is no fork bus above them. */
+.cst-lanes-in { padding-top: 0; }
+.cst-lanes-in::before { display: none; }
+.cst-lanes-in .cst-lane::before { display: none; }
+
+/* grid: independent checks, no order implied — a collector bar underneath. */
+.cst-grid {
+  position: relative; display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: .6rem; width: 100%; padding-bottom: 14px;
+}
+.cst-grid::after {
+  content: ''; position: absolute; bottom: 0; left: 13px; right: 13px; height: 2px;
+  background: repeating-linear-gradient(90deg, var(--line) 0 5px, transparent 5px 10px);
 }
 
-@media (max-width: 720px) {
-  .cst-flow { flex-direction: column; align-items: flex-start; }
-  .cst-step { flex-direction: column; align-items: flex-start; }
-  .cst-card { max-width: none; width: 100%; }
-  .cst-link { width: 2px; height: 22px; margin-left: 1.25rem; }
-  .cst-link::before { background: repeating-linear-gradient(180deg, var(--line) 0 5px, transparent 5px 10px); }
-  .cst-link::after { animation-name: cst-travel-v; left: 50%; margin-left: -3px; }
-  @keyframes cst-travel-v {
-    0%, 4% { top: 0; opacity: 0; }
-    6%     { opacity: 1; }
-    13%    { top: calc(100% - 6px); opacity: 1; }
-    16%    { top: calc(100% - 6px); opacity: 0; }
-    100%   { top: calc(100% - 6px); opacity: 0; }
+/* loop: the spine, plus a return path bracket on the right with the retry
+   condition pinned to it. Steps keep clear of the bracket via padding. */
+.cst-loop { position: relative; padding-right: 108px; }
+.cst-back {
+  position: absolute; top: 16px; bottom: 16px; right: 44px; width: 40px;
+  border: 2px dashed var(--line); border-left: 0;
+  border-radius: 0 16px 16px 0;
+}
+.cst-back::before {
+  content: ''; position: absolute; left: -4px; top: -4px; width: 7px; height: 7px;
+  border-left: 2px solid var(--violet); border-bottom: 2px solid var(--violet);
+  transform: rotate(45deg);
+}
+.cst-back-label {
+  position: absolute; top: 50%; right: -44px; transform: translateY(-50%);
+  width: 88px; text-align: center;
+  background: var(--bg0); border: 1px dashed var(--line); border-radius: 10px;
+  padding: .3rem .4rem; font-size: .64rem; line-height: 1.35; color: var(--mut);
+}
+
+/* ---------- Narrow screens ----------
+   Columns of centred cards get too thin below ~560px, so parallel sections
+   fold into a bracketed list off the spine: still visibly a fork, one lane
+   per row. */
+@media (max-width: 560px) {
+  .cst-lanes {
+    grid-template-columns: 1fr; gap: .55rem;
+    margin-left: 13px; padding: 0 0 0 16px;
+    border-left: 2px dashed var(--line);
   }
+  .cst-lanes::before, .cst-lanes::after { display: none; }
+  .cst-lane::after { display: none; }
+  .cst-lane::before {
+    display: block; left: -16px; top: 50%; margin: 0;
+    width: 14px; height: 2px;
+    background: repeating-linear-gradient(90deg, var(--line) 0 4px, transparent 4px 8px);
+  }
+  .cst-lanes-in .cst-lane::before { display: block; }
+  .cst-lanes .cst-cell {
+    flex-direction: row; text-align: left; align-items: center;
+    gap: .6rem; padding: .5rem .6rem;
+  }
+  .cst-lanes .cst-cell .cst-kind { display: none; }
+
+  .cst-loop { padding-right: 84px; }
+  .cst-back { right: 32px; width: 28px; }
+  .cst-back-label { width: 72px; right: -36px; font-size: .6rem; }
+}
+
+@keyframes cst-row-lite {
+  0%, 6%    { background: transparent; }
+  9%        { background: var(--gold-soft); }
+  16%, 100% { background: transparent; }
+}
+@keyframes cst-dot-lite {
+  0%, 6%    { box-shadow: none; }
+  9%        { box-shadow: 0 0 0 3px var(--gold-soft); }
+  16%, 100% { box-shadow: none; }
+}
+@keyframes cst-cell-lite {
+  0%, 6%    { border-color: var(--line); box-shadow: none; transform: none; }
+  9%        { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-soft); transform: translateY(-2px); }
+  16%, 100% { border-color: var(--line); box-shadow: none; transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cst-rotor { animation: none; }
-  .cst-card { animation: none; }
-  .cst-link::after { animation: none; opacity: .8; left: calc(50% - 3px); }
+  .cst-rotor, .cst-step, .cst-dot, .cst-cell { animation: none; }
+  .cst-seg::after { animation: none; opacity: .8; top: calc(50% - 3px); }
 }
