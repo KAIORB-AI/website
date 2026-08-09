@@ -76,17 +76,17 @@
       test: /\b(p&l|p and l|profit|loss|balance sheet|ebitda|margin|burn rate|revenue|financial|accounts?)\b/i
     },
     {
-      id: 'quote', built: false, path: '/utility/quote-generator/',
+      id: 'quote', built: true, path: '/utility/quote-generator/',
       label: 'Quote & Estimate Generator',
       test: /\b(quote|quotation|estimate|proposal price)\b/i
     },
     {
-      id: 'po', built: false, path: '/utility/purchase-order-generator/',
+      id: 'po', built: true, path: '/utility/purchase-order-generator/',
       label: 'Purchase Order Generator',
       test: /\b(purchase order|\bpo\b|procurement)\b/i
     },
     {
-      id: 'marketing', built: false, path: '/utility/web-marketing-toolkit/',
+      id: 'marketing', built: true, path: '/utility/web-marketing-toolkit/',
       label: 'Web & Marketing Toolkit',
       test: /\b(meta tags?|serp|open graph|og:|twitter card|schema|json-?ld|canonical|redirect|favicon|keyword)\b/i
     },

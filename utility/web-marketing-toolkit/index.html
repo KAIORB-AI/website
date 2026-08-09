@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Web &amp; Marketing Toolkit — meta tags, schema, redirects — KAI247</title>
+<meta name="description" content="Write meta and Open Graph tags with a live search and social preview, generate Organization or LocalBusiness JSON-LD, build redirect rules, and clean a keyword list. All in your browser.">
+<link rel="canonical" href="https://kai247.com/utility/web-marketing-toolkit/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kai247.com/utility/web-marketing-toolkit/">
+<meta property="og:title" content="Web &amp; Marketing Toolkit — KAI247">
+<meta property="og:description" content="Meta tags, schema, redirects and keyword cleanup. Nothing uploaded.">
+<meta name="theme-color" content="#f8fafc">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/utility.css?v=3">
+<script defer src="/assets/js/utility-router.js?v=4"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Web & Marketing Toolkit","url":"https://kai247.com/utility/web-marketing-toolkit/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (web browser)","description":"Meta and Open Graph tag writer with live previews, JSON-LD generator, redirect rule builder and keyword list cleaner.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<style>
+.mk-serp { background:#fff; border:1px solid var(--u-line); border-radius:14px; padding:1rem 1.1rem; }
+.mk-serp .u { color:#0b6b2f; font-size:.78rem; }
+.mk-serp .t { color:#1a0dab; font-size:1.06rem; line-height:1.3; margin:.15rem 0; }
+.mk-serp .d { color:#4d5156; font-size:.85rem; }
+.mk-og { background:#fff; border:1px solid var(--u-line); border-radius:14px; overflow:hidden; }
+.mk-og .img { aspect-ratio:1.91/1; background:linear-gradient(135deg,#e8eefc,#dff5fa); display:grid; place-items:center; color:var(--u-mut); font-size:.78rem; }
+.mk-og .body { padding:.75rem .9rem; }
+.mk-og .dom { color:var(--u-mut); font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; }
+.mk-og .t { font-weight:600; font-size:.92rem; margin:.15rem 0; }
+.mk-og .d { color:var(--u-mut); font-size:.82rem; }
+.mk-count { font-variant-numeric:tabular-nums; }
+.mk-count.over { color:var(--u-rose); font-weight:600; }
+.mk-count.ok { color:var(--u-emerald); }
+</style>
+</head>
+<body>
+<a class="u-skip" href="#main">Skip to content</a>
+<header class="u-head">
+  <div class="u-wrap">
+    <a class="u-brand" href="/" aria-label="KAI247 home">
+      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--u-blue)" stroke-width="4" transform="rotate(-24 32 32)"/><circle cx="32" cy="32" r="10" fill="var(--u-cyan)"/><circle cx="51" cy="19" r="4" fill="var(--u-ink)"/></svg>
+      KAI247
+    </a>
+    <nav class="u-nav" aria-label="Primary">
+      <a href="/utility/">All utilities</a>
+      <a href="/utility/web-essentials/">Web Essentials</a>
+      <a href="/utility/quote-generator/">Quotes</a>
+      <a href="/utility/business-finance-analyzer/">Finance</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="u-wrap">
+  <section class="u-hero" style="text-align:left;padding-bottom:.6rem">
+    <p class="u-kicker"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg> Web &amp; Marketing</p>
+    <h1>The four that get forgotten</h1>
+    <p class="u-lede" style="margin-inline:0">Meta tags, structured data, redirects, and a keyword list that is actually clean.</p>
+    <div class="u-privacy compact" style="margin-top:1.1rem">
+      <span class="lock" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
+      <p><strong>Nothing is uploaded.</strong> No page is fetched and no URL is logged.</p>
+    </div>
+  </section>
+
+  <div class="u-tabs" role="tablist">
+    <button class="u-tab" role="tab" aria-selected="true" data-p="meta">Meta &amp; social</button>
+    <button class="u-tab" role="tab" aria-selected="false" data-p="schema">Schema JSON-LD</button>
+    <button class="u-tab" role="tab" aria-selected="false" data-p="redirect">Redirects</button>
+    <button class="u-tab" role="tab" aria-selected="false" data-p="keywords">Keyword cleaner</button>
+  </div>
+
+  <!-- META -->
+  <section data-panel="meta">
+    <div class="u-tool split">
+      <div class="u-panel">
+        <div class="u-panel-head">
+          <span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h10M4 17h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <h2>Write it</h2>
+        </div>
+        <div class="u-field"><label for="mUrl">Page URL</label><input type="text" id="mUrl" value="https://example.com/pricing" spellcheck="false"></div>
+        <div class="u-field"><label for="mTitle">Title <span class="u-hint mk-count" id="cTitle"></span></label><input type="text" id="mTitle" value="Pricing — Example"></div>
+        <div class="u-field"><label for="mDesc">Description <span class="u-hint mk-count" id="cDesc"></span></label><textarea id="mDesc" rows="3">Simple per-seat pricing with no setup fee. Compare plans and start a free trial.</textarea></div>
+        <div class="u-field"><label for="mImg">Social image URL</label><input type="text" id="mImg" placeholder="https://example.com/og.png" spellcheck="false"></div>
+        <div class="u-field"><label for="mSite">Site name</label><input type="text" id="mSite" value="Example"></div>
+      </div>
+      <div class="u-panel">
+        <div class="u-panel-head">
+          <span class="u-glyph ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M8.5 12.2l2.4 2.4 4.6-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <h2>How it will look</h2>
+        </div>
+        <p class="u-hint" style="margin-bottom:.4rem">Search result</p>
+        <div class="mk-serp"><div class="u" id="pU">example.com › pricing</div><div class="t" id="pT">Pricing</div><div class="d" id="pD">…</div></div>
+        <p class="u-hint" style="margin:1rem 0 .4rem">Shared link</p>
+        <div class="mk-og"><div class="img" id="pImg">No image set — most platforms will show a bare link</div><div class="body"><div class="dom" id="pDom">example.com</div><div class="t" id="pOT">Pricing</div><div class="d" id="pOD">…</div></div></div>
+        <div class="u-field" style="margin-top:1rem"><label for="mOut">Paste into &lt;head&gt;</label><textarea id="mOut" class="u-out" rows="10" readonly></textarea></div>
+        <button class="u-btn u-btn-ghost" type="button" data-copy="mOut">Copy</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEMA -->
+  <section data-panel="schema" hidden>
+    <div class="u-tool split">
+      <div class="u-panel">
+        <div class="u-panel-head">
+          <span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l8 5v8l-8 5-8-5V8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+          <h2>Describe the business</h2>
+        </div>
+        <div class="u-field"><label for="sType">Type</label>
+          <select id="sType"><option value="Organization">Organization</option><option value="LocalBusiness">LocalBusiness</option><option value="Restaurant">Restaurant</option><option value="ProfessionalService">ProfessionalService</option></select>
+        </div>
+        <div class="u-field"><label for="sName">Name</label><input type="text" id="sName" value="Example Ltd"></div>
+        <div class="u-field"><label for="sUrl">Website</label><input type="text" id="sUrl" value="https://example.com" spellcheck="false"></div>
+        <div class="u-field"><label for="sPhone">Phone</label><input type="text" id="sPhone" placeholder="+1 425 555 0100"></div>
+        <div class="u-field"><label for="sStreet">Street</label><input type="text" id="sStreet" placeholder="659 Ferndale Ct NE"></div>
+        <div class="u-field" style="display:flex;gap:.6rem">
+          <div style="flex:1"><label for="sCity">City</label><input type="text" id="sCity" placeholder="Renton"></div>
+          <div style="flex:1"><label for="sRegion">Region</label><input type="text" id="sRegion" placeholder="WA"></div>
+          <div style="flex:1"><label for="sPost">Postcode</label><input type="text" id="sPost" placeholder="98056"></div>
+        </div>
+        <div class="u-field"><label for="sCountry">Country code</label><input type="text" id="sCountry" value="US" maxlength="2" aria-describedby="ccHint"></div>
+      </div>
+      <div class="u-panel">
+        <div class="u-panel-head"><span class="u-glyph ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h2>JSON-LD</h2></div>
+        <div id="sWarn"></div>
+        <div class="u-field"><textarea id="sOut" class="u-out" rows="16" readonly></textarea></div>
+        <button class="u-btn u-btn-ghost" type="button" data-copy="sOut">Copy</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- REDIRECTS -->
+  <section data-panel="redirect" hidden>
+    <div class="u-tool split">
+      <div class="u-panel">
+        <div class="u-panel-head"><span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h12m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><h2>Old path → new path</h2></div>
+        <div class="u-field"><label for="rIn">One pair per line, separated by a space, comma or tab</label>
+          <textarea id="rIn" rows="9" spellcheck="false">/old-pricing /pricing
+/blog/2019/hello, /blog/hello
+/team	/about#team</textarea></div>
+        <div class="u-field"><label for="rServer">Server</label>
+          <select id="rServer"><option value="apache">Apache — .htaccess</option><option value="nginx">nginx</option><option value="netlify">Netlify — _redirects</option></select>
+        </div>
+        <div class="u-field"><label for="rCode">Status</label>
+          <select id="rCode"><option value="301">301 — permanent</option><option value="302">302 — temporary</option></select>
+        </div>
+      </div>
+      <div class="u-panel">
+        <div class="u-panel-head"><span class="u-glyph ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h2>Rules</h2></div>
+        <div id="rWarn"></div>
+        <div class="u-field"><textarea id="rOut" class="u-out" rows="14" readonly></textarea></div>
+        <button class="u-btn u-btn-ghost" type="button" data-copy="rOut">Copy</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEYWORDS -->
+  <section data-panel="keywords" hidden>
+    <div class="u-tool split">
+      <div class="u-panel">
+        <div class="u-panel-head"><span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><h2>Paste the list</h2></div>
+        <div class="u-field"><label for="kIn">One per line, or comma separated</label>
+          <textarea id="kIn" rows="12" spellcheck="false">Best CRM software
+  best crm software
+CRM Software best
+crm  software
+project management tool
+Project Management Tool!
+</textarea></div>
+        <div class="u-field" style="display:flex;gap:1rem;flex-wrap:wrap">
+          <label class="u-check"><input type="checkbox" id="kLower" checked> lowercase</label>
+          <label class="u-check"><input type="checkbox" id="kPunct" checked> strip punctuation</label>
+          <label class="u-check"><input type="checkbox" id="kSort" checked> sort A–Z</label>
+          <label class="u-check"><input type="checkbox" id="kAnagram"> treat reordered words as duplicates</label>
+        </div>
+      </div>
+      <div class="u-panel">
+        <div class="u-panel-head"><span class="u-glyph ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h2>Cleaned</h2></div>
+        <div class="u-stat" style="margin-bottom:1rem">
+          <div><div class="k">In</div><div class="v" id="kIn2">0</div></div>
+          <div><div class="k">Out</div><div class="v" id="kOut2">0</div></div>
+          <div><div class="k">Removed</div><div class="v u-ok" id="kDel">0</div></div>
+        </div>
+        <div class="u-field"><textarea id="kOut" class="u-out" rows="12" readonly></textarea></div>
+        <button class="u-btn u-btn-ghost" type="button" data-copy="kOut">Copy</button>
+      </div>
+    </div>
+  </section>
+
+  <ul class="u-facts" style="margin-top:1.6rem">
+    <li><span class="u-glyph ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg></span>No upload</li>
+    <li><span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Runs offline</li>
+    <li><span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l8 5v8l-8 5-8-5V8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>Valid JSON-LD</li>
+    <li><span class="u-glyph warn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4l9 16H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4m0 3v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Lengths are guidance</li>
+  </ul>
+
+  <details class="u-more">
+    <summary><span class="chev" aria-hidden="true">›</span>What the numbers mean, and what they do not</summary>
+    <div class="body">
+      <p>Title and description counts are <strong>characters</strong>, flagged around 60 and 155. Search engines truncate on rendered pixel width, not character count, so treat those as a sensible working range rather than a rule — a title of capitals runs out of room sooner than the same count in lower case.</p>
+      <p>The JSON-LD is emitted only with the fields you actually filled in: an empty address does not become an empty <code>PostalAddress</code>, because a half-filled node is worse than no node. LocalBusiness types warn when a street address is missing, since that is the whole point of choosing one.</p>
+      <p>Redirect rules are generated for the server you pick and nothing is tested against a live site — this page fetches nothing. It does flag a loop (a path redirecting to itself) and a source appearing twice, because both silently break in production.</p>
+    </div>
+  </details>
+</main>
+
+<footer class="u-foot">
+  <div class="u-wrap">
+    <span>KAI247 — Always with you.</span>
+    <nav aria-label="Footer"><a href="/utility/">All utilities</a> · <a href="/">Home</a></nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) {
+    return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); }
+  function warn(host, msgs) {
+    host.textContent = '';
+    msgs.forEach(function (m) {
+      var p = document.createElement('p');
+      p.className = 'u-note';
+      p.textContent = m;
+      host.appendChild(p);
+    });
+  }
+
+  /* tabs */
+  [].forEach.call(document.querySelectorAll('.u-tab'), function (tab) {
+    tab.addEventListener('click', function () {
+      [].forEach.call(document.querySelectorAll('.u-tab'), function (t) { t.setAttribute('aria-selected', String(t === tab)); });
+      [].forEach.call(document.querySelectorAll('[data-panel]'), function (p) { p.hidden = p.getAttribute('data-panel') !== tab.dataset.p; });
+      location.hash = tab.dataset.p;
+    });
+  });
+  if (location.hash) {
+    var want = location.hash.slice(1);
+    var t0 = document.querySelector('.u-tab[data-p="' + want + '"]');
+    if (t0) t0.click();
+  }
+
+  /* copy buttons */
+  [].forEach.call(document.querySelectorAll('[data-copy]'), function (b) {
+    b.addEventListener('click', function () {
+      var el = $(b.dataset.copy);
+      el.select();
+      try { document.execCommand('copy'); b.textContent = 'Copied'; setTimeout(function(){ b.textContent='Copy'; }, 1400); }
+      catch (e) { b.textContent = 'Select and copy'; }
+    });
+  });
+
+  /* ---------- meta & social ---------- */
+  function host(u) { try { return new URL(u).host.replace(/^www\./, ''); } catch (e) { return 'example.com'; } }
+  function path(u) { try { return new URL(u).pathname.split('/').filter(Boolean).join(' › '); } catch (e) { return ''; } }
+  function count(el, val, limit) {
+    el.textContent = val.length + '/' + limit;
+    el.className = 'u-hint mk-count ' + (val.length > limit ? 'over' : (val.length ? 'ok' : ''));
+  }
+  function renderMeta() {
+    var u = $('mUrl').value.trim(), t = $('mTitle').value, d = $('mDesc').value,
+        img = $('mImg').value.trim(), site = $('mSite').value.trim();
+    count($('cTitle'), t, 60); count($('cDesc'), d, 155);
+    $('pU').textContent = host(u) + (path(u) ? ' › ' + path(u) : '');
+    $('pT').textContent = t || 'Untitled page';
+    $('pD').textContent = d || 'No description set — the engine will invent one from the page.';
+    $('pDom').textContent = host(u);
+    $('pOT').textContent = t || 'Untitled page';
+    $('pOD').textContent = d || '';
+    $('pImg').textContent = img ? img : 'No image set — most platforms will show a bare link';
+
+    var lines = [
+      '<title>' + esc(t) + '</title>',
+      '<meta name="description" content="' + esc(d) + '">',
+      '<link rel="canonical" href="' + esc(u) + '">',
+      '<meta property="og:type" content="website">',
+      '<meta property="og:url" content="' + esc(u) + '">',
+      '<meta property="og:title" content="' + esc(t) + '">',
+      '<meta property="og:description" content="' + esc(d) + '">'
+    ];
+    if (site) lines.push('<meta property="og:site_name" content="' + esc(site) + '">');
+    if (img) {
+      lines.push('<meta property="og:image" content="' + esc(img) + '">');
+      lines.push('<meta name="twitter:card" content="summary_large_image">');
+    } else {
+      lines.push('<meta name="twitter:card" content="summary">');
+    }
+    lines.push('<meta name="twitter:title" content="' + esc(t) + '">');
+    lines.push('<meta name="twitter:description" content="' + esc(d) + '">');
+    $('mOut').value = lines.join('\n');
+  }
+  ['mUrl','mTitle','mDesc','mImg','mSite'].forEach(function (id) { $(id).addEventListener('input', renderMeta); });
+
+  /* ---------- schema ---------- */
+  function renderSchema() {
+    var type = $('sType').value;
+    var obj = { '@context': 'https://schema.org', '@type': type };
+    var name = $('sName').value.trim(), url = $('sUrl').value.trim(), tel = $('sPhone').value.trim();
+    if (name) obj.name = name;
+    if (url) obj.url = url;
+    if (tel) obj.telephone = tel;
+    var street = $('sStreet').value.trim(), city = $('sCity').value.trim(),
+        region = $('sRegion').value.trim(), post = $('sPost').value.trim(), cc = $('sCountry').value.trim();
+    // A country on its own is not an address. The field is pre-filled with a
+    // sensible default, which meant every Organization was emitting a
+    // PostalAddress containing nothing but "US" — a half-filled node is worse
+    // than no node, so require at least one real location field.
+    if (street || city || region || post) {
+      var a = { '@type': 'PostalAddress' };
+      if (street) a.streetAddress = street;
+      if (city) a.addressLocality = city;
+      if (region) a.addressRegion = region;
+      if (post) a.postalCode = post;
+      if (cc) a.addressCountry = cc.toUpperCase();
+      obj.address = a;
+    }
+    $('sOut').value = JSON.stringify(obj, null, 2);
+
+    var msgs = [];
+    if (!name) msgs.push('A name is required for this to be useful to any search engine.');
+    if (type !== 'Organization' && !street) msgs.push('You picked ' + type + ', which exists to describe a place — without a street address it says little that Organization would not.');
+    warn($('sWarn'), msgs);
+  }
+  ['sType','sName','sUrl','sPhone','sStreet','sCity','sRegion','sPost','sCountry'].forEach(function (id) {
+    $(id).addEventListener('input', renderSchema); $(id).addEventListener('change', renderSchema);
+  });
+
+  /* ---------- redirects ---------- */
+  function renderRedirects() {
+    var raw = $('rIn').value.split('\n');
+    var server = $('rServer').value, code = $('rCode').value;
+    var pairs = [], seen = {}, dupes = [], loops = [];
+    raw.forEach(function (line) {
+      var s = line.trim();
+      if (!s) return;
+      var parts = s.split(/[\s,\t]+/).filter(Boolean);
+      if (parts.length < 2) return;
+      var from = parts[0], to = parts.slice(1).join(' ');
+      if (from === to) { loops.push(from); return; }
+      if (seen[from]) { dupes.push(from); return; }
+      seen[from] = true;
+      pairs.push([from, to]);
+    });
+
+    var out;
+    if (server === 'apache') {
+      out = '# Generated by KAI247. Place above other rewrite rules.\nRewriteEngine On\n' +
+        pairs.map(function (p) {
+          return 'RewriteRule ^' + p[0].replace(/^\//, '') + '$ ' + p[1] + ' [R=' + code + ',L]';
+        }).join('\n');
+    } else if (server === 'nginx') {
+      out = '# Generated by KAI247. Inside your server block.\n' +
+        pairs.map(function (p) { return 'rewrite ^' + p[0] + '$ ' + p[1] + ' permanent;'.replace('permanent', code === '301' ? 'permanent' : 'redirect'); }).join('\n');
+    } else {
+      out = '# Generated by KAI247. Save as _redirects at your publish root.\n' +
+        pairs.map(function (p) { return p[0] + '  ' + p[1] + '  ' + code; }).join('\n');
+    }
+    $('rOut').value = pairs.length ? out : '';
+
+    var msgs = [];
+    if (loops.length) msgs.push('Skipped ' + loops.length + ' rule' + (loops.length>1?'s':'') + ' that redirected a path to itself: ' + loops.join(', ') + '. That is an infinite loop in production.');
+    if (dupes.length) msgs.push('Skipped ' + dupes.length + ' duplicate source' + (dupes.length>1?'s':'') + ': ' + dupes.join(', ') + '. Only the first rule for a path would ever run.');
+    warn($('rWarn'), msgs);
+  }
+  ['rIn','rServer','rCode'].forEach(function (id) { $(id).addEventListener('input', renderRedirects); $(id).addEventListener('change', renderRedirects); });
+
+  /* ---------- keyword cleaner ---------- */
+  function renderKeywords() {
+    var raw = $('kIn').value.split(/[\n,]+/);
+    var lower = $('kLower').checked, punct = $('kPunct').checked,
+        sort = $('kSort').checked, anagram = $('kAnagram').checked;
+    var seen = {}, out = [], inCount = 0;
+    raw.forEach(function (line) {
+      var s = line.trim();
+      if (!s) return;
+      inCount++;
+      if (lower) s = s.toLowerCase();
+      if (punct) s = s.replace(/[^\p{L}\p{N}\s-]/gu, '');
+      s = s.replace(/\s+/g, ' ').trim();
+      if (!s) return;
+      var key = anagram ? s.split(' ').sort().join(' ') : s;
+      if (seen[key]) return;
+      seen[key] = true;
+      out.push(s);
+    });
+    if (sort) out.sort(function (a, b) { return a.localeCompare(b); });
+    $('kOut').value = out.join('\n');
+    $('kIn2').textContent = inCount;
+    $('kOut2').textContent = out.length;
+    $('kDel').textContent = (inCount - out.length);
+  }
+  ['kIn','kLower','kPunct','kSort','kAnagram'].forEach(function (id) {
+    $(id).addEventListener('input', renderKeywords); $(id).addEventListener('change', renderKeywords);
+  });
+
+  renderMeta(); renderSchema(); renderRedirects(); renderKeywords();
+})();
+</script>
+</body>
+</html>

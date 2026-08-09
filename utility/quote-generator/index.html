@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quote &amp; Estimate Generator — send a priced quote in a minute — KAI247</title>
+<meta name="description" content="Build a priced quote or estimate with line items, discount and tax, then print it or save it as a PDF. Nothing is uploaded.">
+<link rel="canonical" href="https://kai247.com/utility/quote-generator/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kai247.com/utility/quote-generator/">
+<meta property="og:title" content="Quote &amp; Estimate Generator — KAI247">
+<meta property="og:description" content="Line items in, a clean quote out. Nothing uploaded.">
+<meta name="theme-color" content="#f8fafc">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/utility.css?v=3">
+<script defer src="/assets/js/utility-router.js?v=4"></script>
+<script>window.KAI_DOC = { kind: 'quote' };</script>
+<script defer src="/assets/js/docgen.js?v=1"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Quote &amp; Estimate Generator","url":"https://kai247.com/utility/quote-generator/","applicationCategory":"BusinessApplication","operatingSystem":"Any (web browser)","description":"Build a priced quote or estimate with line items, discount and tax, then print it or save it as a PDF. Nothing is uploaded.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<a class="u-skip" href="#main">Skip to content</a>
+<header class="u-head">
+  <div class="u-wrap">
+    <a class="u-brand" href="/" aria-label="KAI247 home">
+      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--u-blue)" stroke-width="4" transform="rotate(-24 32 32)"/><circle cx="32" cy="32" r="10" fill="var(--u-cyan)"/><circle cx="51" cy="19" r="4" fill="var(--u-ink)"/></svg>
+      KAI247
+    </a>
+    <nav class="u-nav" aria-label="Primary">
+      <a href="/utility/">All utilities</a>
+      <a href="/utility/purchase-order-generator/">Purchase orders</a>
+      <a href="/utility/business-finance-analyzer/">Finance</a>
+      <a href="/utility/pdf-size-reducer/">PDF</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="u-wrap">
+  <section class="u-hero" style="text-align:left;padding-bottom:.6rem">
+    <p class="u-kicker"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg> Quote Generator</p>
+    <h1>Price it, send it</h1>
+    <p class="u-lede" style="margin-inline:0">Line items, discount, tax. Print straight to PDF when it looks right.</p>
+    <div class="u-privacy compact" style="margin-top:1.1rem">
+      <span class="lock" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
+      <p><strong>Nothing is uploaded.</strong> Client names and prices stay in this tab.</p>
+    </div>
+  </section>
+
+  <div class="u-tool split" style="margin-top:1.6rem">
+    <div class="u-panel dg-editor">
+      <div class="u-panel-head">
+        <span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v13H7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <h2 id="docTitle">Document</h2>
+      </div>
+
+      <div class="u-row" style="gap:.6rem;align-items:flex-start">
+        <div class="u-field" style="flex:1;min-width:120px"><label for="num">Number</label><input type="text" id="num"></div>
+        <div class="u-field" style="flex:1;min-width:120px"><label for="issued">Issued</label><input type="date" id="issued"></div>
+        <div class="u-field" style="flex:1;min-width:120px"><label for="due" id="labDue">Valid until</label><input type="date" id="due"></div>
+      </div>
+
+      <div class="u-row" style="gap:.6rem;align-items:flex-start">
+        <div class="u-field" style="flex:1;min-width:160px"><label for="from" id="labFrom">From</label><textarea id="from" rows="3" placeholder="Your company&#10;Street, City&#10;VAT / Reg no."></textarea></div>
+        <div class="u-field" style="flex:1;min-width:160px"><label for="to" id="labTo">To</label><textarea id="to" rows="3" placeholder="Their company&#10;Contact name&#10;Email"></textarea></div>
+      </div>
+
+      <div class="u-panel-head" style="margin-top:1rem">
+        <span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <h2>Lines</h2>
+      </div>
+      <div class="dg-head-row" aria-hidden="true"><span>Description</span><span>Qty</span><span>Unit</span><span>Amount</span><span></span></div>
+      <div class="dg-rows" id="rows"></div>
+      <div class="u-row" style="margin-top:.7rem">
+        <button class="u-btn u-btn-ghost" type="button" id="addRow">Add line</button>
+      </div>
+
+      <div class="u-row" style="gap:.6rem;margin-top:1rem;align-items:flex-start">
+        <div class="u-field" style="flex:1;min-width:110px"><label for="cur">Currency</label>
+          <select id="cur"><option>USD</option><option>EUR</option><option>GBP</option><option>INR</option><option>CAD</option><option>AUD</option><option>AED</option><option>SGD</option></select>
+        </div>
+        <div class="u-field" style="flex:1;min-width:110px"><label for="disc">Discount %</label><input type="number" id="disc" min="0" max="100" step="any" value="0"></div>
+        <div class="u-field" style="flex:1;min-width:110px"><label for="tax">Tax %</label><input type="number" id="tax" min="0" max="100" step="any" value="0"></div>
+      </div>
+
+      <div class="u-field"><label for="terms">Terms</label><textarea id="terms" rows="2"></textarea></div>
+
+      <div class="u-row">
+        <button class="u-btn" type="button" id="print">Print or save as PDF</button>
+        <button class="u-btn u-btn-ghost" type="button" id="reset">Clear lines</button>
+      </div>
+      <p class="u-hint" style="margin-top:.6rem">Printing uses your browser's own PDF writer, so no extra software is loaded.</p>
+    </div>
+
+    <div class="u-panel">
+      <div class="u-panel-head dg-editor">
+        <span class="u-glyph ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M8.5 12.2l2.4 2.4 4.6-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h2>Preview</h2>
+      </div>
+      <div class="u-stat dg-editor" style="margin-bottom:1rem">
+        <div><div class="k">Lines</div><div class="v" id="sCount">0</div></div>
+        <div><div class="k">Subtotal</div><div class="v" id="sSub">—</div></div>
+        <div><div class="k">Total</div><div class="v" id="sTotal">—</div></div>
+      </div>
+      <div class="dg-doc" id="preview"></div>
+    </div>
+  </div>
+
+  <ul class="u-facts dg-editor" style="margin-top:1.6rem">
+    <li><span class="u-glyph ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg></span>No upload</li>
+    <li><span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Runs offline</li>
+    <li><span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19h16M6 16V9m5 7V5m5 11v-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Totals in whole cents</li>
+    <li><span class="u-glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3h12v18l-6-4-6 4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>Print to PDF</li>
+  </ul>
+
+  <details class="u-more dg-editor">
+    <summary><span class="chev" aria-hidden="true">&rsaquo;</span>How the totals are worked out</summary>
+    <div class="body">
+      <p>Every amount is held in whole cents from the moment you type it. Line amount is quantity times unit price; the subtotal is the sum of the lines; the discount comes off the subtotal; tax applies to what is left. Rounding happens once, per line, rather than at the end.</p>
+      <p>That ordering matters: doing the arithmetic in floating point and rounding at the end is how a total ends up a penny away from the sum of its own rows, which is precisely the discrepancy a client notices.</p>
+      <p><strong>Not an accounting system.</strong> It does not store anything, number your documents sequentially, or know your tax rules — the tax field is a plain percentage and applies to everything on the document. Check the rate against your jurisdiction before sending.</p>
+    </div>
+  </details>
+</main>
+
+<footer class="u-foot dg-editor">
+  <div class="u-wrap">
+    <span>KAI247 — Always with you.</span>
+    <nav aria-label="Footer"><a href="/utility/">All utilities</a> &middot; <a href="/">Home</a></nav>
+  </div>
+</footer>
+</body>
+</html>
