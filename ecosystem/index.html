@@ -243,6 +243,34 @@
       <div id="brahmexa-ngsysops-enquiry"></div>
     </div>
   </section>
+
+  <!-- The NG SysOps demonstration. Wider container than the rest of the page:
+       it is a ten-stage operations command centre, and squeezing it into the
+       820px reading column would make it unreadable rather than compact.
+
+       Placed after the enquiry, not instead of it. The enquiry is the real
+       engagement capability and stays exactly as it was; this is the thing
+       that earns someone the interest to use it. Funnel order is deliberate:
+       see it work, then ask.
+
+       Everything it renders is simulated and labelled as such on every value.
+       It has no write path — approving the remediation advances state in the
+       visitor's browser and contacts nothing. -->
+  <section class="band">
+    <div class="container" style="max-width:1180px">
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <p class="kicker">Try it</p>
+        <h2 style="font-size:1.4rem">See NG SysOps work an incident</h2>
+        <p style="color:var(--mut);font-size:0.95rem;max-width:44rem;margin:0 auto">
+          One worked enterprise incident, from the first signal to verified recovery.
+          Walk the ten stages, open the evidence behind any conclusion, and approve the
+          remediation yourself. Simulated data throughout — the demonstration says so on
+          every value it shows.
+        </p>
+      </div>
+      <div id="brahmexa-ngsysops-demo"></div>
+    </div>
+  </section>
   <script src="https://brahmexa.com/widgets/loader.js"
           data-brahmexa-widget="orbit-events"
           data-brahmexa-key="pk_c44bc472ec6f1664f098f66c"
@@ -257,6 +285,11 @@
           data-brahmexa-widget="ngsysops-enquiry"
           data-brahmexa-key="pk_c44bc472ec6f1664f098f66c"
           data-brahmexa-mount="#brahmexa-ngsysops-enquiry"
+          data-brahmexa-accent="#7aaefc" defer></script>
+  <script src="https://brahmexa.com/widgets/loader.js"
+          data-brahmexa-widget="ngsysops-demo"
+          data-brahmexa-key="pk_c44bc472ec6f1664f098f66c"
+          data-brahmexa-mount="#brahmexa-ngsysops-demo"
           data-brahmexa-accent="#7aaefc" defer></script>
 <!-- seo:faq -->
   <section class="seo-faq" id="faq" aria-labelledby="faq-h">
