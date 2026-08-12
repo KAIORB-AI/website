@@ -221,3 +221,24 @@ before deploying and fails if the prerender did not land.
 Cost, stated plainly: react + react-dom is 198 kB raw / **62.7 kB gzipped** for one component.
 That is real, and only worth it because more islands are coming. If the island count stays at
 one, this should be reverted rather than defended.
+
+## 26. NG SysOps arrives as an enquiry, not a dashboard
+Added 2026-08-12. NG SysOps — Brahmexa's Enterprise Operations Intelligence offering — is on
+`/ecosystem/` as a Brahmexa widget beside the two ORBIT ones, using the same partner key.
+
+The obvious widget would have been an operations board: incidents, blast radius, "what changed".
+There is no NG SysOps service behind any of that yet, so such a widget would be `placeholder`,
+which the Brahmexa catalog bars from the shareable set, and `connected=false`, which
+`docs/ADOPT-BRAHMEXA-WIDGETS.md` tells us never to embed. Shipping one anyway with invented
+incidents would also contradict the single thing the product argues — that an operations
+conclusion is worth nothing without the evidence behind it. A product whose first impression on
+the network's front door is fabricated operations data has lost that argument before it starts.
+
+So the widget is `ngsysops-enquiry`: an intake that captures a qualified operations brief into
+the Brahmexa lead inbox and reports success only when the lead was durably stored. That is
+`working` and connected on the same terms as `space-proposal`. What is actually on offer today
+is the design partnership, and this is the honest surface for it.
+
+Blue (`#7aaefc`) rather than the ORBIT gold, so the two network capabilities on that page stay
+visually distinct. When the NG SysOps API exists, a live operations widget joins the band — it
+does not replace this one.

@@ -2,14 +2,20 @@
 
 **Canonical location:** `docs/ADOPT-BRAHMEXA-WIDGETS.md` — hand this to Antigravity (or any agent).
 **Catalog:** <https://brahmexa.com/widgets/> · **Contract:** `Brahmando-ai/Brahmando` → `docs/products/widgets/EMBED-CONTRACT.md`
-**State checked:** 2026-08-08 against the live catalog API. Re-check before starting — these numbers age.
+**State checked:** 2026-08-12 against the live catalog API. Re-check before starting — these numbers age.
 
 ---
 
 ## Read this before you start: most of it is not adoptable yet
 
-Brahmexa publishes 14 embeddable widgets. **Four are connected to a data source; ten are not.**
+Brahmexa publishes 15 embeddable widgets. **Six are connected to a data source; nine are not.**
 That is not a criticism of them — it is the honest state, and it decides what you can ship.
+
+> Updated 2026-08-12: `ngsysops-enquiry` was added (`working`, connected) and is embedded on
+> `/ecosystem/`. It is an intake backed by the Brahmexa lead inbox, not an operations dashboard —
+> NG SysOps has no live data source yet, and a widget that invented one would fail the same
+> `connected` test this document is built around. The count moved 14→15 and connected 4→6
+> (`abhyas-practice` also reports connected since this file was last checked).
 
 Verify for yourself rather than trusting this file:
 
