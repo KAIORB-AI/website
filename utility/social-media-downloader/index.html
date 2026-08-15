@@ -281,7 +281,7 @@
 
       <form id="dlForm" onsubmit="handleDownload(event)">
         <div class="s-input-group">
-          <input type="url" id="linkInput" class="s-input" placeholder="Paste link from Facebook, X, Instagram, TikTok, Reddit, YouTube..." required autocomplete="off">
+          <input type="text" id="linkInput" class="s-input" placeholder="Paste link from Facebook, X, Instagram, TikTok, Reddit, YouTube..." required autocomplete="off">
           <button type="submit" class="u-btn" id="submitBtn">Extract Media</button>
         </div>
       </form>
@@ -395,8 +395,11 @@ function setSample(url) {
 
 async function handleDownload(e) {
   if (e) e.preventDefault();
-  const url = inputEl.value.trim();
+  let url = inputEl.value.trim();
   if (!url) return;
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    url = 'https://' + url;
+  }
 
   const statusEl = document.getElementById('statusMessage');
   const resultEl = document.getElementById('resultContainer');
