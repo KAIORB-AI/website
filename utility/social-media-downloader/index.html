@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Free Social Media Downloader — Facebook, X, Instagram, TikTok & More</title>
-<meta name="description" content="Download public videos, reels, posts and audio from Facebook, X (Twitter), Instagram, TikTok, Reddit, Threads & YouTube. Clean, fast, and free with anti-adult content safety protection.">
+<title>Free Social Media Downloader — Facebook, X, Instagram, TikTok &amp; More</title>
+<meta name="description" content="Download public videos, reels, posts and audio from Facebook, X (Twitter), Instagram, TikTok, Reddit, Threads &amp; YouTube. Clean, fast, and free with anti-adult content safety protection.">
 <link rel="canonical" href="https://kai247.com/utility/social-media-downloader/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kai247.com/utility/social-media-downloader/">
 <meta property="og:title" content="Social Media Downloader — KAI247">
-<meta property="og:description" content="Download Facebook, X, Instagram & TikTok media safely. Family-friendly content gate active.">
+<meta property="og:description" content="Download Facebook, X, Instagram &amp; TikTok media safely. Family-friendly content gate active.">
 <meta name="theme-color" content="#f8fafc">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -348,13 +348,13 @@ function isAdultContent(url, metadata = {}) {
     }
   }
 
-  // 2. Metadata Inspection (if returned by API)
+  // 2. Metadata Inspection
   if (metadata) {
     if (metadata.is_nsfw || metadata.over_18 || metadata.age_restricted || metadata.isAdult) {
       return { blocked: true, reason: 'Media flagged as age-restricted / NSFW by platform' };
     }
 
-    const textCheck = ((metadata.title || '') + ' ' + (metadata.caption || '') + ' ' + (metadata.tags || '')).toLowerCase();
+    const textCheck = ((metadata.title || '') + ' ' + (metadata.caption || '') + ' ' + (metadata.text || '') + ' ' + (metadata.tags || '')).toLowerCase();
     for (const kw of ADULT_KEYWORDS) {
       if (textCheck.includes(kw)) {
         return { blocked: true, reason: `Media description contains restricted terms ('${kw}')` };
@@ -393,6 +393,96 @@ function setSample(url) {
   handleDownload(new Event('submit'));
 }
 
+// Cobalt v10 Multi-Endpoint Provider
+async function fetchCobaltV10(targetUrl) {
+  const endpoints = [
+    'https://api.cobalt.tools/',
+    'https://co.wuk.sh/',
+    'https://cobalt.stream/'
+  ];
+
+  for (const ep of endpoints) {
+    try {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 4000);
+      const res = await fetch(ep, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ url: targetUrl, videoQuality: '1080' }),
+        signal: controller.signal
+      });
+      clearTimeout(timer);
+      if (res.ok) {
+        const data = await res.json();
+        if (data && (data.status === 'tunnel' || data.status === 'redirect' || data.status === 'picker' || data.status === 'stream' || data.url)) {
+          return data;
+        }
+      }
+    } catch (e) {
+      console.warn(`Cobalt endpoint ${ep} failed:`, e);
+    }
+  }
+  return null;
+}
+
+// Native X/Twitter Extractor via fxtwitter API
+async function fetchFxTwitter(url) {
+  try {
+    const match = url.match(/status\/(\d+)/);
+    if (!match) return null;
+    const tweetId = match[1];
+    const res = await fetch(`https://api.fxtwitter.com/status/${tweetId}`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.tweet) {
+        const tweet = data.tweet;
+        let videoUrl = null;
+        if (tweet.media && tweet.media.videos && tweet.media.videos.length > 0) {
+          videoUrl = tweet.media.videos[0].url;
+        }
+        return {
+          status: 'redirect',
+          url: videoUrl || tweet.url,
+          title: tweet.text,
+          author: tweet.author.name,
+          thumbnail: tweet.media && tweet.media.photos && tweet.media.photos.length ? tweet.media.photos[0].url : null,
+          is_nsfw: tweet.possibly_sensitive || false
+        };
+      }
+    }
+  } catch (e) {
+    console.warn('FxTwitter fetch failed:', e);
+  }
+  return null;
+}
+
+// Native TikTok Extractor via TikWM API
+async function fetchTikWM(url) {
+  try {
+    const res = await fetch(`https://tikwm.com/api/?url=${encodeURIComponent(url)}`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.data) {
+        const t = data.data;
+        return {
+          status: 'redirect',
+          url: t.play,
+          music: t.music,
+          title: t.title,
+          thumbnail: t.cover,
+          author: t.author ? t.author.nickname : ''
+        };
+      }
+    }
+  } catch (e) {
+    console.warn('TikWM fetch failed:', e);
+  }
+  return null;
+}
+
 async function handleDownload(e) {
   if (e) e.preventDefault();
   let url = inputEl.value.trim();
@@ -422,19 +512,19 @@ async function handleDownload(e) {
   try {
     statusEl.innerHTML = '<div style="color:var(--u-blue);font-weight:600;">Extracting media streams from platform...</div>';
 
-    // Call Cobalt API with fallbacks
     let apiRes = null;
-    try {
-      const res = await fetch('https://api.cobalt.tools/api/json', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: url, videoQuality: '1080' })
-      });
-      if (res.ok) {
-        apiRes = await res.json();
-      }
-    } catch (err) {
-      console.warn('Cobalt primary API failed, trying fallback extraction:', err);
+    const platform = detectPlatform(url);
+
+    // Platform-specific fast extractors first
+    if (platform === 'x') {
+      apiRes = await fetchFxTwitter(url);
+    } else if (platform === 'tt') {
+      apiRes = await fetchTikWM(url);
+    }
+
+    // Fallback to Cobalt v10 multi-endpoint array
+    if (!apiRes) {
+      apiRes = await fetchCobaltV10(url);
     }
 
     // Step 2: Post-fetch Safety Gate Check on API metadata
@@ -451,13 +541,13 @@ async function handleDownload(e) {
     statusEl.style.display = 'none';
     btn.disabled = false;
 
-    if (apiRes && (apiRes.status === 'stream' || apiRes.status === 'redirect' || apiRes.status === 'picker')) {
+    if (apiRes && (apiRes.url || apiRes.picker)) {
       renderMediaResult(url, apiRes);
     } else {
-      // Direct media extraction fallback for social platforms
       renderFallbackResult(url);
     }
   } catch (err) {
+    console.error('Download error:', err);
     btn.disabled = false;
     statusEl.style.display = 'none';
     renderFallbackResult(url);
@@ -487,14 +577,15 @@ function renderMediaResult(originalUrl, data) {
   const platformName = platform.toUpperCase();
 
   let downloadUrl = data.url;
-  let isPicker = data.status === 'picker';
+  let isPicker = Array.isArray(data.picker);
   
   let html = `
     <div class="s-result-card">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
         <div>
           <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;color:var(--u-blue);text-transform:uppercase;">${platformName} Stream Ready</span>
-          <h3 style="font-size:1.15rem;margin-top:0.2rem;">Public Media Ready to Download</h3>
+          <h3 style="font-size:1.15rem;margin-top:0.2rem;">${data.title ? escapeHtml(data.title.slice(0, 80)) : 'Public Media Ready to Download'}</h3>
+          ${data.author ? `<div style="font-size:0.85rem;color:var(--u-mut);">By ${escapeHtml(data.author)}</div>` : ''}
         </div>
         <span class="s-badge active">✓ Safety Gate Passed</span>
       </div>
@@ -504,12 +595,12 @@ function renderMediaResult(originalUrl, data) {
     html += `
       <video class="s-preview-media" controls src="${downloadUrl}" poster="${data.thumbnail || ''}"></video>
       <div class="s-btn-group">
-        <a href="${downloadUrl}" download class="s-dl-btn" target="_blank" rel="noopener">🎬 Download Video (HD)</a>
-        <a href="${downloadUrl}" download class="s-dl-btn audio" target="_blank" rel="noopener">🎵 Download Audio</a>
+        <a href="${downloadUrl}" download target="_blank" rel="noopener" class="s-dl-btn">🎬 Download Video (HD)</a>
+        <a href="${data.music || downloadUrl}" download target="_blank" rel="noopener" class="s-dl-btn audio">🎵 Download Audio</a>
         <button type="button" class="s-dl-btn secondary" onclick="copyLink('${downloadUrl}')">📋 Copy Direct Link</button>
       </div>
     `;
-  } else if (isPicker && Array.isArray(data.picker)) {
+  } else if (isPicker && data.picker.length > 0) {
     html += `<div style="margin-top:1rem;display:flex;flex-direction:column;gap:0.8rem;">`;
     data.picker.forEach((item, idx) => {
       html += `
@@ -534,20 +625,26 @@ function renderFallbackResult(url) {
     <div class="s-result-card">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
         <div>
-          <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;color:var(--u-blue);text-transform:uppercase;">${platform.toUpperCase()} Link Processed</span>
-          <h3 style="font-size:1.15rem;margin-top:0.2rem;">Media Link Extractor Ready</h3>
+          <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;color:var(--u-blue);text-transform:uppercase;">${platform.toUpperCase()} Extractor Ready</span>
+          <h3 style="font-size:1.15rem;margin-top:0.2rem;">Public Media Ready to Download</h3>
         </div>
         <span class="s-badge active">✓ Anti-X Gate Passed</span>
       </div>
       <p style="color:var(--u-mut);font-size:0.9rem;margin-top:0.6rem;">
-        Click below to retrieve public video stream for <code>${url}</code>.
+        Click below to retrieve public video stream for <code>${escapeHtml(url)}</code>.
       </p>
       <div class="s-btn-group">
-        <a href="https://api.cobalt.tools/api/json?url=${encodeURIComponent(url)}" target="_blank" rel="noopener" class="s-dl-btn">🎬 Open Direct HD Stream</a>
+        <a href="https://api.cobalt.tools/?url=${encodeURIComponent(url)}" target="_blank" rel="noopener" class="s-dl-btn">🎬 Open Direct HD Stream</a>
         <button type="button" class="s-dl-btn secondary" onclick="copyLink('${url}')">📋 Copy Link</button>
       </div>
     </div>
   `;
+}
+
+function escapeHtml(str) {
+  return String(str || '').replace(/[&<>"']/g, function(m) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+  });
 }
 
 function copyLink(text) {
