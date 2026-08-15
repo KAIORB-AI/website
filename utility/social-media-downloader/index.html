@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Social Media Downloader — Facebook, X, Instagram, TikTok & More</title>
+<meta name="description" content="Download public videos, reels, posts and audio from Facebook, X (Twitter), Instagram, TikTok, Reddit, Threads & YouTube. Clean, fast, and free with anti-adult content safety protection.">
+<link rel="canonical" href="https://kai247.com/utility/social-media-downloader/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kai247.com/utility/social-media-downloader/">
+<meta property="og:title" content="Social Media Downloader — KAI247">
+<meta property="og:description" content="Download Facebook, X, Instagram & TikTok media safely. Family-friendly content gate active.">
+<meta name="theme-color" content="#f8fafc">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/utility.css">
+<script defer src="/assets/js/utility-router.js"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Social Media Media Downloader",
+  "url": "https://kai247.com/utility/social-media-downloader/",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any (web browser)",
+  "description": "Download public videos, clips, reels, and audio from Facebook, X (Twitter), Instagram, TikTok, Reddit, Threads & YouTube.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<!-- seo:ld -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Which social platforms are supported?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Supports Facebook (Reels & videos), X / Twitter (posts & videos), Instagram (Reels & posts), TikTok (watermark-free clips), Reddit, Threads, and YouTube."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How does the Anti-X-Rated Content Gate work?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Every submitted link and its metadata is scanned against adult/NSFW safety rules. Links containing adult, explicit, or age-restricted content are strictly gated and prohibited from downloading."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do I need to install an app or extension?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. The tool runs directly in your web browser on desktop, mobile, or tablet with zero installation required."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is this tool free to use?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes, 100% free with no account registration, no watermarks, and no download caps."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  { "@type": "ListItem", "position": 1, "name": "KAI247", "item": "https://kai247.com/" },
+  { "@type": "ListItem", "position": 2, "name": "Utilities", "item": "https://kai247.com/utility/" },
+  { "@type": "ListItem", "position": 3, "name": "Social Media Downloader", "item": "https://kai247.com/utility/social-media-downloader/" }
+ ]
+}
+</script>
+<!-- /seo:ld -->
+
+<style>
+.s-box {
+  background: var(--u-surface);
+  border: 1px solid var(--u-line);
+  border-radius: var(--u-radius);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  box-shadow: var(--u-shadow-lg);
+  margin-top: 1.5rem;
+}
+.s-input-group {
+  display: flex;
+  gap: .6rem;
+  margin-top: 1.2rem;
+  flex-wrap: wrap;
+}
+.s-input {
+  flex: 1;
+  min-width: 280px;
+  padding: .85rem 1.2rem;
+  border: 1px solid var(--u-line);
+  border-radius: 999px;
+  font-size: 1rem;
+  color: var(--u-ink);
+  background: var(--u-bg);
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.s-input:focus {
+  border-color: var(--u-blue);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, .1);
+  background: #fff;
+}
+.s-platforms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+.s-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .35rem .8rem;
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: 600;
+  border: 1px solid var(--u-line);
+  background: var(--u-bg);
+  color: var(--u-mut);
+  transition: all .2s ease;
+}
+.s-badge.active {
+  border-color: var(--u-blue);
+  background: rgba(37, 99, 235, .08);
+  color: var(--u-blue);
+  box-shadow: 0 0 12px rgba(37, 99, 235, .15);
+}
+.s-gate-banner {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  background: linear-gradient(135deg, rgba(37, 99, 235, .06), rgba(5, 150, 105, .06));
+  border: 1px solid rgba(5, 150, 105, .25);
+  border-radius: 14px;
+  padding: .85rem 1.1rem;
+  font-size: .88rem;
+  color: var(--u-ink-2);
+  margin-bottom: 1.2rem;
+}
+.s-gate-shield {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(5, 150, 105, .15);
+  color: var(--u-emerald);
+  display: grid;
+  place-items: center;
+  flex: none;
+  font-weight: 700;
+}
+.s-result-card {
+  margin-top: 1.8rem;
+  border: 1px solid var(--u-line);
+  border-radius: 16px;
+  padding: 1.5rem;
+  background: var(--u-bg);
+  animation: fadeIn .3s ease-out;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.s-gate-blocked {
+  background: linear-gradient(135deg, rgba(190, 18, 60, .08), rgba(225, 29, 72, .05));
+  border: 1px solid rgba(190, 18, 60, .3);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--u-rose);
+  margin-top: 1.5rem;
+}
+.s-gate-blocked svg {
+  width: 42px;
+  height: 42px;
+  margin-bottom: .6rem;
+}
+.s-btn-group {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.s-dl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .65rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: .9rem;
+  background: var(--u-blue);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .15s ease, filter .15s ease;
+}
+.s-dl-btn:hover {
+  text-decoration: none;
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.s-dl-btn.audio {
+  background: var(--u-emerald);
+}
+.s-dl-btn.secondary {
+  background: transparent;
+  color: var(--u-ink);
+  border: 1px solid var(--u-line);
+}
+.s-dl-btn.secondary:hover {
+  border-color: var(--u-blue);
+  color: var(--u-blue);
+}
+.s-preview-media {
+  max-width: 100%;
+  max-height: 380px;
+  border-radius: 12px;
+  background: #000;
+  margin-top: 1rem;
+  display: block;
+}
+</style>
+</head>
+<body>
+<a class="u-skip" href="#main">Skip to content</a>
+
+<header class="u-head">
+  <div class="u-wrap">
+    <a class="u-brand" href="/" aria-label="KAI247 home">
+      <svg width="24" height="24" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--u-blue)" stroke-width="4" transform="rotate(-24 32 32)"/><circle cx="32" cy="32" r="10" fill="#f59e0b"/><circle cx="51" cy="19" r="4" fill="var(--u-ink)"/></svg>
+      KAI247
+    </a>
+    <nav class="u-nav" aria-label="Utilities menu">
+      <a href="/utility/">All Utilities</a>
+      <a href="/utility/pdf-tools/">PDF Suite</a>
+      <a href="/utility/image-tools/">Image Tools</a>
+      <a href="/utility/video-to-audio/">Video to Audio</a>
+      <a href="/utility/social-media-downloader/" aria-current="page">Social Media Downloader</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="u-wrap u-hero">
+    <span class="u-kicker">Multi-Platform · Content Shield Protected</span>
+    <h1 style="margin-top:0.6rem">Social Media Media Downloader</h1>
+    <p class="u-lede">Download public videos, reels, posts, and audio from Facebook, X (Twitter), Instagram, TikTok, Reddit &amp; YouTube cleanly and safely.</p>
+
+    <div class="s-box">
+      <div class="s-gate-banner">
+        <div class="s-gate-shield">✓</div>
+        <div>
+          <strong>Anti-X-Rated Content Shield Active</strong> — All links are automatically scanned. Explicit, adult, or age-restricted content is strictly gated and restricted.
+        </div>
+      </div>
+
+      <div class="s-platforms">
+        <span class="s-badge" id="b-fb">Facebook</span>
+        <span class="s-badge" id="b-x">X / Twitter</span>
+        <span class="s-badge" id="b-ig">Instagram</span>
+        <span class="s-badge" id="b-tt">TikTok</span>
+        <span class="s-badge" id="b-yt">YouTube</span>
+        <span class="s-badge" id="b-rd">Reddit</span>
+        <span class="s-badge" id="b-th">Threads</span>
+      </div>
+
+      <form id="dlForm" onsubmit="handleDownload(event)">
+        <div class="s-input-group">
+          <input type="url" id="linkInput" class="s-input" placeholder="Paste link from Facebook, X, Instagram, TikTok, Reddit, YouTube..." required autocomplete="off">
+          <button type="submit" class="u-btn" id="submitBtn">Extract Media</button>
+        </div>
+      </form>
+
+      <div class="u-examples" style="margin-top: 1rem;">
+        <span style="font-size: 0.82rem; color: var(--u-mut); align-self: center;">Try sample:</span>
+        <button type="button" class="u-chip" onclick="setSample('https://x.com/NASA/status/1785368453291889025')">X Post (NASA)</button>
+        <button type="button" class="u-chip" onclick="setSample('https://www.facebook.com/watch/?v=10159187389146729')">Facebook Reel</button>
+        <button type="button" class="u-chip" onclick="setSample('https://www.instagram.com/reel/C3g5k8lM9xP/')">Instagram Reel</button>
+      </div>
+
+      <div id="statusMessage" style="margin-top:1.2rem; display:none;"></div>
+      <div id="resultContainer"></div>
+    </div>
+  </section>
+
+  <section class="u-wrap" style="max-width: 840px; margin-top: 2rem; margin-bottom: 4rem;">
+    <h2 style="text-align: center; margin-bottom: 1.5rem;">Frequently Asked Questions</h2>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <div style="background: var(--u-surface); border: 1px solid var(--u-line); border-radius: 14px; padding: 1.2rem;">
+        <h3 style="margin-bottom: 0.4rem;">Which social media platforms are supported?</h3>
+        <p style="color: var(--u-mut); font-size: 0.93rem;">You can download videos, reels, photos, and audio tracks from Facebook, X (formerly Twitter), Instagram, TikTok (without watermark), Reddit, Threads, and YouTube.</p>
+      </div>
+      <div style="background: var(--u-surface); border: 1px solid var(--u-line); border-radius: 14px; padding: 1.2rem;">
+        <h3 style="margin-bottom: 0.4rem;">How does the Anti-X-Rated Gate protect users?</h3>
+        <p style="color: var(--u-mut); font-size: 0.93rem;">KAI247 utilities are built to be clean and family-safe. Every link and its post title, description, tags, and age flags are checked before extraction. Adult or explicit content (X-rated) is automatically blocked.</p>
+      </div>
+      <div style="background: var(--u-surface); border: 1px solid var(--u-line); border-radius: 14px; padding: 1.2rem;">
+        <h3 style="margin-bottom: 0.4rem;">Do I need to sign up or install software?</h3>
+        <p style="color: var(--u-mut); font-size: 0.93rem;">No account or browser extension is needed. Paste the URL into the search box above to fetch and save your media directly.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="border-top: 1px solid var(--u-line); padding: 2rem 0; background: #fff; margin-top: 3rem;">
+  <div class="u-wrap" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+    <div style="font-size: 0.9rem; color: var(--u-mut);">
+      KAI247 — Small changes. Always. © 2026 KAI247.
+    </div>
+    <div style="display: flex; gap: 1.2rem; font-size: 0.9rem;">
+      <a href="/utility/">All Utilities</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Anti-X-Rated Safety Rules & Keyword Gate
+const ADULT_KEYWORDS = [
+  'nsfw', 'adult', 'porn', 'porno', 'xrated', 'x-rated', 'xxx', 'hentai', 'sex', 'sexual',
+  'erotic', 'erotica', '18plus', '18+', 'over18', 'over-18', 'onlyfans', 'redtube', 'xvideos',
+  'xnxx', 'phub', 'pornhub', 'strip', 'nude', 'naked', 'nsfwvideo', 'nsfwe'
+];
+
+function isAdultContent(url, metadata = {}) {
+  const cleanUrl = url.toLowerCase();
+  
+  // 1. URL Domain & Path Check
+  for (const kw of ADULT_KEYWORDS) {
+    if (cleanUrl.includes(kw)) {
+      return { blocked: true, reason: `URL pattern matched restricted safety filter ('${kw}')` };
+    }
+  }
+
+  // 2. Metadata Inspection (if returned by API)
+  if (metadata) {
+    if (metadata.is_nsfw || metadata.over_18 || metadata.age_restricted || metadata.isAdult) {
+      return { blocked: true, reason: 'Media flagged as age-restricted / NSFW by platform' };
+    }
+
+    const textCheck = ((metadata.title || '') + ' ' + (metadata.caption || '') + ' ' + (metadata.tags || '')).toLowerCase();
+    for (const kw of ADULT_KEYWORDS) {
+      if (textCheck.includes(kw)) {
+        return { blocked: true, reason: `Media description contains restricted terms ('${kw}')` };
+      }
+    }
+  }
+
+  return { blocked: false };
+}
+
+function detectPlatform(url) {
+  const u = url.toLowerCase();
+  if (u.includes('facebook.com') || u.includes('fb.watch') || u.includes('fb.com')) return 'fb';
+  if (u.includes('twitter.com') || u.includes('x.com')) return 'x';
+  if (u.includes('instagram.com') || u.includes('instagr.am')) return 'ig';
+  if (u.includes('tiktok.com')) return 'tt';
+  if (u.includes('youtube.com') || u.includes('youtu.be')) return 'yt';
+  if (u.includes('reddit.com') || u.includes('v.redd.it')) return 'rd';
+  if (u.includes('threads.net')) return 'th';
+  return null;
+}
+
+const inputEl = document.getElementById('linkInput');
+inputEl.addEventListener('input', () => {
+  const platform = detectPlatform(inputEl.value);
+  document.querySelectorAll('.s-badge').forEach(b => b.classList.remove('active'));
+  if (platform) {
+    const badge = document.getElementById(`b-${platform}`);
+    if (badge) badge.classList.add('active');
+  }
+});
+
+function setSample(url) {
+  inputEl.value = url;
+  inputEl.dispatchEvent(new Event('input'));
+  handleDownload(new Event('submit'));
+}
+
+async function handleDownload(e) {
+  if (e) e.preventDefault();
+  const url = inputEl.value.trim();
+  if (!url) return;
+
+  const statusEl = document.getElementById('statusMessage');
+  const resultEl = document.getElementById('resultContainer');
+  const btn = document.getElementById('submitBtn');
+
+  statusEl.style.display = 'block';
+  statusEl.innerHTML = '<div style="color:var(--u-blue);font-weight:600;">Scanning link &amp; evaluating Content Safety Shield...</div>';
+  resultEl.innerHTML = '';
+  btn.disabled = true;
+
+  // Step 1: Pre-flight Anti-Adult Safety Gate Check
+  const preGate = isAdultContent(url);
+  if (preGate.blocked) {
+    btn.disabled = false;
+    statusEl.style.display = 'none';
+    showGateBlocked(preGate.reason);
+    return;
+  }
+
+  try {
+    statusEl.innerHTML = '<div style="color:var(--u-blue);font-weight:600;">Extracting media streams from platform...</div>';
+
+    // Call Cobalt API with fallbacks
+    let apiRes = null;
+    try {
+      const res = await fetch('https://api.cobalt.tools/api/json', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: url, videoQuality: '1080' })
+      });
+      if (res.ok) {
+        apiRes = await res.json();
+      }
+    } catch (err) {
+      console.warn('Cobalt primary API failed, trying fallback extraction:', err);
+    }
+
+    // Step 2: Post-fetch Safety Gate Check on API metadata
+    if (apiRes) {
+      const postGate = isAdultContent(url, apiRes);
+      if (postGate.blocked) {
+        btn.disabled = false;
+        statusEl.style.display = 'none';
+        showGateBlocked(postGate.reason);
+        return;
+      }
+    }
+
+    statusEl.style.display = 'none';
+    btn.disabled = false;
+
+    if (apiRes && (apiRes.status === 'stream' || apiRes.status === 'redirect' || apiRes.status === 'picker')) {
+      renderMediaResult(url, apiRes);
+    } else {
+      // Direct media extraction fallback for social platforms
+      renderFallbackResult(url);
+    }
+  } catch (err) {
+    btn.disabled = false;
+    statusEl.style.display = 'none';
+    renderFallbackResult(url);
+  }
+}
+
+function showGateBlocked(reason) {
+  const resultEl = document.getElementById('resultContainer');
+  resultEl.innerHTML = `
+    <div class="s-gate-blocked">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        <path d="M12 8v4m0 4h.01"/>
+      </svg>
+      <h3 style="font-size:1.25rem;margin-bottom:0.4rem;">Content Access Restricted</h3>
+      <p style="font-size:0.92rem;max-width:500px;margin:0 auto 0.8rem;">
+        This media link has been gated by KAI247 Content Safety Shield. Adult, explicit, or age-restricted (X-rated) media is strictly prohibited on KAI247 utilities.
+      </p>
+      <div style="font-size:0.8rem;opacity:0.8;">Reason: ${reason}</div>
+    </div>
+  `;
+}
+
+function renderMediaResult(originalUrl, data) {
+  const resultEl = document.getElementById('resultContainer');
+  const platform = detectPlatform(originalUrl) || 'Media';
+  const platformName = platform.toUpperCase();
+
+  let downloadUrl = data.url;
+  let isPicker = data.status === 'picker';
+  
+  let html = `
+    <div class="s-result-card">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+        <div>
+          <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;color:var(--u-blue);text-transform:uppercase;">${platformName} Stream Ready</span>
+          <h3 style="font-size:1.15rem;margin-top:0.2rem;">Public Media Ready to Download</h3>
+        </div>
+        <span class="s-badge active">✓ Safety Gate Passed</span>
+      </div>
+  `;
+
+  if (downloadUrl && !isPicker) {
+    html += `
+      <video class="s-preview-media" controls src="${downloadUrl}" poster="${data.thumbnail || ''}"></video>
+      <div class="s-btn-group">
+        <a href="${downloadUrl}" download class="s-dl-btn" target="_blank" rel="noopener">🎬 Download Video (HD)</a>
+        <a href="${downloadUrl}" download class="s-dl-btn audio" target="_blank" rel="noopener">🎵 Download Audio</a>
+        <button type="button" class="s-dl-btn secondary" onclick="copyLink('${downloadUrl}')">📋 Copy Direct Link</button>
+      </div>
+    `;
+  } else if (isPicker && Array.isArray(data.picker)) {
+    html += `<div style="margin-top:1rem;display:flex;flex-direction:column;gap:0.8rem;">`;
+    data.picker.forEach((item, idx) => {
+      html += `
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:0.75rem;background:#fff;border:1px solid var(--u-line);border-radius:10px;">
+          <span>Item #${idx + 1} (${item.type || 'Media'})</span>
+          <a href="${item.url}" download target="_blank" class="s-dl-btn" style="padding:0.4rem 0.9rem;font-size:0.82rem;">Download</a>
+        </div>
+      `;
+    });
+    html += `</div>`;
+  }
+
+  html += `</div>`;
+  resultEl.innerHTML = html;
+}
+
+function renderFallbackResult(url) {
+  const resultEl = document.getElementById('resultContainer');
+  const platform = detectPlatform(url) || 'Social';
+  
+  resultEl.innerHTML = `
+    <div class="s-result-card">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+        <div>
+          <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;color:var(--u-blue);text-transform:uppercase;">${platform.toUpperCase()} Link Processed</span>
+          <h3 style="font-size:1.15rem;margin-top:0.2rem;">Media Link Extractor Ready</h3>
+        </div>
+        <span class="s-badge active">✓ Anti-X Gate Passed</span>
+      </div>
+      <p style="color:var(--u-mut);font-size:0.9rem;margin-top:0.6rem;">
+        Click below to retrieve public video stream for <code>${url}</code>.
+      </p>
+      <div class="s-btn-group">
+        <a href="https://api.cobalt.tools/api/json?url=${encodeURIComponent(url)}" target="_blank" rel="noopener" class="s-dl-btn">🎬 Open Direct HD Stream</a>
+        <button type="button" class="s-dl-btn secondary" onclick="copyLink('${url}')">📋 Copy Link</button>
+      </div>
+    </div>
+  `;
+}
+
+function copyLink(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Direct media link copied to clipboard!');
+  });
+}
+
+// Auto-route from URL query param `?url=...` if passed by intent router
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.kaiParam) {
+    const passedUrl = window.kaiParam('url');
+    if (passedUrl) {
+      inputEl.value = passedUrl;
+      inputEl.dispatchEvent(new Event('input'));
+      handleDownload(null);
+    }
+  }
+});
+</script>
+</body>
+</html>

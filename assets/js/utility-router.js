@@ -107,13 +107,19 @@
         if (/\btranscri|speech|whisper|subtitle|caption/i.test(q)) { p.rate = p.rate || 16000; p.channels = p.channels || 1; }
         return p;
       }
+    },
+    {
+      id: 'socialmedia', built: true, path: '/utility/social-media-downloader/',
+      label: 'Social Media Downloader',
+      test: /\b(facebook|fb|x\.com|twitter|instagram|insta|tiktok|threads|reddit)\b|\b(download|save|fetch)\s+(video|reel|media|post|tweet|clip)\b/i,
+      params: function (q) { var u = url(q); return u ? { url: u } : {}; }
     }
   ];
 
   // PDF before photo: "shrink this PDF image" is a PDF request.
   // video2audio before photo too: "extract the audio from this recording" must
   // not be swallowed by the photo route's broad media words.
-  var ORDER = ['pdf', 'qr', 'utm', 'sitemap', 'robots', 'slug', 'cidr', 'video2audio', 'finance', 'quote', 'po', 'marketing', 'photo'];
+  var ORDER = ['pdf', 'qr', 'utm', 'sitemap', 'robots', 'slug', 'cidr', 'socialmedia', 'video2audio', 'finance', 'quote', 'po', 'marketing', 'photo'];
 
   function sizeKB(q) {
     var m = q.match(/(\d+(?:\.\d+)?)\s*(kb|mb|gb|k|m|g|b)\b/i);
