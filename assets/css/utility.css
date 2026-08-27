@@ -387,3 +387,35 @@ a.u-card:hover .u-node .ring-3 { animation: u-pulse 1.6s ease-out infinite; }
 }
 .u-check { display:inline-flex; align-items:center; gap:.45rem; font-size:.88rem; color:var(--u-ink-2); }
 .u-check input { width:17px; height:17px; accent-color: var(--u-blue); }
+
+/* ================= Brand mark & watermark (tool pages) =================
+   This chrome is fixed-light by design, so it takes the DARK orb crop: a
+   deep navy badge on near-white is the higher-contrast pairing, and the
+   light cut would wash out against #f8fafc.
+
+   The watermark is the faceless lockup on purpose. Every page in this
+   directory is an instrument the visitor is operating -- a calculator, a
+   converter -- and a face watching them work reads as surveillance rather
+   than company. The sage belongs on the pages that talk to you; here the
+   orb alone carries the brand. */
+
+.u-brand__mark {
+  width: 30px; height: 30px; flex: none; border-radius: 50%;
+  background: url('/assets/img/orb-mark-dark.webp') center / cover no-repeat;
+  box-shadow: 0 0 0 1px var(--u-line), 0 6px 16px -6px rgba(15, 23, 42, .45);
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.u-brand:hover .u-brand__mark {
+  transform: scale(1.07);
+  box-shadow: 0 0 0 1px var(--u-blue), 0 8px 20px -6px rgba(37, 99, 235, .45);
+}
+
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  background: url('/assets/img/wm-dark-logo.webp') center 42% / min(70vw, 780px) auto no-repeat;
+  opacity: .045;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .u-brand__mark, .u-brand:hover .u-brand__mark { transition: none; transform: none; }
+}

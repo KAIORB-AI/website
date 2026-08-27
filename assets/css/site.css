@@ -726,3 +726,76 @@ body.viewer-open { overflow: hidden; }
 }
 
 
+
+/* ================= Brand mark & watermark =================
+   The logo art is a sage behind an orb, shipped in six cuts:
+   {dark,light} x {front,side,logo}. Two rules govern their use.
+
+   1. THE MARK. Only the sphere is cropped for the nav badge. The full
+      lockup's outer ring system collapses into mud at 30px, and the
+      wordmark beside it already says the name -- so the badge carries
+      the one shape that survives being small.
+
+   2. THE GAZE. Which way he looks is the page's posture, not decoration:
+        .wm-front  he faces the reader   -> pages that address the visitor
+        .wm-side   he looks past you     -> pages about the network's work
+        .wm-orb    no face at all        -> tools; an instrument isn't watched
+      The side art is MIRRORED between themes (dark = sage on the left
+      looking right, light = sage on the right looking left), so the anchor
+      has to flip with the variant. Anchor both left and in light mode his
+      gaze runs off the edge of the page instead of into the column.
+
+   Decorative and inert: aria-hidden mark, pointer-events:none watermark,
+   and the accessible name lives on the <a>. */
+
+:root { --orb-mark: url('/assets/img/orb-mark-dark.webp'); }
+
+.brand__mark {
+  width: 30px; height: 30px; flex: none; border-radius: 50%;
+  background: var(--orb-mark) center / cover no-repeat;
+  box-shadow: 0 0 0 1px var(--line), 0 0 14px rgba(122, 174, 252, .26);
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.brand:hover .brand__mark {
+  transform: scale(1.07);
+  box-shadow: 0 0 0 1px var(--gold-soft), 0 0 20px rgba(122, 174, 252, .48);
+}
+
+/* Sits behind the starfield (z-index -1) but above the body gradient. */
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  background: var(--wm) var(--wm-pos) / var(--wm-size) auto no-repeat;
+  opacity: var(--wm-op);
+}
+
+:root {
+  --wm: url('/assets/img/wm-dark-front.webp');
+  --wm-pos: center 38%;
+  --wm-size: min(74vw, 820px);
+  --wm-op: .07;
+}
+body.wm-side {
+  --wm: url('/assets/img/wm-dark-side.webp');
+  --wm-pos: left -10% center;
+  --wm-size: min(88vw, 1000px);
+  --wm-op: .075;
+}
+body.wm-orb {
+  --wm: url('/assets/img/wm-dark-logo.webp');
+  --wm-pos: center 42%;
+  --wm-op: .055;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --orb-mark: url('/assets/img/orb-mark-light.webp');
+    --wm: url('/assets/img/wm-light-front.webp');
+    --wm-op: .10;
+  }
+  body.wm-side { --wm: url('/assets/img/wm-light-side.webp'); --wm-pos: right -10% center; --wm-op: .10; }
+  body.wm-orb  { --wm: url('/assets/img/wm-light-logo.webp'); --wm-op: .085; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand__mark, .brand:hover .brand__mark { transition: none; transform: none; }
+}
