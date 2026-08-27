@@ -745,8 +745,8 @@ body.viewer-open { overflow: hidden; }
         .wm-orb    no face at all        -> tools; an instrument isn't watched
       The side art is MIRRORED between themes (dark = sage on the left
       looking right, light = sage on the right looking left), so the anchor
-      has to flip with the variant. Anchor both left and in light mode his
-      gaze runs off the edge of the page instead of into the column.
+      flips with the variant -- see the sizing note below for when that x
+      value actually bites and when the crop makes it moot.
 
    Decorative and inert: aria-hidden mark, pointer-events:none watermark,
    and the accessible name lives on the <a>. */
@@ -764,39 +764,56 @@ body.viewer-open { overflow: hidden; }
   box-shadow: 0 0 0 1px var(--gold-soft), 0 0 20px rgba(122, 174, 252, .48);
 }
 
-/* Sits behind the starfield (z-index -1) but above the body gradient. */
+/* Sits behind the starfield (z-index -1) but above the body gradient.
+
+   SIZED cover, NOT a fixed width. The art carries its own opaque cosmic
+   background, so at any size smaller than the viewport it draws its own four
+   edges and the page reads as having a photo pasted into the middle of it --
+   a frame, not a backdrop. Covering the viewport is the only way the art
+   becomes the page's own background rather than an object sitting on it.
+
+   Consequence worth knowing: the sources are square and viewports are usually
+   wide, so cover scales to the WIDTH and crops top and bottom. --wm-pos is
+   therefore mostly choosing WHICH HORIZONTAL BAND of the composition survives,
+   and the values below are picked to keep his face and the orb in frame while
+   letting the wordmark baked into the bottom of the art crop away -- the nav
+   already says KAIORB, and a second giant one ghosted across the page is noise.
+   The x half of each value only bites on tall/narrow screens, where the crop
+   flips to horizontal; that is where the side variants' left/right still
+   decides which way he is looking. */
 body::after {
   content: ''; position: fixed; inset: 0; z-index: -2; pointer-events: none;
-  background: var(--wm) var(--wm-pos) / var(--wm-size) auto no-repeat;
+  background: var(--wm) var(--wm-pos) / var(--wm-size) no-repeat;
   opacity: var(--wm-op);
 }
 
 :root {
   --wm: url('/assets/img/wm-dark-front.webp');
-  --wm-pos: center 38%;
-  --wm-size: min(74vw, 820px);
-  --wm-op: .07;
+  --wm-pos: center 34%;
+  --wm-size: cover;
+  --wm-op: .06;
 }
 body.wm-side {
   --wm: url('/assets/img/wm-dark-side.webp');
-  --wm-pos: left -10% center;
-  --wm-size: min(88vw, 1000px);
-  --wm-op: .075;
+  --wm-pos: left 38%;
+  --wm-op: .065;
 }
 body.wm-orb {
   --wm: url('/assets/img/wm-dark-logo.webp');
-  --wm-pos: center 42%;
-  --wm-op: .055;
+  --wm-pos: center 40%;
+  --wm-op: .05;
 }
 
+/* Lower than dark on purpose: the light cuts are brighter and busier, and the
+   page behind them is near-white, so the same number reads noticeably heavier. */
 @media (prefers-color-scheme: light) {
   :root {
     --orb-mark: url('/assets/img/orb-mark-light.webp');
     --wm: url('/assets/img/wm-light-front.webp');
-    --wm-op: .10;
+    --wm-op: .075;
   }
-  body.wm-side { --wm: url('/assets/img/wm-light-side.webp'); --wm-pos: right -10% center; --wm-op: .10; }
-  body.wm-orb  { --wm: url('/assets/img/wm-light-logo.webp'); --wm-op: .085; }
+  body.wm-side { --wm: url('/assets/img/wm-light-side.webp'); --wm-pos: right 38%; --wm-op: .075; }
+  body.wm-orb  { --wm: url('/assets/img/wm-light-logo.webp'); --wm-op: .065; }
 }
 
 @media (prefers-reduced-motion: reduce) {

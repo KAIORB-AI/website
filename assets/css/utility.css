@@ -413,8 +413,8 @@ a.u-card:hover .u-node .ring-3 { animation: u-pulse 1.6s ease-out infinite; }
 
 body::after {
   content: ''; position: fixed; inset: 0; z-index: -2; pointer-events: none;
-  background: url('/assets/img/wm-dark-logo.webp') center 42% / min(70vw, 780px) auto no-repeat;
-  opacity: .045;
+  background: url('/assets/img/wm-dark-logo.webp') center 40% / cover no-repeat;
+  opacity: .04;
 }
 
 @media (prefers-reduced-motion: reduce) {
