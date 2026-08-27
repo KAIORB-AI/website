@@ -1,7 +1,7 @@
-/* KaiOrb → Nexus
+/* KAIORB → Nexus
  *
  * Nexus is the network's AI assistant: it answers questions about one specific business using
- * only that business's own website and documents. Installed here, that business is KaiOrb.
+ * only that business's own website and documents. Installed here, that business is KAIORB.
  *
  * ── TO GO LIVE ────────────────────────────────────────────────────────────────────────────
  * Paste the publishable key for kaiorb.com from the Nexus Console into NEXUS_KEY below.
@@ -17,13 +17,13 @@
  * Keep /llms.txt current — it is the single source Nexus should trust over anything inferred.
  */
 (function () {
-  var NEXUS_KEY = 'pk_ced3ba4e3289a80726922cc2';  // KaiOrb tenant, allowlisted to kaiorb.com
-  var ACCENT    = '#f2c56d';          // KaiOrb gold
+  var NEXUS_KEY = 'pk_ced3ba4e3289a80726922cc2';  // KAIORB tenant, allowlisted to kaiorb.com
+  var ACCENT    = '#f2c56d';          // KAIORB gold
   var POSITION  = 'bottom-right';
 
   if (!NEXUS_KEY) {
     if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
-      console.info('[KaiOrb] Nexus is not configured — set NEXUS_KEY in /assets/js/nexus.js');
+      console.info('[KAIORB] Nexus is not configured — set NEXUS_KEY in /assets/js/nexus.js');
     }
     return;
   }

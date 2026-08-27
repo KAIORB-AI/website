@@ -34,14 +34,14 @@ Anything neither verified nor conceptual is absent from the site.
 | Isha Skin Care & Hair Clinic — dermatology; personalized skincare and hair restoration; India | VERIFIED | skincareisha.com |
 | Global & Funsize Productions — event broker & live entertainment production, books shows nationwide (talent, staging, sound, lighting, promotion); USA | VERIFIED | funsizegp.com |
 | Easy Q2C — Australia; **no descriptor** (easyq2c.com returned Cloudflare 525 on 2026-08-08; offering unverifiable) | UNVERIFIED → absent | — |
-| Brand membership in KaiOrb and countries | Owner-provided | Master prompt / repo owner |
+| Brand membership in KAIORB and countries | Owner-provided | Master prompt / repo owner |
 
 ## Deliberately conceptual (no factual claim made)
 
 - "Always with you." / Friend · Philosopher · Guide · Warrior — brand poetry
 - The universe/orbit metaphor, the Open Orbit seat, "capability rings"
 - "The network grows by helping others grow" — vision
-- "A single KaiOrb channel is being brought into orbit" (/contact) — roadmap framing
+- "A single KAIORB channel is being brought into orbit" (/contact) — roadmap framing
 - "More stars arriving" (/impact) — roadmap framing
 - KAI name associations — presented as feeling, never as dictionary translations (§1 of master prompt)
 
@@ -57,7 +57,7 @@ Anything neither verified nor conceptual is absent from the site.
 
 Client counts · revenue · employee numbers · office lists beyond the verified ones ·
 certifications · awards · testimonials · case studies · "subsidiary" language ·
-any KaiOrb contact email or phone number.
+any KAIORB contact email or phone number.
 
 ## Widget catalog (verified 2026-08-08 against the live platform)
 
@@ -91,5 +91,5 @@ safety-critical guidance it cannot source; LENS shows only published findings an
 nothing; Abhyas keeps answer keys server-side.
 
 Embedding anywhere requires a partner key with that domain on its allowlist — an empty domain
-list makes a key inert. **KaiOrb has no partner key**, so the page previews widgets rather
+list makes a key inert. **KAIORB has no partner key**, so the page previews widgets rather
 than running them.

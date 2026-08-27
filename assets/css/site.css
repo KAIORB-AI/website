@@ -1,4 +1,4 @@
-/* KaiOrb — design system. Deep space is the primary expression; light mode is the day side. */
+/* KAIORB — design system. Deep space is the primary expression; light mode is the day side. */
 
 :root {
   --bg0: #05060c;
@@ -85,7 +85,10 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   border-bottom: 1px solid var(--line);
 }
 .head .container { display: flex; align-items: center; gap: 1.4rem; height: 62px; }
-.brand { display: flex; align-items: center; gap: .55rem; font-weight: 700; font-size: 1.06rem; color: var(--ink); letter-spacing: .04em; }
+/* .1em, not the .04em this carried as "KaiOrb": the wordmark is set all-caps
+   to match the logo art, and caps need the extra air or KAIORB reads as a
+   solid block. The art itself tracks far wider still; this is a nod, not a copy. */
+.brand { display: flex; align-items: center; gap: .55rem; font-weight: 700; font-size: 1.06rem; color: var(--ink); letter-spacing: .1em; }
 .brand:hover { text-decoration: none; }
 .brand svg { display: block; }
 .nav { display: flex; gap: 1.15rem; margin-left: auto; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }

@@ -126,7 +126,7 @@ they version together.
 Rules that outrank aesthetics, restated from the data file:
 
 1. Workflows are **illustrative** — the shape of automation in an area, not
-   a claim that KaiOrb runs that pipeline for a customer today. The badge
+   a claim that KAIORB runs that pipeline for a customer today. The badge
    above the diagrams says so. Never drop it.
 2. Do not add a workflow describing something the network cannot build.
 

@@ -1,4 +1,4 @@
-/* KaiOrb — Capabilities constellation.
+/* KAIORB — Capabilities constellation.
  *
  * Eight capability families on an orbit around the core. Click one and a panel
  * opens underneath showing the agentic workflows that live in that
@@ -8,7 +8,7 @@
  * HONESTY
  * -------
  * The workflows are ILLUSTRATIVE. They show the shape of automation in each
- * area; they are not a claim that KaiOrb runs these exact pipelines for you
+ * area; they are not a claim that KAIORB runs these exact pipelines for you
  * today, and the panel says so in the badge above them. Do not quietly drop
  * that badge, and do not add a workflow describing something the network
  * cannot actually build.

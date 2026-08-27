@@ -14,21 +14,21 @@ export const BUSINESS_CATEGORIES: BusinessCategory[] = [
     id: 'restaurant',
     name: 'Restaurant',
     actionText: 'Run a restaurant?',
-    microCopy: 'Grow it. Focus on your food and hospitality — KaiOrb strengthens local discovery and customer engagement around your business.',
+    microCopy: 'Grow it. Focus on your food and hospitality — KAIORB strengthens local discovery and customer engagement around your business.',
     capabilities: ['Hosting', 'REACH', 'COMET', 'ORBIT', 'AI', 'Utilities'],
   },
   {
     id: 'landscaping',
     name: 'Landscaping & Lawn Care',
     actionText: 'Own a landscaping business?',
-    microCopy: 'Grow it. KaiOrb helps property owners across your city find your services 24×7.',
+    microCopy: 'Grow it. KAIORB helps property owners across your city find your services 24×7.',
     capabilities: ['Hosting', 'REACH', 'COMET', 'AI', 'Utilities'],
   },
   {
     id: 'urgent-care',
     name: 'Urgent Care & Dental',
     actionText: 'Operate an urgent care or medical practice?',
-    microCopy: 'Strengthen it. KaiOrb supports the digital and administrative business infrastructure around your patient care.',
+    microCopy: 'Strengthen it. KAIORB supports the digital and administrative business infrastructure around your patient care.',
     capabilities: ['Hosting', 'REACH', 'AI', 'Utilities'],
     disclaimer: 'Supports business infrastructure (web presence, discovery & utilities). Does not provide clinical, diagnostic, or regulatory compliance systems.',
   },
@@ -65,7 +65,7 @@ export const BUSINESS_CATEGORIES: BusinessCategory[] = [
     id: 'anything',
     name: 'Whatever You Build',
     actionText: 'Whatever you do.',
-    microCopy: 'You shouldn\'t have to build everything around it. KaiOrb evolves the rest.',
+    microCopy: 'You shouldn\'t have to build everything around it. KAIORB evolves the rest.',
     capabilities: ['Hosting', 'REACH', 'ORBIT', 'COMET', 'AI', 'Utilities', 'Global Network'],
   },
 ]
@@ -115,7 +115,7 @@ export function BusinessEvolution() {
       </div>
 
       {/* Spatial Orbital Diagram: YOUR BUSINESS at Center */}
-      <div className="k-biz-diagram" role="img" aria-label="Diagram showing KaiOrb capability nodes surrounding YOUR BUSINESS.">
+      <div className="k-biz-diagram" role="img" aria-label="Diagram showing KAIORB capability nodes surrounding YOUR BUSINESS.">
         <svg viewBox="0 0 700 480" className="k-biz-svg">
           <defs>
             <radialGradient id="bizCoreGrad" cx="50%" cy="50%" r="50%">
@@ -172,7 +172,7 @@ export function BusinessEvolution() {
             )
           })}
 
-          {/* CENTER NODE: YOUR BUSINESS (Not KaiOrb) */}
+          {/* CENTER NODE: YOUR BUSINESS (Not KAIORB) */}
           <g className="k-biz-center-node">
             <circle cx="350" cy="240" r="62" fill="url(#bizCoreGrad)" style={{ filter: 'drop-shadow(0 0 24px rgba(242,197,109,0.4))' }} />
             <circle cx="350" cy="240" r="70" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeDasharray="3 5" />
@@ -201,7 +201,7 @@ export function BusinessEvolution() {
         <div className="k-biz-flow-step">
           <span className="k-biz-flow-num">03</span>
           <h4>Your Brand Stays Yours</h4>
-          <p>Keep your name, look, and ownership. More capabilities arrive as KaiOrb evolves 24×7.</p>
+          <p>Keep your name, look, and ownership. More capabilities arrive as KAIORB evolves 24×7.</p>
         </div>
       </div>
     </div>

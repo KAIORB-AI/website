@@ -127,7 +127,7 @@ catalog is being represented, enumerate what is actually there rather than
 summarising it, and carry any disclaimer that travels with it.
 
 Known gaps you must not paper over: **easyq2c.com is currently broken**
-(Cloudflare 525), and **there is no KaiOrb contact email** — `/contact` routes
+(Cloudflare 525), and **there is no KAIORB contact email** — `/contact` routes
 through the founding companies' sites.
 
 ---
@@ -138,7 +138,7 @@ through the founding companies' sites.
    companies are an orbital composition — planets on a shared arc. The trinity
    is a point-**down** triangle; an apex reads as rank, and the companies are
    peers.
-2. **Catalogs must read as one KaiOrb offering set**, never a directory of
+2. **Catalogs must read as one KAIORB offering set**, never a directory of
    member-company links. Tiles open the destination inside the page via
    `assets/js/viewer.js`.
 

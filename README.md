@@ -1,6 +1,6 @@
 # kai247-web
 
-The production website for **kaiorb.com** — KaiOrb, a companion ecosystem. *Small changes. Always. 24×7.*
+The production website for **kaiorb.com** — KAIORB, a companion ecosystem. *Small changes. Always. 24×7.*
 
 ## Architecture
 

@@ -1,4 +1,4 @@
-/* KaiOrb Utilities — intent router.
+/* KAIORB Utilities — intent router.
  *
  * Deterministic on purpose. It matches the request against declared patterns,
  * extracts the parameters it can prove are there, and opens the tool with them

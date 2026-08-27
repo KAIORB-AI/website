@@ -1,4 +1,4 @@
-/* KaiOrb Utilities — Brahmexa circular design language, clean & light.
+/* KAIORB Utilities — Brahmexa circular design language, clean & light.
    Standalone: these pages do not load site.css. The main site is deep space;
    the utility suite is deliberately its own daylight surface. */
 
@@ -57,7 +57,8 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   border-bottom: 1px solid var(--u-line);
 }
 .u-head .u-wrap { display: flex; align-items: center; gap: 1.2rem; height: 64px; }
-.u-brand { display: flex; align-items: center; gap: .55rem; font-weight: 600; font-size: 1.05rem; color: var(--u-ink); letter-spacing: .03em; }
+/* See site.css .brand — all-caps wordmark, so tracking opens up. */
+.u-brand { display: flex; align-items: center; gap: .55rem; font-weight: 600; font-size: 1.05rem; color: var(--u-ink); letter-spacing: .09em; }
 .u-brand:hover { text-decoration: none; }
 .u-nav { display: flex; gap: 1.1rem; margin-left: auto; white-space: nowrap; overflow-x: auto; scrollbar-width: none; }
 .u-nav::-webkit-scrollbar { display: none; }

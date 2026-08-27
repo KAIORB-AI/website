@@ -4,7 +4,7 @@
 > superseded history — GitHub Pages and the SSH-to-Apache-docroot route are both
 > retired. Read this block, not the archive.**
 >
-> The site moved from kai247.com to **kaiorb.com** and rebranded **KAI247 → KaiOrb**.
+> The site moved from kai247.com to **kaiorb.com** and rebranded **KAI247 → KAIORB**.
 >
 > | Piece | Where |
 > |---|---|

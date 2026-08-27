@@ -39,7 +39,7 @@ but it is not something to put in front of a visitor. **Do not embed a widget wh
    curl -s -X POST https://brahmexa.com/api/widgets/admin/partners \
      -H "Authorization: Bearer $BRX_WIDGETS_ADMIN_TOKEN" \
      -H 'Content-Type: application/json' \
-     -d '{ "org": "KaiOrb",
+     -d '{ "org": "KAIORB",
            "widgets": ["space-proposal"],
            "domains": ["kaiorb.com", "*.kaiorb.com", "localhost"],
            "settings": { "_shared": { "accent": "#f2c56d", "mode": "auto" },
@@ -77,7 +77,7 @@ Of the four connected widgets, this is the only one that fits a network site. Th
 belong on member businesses' own sites, not on kaiorb.com. **Do not embed them here.**
 
 Put it on `/join/` (and consider `/contact/`, which currently routes people out to the three
-founding companies' sites because KaiOrb has no contact address of its own):
+founding companies' sites because KAIORB has no contact address of its own):
 
 ```html
 <div id="brahmexa-space-proposal"></div>
@@ -108,14 +108,14 @@ When `orbit-events` connects it is the obvious next adoption for kaiorb.com.
 
 ## The bigger reason this matters
 
-`assets/js/viewer.js` currently opens member-company pages **inside an iframe** with KaiOrb chrome
+`assets/js/viewer.js` currently opens member-company pages **inside an iframe** with KAIORB chrome
 around them — `data-url="https://brahmexa.com/csr-agent.php?slug=fafsa"` and eight more like it.
 That was always described as interim: *"until each org supplies a widget — then only `data-url`
 changes."*
 
 Brahmexa has now supplied widgets. So the direction of travel is to replace those iframe tiles with
 real embeds, one at a time, **as each widget actually connects**. An embedded widget beats an iframe
-on every axis that matters here: it inherits KaiOrb's accent, it is keyboard and screen-reader
+on every axis that matters here: it inherits KAIORB's accent, it is keyboard and screen-reader
 native rather than a nested document, it cannot be broken by the other site's framing headers, and
 it needs one CSP host instead of trusting a whole origin.
 
