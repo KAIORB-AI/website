@@ -9,7 +9,7 @@ import io, json, os, html, datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = json.load(io.open(os.path.join(ROOT, 'scripts', 'blog-data.json'), encoding='utf-8'))
-SITE = 'https://kai247.com'
+SITE = 'https://kaiorb.com'
 
 TOOL_NAMES = {
     'pdf-size-reducer': 'PDF Size Reducer',

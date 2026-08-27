@@ -10,7 +10,7 @@ Run:  python scripts/build-sitemap.py
 import io, os, re, datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE = 'https://kai247.com'
+SITE = 'https://kaiorb.com'
 
 # Directories that hold source or documentation rather than pages.
 SKIP_DIRS = {'.git', '.github', 'node_modules', 'src', 'scripts', 'docs', '.ssr', 'assets'}

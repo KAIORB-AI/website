@@ -6,7 +6,7 @@ Naver consume it. Google does not.
 
 It needs no account. Ownership is proved by hosting a file at
 
-    https://kai247.com/<key>.txt
+    https://kaiorb.com/<key>.txt
 
 whose only content is the key. That file MUST be live before submitting, or
 the whole batch is rejected with 403 — so deploy before running this.
@@ -18,11 +18,11 @@ Run:  python scripts/indexnow.py            # submit every sitemap URL
 import io, json, os, re, ssl, sys, urllib.error, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE = 'https://kai247.com'
-HOST = 'kai247.com'
+SITE = 'https://kaiorb.com'
+HOST = 'kaiorb.com'
 KEY = '8ff9c57d8bf96d4341988328a4d43394'
 ENDPOINT = 'https://api.indexnow.org/indexnow'
-UA = 'kai247-indexnow/1.0 (+https://kai247.com/)'
+UA = 'kaiorb-indexnow/1.0 (+https://kaiorb.com/)'
 
 # IndexNow caps a batch at 10,000 URLs. Nowhere near that here, but a silent
 # truncation would look like a successful submission of everything.

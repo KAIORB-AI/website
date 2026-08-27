@@ -1,4 +1,4 @@
-// Offering viewer — opens a KAI247 offering inside the page, so the visitor stays in orbit.
+// Offering viewer — opens a KaiOrb offering inside the page, so the visitor stays in orbit.
 // Interim: the frame carries the delivering site. Later it carries that offering's widget;
 // only the data-url on each tile changes.
 (function () {
@@ -10,14 +10,14 @@
     viewer.hidden = true;
     viewer.setAttribute('role', 'dialog');
     viewer.setAttribute('aria-modal', 'true');
-    viewer.setAttribute('aria-label', 'KAI247 offering');
+    viewer.setAttribute('aria-label', 'KaiOrb offering');
     viewer.innerHTML =
       '<div class="viewer-chrome">' +
         '<span class="viewer-mark">' +
           '<svg width="20" height="20" viewBox="0 0 64 64" aria-hidden="true">' +
             '<ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--blue)" stroke-width="5" transform="rotate(-24 32 32)"/>' +
             '<circle cx="32" cy="32" r="11" fill="var(--gold)"/>' +
-          '</svg>KAI247</span>' +
+          '</svg>KaiOrb</span>' +
         '<span class="viewer-title" id="viewerTitle"></span>' +
         '<span class="viewer-actions">' +
           '<a class="viewer-btn" id="viewerNewTab" target="_blank" rel="noopener">Open in new tab ↗</a>' +

@@ -15,7 +15,7 @@ import io, json, os, re, sys, html
 from collections import defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE = 'https://kai247.com'
+SITE = 'https://kaiorb.com'
 SKIP = {'.git', '.github', 'node_modules', 'src', 'scripts', 'docs', '.ssr', 'assets'}
 
 # The site publishes a guide quoting these as the working limits. Holding our

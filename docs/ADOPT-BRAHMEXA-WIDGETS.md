@@ -1,4 +1,4 @@
-# Prompt: adopt the Brahmexa widgets on kai247.com
+# Prompt: adopt the Brahmexa widgets on kaiorb.com
 
 **Canonical location:** `docs/ADOPT-BRAHMEXA-WIDGETS.md` — hand this to Antigravity (or any agent).
 **Catalog:** <https://brahmexa.com/widgets/> · **Contract:** `Brahmando-ai/Brahmando` → `docs/products/widgets/EMBED-CONTRACT.md`
@@ -31,17 +31,17 @@ but it is not something to put in front of a visitor. **Do not embed a widget wh
 ### Two blockers you cannot clear yourself
 
 1. **`BRX_WIDGETS_ADMIN_TOKEN` is unset on brahmexa.com.** Partner provisioning returns
-   `503 admin_disabled`, so **no embed key can be minted for kai247.com at all.** Until an operator
+   `503 admin_disabled`, so **no embed key can be minted for kaiorb.com at all.** Until an operator
    sets that env var, nothing in this document can be executed. Stop and report.
-2. **kai247.com needs a partner record.** Once the token exists, an operator provisions one:
+2. **kaiorb.com needs a partner record.** Once the token exists, an operator provisions one:
 
    ```bash
    curl -s -X POST https://brahmexa.com/api/widgets/admin/partners \
      -H "Authorization: Bearer $BRX_WIDGETS_ADMIN_TOKEN" \
      -H 'Content-Type: application/json' \
-     -d '{ "org": "KAI247",
+     -d '{ "org": "KaiOrb",
            "widgets": ["space-proposal"],
-           "domains": ["kai247.com", "*.kai247.com", "localhost"],
+           "domains": ["kaiorb.com", "*.kaiorb.com", "localhost"],
            "settings": { "_shared": { "accent": "#f2c56d", "mode": "auto" },
                          "space-proposal": { "heading": "Tell us what you are building" } } }'
    ```
@@ -55,17 +55,17 @@ but it is not something to put in front of a visitor. **Do not embed a widget wh
 
 ### 1 · Nexus is a different system — do this one first, it is the highest value
 
-`nexus-chat` is the only widget marked `verified`, and kai247.com is **already wired for it**.
+`nexus-chat` is the only widget marked `verified`, and kaiorb.com is **already wired for it**.
 `assets/js/nexus.js` loads on every page and does nothing because `NEXUS_KEY` is empty.
 
 It does **not** use the widget loader or the partner key above. It needs a publishable key from the
-**Nexus Console** for a kai247.com tenant. One line:
+**Nexus Console** for a kaiorb.com tenant. One line:
 
 ```js
 var NEXUS_KEY = 'pk_...';   // from the Nexus Console, not from /api/widgets/admin/partners
 ```
 
-Then point the Nexus crawler at `https://kai247.com/` and upload the knowledge document. Note that
+Then point the Nexus crawler at `https://kaiorb.com/` and upload the knowledge document. Note that
 `/llms.txt` is deliberately **unpublished** — it lives outside every repo at
 `C:\whizyoga\kai247-nexus-knowledge.md` and must be uploaded to the Console directly, never
 committed or served. The deploy fails if it reappears in the tree.
@@ -74,10 +74,10 @@ committed or served. The deploy fails if it reappears in the tree.
 
 Of the four connected widgets, this is the only one that fits a network site. The other three
 (`restaurant-reserve`, `landscaping-quote`, `hvac-service-request`) are vertical intake forms that
-belong on member businesses' own sites, not on kai247.com. **Do not embed them here.**
+belong on member businesses' own sites, not on kaiorb.com. **Do not embed them here.**
 
 Put it on `/join/` (and consider `/contact/`, which currently routes people out to the three
-founding companies' sites because KAI247 has no contact address of its own):
+founding companies' sites because KaiOrb has no contact address of its own):
 
 ```html
 <div id="brahmexa-space-proposal"></div>
@@ -102,20 +102,20 @@ agreed to that.
 brahmexa.com (`BRX_REACH_BASE`, `BRX_GATEWAY_BASE`, and so on). No redeploy is needed on either
 side; the badge on <https://brahmexa.com/widgets/> flips on the next request.
 
-When `orbit-events` connects it is the obvious next adoption for kai247.com.
+When `orbit-events` connects it is the obvious next adoption for kaiorb.com.
 
 ---
 
 ## The bigger reason this matters
 
-`assets/js/viewer.js` currently opens member-company pages **inside an iframe** with KAI247 chrome
+`assets/js/viewer.js` currently opens member-company pages **inside an iframe** with KaiOrb chrome
 around them — `data-url="https://brahmexa.com/csr-agent.php?slug=fafsa"` and eight more like it.
 That was always described as interim: *"until each org supplies a widget — then only `data-url`
 changes."*
 
 Brahmexa has now supplied widgets. So the direction of travel is to replace those iframe tiles with
 real embeds, one at a time, **as each widget actually connects**. An embedded widget beats an iframe
-on every axis that matters here: it inherits KAI247's accent, it is keyboard and screen-reader
+on every axis that matters here: it inherits KaiOrb's accent, it is keyboard and screen-reader
 native rather than a nested document, it cannot be broken by the other site's framing headers, and
 it needs one CSP host instead of trusting a whole origin.
 
@@ -126,7 +126,7 @@ saying it has no data.
 
 ## Rules that do not bend
 
-- **kai247.com has no CSP header today.** If one is ever added it needs exactly
+- **kaiorb.com has no CSP header today.** If one is ever added it needs exactly
   `script-src https://brahmexa.com` and `connect-src https://brahmexa.com` — the widget makes no
   other external request, loads no CDN and sets no cookie.
 - **Every widget renders in a closed Shadow DOM.** It cannot leak styles into the site and the site

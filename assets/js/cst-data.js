@@ -1,4 +1,4 @@
-/* KAI247 — Capabilities constellation: the workflow data.
+/* KaiOrb — Capabilities constellation: the workflow data.
  *
  * Split out from constellations.js so the shapes can be read and edited
  * without scrolling past the renderer.
@@ -17,7 +17,7 @@
  * heights rather than uniform blocks.
  *
  * HONESTY: these are ILLUSTRATIVE. They show the shape of automation in each
- * area; they are not a claim that KAI247 runs these exact pipelines for a
+ * area; they are not a claim that KaiOrb runs these exact pipelines for a
  * customer today, and the panel says so in a badge. Do not drop that badge,
  * and do not add a workflow describing something the network cannot build.
  */

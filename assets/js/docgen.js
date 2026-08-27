@@ -1,4 +1,4 @@
-/* KAI247 — line-item document builder.
+/* KaiOrb — line-item document builder.
  *
  * Drives both the Quote & Estimate Generator and the Purchase Order
  * Generator. The two documents differ in wording, numbering and which date

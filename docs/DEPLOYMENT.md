@@ -1,4 +1,30 @@
-# Deployment — kai247.com
+# Deployment — kaiorb.com
+
+> **CURRENT STATE (2026-08-27). Everything below the first horizontal rule is
+> superseded history — GitHub Pages and the SSH-to-Apache-docroot route are both
+> retired. Read this block, not the archive.**
+>
+> The site moved from kai247.com to **kaiorb.com** and rebranded **KAI247 → KaiOrb**.
+>
+> | Piece | Where |
+> |---|---|
+> | Content | this repo (`kai247-ai/kai247-web`), branch `main`, root folder |
+> | Image | built by `Brahmando-ai/Brahmando` → `build-kai247-multiarch.yml` (multi-arch arm64+amd64, no attestations) → GHCR, promoted to GitLab by `kai247-promote.yml` |
+> | Primary | ATOM Docker Compose, container `kai247-web`, `127.0.0.1:18101`, compose at `/data/kai247/compose` |
+> | DR | gpuserver K3s, namespace `brahmando`, deployment `kai247-web` |
+> | Deploy | GitLab `kai-production/kai247/kai247-web` — `deploy_atom` then `deploy_gpuserver_dr`, both manual, driven by `RELEASE_TAG` |
+> | Public routing | Cloudflare Worker `kaiorb-firstparty-failover` on `kaiorb.com/*` + `www.kaiorb.com/*`, primary `atom-core-origin.kaiorb.com`, DR `india-core-origin.kaiorb.com`, stamping `X-KAI-Origin` |
+> | Old domain | `kai247.com` is held for the SaaS platform: a redirect Worker serves a holding page on `/` and 301s every other path to kaiorb.com |
+>
+> **Infrastructure identifiers are deliberately still `kai247-*`** — the GitLab
+> project, container name, K3s deployment, `/data/kai247` path and port 18101.
+> They name infrastructure, not the brand; renaming them is a separate change.
+>
+> **There is no push-triggered deploy.** `.github/workflows/deploy-kai247.yml`
+> was deleted at the migration: it SSH-synced into a shared Apache docroot that
+> nothing routes to any more. Releases are cut deliberately, not on push.
+
+---
 
 ## Serving path (recorded 2026-08-08)
 
@@ -6,9 +32,9 @@
 |---|---|
 | Content | This repo (`kai247-ai/kai247-web`), branch `main`, root folder |
 | Hosting | GitHub Pages (branch-based, no Actions workflow) |
-| Custom domain | `CNAME` file in repo root → `kai247.com`, plus Pages custom-domain setting |
-| DNS | Cloudflare: apex `kai247.com` A → 185.199.108/109/110/111.153 (GitHub Pages); `www` CNAME → GitHub Pages |
-| TLS | GitHub Pages-issued certificate for kai247.com (enforce HTTPS once provisioned) |
+| Custom domain | `CNAME` file in repo root → `kaiorb.com`, plus Pages custom-domain setting |
+| DNS | Cloudflare: apex `kaiorb.com` A → 185.199.108/109/110/111.153 (GitHub Pages); `www` CNAME → GitHub Pages |
+| TLS | GitHub Pages-issued certificate for kaiorb.com (enforce HTTPS once provisioned) |
 
 Note: the `www` CNAME currently targets `whizyoga-ai.github.io`. GitHub routes custom domains
 by Host header so this works, but `kai247-ai.github.io` (the org that owns the repo) is the
@@ -32,7 +58,7 @@ for the `kai247-ai` org (Settings → Pages → verified domains) to prevent dom
 
 ---
 
-## 2026-08-08 — kai247.com moves to the GPU server, from THIS repo
+## 2026-08-08 — kaiorb.com moves to the GPU server, from THIS repo
 
 The site is deployed by `.github/workflows/deploy-kai247.yml` on a **GitHub-hosted** runner
 (free for public repos) which reaches the server over SSH — the same route
@@ -64,7 +90,7 @@ access to that box.
 ### Finishing the cutover
 
 1. ✅ Done — the workflow deploys green on every push to `main`.
-2. Zero Trust → Networks → Tunnels → Public Hostnames → add `kai247.com` →
+2. Zero Trust → Networks → Tunnels → Public Hostnames → add `kaiorb.com` →
    `HTTP → manjulab-web.brahmando.svc.cluster.local:80`.
 3. Cloudflare DNS → delete the four Pages A records (185.199.108–111.153) and the `www` CNAME
    to `whizyoga-ai.github.io`; they conflict with the record the tunnel creates.
@@ -75,7 +101,7 @@ access to that box.
 
 ### Things that will bite
 
-- **If kai247.com serves the Brahmexa site**, the files are fine — the host rewrite was dropped
+- **If kaiorb.com serves the Brahmexa site**, the files are fine — the host rewrite was dropped
   from `brahmexa-web/.htaccess` in the Brahmando repo, which is re-extracted over the docroot
   on every brahmexa.com deploy and can regress from another repository.
 - **Never add a clean/delete step to `deploy-brahmexa-com.yml`** — it untars over the shared
@@ -83,7 +109,7 @@ access to that box.
 - **`llms.txt` must never return.** The deploy fails if it is in the tree or on the server.
 
 
-## Troubleshooting: kai247.com returns 502 (seen 2026-08-08, during cutover)
+## Troubleshooting: kaiorb.com returns 502 (seen 2026-08-08, during cutover)
 
 Symptom: every route returns `502`, body is the bare text `error code: 502`, `Server: cloudflare`.
 
@@ -94,21 +120,21 @@ curl -s -o /dev/null -w '%{http_code}
 ' https://brahmexa.com/     # 200 -> tunnel + Apache healthy
 curl -s -o /dev/null -w '%{http_code}
 ' https://funsizegp.com/    # 200 -> sibling subdirectory healthy
-nslookup kai247.com                                                # 104.21.x / 172.67.x -> proxied by Cloudflare
+nslookup kaiorb.com                                                # 104.21.x / 172.67.x -> proxied by Cloudflare
 ```
 
-If the siblings answer 200 and kai247.com does not, the files, the `.htaccess` rewrite and the
-Apache service are all fine — **the fault is the kai247.com Public Hostname entry in Zero
+If the siblings answer 200 and kaiorb.com does not, the files, the `.htaccess` rewrite and the
+Apache service are all fine — **the fault is the kaiorb.com Public Hostname entry in Zero
 Trust**. A bare `error code: 502` from the edge means cloudflared could not reach a service for
 that hostname, which is either a wrong service value or a DNS record pointing at the tunnel
 with no matching ingress rule behind it.
 
 Fix: open the **funsizegp.com** public-hostname entry, which is known good, and copy its
-service value verbatim into the kai247.com entry — same tunnel, same scheme, same address.
+service value verbatim into the kaiorb.com entry — same tunnel, same scheme, same address.
 Scheme matters: `HTTPS://` against an Apache that only speaks HTTP on :80 returns exactly this
 502. The expected value is `HTTP` → `manjulab-web.brahmando.svc.cluster.local:80`.
 
 Instant rollback while diagnosing: re-add the four GitHub Pages A records for the apex
 (185.199.108.153, .109.153, .110.153, .111.153) as **DNS-only**. The Pages origin is still
-built and serving — `curl --resolve kai247.com:443:185.199.108.153 https://kai247.com/`
+built and serving — `curl --resolve kaiorb.com:443:185.199.108.153 https://kaiorb.com/`
 returns 200 — so the site comes back within a DNS TTL.

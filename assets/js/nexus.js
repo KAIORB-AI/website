@@ -1,10 +1,10 @@
-/* KAI247 → Nexus
+/* KaiOrb → Nexus
  *
  * Nexus is the network's AI assistant: it answers questions about one specific business using
- * only that business's own website and documents. Installed here, that business is KAI247.
+ * only that business's own website and documents. Installed here, that business is KaiOrb.
  *
  * ── TO GO LIVE ────────────────────────────────────────────────────────────────────────────
- * Paste the publishable key for kai247.com from the Nexus Console into NEXUS_KEY below.
+ * Paste the publishable key for kaiorb.com from the Nexus Console into NEXUS_KEY below.
  * That is the only change required. Until a key is set this file does nothing at all —
  * no launcher, no broken circle, no network request.
  *
@@ -13,17 +13,17 @@
  *   /llms.txt      canonical facts + the "never claim this" guardrails (the important one)
  *   /knowledge/    the same knowledge as human Q&A, with FAQPage structured data
  *   every page     the network, capabilities, offerings, impact agents and join paths
- * Point the Nexus crawler at https://kai247.com/ and upload /llms.txt as a document.
+ * Point the Nexus crawler at https://kaiorb.com/ and upload /llms.txt as a document.
  * Keep /llms.txt current — it is the single source Nexus should trust over anything inferred.
  */
 (function () {
-  var NEXUS_KEY = 'pk_ced3ba4e3289a80726922cc2';  // KAI247 tenant, allowlisted to kai247.com
-  var ACCENT    = '#f2c56d';          // KAI247 gold
+  var NEXUS_KEY = 'pk_ced3ba4e3289a80726922cc2';  // KaiOrb tenant, allowlisted to kaiorb.com
+  var ACCENT    = '#f2c56d';          // KaiOrb gold
   var POSITION  = 'bottom-right';
 
   if (!NEXUS_KEY) {
     if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
-      console.info('[KAI247] Nexus is not configured — set NEXUS_KEY in /assets/js/nexus.js');
+      console.info('[KaiOrb] Nexus is not configured — set NEXUS_KEY in /assets/js/nexus.js');
     }
     return;
   }

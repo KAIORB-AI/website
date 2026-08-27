@@ -18,7 +18,7 @@ import io, json, os, re, html, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = json.load(io.open(os.path.join(ROOT, 'scripts', 'seo-data.json'), encoding='utf-8'))
-SITE = 'https://kai247.com'
+SITE = 'https://kaiorb.com'
 
 SEO_CSS_V = '2'  # bump whenever assets/css/seo.css changes
 

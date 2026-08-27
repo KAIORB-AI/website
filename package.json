@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "kai247.com \u2014 static pages with React islands for the parts that grow",
+  "description": "kaiorb.com \u2014 static pages with React islands for the parts that grow",
   "scripts": {
     "dev": "vite build --watch",
     "build": "tsc --noEmit && vite build && vite build -c vite.ssr.config.ts && node scripts/prerender.mjs",

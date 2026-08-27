@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Free Domain Check &amp; SEO Analyzer — Audit Domain, DNS &amp; On-Page SEO</title>
 <meta name="description" content="Check domain health, DNS records (A, MX, NS, TXT), SSL security, meta tags, Open Graph, heading hierarchy, and overall SEO score instantly in your browser.">
-<link rel="canonical" href="https://kai247.com/utility/domain-seo-analyzer/">
+<link rel="canonical" href="https://kaiorb.com/utility/domain-seo-analyzer/">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://kai247.com/utility/domain-seo-analyzer/">
-<meta property="og:title" content="Domain &amp; SEO Analyzer — KAI247">
+<meta property="og:url" content="https://kaiorb.com/utility/domain-seo-analyzer/">
+<meta property="og:title" content="Domain &amp; SEO Analyzer — KaiOrb">
 <meta property="og:description" content="Instant domain check, DNS lookup, and comprehensive on-page SEO health audit.">
 <meta name="theme-color" content="#f8fafc">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -23,7 +23,7 @@
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Domain & SEO Analyzer",
-  "url": "https://kai247.com/utility/domain-seo-analyzer/",
+  "url": "https://kaiorb.com/utility/domain-seo-analyzer/",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any (web browser)",
   "description": "Comprehensive domain health inspector, DNS lookup, and SEO audit tool.",
@@ -68,9 +68,9 @@
  "@context": "https://schema.org",
  "@type": "BreadcrumbList",
  "itemListElement": [
-  { "@type": "ListItem", "position": 1, "name": "KAI247", "item": "https://kai247.com/" },
-  { "@type": "ListItem", "position": 2, "name": "Utilities", "item": "https://kai247.com/utility/" },
-  { "@type": "ListItem", "position": 3, "name": "Domain & SEO Analyzer", "item": "https://kai247.com/utility/domain-seo-analyzer/" }
+  { "@type": "ListItem", "position": 1, "name": "KaiOrb", "item": "https://kaiorb.com/" },
+  { "@type": "ListItem", "position": 2, "name": "Utilities", "item": "https://kaiorb.com/utility/" },
+  { "@type": "ListItem", "position": 3, "name": "Domain & SEO Analyzer", "item": "https://kaiorb.com/utility/domain-seo-analyzer/" }
  ]
 }
 </script>
@@ -197,9 +197,9 @@
 
 <header class="u-head">
   <div class="u-wrap">
-    <a class="u-brand" href="/" aria-label="KAI247 home">
+    <a class="u-brand" href="/" aria-label="KaiOrb home">
       <svg width="24" height="24" viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="32" rx="27" ry="13.5" fill="none" stroke="var(--u-blue)" stroke-width="4" transform="rotate(-24 32 32)"/><circle cx="32" cy="32" r="10" fill="#f59e0b"/><circle cx="51" cy="19" r="4" fill="var(--u-ink)"/></svg>
-      KAI247
+      KaiOrb
     </a>
     <nav class="u-nav" aria-label="Utilities menu">
       <a href="/utility/">All Utilities</a>
@@ -219,7 +219,7 @@
     <div class="d-box">
       <form id="auditForm" onsubmit="handleAudit(event)">
         <div class="d-input-group">
-          <input type="text" id="domainInput" class="d-input" placeholder="Enter domain or website (e.g. github.com, kai247.com, nimt.ai)..." required autocomplete="off">
+          <input type="text" id="domainInput" class="d-input" placeholder="Enter domain or website (e.g. github.com, kaiorb.com, nimt.ai)..." required autocomplete="off">
           <button type="submit" class="u-btn" id="auditBtn">Analyze Domain &amp; SEO</button>
         </div>
       </form>
@@ -227,7 +227,7 @@
       <div class="u-examples" style="margin-top: 1rem;">
         <span style="font-size: 0.82rem; color: var(--u-mut); align-self: center;">Try sample domain:</span>
         <button type="button" class="u-chip" onclick="setSample('github.com')">github.com</button>
-        <button type="button" class="u-chip" onclick="setSample('kai247.com')">kai247.com</button>
+        <button type="button" class="u-chip" onclick="setSample('kaiorb.com')">kaiorb.com</button>
         <button type="button" class="u-chip" onclick="setSample('wikipedia.org')">wikipedia.org</button>
         <button type="button" class="u-chip" onclick="setSample('nimt.ai')">nimt.ai</button>
       </div>
@@ -258,7 +258,7 @@
 <footer style="border-top: 1px solid var(--u-line); padding: 2rem 0; background: #fff; margin-top: 3rem;">
   <div class="u-wrap" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
     <div style="font-size: 0.9rem; color: var(--u-mut);">
-      KAI247 — Small changes. Always. © 2026 KAI247.
+      KaiOrb — Small changes. Always. © 2026 KaiOrb.
     </div>
     <div style="display: flex; gap: 1.2rem; font-size: 0.9rem;">
       <a href="/utility/">All Utilities</a>
@@ -319,7 +319,7 @@ async function handleAudit(e) {
   const btn = document.getElementById('auditBtn');
 
   if (!normalized) {
-    resultsEl.innerHTML = '<div style="color:var(--u-rose);text-align:center;margin-top:1rem;">Please enter a valid domain name (e.g. github.com, kai247.com).</div>';
+    resultsEl.innerHTML = '<div style="color:var(--u-rose);text-align:center;margin-top:1rem;">Please enter a valid domain name (e.g. github.com, kaiorb.com).</div>';
     return;
   }
 
@@ -469,7 +469,7 @@ function renderResults(host, fullUrl, score, aRecs, mxRecs, nsRecs, txtRecs, che
           <li><strong>Domain Resolution</strong>: <code>${host}</code> is fully active and accessible over secure HTTPS.</li>
           <li><strong>Meta Title &amp; Snippet</strong>: Keep title tags between 30–60 characters to prevent truncation on Google SERPs.</li>
           <li><strong>Meta Description</strong>: Add a concise 70–160 character description describing your product or value proposition.</li>
-          <li><strong>Social Cards (Open Graph)</strong>: Ensure `og:title` and `og:image` (1200x630px) are set for high-engagement link previews on Twitter/X, LinkedIn, and Facebook.</li>
+          <li><strong>Social Cards (Open Graph)</strong>: Ensure <code>og:title</code> and <code>og:image</code> (1200x630px) are set for high-engagement link previews on Twitter/X, LinkedIn, and Facebook.</li>
           <li><strong>Technical Security</strong>: Maintain SSL redirection from HTTP to HTTPS across all routes.</li>
         </ul>
       </div>
@@ -480,7 +480,7 @@ function renderResults(host, fullUrl, score, aRecs, mxRecs, nsRecs, txtRecs, che
 }
 
 function copyReport(host, score) {
-  const summary = `KAI247 Domain & SEO Audit Report for ${host}\nOverall SEO Health Score: ${score}/100\nTarget URL: https://${host}\nGenerated via https://kai247.com/utility/domain-seo-analyzer/`;
+  const summary = `KaiOrb Domain & SEO Audit Report for ${host}\nOverall SEO Health Score: ${score}/100\nTarget URL: https://${host}\nGenerated via https://kaiorb.com/utility/domain-seo-analyzer/`;
   navigator.clipboard.writeText(summary).then(() => {
     alert('SEO report summary copied to clipboard!');
   });

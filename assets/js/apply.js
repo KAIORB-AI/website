@@ -14,7 +14,7 @@
     var subject = form.dataset.subject.replace('{name}', name);
     return 'mailto:' + form.dataset.apply +
       '?subject=' + encodeURIComponent(subject) +
-      '&body=' + encodeURIComponent(lines.join('\n') + '\n\n- sent from kai247.com/join');
+      '&body=' + encodeURIComponent(lines.join('\n') + '\n\n- sent from kaiorb.com/join');
   }
   window.__kaiCompose = compose;
   document.querySelectorAll('form[data-apply]').forEach(function (form) {

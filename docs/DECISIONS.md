@@ -32,10 +32,10 @@ easyq2c.com returned Cloudflare error 525 (origin SSL failure) on 2026-08-08 —
 could not be verified, so per §3 the brand renders as name + country + link only.
 Add a descriptor when the site is reachable. (Also: tell the owner their origin cert is broken.)
 
-## 7. No KAI247 contact email
-No public KAI247-owned contact channel could be verified. Contact routes through the three
+## 7. No KaiOrb contact email
+No public KaiOrb-owned contact channel could be verified. Contact routes through the three
 founding companies' sites. When the owner establishes a canonical address (e.g.
-hello@kai247.com), add it to /contact and /join.
+hello@kaiorb.com), add it to /contact and /join.
 
 ## 8. ORBIT is described as "intelligent web hosting"
 brahmexa.com currently presents ORBIT as intelligent web hosting (not event ticketing, as
@@ -56,11 +56,11 @@ confirm or replace it (it appears in the two `data-apply` attributes and the two
 "prefer plain email" links). Upgrade path when volume justifies it: a Cloudflare Worker
 form endpoint or a form service, which would also enable real file upload.
 
-## 12. Offerings are presented as KAI247's, and open in-page via iframe
-Per owner direction (and master prompt §3.4, "one unified KAI247 capability ecosystem"), the
+## 12. Offerings are presented as KaiOrb's, and open in-page via iframe
+Per owner direction (and master prompt §3.4, "one unified KaiOrb capability ecosystem"), the
 platform catalog no longer reads as a directory of other companies' sites. Tiles carry the
 offering name and descriptor only; the delivering domain appears in the viewer chrome, not on
-the tile face. Clicking opens `assets/js/viewer.js` — a full-screen in-page frame with KAI247
+the tile face. Clicking opens `assets/js/viewer.js` — a full-screen in-page frame with KaiOrb
 chrome (Esc / Close / "Open in new tab" / `#open=<slug>` deep link). Links clicked inside the
 frame stay inside the frame, so the visitor never leaves the orbit.
 
@@ -76,7 +76,7 @@ individual orgs, **only the tile's `data-url` changes** — no other code moves.
 ## 13. Founding trinity rendered as an orbital composition, not cards
 The company list was a rectangular card stack, which the brief explicitly rules out ("minimal
 rectangular-card overload", "minimal corporate-grid feeling"). Replaced with `.trinity`: three
-planets seated on a shared SVG arc, each with an elliptical ring echoing the KAI247 mark and
+planets seated on a shared SVG arc, each with an elliptical ring echoing the KaiOrb mark and
 the country code on the disc — so the "built across three continents" story is told by the
 composition itself. Arc geometry: viewBox `0 0 1000 240`, path `M 0 210 Q 500 -90 1000 210`,
 rendered at 216px with `preserveAspectRatio="none"`, so orb centres land on the curve at any
@@ -86,31 +86,31 @@ component is fully removed.
 ## 14. Nexus chat assistant — curriculum built, widget ships inert pending a key
 Nexus (brahmexa.com/nexus.php) is an AI assistant that answers questions about **one specific
 business using only that business's own website and documents**. Installed here, that business
-is KAI247. Its official install is a single script tag:
+is KaiOrb. Its official install is a single script tag:
 
     <script src="https://brahmexa.com/nexus/widget.js" data-nexus-key="pk_…" defer></script>
 
 It renders its own circular launcher in a shadow DOM and supports `data-nexus-key` (required),
 `data-nexus-accent` and `data-nexus-position`.
 
-**Blocker: KAI247 has no publishable key.** A `pk_` key is issued from the Nexus Console and
+**Blocker: KaiOrb has no publishable key.** A `pk_` key is issued from the Nexus Console and
 cannot be invented — a wrong or absent key yields a dead circle or someone else's business
 brain. So `assets/js/nexus.js` ships with `NEXUS_KEY = ''` and **does nothing at all** until a
 key is set: no launcher, no request, no broken UI. Setting that one string turns Nexus on
-site-wide (it is already loaded on all 14 pages, with KAI247 gold as the accent).
+site-wide (it is already loaded on all 14 pages, with KaiOrb gold as the accent).
 
 **No stand-in chat was built.** A hand-rolled Q&A panel dressed as an AI assistant would be a
 false claim, and the Nexus demo belongs to a fictional business. Absence over pretence.
 
 **What WAS delivered is the education**, which is the part that actually determines answer
 quality — Nexus learns by crawling:
-- `/llms.txt` — canonical KAI247 facts *and* an explicit "never claim this" section (no invented
-  metrics, no "subsidiary", no prices, no KAI247 email, CSR agents are guidance-only, say "I
+- `/llms.txt` — canonical KaiOrb facts *and* an explicit "never claim this" section (no invented
+  metrics, no "subsidiary", no prices, no KaiOrb email, CSR agents are guidance-only, say "I
   don't know" rather than guess). This is the guardrail document; keep it current.
 - `/knowledge/` — the same knowledge as human Q&A with `FAQPage` structured data, which also
   serves answer engines and AI assistants generally (master prompt §15).
 
-To activate: set the key, point the Nexus crawler at https://kai247.com/, and upload
+To activate: set the key, point the Nexus crawler at https://kaiorb.com/, and upload
 `/llms.txt` as a document so it outranks anything inferred.
 
 ## 15. /knowledge/ exceeds the 350-word page budget
@@ -125,7 +125,7 @@ included; paid plans later with founding brands hearing first; terms shaped bran
 No prices, dates, or contractual commitments are stated.
 
 ## 18. Brahmexa's offering list replaced by the widget catalog, grouped business vs service
-Owner direction. The previous "KAI247 offerings" tiles (Brahmando, Nexus, ORBIT, REACH, ANYO
+Owner direction. The previous "KaiOrb offerings" tiles (Brahmando, Nexus, ORBIT, REACH, ANYO
 Academy, SMB Engine, SWAN, Abhyas, School ERP, Chat X) were a product list; they are replaced
 by the fourteen embeddable widgets, which are the thing a visitor can actually put on a page.
 
@@ -145,7 +145,7 @@ are `partial`; presenting them as live is the specific failure the widget platfo
 exist to prevent.
 
 Tiles open each widget's `preview.php` in the in-page viewer rather than embedding it, because
-embedding needs a partner key with kai247.com on its allowlist and KAI247 has none. When a key
+embedding needs a partner key with kaiorb.com on its allowlist and KaiOrb has none. When a key
 is issued, an embedded widget replaces the preview tile — the loader snippet is one line.
 
 ## 19. Education removed from the widget catalog
@@ -179,12 +179,12 @@ that looks like success.
 `assets/js/utility-router.js` matches declared patterns, extracts only parameters it can prove
 are present (size targets, device counts, URLs, CIDR blocks) and opens the tool pre-filled. It
 never routes to an unbuilt tool — it names the tool and says it is in development. This is the
-local half of the Nexus bar; when a Nexus key exists for kai247.com, unmatched requests are
+local half of the Nexus bar; when a Nexus key exists for kaiorb.com, unmatched requests are
 what should be handed to it.
 
 ## 23. /utility and /utilities are two different things
 `/utilities/` is the Instrument Ring — tools contributed by the network (School ERP, ORBIT
-starter analysis, Brahmando Marketplace). `/utility/` is KAI247's own browser-side suite. Main
+starter analysis, Brahmando Marketplace). `/utility/` is KaiOrb's own browser-side suite. Main
 navigation now points at `/utility/`, and the two cross-link. **This is a confusing pair of
 URLs** and worth merging under one name when the owner picks one.
 
@@ -193,10 +193,10 @@ Owner direction: triangle, and no country in the middle or at the top. An upward
 one country at the apex, and an apex reads as rank — wrong for three companies that deliver as
 one network. Pointing down leaves the top edge flat: two countries sit at exactly the same
 height (verified: both orb centres at y=54), the third sits below, and the centroid is the
-KAI247 mark rather than any country. The middle of the network is the network.
+KaiOrb mark rather than any country. The middle of the network is the network.
 
 Countries render as their own map silhouette **filled with their flag colours**, inside the
-flattened elliptical ring from the KAI247 logo. Filling the map with the flag — rather than
+flattened elliptical ring from the KaiOrb logo. Filling the map with the flag — rather than
 drawing a white map over flag bands — is what keeps it legible: there is no band the silhouette
 can disappear against, in either theme. The paths are deliberately simplified; at 76px a
 survey-accurate coastline is noise. Canada's path is centred on y=45 rather than y=50 because

@@ -1,4 +1,4 @@
-/* KAI247 Utilities — intent router.
+/* KaiOrb Utilities — intent router.
  *
  * Deterministic on purpose. It matches the request against declared patterns,
  * extracts the parameters it can prove are there, and opens the tool with them
@@ -7,7 +7,7 @@
  * routing to a page that does not exist.
  *
  * This is the local half of the Nexus assistant bar. When a Nexus key is issued
- * for kai247.com, anything unmatched here is what should be handed to Nexus —
+ * for kaiorb.com, anything unmatched here is what should be handed to Nexus —
  * see assets/js/nexus.js.
  */
 (function () {

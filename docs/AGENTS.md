@@ -1,4 +1,4 @@
-# Working on kai247.com — instructions for coding agents
+# Working on kaiorb.com — instructions for coding agents
 
 **Canonical location:** `docs/AGENTS.md` (Antigravity, Claude, Codex, Cursor — all of you)
 **Related:** [DEPLOYMENT.md](DEPLOYMENT.md) · [DECISIONS.md](DECISIONS.md) · [CONTENT-INVENTORY.md](CONTENT-INVENTORY.md) · [CAPABILITIES-FLOW-DESIGN.md](CAPABILITIES-FLOW-DESIGN.md)
@@ -10,24 +10,24 @@ editing it publishes nothing and deploys nothing.
 
 ## 0. First, make sure you are in the right repository
 
-**kai247.com is served from `kai247-ai/kai247-web` — this repo.**
+**kaiorb.com is served from `kai247-ai/kai247-web` — this repo.**
 Local clone: `C:\whizyoga\repos\kai247-web`.
 
 There is a second repository that is easy to mistake for this one:
 
-| Repo | What it is | Does editing it change kai247.com? |
+| Repo | What it is | Does editing it change kaiorb.com? |
 |---|---|---|
 | `kai247-ai/kai247-web` (this one) | The website. Static HTML/CSS/SVG at the repo root, plus React islands. | **Yes** |
 | `kai247-ai/Utilities` | A separate React monorepo of utility apps. Its pipeline builds a container and deploys it to a GPU server on port 8000. | **No** |
 
 `kai247-ai/Utilities` contains commits with messages like *"preserve and elevate
-Fable 5 circular orbital theme on kai247.com landing page"*. **Those changes do
-not reach kai247.com.** They alter that monorepo's own `packages/ui`, which is
+Fable 5 circular orbital theme on kaiorb.com landing page"*. **Those changes do
+not reach kaiorb.com.** They alter that monorepo's own `packages/ui`, which is
 served by a container, not by this site. Note also that this repo already has
 its own utilities pages at `/utility/` and `/utilities/`, unrelated to that
 monorepo.
 
-If the task is "change something a visitor sees on kai247.com", the change
+If the task is "change something a visitor sees on kaiorb.com", the change
 belongs **here**.
 
 ---
@@ -127,7 +127,7 @@ catalog is being represented, enumerate what is actually there rather than
 summarising it, and carry any disclaimer that travels with it.
 
 Known gaps you must not paper over: **easyq2c.com is currently broken**
-(Cloudflare 525), and **there is no KAI247 contact email** — `/contact` routes
+(Cloudflare 525), and **there is no KaiOrb contact email** — `/contact` routes
 through the founding companies' sites.
 
 ---
@@ -138,7 +138,7 @@ through the founding companies' sites.
    companies are an orbital composition — planets on a shared arc. The trinity
    is a point-**down** triangle; an apex reads as rank, and the companies are
    peers.
-2. **Catalogs must read as one KAI247 offering set**, never a directory of
+2. **Catalogs must read as one KaiOrb offering set**, never a directory of
    member-company links. Tiles open the destination inside the page via
    `assets/js/viewer.js`.
 
@@ -150,10 +150,10 @@ The workflow has a final step that checks what the server actually serves, but
 green Actions means the files shipped — not that the page is right.
 
 ```bash
-curl -sI https://kai247.com/ | head -3
+curl -sI https://kaiorb.com/ | head -3
 ```
 
-If kai247.com starts serving the **Brahmexa** site, the files here are fine and
+If kaiorb.com starts serving the **Brahmexa** site, the files here are fine and
 the routing broke **in another repository**: the host is matched by an internal
 rewrite in `Brahmando-ai/Brahmando` → `brahmexa-web/.htaccess`. Equally, never
 add a clean or delete step to that repo's `deploy-brahmexa-com.yml` — it untars
