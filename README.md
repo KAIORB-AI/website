@@ -1,6 +1,16 @@
-# kai247-web
+# KAIORB Website
 
-The production website for **kaiorb.com** — KAIORB, a companion ecosystem. *Small changes. Always. 24×7.*
+Production website for https://kaiorb.com.
+
+KAIORB is the brand/company/provider network.
+
+This is not the KAI247 SaaS platform.
+KAI247 lives at https://kai247.com.
+
+GitHub: [`KAIORB-AI/website`](https://github.com/KAIORB-AI/website).
+KAI247 application source: `Brahmando-ai/Brahmando/services/kai247`.
+
+*Small changes. Always. 24×7.*
 
 ## Architecture
 
@@ -18,4 +28,4 @@ Every factual descriptor on the site was verified against the live public sites 
 
 ## Deploying
 
-Pushing to `main` triggers `.github/workflows/deploy-kai247.yml`, which builds React islands (`npm run build`), verifies pre-rendered HTML, and syncs the site to the production server. See `docs/DEPLOYMENT.md` and `docs/AGENTS.md` for details.
+See `docs/DEPLOYMENT.md` and `docs/AGENTS.md`. There is no push-triggered GitHub Actions deploy in this repository; infrastructure identifiers (`kai247-web` containers, GitLab `kai-production/kai247/kai247-web`) are unchanged.

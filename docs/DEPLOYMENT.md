@@ -8,7 +8,7 @@
 >
 > | Piece | Where |
 > |---|---|
-> | Content | this repo (`kai247-ai/kai247-web`), branch `main`, root folder |
+> | Content | this repo (`KAIORB-AI/website`), branch `main`, root folder |
 > | Image | built by `Brahmando-ai/Brahmando` → `build-kai247-multiarch.yml` (multi-arch arm64+amd64, no attestations) → GHCR, promoted to GitLab by `kai247-promote.yml` |
 > | Primary | ATOM Docker Compose, container `kai247-web`, `127.0.0.1:18101`, compose at `/data/kai247/compose` |
 > | DR | gpuserver K3s, namespace `brahmando`, deployment `kai247-web` |
@@ -30,7 +30,7 @@
 
 | Piece | Where it lives |
 |---|---|
-| Content | This repo (`kai247-ai/kai247-web`), branch `main`, root folder |
+| Content | This repo (`KAIORB-AI/website`, formerly `kai247-ai/kai247-web`), branch `main`, root folder |
 | Hosting | GitHub Pages (branch-based, no Actions workflow) |
 | Custom domain | `CNAME` file in repo root → `kaiorb.com`, plus Pages custom-domain setting |
 | DNS | Cloudflare: apex `kaiorb.com` A → 185.199.108/109/110/111.153 (GitHub Pages); `www` CNAME → GitHub Pages |
@@ -96,7 +96,7 @@ access to that box.
    to `whizyoga-ai.github.io`; they conflict with the record the tunnel creates.
 4. Re-run the workflow — `Verify what the server actually serves` stops saying
    `served by: GitHub.com`.
-5. Disable Pages: `gh api -X DELETE repos/kai247-ai/kai247-web/pages`. Keep the repo public;
+5. Disable Pages: `gh api -X DELETE repos/KAIORB-AI/website/pages`. Keep the repo public;
    nothing here needs to be private now that the deploy holds no secrets in plaintext.
 
 ### Things that will bite

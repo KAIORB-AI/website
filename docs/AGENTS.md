@@ -10,17 +10,18 @@ editing it publishes nothing and deploys nothing.
 
 ## 0. First, make sure you are in the right repository
 
-**kaiorb.com is served from `kai247-ai/kai247-web` — this repo.**
-Local clone: `C:\whizyoga\repos\kai247-web`.
+**kaiorb.com is served from `KAIORB-AI/website` — this repo.**
+Local clone: `C:\whizyoga\repos\kaiorb-website`.
 
 There is a second repository that is easy to mistake for this one:
 
 | Repo | What it is | Does editing it change kaiorb.com? |
 |---|---|---|
-| `kai247-ai/kai247-web` (this one) | The website. Static HTML/CSS/SVG at the repo root, plus React islands. | **Yes** |
-| `kai247-ai/Utilities` | A separate React monorepo of utility apps. Its pipeline builds a container and deploys it to a GPU server on port 8000. | **No** |
+| `KAIORB-AI/website` (this one) | The website. Static HTML/CSS/SVG at the repo root, plus React islands. | **Yes** |
+| `KAIORB-AI/Utilities` | A separate React monorepo of utility apps. Its pipeline builds a container and deploys it to a GPU server on port 8000. | **No** |
+| `KAIORB-AI/kai247` | Public KAI247 platform identity. Application source is `Brahmando-ai/Brahmando/services/kai247`. | **No** |
 
-`kai247-ai/Utilities` contains commits with messages like *"preserve and elevate
+`KAIORB-AI/Utilities` contains commits with messages like *"preserve and elevate
 Fable 5 circular orbital theme on kaiorb.com landing page"*. **Those changes do
 not reach kaiorb.com.** They alter that monorepo's own `packages/ui`, which is
 served by a container, not by this site. Note also that this repo already has
@@ -52,7 +53,7 @@ belongs **here**.
 Pushing to `main` **is** the deploy. There is no staging step.
 
 ```bash
-cd C:\whizyoga\antigravity\kai247-web
+cd C:\whizyoga\repos\kaiorb-website
 git checkout main
 git pull --ff-only
 # ... make your changes ...
