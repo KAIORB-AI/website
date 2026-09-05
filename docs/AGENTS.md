@@ -19,7 +19,7 @@ There is a second repository that is easy to mistake for this one:
 |---|---|---|
 | `KAIORB-AI/website` (this one) | The website. Static HTML/CSS/SVG at the repo root, plus React islands. | **Yes** |
 | `KAIORB-AI/Utilities` | A separate React monorepo of utility apps. Its pipeline builds a container and deploys it to a GPU server on port 8000. | **No** |
-| `KAIORB-AI/kai247` | Public KAI247 platform identity. Application source is `Brahmando-ai/Brahmando/services/kai247`. | **No** |
+| `KAIORB-AI/kai247` | The KAI247 platform application itself (private since 2026-09-04; it moved here out of `Brahmando-ai/Brahmando/services/kai247`). | **No** |
 
 `KAIORB-AI/Utilities` contains commits with messages like *"preserve and elevate
 Fable 5 circular orbital theme on kaiorb.com landing page"*. **Those changes do

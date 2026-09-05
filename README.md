@@ -8,7 +8,7 @@ This is not the KAI247 SaaS platform.
 KAI247 lives at https://kai247.com.
 
 GitHub: [`KAIORB-AI/website`](https://github.com/KAIORB-AI/website).
-KAI247 application source: `Brahmando-ai/Brahmando/services/kai247`.
+KAI247 application source: `KAIORB-AI/kai247` (private).
 
 *Small changes. Always. 24×7.*
 
